@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class JobConnectorPivot extends Model
+class Jobconnectorpivot extends Model
 {
     public function participant(){
         return $this->belongsTo('App\Participant');

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProgramPivot extends Model
+class Programpivot extends Model
 {
     public function coach(){
         return $this->hasOne('App\Coach');

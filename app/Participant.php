@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Participant extends Model
 {
     public function reference(){
-        return $this->hasOne('App\Reference');
+        return $this->hasMany('App\Reference');
     }
 
     public function profession(){
