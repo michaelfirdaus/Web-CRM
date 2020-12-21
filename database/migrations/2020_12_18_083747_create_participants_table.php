@@ -14,11 +14,24 @@ class CreateParticipantsTable extends Migration
     public function up()
     {
         Schema::create('participants', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
+            $table->bigInteger('branch_id');
+            $table->bigInteger('jobconnector_id')->nullable();
+            $table->bigInteger('program_id');
+            $table->bigInteger('knowcn_id');
+            $table->bigInteger('profession_id');
             $table->string('name');
-            $table->date('dob');
+            $table->string('pob');
+            $table->string('dob');
             $table->string('phonenumber');
+            $table->string('address');
             $table->string('email');
+            $table->string('student_idcard')->nullable();
+            $table->string('cv_link');
+            $table->string('sp_link')->nullable();
+            $table->string('emergencycontact_name');
+            $table->string('emergencycontact_phone');
+            $table->date('member_validthru')->nullable();
             $table->timestamps();
         });
     }
