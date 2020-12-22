@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Participant extends Model
 {
+    protected $table = 'participants';
+
+    protected $guarded = [];
+
     public function reference(){
         return $this->hasMany('App\Reference');
     }

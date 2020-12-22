@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Jobconnectorpivot extends Model
 {
+    protected $table = 'jobconnectorpivots';
+
+    protected $guarded = [];
+
     public function participant(){
         return $this->belongsTo('App\Participant');
     }
