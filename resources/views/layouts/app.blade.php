@@ -72,9 +72,31 @@
             </div>
         </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+        @if(Auth::check())
+            <div class="container mt-4">
+                <div class="row mt-4">
+                    <div class="col-md">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="{{ route('profession.create') }}">Add New Profession</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('professions') }}">View All Professions</a>
+                            </li>              
+                            {{-- <li class="list-group-item">
+                                <a href="{{ route('product.create') }}">Add New Product</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('products') }}">View All Products Details</a>
+                            </li> --}}
+                        </ul>
+                    </div>
+                    <div class="col-lg-9">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
+            @endif
     </div>
 </body>
 </html>
