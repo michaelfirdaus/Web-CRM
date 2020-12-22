@@ -4,14 +4,14 @@
 
     <div class="card">
         <div class="card card-header">
-            <th><strong>List Semua Coach</strong></th>
+            <th><strong>List Semua Kanal Course-Net</strong></th>
         </div>
         <div class="card card-body">
 
             <table class="table table-hover">
                 <thead>
                     <th>
-                        Nama Coach
+                        Nama Kanal
                     </th>
                     <th>
                         Edit
@@ -22,19 +22,19 @@
                 </thead>
         
                 <tbody>
-                    @if($coaches->count() > 0)
-                        @foreach ($coaches as $coach)
+                    @if($knowcns->count() > 0)
+                        @foreach ($knowcns as $knowcn)
                             <tr>
                                 <td>
-                                    {{ $coach->name }}
+                                    {{ $knowcn->name }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('coach.edit', ['id' => $coach ->id]) }}" class="btn btn-xs btn-info">
+                                    <a href="{{ route('knowcn.edit', ['id' => $knowcn ->id]) }}" class="btn btn-xs btn-info">
                                         <span class="fas fa-pencil-alt"></span>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{ route('coach.delete', ['id' => $coach ->id]) }}" class="btn btn-xs btn-danger">
+                                    <a href="{{ route('knowcn.delete', ['id' => $knowcn ->id]) }}" class="btn btn-xs btn-danger">
                                         <span class="fas fa-trash-alt"></span>
                                     </a>
                                 </td>
@@ -42,7 +42,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <th colspan="3" class="text-center">Tidak ada coach yang tersedia, tambahkan coach terlebih dahulu.</th>
+                            <th colspan="3" class="text-center">Tidak ada kanal yang tersedia, tambahkan kanal terlebih dahulu.</th>
                         </tr>
                     @endif
                 </tbody>

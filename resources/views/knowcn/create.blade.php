@@ -7,20 +7,20 @@
 
     <div class="card">
         <div class="card-header">
-            Tambah Sales Baru
+            Tambah Kanal Course-Net Baru
         </div>
 
         <div class="card-body">
-            <form action="{{ route('salesperson.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('knowcn.store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="name">Nama Sales</label>
+                    <label for="name">Nama Kanal</label>
                     <input type="text" name="name" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success">Tambahkan Sales</button>
+                        <button type="submit" class="btn btn-success">Tambahkan Kanal</button>
                     </div>
                 </div>
 

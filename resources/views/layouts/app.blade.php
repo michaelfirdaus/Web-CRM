@@ -97,6 +97,12 @@
                             <li class="list-group-item">
                                 <a href="{{ route('salespersons') }}">Tampilkan Semua Sales</a>
                             </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('knowcn.create') }}">Tambah Kanal Baru Course-Net</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('knowcns') }}">Tampilkan Semua Kanal Course-Net</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-lg-9">

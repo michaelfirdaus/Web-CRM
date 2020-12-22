@@ -117,9 +117,42 @@ Route::group(['middleware' => 'auth'], function() {
         'as'    => 'salesperson.store'
     ]);
 
-    Route::get('/person/delete/{id}',[
+    Route::get('/salesperson/delete/{id}',[
         'uses' => 'SalespersonController@destroy',
         'as'   => 'salesperson.delete'
+    ]);
+
+
+
+
+    Route::get('/knowcns',[
+        'uses'  => 'KnowcnController@index',
+        'as'    => 'knowcns'
+    ]);
+
+    Route::get('/knowcn/create',[
+        'uses'  => 'KnowcnController@create',
+        'as'    => 'knowcn.create'
+    ]);
+
+    Route::post('/knowcn/update/{id}',[
+        'uses'  => 'KnowcnController@update',
+        'as'    => 'knowcn.update'
+    ]);
+
+    Route::get('/knowcn/edit/{id}',[
+        'uses' => 'KnowcnController@edit',
+        'as'   => 'knowcn.edit'
+    ]);
+
+    Route::post('/knowcn/store',[
+        'uses'  => 'KnowcnController@store',
+        'as'    => 'knowcn.store'
+    ]);
+
+    Route::get('/knowcn/delete/{id}',[
+        'uses' => 'KnowcnController@destroy',
+        'as'   => 'knowcn.delete'
     ]);
 
 });
