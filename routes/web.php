@@ -190,6 +190,36 @@ Route::group(['middleware' => 'auth'], function() {
 //
 
 
+//Branch routes
+Route::get('/branches',[
+    'uses'  => 'BranchController@index',
+    'as'    => 'branches'
+]);
 
+Route::get('/branch/create',[
+    'uses'  => 'BranchController@create',
+    'as'    => 'branch.create'
+]);
+
+Route::post('/branch/update/{id}',[
+    'uses'  => 'BranchController@update',
+    'as'    => 'branch.update'
+]);
+
+Route::get('/branch/edit/{id}',[
+    'uses' => 'BranchController@edit',
+    'as'   => 'branch.edit'
+]);
+
+Route::post('/branch/store',[
+    'uses'  => 'BranchController@store',
+    'as'    => 'branch.store'
+]);
+
+Route::get('/branch/delete/{id}',[
+    'uses' => 'BranchController@destroy',
+    'as'   => 'branch.delete'
+]);
+//
 
 });

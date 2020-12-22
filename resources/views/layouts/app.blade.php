@@ -109,6 +109,12 @@
                             <li class="list-group-item">
                                 <a href="{{ route('jobconnectors') }}">Tampilkan Semua Perusahaan Penerima Loker</a>
                             </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('branch.create') }}">Tambah Cabang Baru Course-Net</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('branches') }}">Tampilkan Semua Cabang Course-Net</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-lg-9">
