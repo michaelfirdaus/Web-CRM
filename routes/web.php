@@ -25,7 +25,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 
 
-
+//Profession routes
     Route::get('/professions',[
         'uses'  => 'ProfessionController@index',
         'as'    => 'professions'
@@ -55,10 +55,10 @@ Route::group(['middleware' => 'auth'], function() {
         'uses' => 'ProfessionController@destroy',
         'as'   => 'profession.delete'
     ]);
+//
 
 
-
-
+//Coach routes
     Route::get('/coaches',[
         'uses'  => 'CoachController@index',
         'as'    => 'coaches'
@@ -88,10 +88,10 @@ Route::group(['middleware' => 'auth'], function() {
         'uses' => 'CoachController@destroy',
         'as'   => 'coach.delete'
     ]);
+//
 
 
-
-
+//Salesperson routes
     Route::get('/salespersons',[
         'uses'  => 'SalespersonController@index',
         'as'    => 'salespersons'
@@ -121,10 +121,10 @@ Route::group(['middleware' => 'auth'], function() {
         'uses' => 'SalespersonController@destroy',
         'as'   => 'salesperson.delete'
     ]);
+//
 
 
-
-
+//KnowCN routes
     Route::get('/knowcns',[
         'uses'  => 'KnowcnController@index',
         'as'    => 'knowcns'
@@ -154,5 +154,42 @@ Route::group(['middleware' => 'auth'], function() {
         'uses' => 'KnowcnController@destroy',
         'as'   => 'knowcn.delete'
     ]);
+//
+
+
+//Jobconnector routes
+    Route::get('/jobconnectors',[
+        'uses'  => 'JobconnectorController@index',
+        'as'    => 'jobconnectors'
+    ]);
+
+    Route::get('/jobconnector/create',[
+        'uses'  => 'JobconnectorController@create',
+        'as'    => 'jobconnector.create'
+    ]);
+
+    Route::post('/jobconnector/update/{id}',[
+        'uses'  => 'JobconnectorController@update',
+        'as'    => 'jobconnector.update'
+    ]);
+
+    Route::get('/jobconnector/edit/{id}',[
+        'uses' => 'JobconnectorController@edit',
+        'as'   => 'jobconnector.edit'
+    ]);
+
+    Route::post('/jobconnector/store',[
+        'uses'  => 'JobconnectorController@store',
+        'as'    => 'jobconnector.store'
+    ]);
+
+    Route::get('/jobconnector/delete/{id}',[
+        'uses' => 'JobconnectorController@destroy',
+        'as'   => 'jobconnector.delete'
+    ]);
+//
+
+
+
 
 });
