@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Profession;
+use Session;
 
 class ProfessionController extends Controller
 {
@@ -46,7 +47,7 @@ class ProfessionController extends Controller
 
         $profession->save();
 
-        // Session::flash('success', 'Successfully created category');
+        Session::flash('success', 'Successfully created category');
 
         return redirect()->route('professions');
 
@@ -91,7 +92,7 @@ class ProfessionController extends Controller
 
         $profession->save();
 
-        // Session::flash('success', 'Successfully updated category');
+        Session::flash('success', 'Successfully update profession');
 
         return redirect()->route('professions');
     }
@@ -108,7 +109,7 @@ class ProfessionController extends Controller
 
         $profession->delete();
 
-        Session::flash('success', 'Successfully deleted category');
+        Session::flash('success', 'Successfully delete profession');
 
         return redirect()->route('professions');
     }
