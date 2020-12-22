@@ -22,19 +22,19 @@
                 </thead>
         
                 <tbody>
-                    @if($salesperson->count() > 0)
-                        @foreach ($salesperson as $salespeople)
+                    @if($salespersons->count() > 0)
+                        @foreach ($salespersons as $salesperson)
                             <tr>
                                 <td>
-                                    {{ $coach->name }}
+                                    {{ $salesperson->name }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('salespeople.edit', ['id' => $salespeople ->id]) }}" class="btn btn-xs btn-info">
+                                    <a href="{{ route('salesperson.edit', ['id' => $salesperson ->id]) }}" class="btn btn-xs btn-info">
                                         <span class="fas fa-pencil-alt"></span>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{ route('salespeople.delete', ['id' => $salespople ->id]) }}" class="btn btn-xs btn-danger">
+                                    <a href="{{ route('salesperson.delete', ['id' => $salesperson ->id]) }}" class="btn btn-xs btn-danger">
                                         <span class="fas fa-trash-alt"></span>
                                     </a>
                                 </td>

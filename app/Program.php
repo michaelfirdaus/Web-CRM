@@ -11,7 +11,7 @@ class Program extends Model
     protected $guarded = [];
 
     public function programpivot(){
-        return $this->belongsTo('App\ProgramPivot');
+        return $this->belongsTo('App\Programpivot');
     }
 
     public function branch(){

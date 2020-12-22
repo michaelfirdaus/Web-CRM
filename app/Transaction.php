@@ -11,11 +11,11 @@ class Transaction extends Model
     protected $guarded = [];
 
     public function salesperson(){
-        return $this->belongsTo('App\SalesPerson');
+        return $this->belongsTo('App\Salesperson');
     }
 
     public function programpivot(){
-        return $this->hasOne('App\ProgramPivot');
+        return $this->hasOne('App\Programpivot');
     }
 
     public function result(){

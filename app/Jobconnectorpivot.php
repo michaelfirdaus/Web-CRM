@@ -15,6 +15,6 @@ class Jobconnectorpivot extends Model
     }
 
     public function jobconnector(){
-        return $this->hasOne('App\JobConnector');
+        return $this->hasOne('App\Jobconnector');
     }
 }

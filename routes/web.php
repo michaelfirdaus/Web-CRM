@@ -23,6 +23,9 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function() {
 
+
+
+
     Route::get('/professions',[
         'uses'  => 'ProfessionController@index',
         'as'    => 'professions'
@@ -53,6 +56,9 @@ Route::group(['middleware' => 'auth'], function() {
         'as'   => 'profession.delete'
     ]);
 
+
+
+
     Route::get('/coaches',[
         'uses'  => 'CoachController@index',
         'as'    => 'coaches'
@@ -81,6 +87,39 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/coach/delete/{id}',[
         'uses' => 'CoachController@destroy',
         'as'   => 'coach.delete'
+    ]);
+
+
+
+
+    Route::get('/salespersons',[
+        'uses'  => 'SalespersonController@index',
+        'as'    => 'salespersons'
+    ]);
+
+    Route::get('/salesperson/create',[
+        'uses'  => 'SalespersonController@create',
+        'as'    => 'salesperson.create'
+    ]);
+
+    Route::post('/salesperson/update/{id}',[
+        'uses'  => 'SalespersonController@update',
+        'as'    => 'salesperson.update'
+    ]);
+
+    Route::get('/salesperson/edit/{id}',[
+        'uses' => 'SalespersonController@edit',
+        'as'   => 'salesperson.edit'
+    ]);
+
+    Route::post('/salesperson/store',[
+        'uses'  => 'SalespersonController@store',
+        'as'    => 'salesperson.store'
+    ]);
+
+    Route::get('/person/delete/{id}',[
+        'uses' => 'SalespersonController@destroy',
+        'as'   => 'salesperson.delete'
     ]);
 
 });

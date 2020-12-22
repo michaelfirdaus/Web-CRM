@@ -91,6 +91,12 @@
                             <li class="list-group-item">
                                 <a href="{{ route('coaches') }}">Tampilkan Semua Coach</a>
                             </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('salesperson.create') }}">Tambah Sales Baru</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('salespersons') }}">Tampilkan Semua Sales</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-lg-9">

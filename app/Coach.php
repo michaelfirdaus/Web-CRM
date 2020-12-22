@@ -11,6 +11,6 @@ class Coach extends Model
     protected $guarded = [];
 
     public function programpivot(){
-        return $this->belongsTo('App\ProgramPivot');
+        return $this->belongsTo('App\Programpivot');
     }
 }

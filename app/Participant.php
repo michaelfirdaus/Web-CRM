@@ -19,7 +19,7 @@ class Participant extends Model
     }
 
     public function jobconnectorpivots(){
-        return $this->hasMany('App\JobConnectorPivot');
+        return $this->hasMany('App\Jobconnectorpivot');
     }
 
     public function branch(){
@@ -31,6 +31,6 @@ class Participant extends Model
     }
 
     public function knowcn(){
-        return $this->hasOne('App\KnowCN');
+        return $this->hasOne('App\Knowcn');
     }
 }

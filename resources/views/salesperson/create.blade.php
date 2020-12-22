@@ -11,7 +11,7 @@
         </div>
 
         <div class="card-body">
-            <form action="{{ route('salespeople.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('salesperson.store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="name">Nama Sales</label>

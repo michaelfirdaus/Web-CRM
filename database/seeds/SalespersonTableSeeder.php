@@ -11,15 +11,15 @@ class SalespersonTableSeeder extends Seeder
      */
     public function run()
     {
-        App\SalesPerson::create([
+        App\Salesperson::create([
             'name' => 'Hana Oktapiane'
         ]);
 
-        App\SalesPerson::create([
+        App\Salesperson::create([
             'name' => 'Dina Martina'
         ]);
 
-        App\SalesPerson::create([
+        App\Salesperson::create([
             'name' => 'Hanifah Kusdinar'
         ]);
     }

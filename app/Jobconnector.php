@@ -11,6 +11,6 @@ class Jobconnector extends Model
     protected $guarded = [];
 
     public function jobconnectorpivot(){
-        return $this->belongsTo('App\JobConnectorPivot');
+        return $this->belongsTo('App\Jobconnectorpivot');
     }
 }
