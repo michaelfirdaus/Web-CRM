@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ParticipantTableSeeder extends Seeder
+class ProfessionTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,8 @@ class ParticipantTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        App\Profession::create([
+            'name' => 'CEO'
+        ]);
     }
 }

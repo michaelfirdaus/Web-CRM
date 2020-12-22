@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Participant extends Model
 {
+    protected $table = 'participants';
+
+    protected $guarded = [];
+
     public function reference(){
-        return $this->hasOne('App\Reference');
+        return $this->hasMany('App\Reference');
     }
 
     public function profession(){
@@ -15,7 +19,7 @@ class Participant extends Model
     }
 
     public function jobconnectorpivots(){
-        return $this->hasMany('App\JobConnectorPivot');
+        return $this->hasMany('App\Jobconnectorpivot');
     }
 
     public function branch(){
@@ -27,6 +31,6 @@ class Participant extends Model
     }
 
     public function knowcn(){
-        return $this->hasOne('App\KnowCN');
+        return $this->hasOne('App\Knowcn');
     }
 }
