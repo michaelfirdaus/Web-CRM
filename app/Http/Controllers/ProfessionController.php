@@ -47,7 +47,7 @@ class ProfessionController extends Controller
 
         $profession->save();
 
-        Session::flash('success', 'Successfully created category');
+        Session::flash('success', 'Berhasil Menambahkan Profesi Baru');
 
         return redirect()->route('professions');
 
@@ -92,7 +92,7 @@ class ProfessionController extends Controller
 
         $profession->save();
 
-        Session::flash('success', 'Successfully update profession');
+        Session::flash('success', 'Berhasil Memperbaharui Profesi');
 
         return redirect()->route('professions');
     }
@@ -109,7 +109,7 @@ class ProfessionController extends Controller
 
         $profession->delete();
 
-        Session::flash('success', 'Successfully delete profession');
+        Session::flash('success', 'Berhasil Menghapus Profesi');
 
         return redirect()->route('professions');
     }

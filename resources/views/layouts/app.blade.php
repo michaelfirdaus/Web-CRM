@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Admin Internal Course-Net</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
@@ -26,7 +26,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    Admin Internal Course-Net
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -80,17 +80,17 @@
                     <div class="col-md">
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <a href="{{ route('profession.create') }}">Add New Profession</a>
+                                <a href="{{ route('profession.create') }}">Tambah Profesi Baru</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{ route('professions') }}">View All Professions</a>
+                                <a href="{{ route('professions') }}">Tampilkan Semua Profesi</a>
                             </li>              
-                            {{-- <li class="list-group-item">
-                                <a href="{{ route('product.create') }}">Add New Product</a>
+                            <li class="list-group-item">
+                                <a href="{{ route('coach.create') }}">Tambah Coach Baru</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{ route('products') }}">View All Products Details</a>
-                            </li> --}}
+                                <a href="{{ route('coaches') }}">Tampilkan Semua Coach</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-lg-9">
