@@ -10,7 +10,7 @@ class Participant extends Model
 
     protected $guarded = [];
 
-    public function reference(){
+    public function references(){
         return $this->hasMany('App\Reference');
     }
 
@@ -18,8 +18,14 @@ class Participant extends Model
         return $this->hasOne('App\Profession');
     }
 
-    public function jobconnectorpivots(){
-        return $this->hasMany('App\Jobconnectorpivot');
+    public function jobconnectors(){
+        return $this->belongsToMany('App\Jobconnector')
+                    ->using('App\JobconnectorParticipant')
+                    ->withPivot('date', 'application_status');
+    }
+
+    public function jobconnectorparticipant(){
+        return $this->belongsTo('App\JobconnectorParticipant', 'participant_id');
     }
 
     public function branch(){

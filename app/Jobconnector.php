@@ -10,7 +10,13 @@ class Jobconnector extends Model
 
     protected $guarded = [];
 
-    public function jobconnectorpivot(){
-        return $this->belongsTo('App\Jobconnectorpivot');
+    public function participants(){
+        return $this->belongsToMany('App\Participant')
+                    ->using('App\JobconnectorParticipant')
+                    ->withPivot('date', 'application_status');
+    }
+
+    public function jobconnectorparticipant(){
+        return $this->belongsTo('App\JobconnectorParticipant', 'jobconnector_id');
     }
 }

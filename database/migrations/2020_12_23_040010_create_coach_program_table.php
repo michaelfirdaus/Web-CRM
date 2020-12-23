@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProgrampivotsTable extends Migration
+class CreateCoachProgramTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateProgrampivotsTable extends Migration
      */
     public function up()
     {
-        Schema::create('programpivots', function (Blueprint $table) {
+        Schema::create('coach_program', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('coach_id');
             $table->bigInteger('program_id');
@@ -29,6 +29,6 @@ class CreateProgrampivotsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('programpivots');
+        Schema::dropIfExists('coach_program');
     }
 }

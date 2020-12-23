@@ -25,7 +25,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 
 
-
+//Profession routes
     Route::get('/professions',[
         'uses'  => 'ProfessionController@index',
         'as'    => 'professions'
@@ -55,10 +55,10 @@ Route::group(['middleware' => 'auth'], function() {
         'uses' => 'ProfessionController@destroy',
         'as'   => 'profession.delete'
     ]);
+//
 
 
-
-
+//Coach routes
     Route::get('/coaches',[
         'uses'  => 'CoachController@index',
         'as'    => 'coaches'
@@ -88,10 +88,10 @@ Route::group(['middleware' => 'auth'], function() {
         'uses' => 'CoachController@destroy',
         'as'   => 'coach.delete'
     ]);
+//
 
 
-
-
+//Salesperson routes
     Route::get('/salespersons',[
         'uses'  => 'SalespersonController@index',
         'as'    => 'salespersons'
@@ -121,10 +121,10 @@ Route::group(['middleware' => 'auth'], function() {
         'uses' => 'SalespersonController@destroy',
         'as'   => 'salesperson.delete'
     ]);
+//
 
 
-
-
+//KnowCN routes
     Route::get('/knowcns',[
         'uses'  => 'KnowcnController@index',
         'as'    => 'knowcns'
@@ -154,5 +154,137 @@ Route::group(['middleware' => 'auth'], function() {
         'uses' => 'KnowcnController@destroy',
         'as'   => 'knowcn.delete'
     ]);
+//
+
+
+//Jobconnector routes
+    Route::get('/jobconnectors',[
+        'uses'  => 'JobconnectorController@index',
+        'as'    => 'jobconnectors'
+    ]);
+
+    Route::get('/jobconnector/create',[
+        'uses'  => 'JobconnectorController@create',
+        'as'    => 'jobconnector.create'
+    ]);
+
+    Route::post('/jobconnector/update/{id}',[
+        'uses'  => 'JobconnectorController@update',
+        'as'    => 'jobconnector.update'
+    ]);
+
+    Route::get('/jobconnector/edit/{id}',[
+        'uses' => 'JobconnectorController@edit',
+        'as'   => 'jobconnector.edit'
+    ]);
+
+    Route::post('/jobconnector/store',[
+        'uses'  => 'JobconnectorController@store',
+        'as'    => 'jobconnector.store'
+    ]);
+
+    Route::get('/jobconnector/delete/{id}',[
+        'uses' => 'JobconnectorController@destroy',
+        'as'   => 'jobconnector.delete'
+    ]);
+//
+
+
+//Branch routes
+    Route::get('/branches',[
+        'uses'  => 'BranchController@index',
+        'as'    => 'branches'
+    ]);
+
+    Route::get('/branch/create',[
+        'uses'  => 'BranchController@create',
+        'as'    => 'branch.create'
+    ]);
+
+    Route::post('/branch/update/{id}',[
+        'uses'  => 'BranchController@update',
+        'as'    => 'branch.update'
+    ]);
+
+    Route::get('/branch/edit/{id}',[
+        'uses' => 'BranchController@edit',
+        'as'   => 'branch.edit'
+    ]);
+
+    Route::post('/branch/store',[
+        'uses'  => 'BranchController@store',
+        'as'    => 'branch.store'
+    ]);
+
+    Route::get('/branch/delete/{id}',[
+        'uses' => 'BranchController@destroy',
+        'as'   => 'branch.delete'
+    ]);
+//
+
+
+//Program routes
+    Route::get('/programs',[
+        'uses'  => 'ProgramController@index',
+        'as'    => 'programs'
+    ]);
+
+    Route::get('/program/create',[
+        'uses'  => 'ProgramController@create',
+        'as'    => 'program.create'
+    ]);
+
+    Route::post('/program/update/{id}',[
+        'uses'  => 'ProgramController@update',
+        'as'    => 'program.update'
+    ]);
+
+    Route::get('/program/edit/{id}',[
+        'uses' => 'ProgramController@edit',
+        'as'   => 'program.edit'
+    ]);
+
+    Route::post('/program/store',[
+        'uses'  => 'ProgramController@store',
+        'as'    => 'program.store'
+    ]);
+
+    Route::get('/program/delete/{id}',[
+        'uses' => 'ProgramController@destroy',
+        'as'   => 'program.delete'
+    ]);
+//
+
+//Programpivot routes
+Route::get('/programpivots',[
+    'uses'  => 'ProgrampivotController@index',
+    'as'    => 'programpivots'
+]);
+
+Route::get('/programpivot/create',[
+    'uses'  => 'ProgrampivotController@create',
+    'as'    => 'programpivot.create'
+]);
+
+Route::post('/programpivot/update/{id}',[
+    'uses'  => 'ProgrampivotController@update',
+    'as'    => 'programpivot.update'
+]);
+
+Route::get('/programpivot/edit/{id}',[
+    'uses' => 'ProgrampivotController@edit',
+    'as'   => 'programpivot.edit'
+]);
+
+Route::post('/programpivot/store',[
+    'uses'  => 'ProgrampivotController@store',
+    'as'    => 'programpivot.store'
+]);
+
+Route::get('/programpivot/delete/{id}',[
+    'uses' => 'ProgrampivotController@destroy',
+    'as'   => 'programpivot.delete'
+]);
+//
 
 });
