@@ -50,9 +50,6 @@
                         Lokasi Pendaftaran
                     </th>
                     <th> 
-                        Job Connector
-                    </th>
-                    <th> 
                         Minat Program
                     </th>
                     <th> 
@@ -111,9 +108,6 @@
                                 </td>
                                 <td>
                                     {{ $participant->branch_id }}
-                                </td>
-                                <td>
-                                    {{ $participant->jobconnector_id }}
                                 </td>
                                 <td>
                                     {{ $participant->program_id }}

@@ -25,12 +25,12 @@
 
                 <div class="form-group">
                     <label for="dob">Tanggal Lahir</label>
-                    <input type="text" name="dob" value="{{ $participant->dob }}" class="form-control">
+                    <input type="date" id="dob" name="dob" value="{{ $participant->dob }}">
                 </div>
 
                 <div class="form-group">
                     <label for="phonenumber">Nomor Telepon</label>
-                    <input type="tel" name="phonenumber" value="{{ $participant->phonenumber }}" class="form-control">
+                    <input type="tel" name="phonenumber" value="{{ $participant->phonenumber }}" placeholder="Cth : 628111011011" class="form-control">
                 </div>
 
                 <div class="form-group">
@@ -65,7 +65,7 @@
 
                 <div class="form-group">
                     <label for="emergencycontact_phone">Nomor Kontak Darurat</label>
-                    <input type="text" name="emergencycontact_phone" value="{{ $participant->student_idcard }}" class="form-control">
+                    <input type="tel" name="emergencycontact_phone" value="{{ $participant->student_idcard }}" placeholder="Cth : 628111011011" class="form-control">
                 </div>
 
                 <div class="form-group">
@@ -85,23 +85,36 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="jobconnector_id">Job Connector</label>
-                    <input type="text" name="address" value="{{ $participant->sp_link }}" class="form-control">
+                    <label for="program_id">Minat Program</label>
+                    @foreach($programs as $program)
+                            @if($program->id == $participant->program_id)
+                                <option selected value="{{ $program->id }}"> {{ $program->name }} </option>
+                            @else
+                                <option value="{{ $program->id }}"> {{ $program->name }} </option>
+                            @endif 
+                    @endforeach
                 </div>
 
                 <div class="form-group">
-                    <label for="text">Nama Kontak Darurat</label>
-                    <input type="text" name="text" value="{{ $participant->emergencycontact_name }}" class="form-control">
+                    <label for="knowcn_id">Mengetahui CN dari</label>
+                    @foreach($knowcns as $knowcn)
+                            @if($knowcn->id == $participant->knowcn_id)
+                                <option selected value="{{ $knowcn->id }}"> {{ $knowcn->name }} </option>
+                            @else
+                                <option value="{{ $knowcn->id }}"> {{ $knowcn->name }} </option>
+                            @endif 
+                    @endforeach
                 </div>
 
                 <div class="form-group">
-                    <label for="emergencycontact_phone">Nomor Kontak Darurat</label>
-                    <input type="text" name="emergencycontact_phone" value="{{ $participant->student_idcard }}" class="form-control">
-                </div>
-
-                <div class="form-group">
-                    <label for="member_validthru">Member Berlaku s/d</label>
-                    <input type="date" id="member_validthru" name="member_validthru">
+                    <label for="knowcn_id">Profesi</label>
+                    @foreach($professions as $profession)
+                            @if($profession->id == $participant->profession_id)
+                                <option selected value="{{ $profession->id }}"> {{ $profession->name }} </option>
+                            @else
+                                <option value="{{ $profession->id }}"> {{ $pro->name }} </option>
+                            @endif 
+                    @endforeach
                 </div>
 
                 <div class="form-group">
