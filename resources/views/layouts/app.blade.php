@@ -120,10 +120,26 @@
                             </li>
 
                             <li class="list-group-item">
-                                <a class="dropdown-toggle" href="" data-toggle="dropdown">Perusahaan Rekanan <span class="caret"></span></a>
+                                <a class="dropdown-toggle" href="" data-toggle="dropdown">Cabang <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li class="m-2"><a href="{{ route('branch.create') }}">Tambah Cabang Baru Course-Net</a></li>
                                     <li class="m-2"><a href="{{ route('branches') }}">Tampilkan Semua Cabang Course-Net</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="list-group-item">
+                                <a class="dropdown-toggle" href="" data-toggle="dropdown">Program <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="m-2"><a href="{{ route('program.create') }}">Tambah Program Baru</a></li>
+                                    <li class="m-2"><a href="{{ route('programs') }}">Tampilkan Program</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="list-group-item">
+                                <a class="dropdown-toggle" href="" data-toggle="dropdown">Jadwal Kelas<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="m-2"><a href="{{ route('programpivot.create') }}">Tambah Jadwal Kelas Baru</a></li>
+                                    <li class="m-2"><a href="{{ route('programpivots') }}">Tampilkan Jadwal Kelas</a></li>
                                 </ul>
                             </li>
 

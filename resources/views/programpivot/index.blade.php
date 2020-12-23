@@ -4,7 +4,7 @@
 
     <div class="card">
         <div class="card card-header">
-            <th><strong>List Semua Program</strong></th>
+            <th><strong>List Semua Jadwal Kelas</strong></th>
         </div>
         <div class="card card-body">
 
@@ -14,7 +14,10 @@
                         Nama Program
                     </th>
                     <th> 
-                        Lokasi Cabang
+                        Nama Coach
+                    </th>
+                    <th> 
+                        Tanggal Batch
                     </th>
                     <th>
                         Edit
@@ -25,22 +28,25 @@
                 </thead>
         
                 <tbody>
-                    @if($programs->count() > 0)
-                        @foreach ($programs as $program)
+                    @if($programpivots->count() > 0)
+                        @foreach ($programpivots as $programpivot)
                             <tr>
                                 <td>
-                                    {{ $program->name }}
+                                    {{ $programpivot->program_id }}
                                 </td>
                                 <td>
-                                    {{ $program->branch->branch_name }}
+                                    {{ $programpivot->coach->name }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('program.edit', ['id' => $program ->id]) }}" class="btn btn-xs btn-info">
+                                    {{ $programpivot->date }}
+                                </td>
+                                <td>
+                                    <a href="{{ route('programpivot.edit', ['id' => $programpivot ->id]) }}" class="btn btn-xs btn-info">
                                         <span class="fas fa-pencil-alt"></span>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{ route('program.delete', ['id' => $program ->id]) }}" class="btn btn-xs btn-danger">
+                                    <a href="{{ route('programpivot.delete', ['id' => $programpivot ->id]) }}" class="btn btn-xs btn-danger">
                                         <span class="fas fa-trash-alt"></span>
                                     </a>
                                 </td>
@@ -48,7 +54,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <th colspan="3" class="text-center">Tidak ada program yang tersedia, tambahkan program baru.</th>
+                            <th colspan="3" class="text-center">Tidak ada jadwal kelas yang tersedia, tambahkan jadwal kelas baru.</th>
                         </tr>
                     @endif
                 </tbody>

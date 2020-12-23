@@ -24,18 +24,13 @@
                     <select name="branch_location" id="location" class="form-control">
                         @foreach($branches as $branch)
                             @if($branch->id == $current_branch)
-                                <option selected value="{{ $branch->id }}"> {{ $branch->name }} </option>
+                                <option selected value="{{ $branch->id }}"> {{ $branch->branch_name }} </option>
                             @else
-                                <option value="{{ $branch->id }}"> {{ $branch->name }} </option>
+                                <option value="{{ $branch->id }}"> {{ $branch->branch_name }} </option>
                             @endif
                         @endforeach
                     </select>
                 </div>
-
-                {{-- <div class="form-group">
-                    <label for="date">Tanggal Batch</label>
-                    <input type="date" id="date" name="date" value="{{ $program->date }}">
-                </div> --}}
 
 
                 <div class="form-group">

@@ -7,11 +7,11 @@
 
     <div class="card">
         <div class="card-header">
-            Tambah Program Baru
+            Tambah Kelas Baru
         </div>
 
         <div class="card-body">
-            <form action="{{ route('profession.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('program.store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="name">Nama Program</label>
@@ -22,15 +22,11 @@
                     <label for="branch_location">Lokasi Cabang</label>
                     <select name="branch_location" id="location" class="form-control">
                         @foreach($branches as $branch)
-                            <option value="{{ $branch->id }}"> {{ $branch->name }} </option>
+                            <option value="{{ $branch->id }}"> {{ $branch->branch_name }} </option>
                         @endforeach
                     </select>
                 </div>
 
-                {{-- <div class="form-group">
-                    <label for="date">Tanggal Batch</label>
-                    <input type="date" id="date" name="date">
-                </div> --}}
 
                 <div class="form-group">
                     <div class="text-center">
