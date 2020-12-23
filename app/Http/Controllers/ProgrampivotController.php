@@ -63,8 +63,7 @@ class ProgrampivotController extends Controller
         $this->validate($request, [
             'program' => 'required',
             'coach'   => 'required',
-            'date'    => 'required',
-            'branch'  => 'required',    
+            'date'    => 'required',    
         ]);
 
         foreach($request->coach as $coach){
@@ -74,7 +73,7 @@ class ProgrampivotController extends Controller
                 'date'          => $request->date,
             ]);
         }
-        
+
         Session::flash('success', 'Berhasil Menambahkan Jadwal Kelas');
 
         return redirect()->route('programpivots');

@@ -131,10 +131,10 @@ class ProgramController extends Controller
     {
         $program = Program::find($id);
 
-        $program->save();
+        $program->delete();
 
         Session::flash('success', 'Berhasil Menghapus Program');
 
-        return redirect()->route('prorgams');
+        return redirect()->route('programs');
     }
 }

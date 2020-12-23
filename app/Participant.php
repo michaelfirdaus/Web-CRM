@@ -10,7 +10,7 @@ class Participant extends Model
 
     protected $guarded = [];
 
-    public function reference(){
+    public function references(){
         return $this->hasMany('App\Reference');
     }
 
