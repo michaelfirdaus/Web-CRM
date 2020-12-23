@@ -80,41 +80,53 @@
                     <div class="col-md">
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <a href="{{ route('profession.create') }}">Tambah Profesi Baru</a>
-                            </li>
+                                <a class="dropdown-toggle" href="" data-toggle="dropdown">Profesi <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="m-2"><a href="{{ route('profession.create') }}">Tambah Profesi Baru</a></li>
+                                    <li class="m-2"><a href="{{ route('professions') }}">Tampilkan Semua Profesi</a></li>
+                                </ul>
+                            </li>      
+
                             <li class="list-group-item">
-                                <a href="{{ route('professions') }}">Tampilkan Semua Profesi</a>
-                            </li>              
-                            <li class="list-group-item">
-                                <a href="{{ route('coach.create') }}">Tambah Coach Baru</a>
+                                <a class="dropdown-toggle" href="" data-toggle="dropdown">Coach <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="m-2"><a href="{{ route('coach.create') }}">Tambah Coach Baru</a></li>
+                                    <li class="m-2"><a href="{{ route('coaches') }}">Tampilkan Semua Coach</a></li>
+                                </ul>
                             </li>
+
                             <li class="list-group-item">
-                                <a href="{{ route('coaches') }}">Tampilkan Semua Coach</a>
+                                <a class="dropdown-toggle" href="" data-toggle="dropdown">Sales <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="m-2"><a href="{{ route('salesperson.create') }}">Tambah Sales Baru</a></li>
+                                    <li class="m-2"><a href="{{ route('salespersons') }}">Tampilkan Semua Sales</a></li>
+                                </ul>
                             </li>
+
                             <li class="list-group-item">
-                                <a href="{{ route('salesperson.create') }}">Tambah Sales Baru</a>
+                                <a class="dropdown-toggle" href="" data-toggle="dropdown">Kanal <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="m-2"><a href="{{ route('knowcn.create') }}">Tambah Kanal Baru Course-Net</a></li>
+                                    <li class="m-2"><a href="{{ route('knowcns') }}">Tampilkan Semua Kanal Course-Net</a></li>
+                                </ul>
                             </li>
+
                             <li class="list-group-item">
-                                <a href="{{ route('salespersons') }}">Tampilkan Semua Sales</a>
+                                <a class="dropdown-toggle" href="" data-toggle="dropdown">Perusahaan Rekanan <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="m-2"><a href="{{ route('jobconnector.create') }}">Tambah Perusahaan Penerima Loker</a></li>
+                                    <li class="m-2"><a href="{{ route('jobconnectors') }}">Tampilkan Semua Perusahaan Penerima Loker</a></li>
+                                </ul>
                             </li>
+
                             <li class="list-group-item">
-                                <a href="{{ route('knowcn.create') }}">Tambah Kanal Baru Course-Net</a>
+                                <a class="dropdown-toggle" href="" data-toggle="dropdown">Perusahaan Rekanan <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="m-2"><a href="{{ route('branch.create') }}">Tambah Cabang Baru Course-Net</a></li>
+                                    <li class="m-2"><a href="{{ route('branches') }}">Tampilkan Semua Cabang Course-Net</a></li>
+                                </ul>
                             </li>
-                            <li class="list-group-item">
-                                <a href="{{ route('knowcns') }}">Tampilkan Semua Kanal Course-Net</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="{{ route('jobconnector.create') }}">Tambah Perusahaan Penerima Loker</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="{{ route('jobconnectors') }}">Tampilkan Semua Perusahaan Penerima Loker</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="{{ route('branch.create') }}">Tambah Cabang Baru Course-Net</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="{{ route('branches') }}">Tampilkan Semua Cabang Course-Net</a>
-                            </li>
+
                         </ul>
                     </div>
                     <div class="col-lg-9">
