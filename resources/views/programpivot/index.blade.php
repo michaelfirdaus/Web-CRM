@@ -19,6 +19,9 @@
                     <th> 
                         Tanggal Batch
                     </th>
+                    <th> 
+                        Lokasi Kelas
+                    </th>
                     <th>
                         Edit
                     </th>
@@ -28,35 +31,41 @@
                 </thead>
         
                 <tbody>
-                    @if($programpivots->count() > 0)
-                        @foreach ($programpivots as $programpivot)
-                            <tr>
-                                <td>
-                                    {{ $programpivot->program_id }}
-                                </td>
-                                <td>
-                                    {{ $programpivot->coach->name }}
-                                </td>
-                                <td>
-                                    {{ $programpivot->date }}
-                                </td>
-                                <td>
-                                    <a href="{{ route('programpivot.edit', ['id' => $programpivot ->id]) }}" class="btn btn-xs btn-info">
-                                        <span class="fas fa-pencil-alt"></span>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="{{ route('programpivot.delete', ['id' => $programpivot ->id]) }}" class="btn btn-xs btn-danger">
-                                        <span class="fas fa-trash-alt"></span>
-                                    </a>
-                                </td>
-                            </tr>
+                    @if($coachprograms->count() > 0)
+                        @foreach ($programs as $program)
+                            @foreach($program->coaches as $coach)
+                                <tr>
+                                    <td>
+                                        {{ $program->name }}
+                                    </td>
+                                    <td>
+                                        {{ $coach->name }}
+                                    </td>
+                                    <td>
+                                        {{ $coach->pivot->date }}
+                                    </td>
+                                    <td>
+                                        {{ $program->branch->branch_name }}
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('programpivot.edit', $coach->pivot->id) }}" class="btn btn-xs btn-info">
+                                            <span class="fas fa-pencil-alt"></span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('programpivot.delete', ['id' => $coach->pivot ->id]) }}" class="btn btn-xs btn-danger">
+                                            <span class="fas fa-trash-alt"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         @endforeach
                     @else
                         <tr>
                             <th colspan="3" class="text-center">Tidak ada jadwal kelas yang tersedia, tambahkan jadwal kelas baru.</th>
                         </tr>
                     @endif
+
                 </tbody>
             </table>
         </div>

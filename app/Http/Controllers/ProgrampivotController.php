@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Programpivot;
 use App\Program;
 use App\Coach;
+use App\CoachProgram;
+use App\Branch;
 use Session;
+use DB;
 
 class ProgrampivotController extends Controller
 {
@@ -18,14 +20,12 @@ class ProgrampivotController extends Controller
      */
     public function index()
     {
-        $programpivots = Programpivot::all();
-        $programs = Program::all();
-        $coaches = Coach::all();
+        $coachprograms = CoachProgram::all();
+        $programs = Program::with('coaches','branch')->get();
 
         return view('programpivot.index')
-            ->with('programpivots', $programpivots)
-            ->with('programs', $programs)
-            ->with('coaches', $coaches);
+        ->with('programs', $programs)
+        ->with('coachprograms', $coachprograms);
     }
 
     /**
@@ -35,9 +35,9 @@ class ProgrampivotController extends Controller
      */
     public function create()
     {
-        $programpivots = Programpivot::all();
         $programs = Program::all();
         $coaches = Coach::all();
+        $branches = Branch::all();
 
         if($programs->count() == 0 || $coaches->count() == 0){
             Session::flash('info', 'Tidak Dapat Menambahkan Jadwal Kelas karena Program/Coach Tidak Tersedia');
@@ -45,8 +45,8 @@ class ProgrampivotController extends Controller
         }
 
         return view('programpivot.create')
-            ->with('programpivots', $programpivots)
             ->with('programs', $programs)
+            ->with('branches', $branches)
             ->with('coaches', $coaches);
 
     }
@@ -59,18 +59,22 @@ class ProgrampivotController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
-            'program'           => 'required',
-            'coach'             => 'required',
-            'date'              => 'required',
+            'program' => 'required',
+            'coach'   => 'required',
+            'date'    => 'required',
+            'branch'  => 'required',    
         ]);
 
-        $programpivot = Programpivot::create([
-            'program_id'    => $request->program,
-            'coach_id'      => $request->coach,
-            'date'          => $request->date
-        ]);
-
+        foreach($request->coach as $coach){
+            DB::table('coach_program')->insert([
+                'coach_id'      => $coach,
+                'program_id'    => $request->program,
+                'date'          => $request->date,
+            ]);
+        }
+        
         Session::flash('success', 'Berhasil Menambahkan Jadwal Kelas');
 
         return redirect()->route('programpivots');
@@ -95,13 +99,18 @@ class ProgrampivotController extends Controller
      */
     public function edit($id)
     {
-        $programpivot = Programpivot::find($id);
+
+        $coachprogram = CoachProgram::find($id);
+        $current_program = Program::find($coachprogram->program_id);
         $programs = Program::all();
         $coaches = Coach::all();
+        $branches = Branch::all();
 
         return view('programpivot.edit')
-            ->with('programpivot', $programpivot)
+            ->with('coachprogram', $coachprogram)
             ->with('programs', $programs)
+            ->with('current_program', $current_program)
+            ->with('branches', $branches)
             ->with('coaches', $coaches);
     }
 
@@ -114,22 +123,27 @@ class ProgrampivotController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $programpivot = Programpivot::find($id);
-        $programs = Program::all();
-        $coaches = Coach::all();
+        $coachprogram = CoachProgram::find($id);
 
         $this->validate($request, [
-            'program'           => 'required',
-            'coach'             => 'required',
-            'date'              => 'required',
+            'program' => 'required',
+            'coach'   => 'required',
+            'branch'  => 'required',
+            'date'    => 'required',
         ]);
 
-        $programpivot->id           = $request->id;
-        $programpivot->coach_id     = $request->coach;
-        $programpivot->program_id   = $request->program;
-        $programpivot->date         = $request->date;
+        $coachprogram->id           = $request->id;
+        $coachprogram->coach_id     = $request->coach;
+        $coachprogram->program_id   = $request->program;
+        $coachprogram->date         = $request->date;
 
-        $programpivot->save();
+        $coachprogram->save();
+
+        $program = Program::find($coachprogram->program_id);
+
+        $program->branch_id = $request->branch;
+
+        $program->save();
 
         Session::flash('success', 'Berhasil Memperbaharui Jadwal Kelas');
 
@@ -144,9 +158,9 @@ class ProgrampivotController extends Controller
      */
     public function destroy($id)
     {
-        $programpivot = Programpivot::find($id);
+        $coachprogram = CoachProgram::find($id);
 
-        $programpivot->delete();
+        $coachprogram->delete();
 
         Session::flash('success', 'Berhasil Menghapus Jadwal Kelas');
 

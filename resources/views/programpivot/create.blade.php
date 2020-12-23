@@ -24,7 +24,7 @@
 
                 <div class="form-group">
                     <label for="coach">Nama Coach yang Akan Mengajar</label>
-                    <select name="coach" id="coach" class="form-control">
+                    <select name="coach[]" id="coach" class="form-control">
                         @foreach($coaches as $coach)
                             <option value="{{ $coach->id }}"> {{ $coach->name }} </option>
                         @endforeach
