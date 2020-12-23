@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJobconnectorpivotsTable extends Migration
+class CreateCoachJobconnectorParticipantTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateJobconnectorpivotsTable extends Migration
      */
     public function up()
     {
-        Schema::create('jobconnectorpivots', function (Blueprint $table) {
+        Schema::create('coach_jobconnector_participant', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('participant_id');
             $table->bigInteger('jobconnector_id');
@@ -30,6 +30,6 @@ class CreateJobconnectorpivotsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jobconnectorpivots');
+        Schema::dropIfExists('coach_jobconnector_participant');
     }
 }

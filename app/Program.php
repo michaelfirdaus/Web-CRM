@@ -11,7 +11,6 @@ class Program extends Model
     protected $guarded = [];
 
     public function coaches(){
-        // return $this->belongsToMany('App\Coach', 'coach_program', 'id', 'coach_id');
         return $this->belongsToMany('App\Coach')
                     ->using('App\CoachProgram')
                     ->withPivot('date', 'id');
