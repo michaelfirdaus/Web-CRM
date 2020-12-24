@@ -46,9 +46,9 @@
                     <select name="branch" id="branch" class="form-control">
                         @foreach($branches as $branch)
                             @if($branch->id == $current_program->branch_id)
-                                <option selected value="{{ $branch->id }}"> {{ $branch->branch_name }} </option>
+                                <option selected value="{{ $branch->id }}"> {{ $branch->name }} </option>
                             @else
-                                <option value="{{ $branch->id }}"> {{ $branch->branch_name }} </option>
+                                <option value="{{ $branch->id }}"> {{ $branch->name }} </option>
                             @endif 
                         @endforeach
                     </select>

@@ -30,7 +30,7 @@
                                     {{ $program->name }}
                                 </td>
                                 <td>
-                                    {{ $program->branch->branch_name }}
+                                    {{ $program->branch->name }}
                                 </td>
                                 <td>
                                     <a href="{{ route('program.edit', ['id' => $program ->id]) }}" class="btn btn-xs btn-info">

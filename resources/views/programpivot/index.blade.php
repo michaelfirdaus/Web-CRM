@@ -43,7 +43,7 @@
                                         {{ $coach->pivot->date }}
                                     </td>
                                     <td>
-                                        {{ $program->branch->branch_name }}
+                                        {{ $program->branch->name }}
                                     </td>
                                     <td>
                                         <a href="{{ route('programpivot.edit', $coach->pivot->id) }}" class="btn btn-xs btn-info">

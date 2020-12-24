@@ -27,10 +27,10 @@
                         @foreach ($branches as $branch)
                             <tr>
                                 <td>
-                                    {{ $branch->branch_name }}
+                                    {{ $branch->name }}
                                 </td>
                                 <td>
-                                    {{ $branch->branch_code }}
+                                    {{ $branch->code }}
                                 </td>
                                 <td>
                                     <a href="{{ route('branch.edit', ['id' => $branch ->id]) }}" class="btn btn-xs btn-info">

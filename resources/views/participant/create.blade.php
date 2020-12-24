@@ -75,7 +75,7 @@
                     <select name="branch_id" id="branch_id" class="form-control">
                         <option selected value=""> - Pilih Lokasi Pendaftaran - </option>
                     @foreach($branches as $branch)
-                        <option value="{{ $branch->id }}"> {{ $branch->branch_name }} - {{$branch->branch_code}} </option> 
+                        <option value="{{ $branch->id }}"> {{ $branch->name }} - {{$branch->code}} </option> 
                     @endforeach
                     </select>
                 </div>

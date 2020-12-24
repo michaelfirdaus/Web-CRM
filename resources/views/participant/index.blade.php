@@ -108,7 +108,7 @@
                                     {{ $participant->member_validthru }}
                                 </td>
                                 <td>
-                                    {{ $participant->branch->branch_name }}
+                                    {{ $participant->branch->name }}
                                 </td>
                                 <td>
                                     {{  $participant->program_id != NULL ? $participant->program->name : 'Belum Ada Minat' }}

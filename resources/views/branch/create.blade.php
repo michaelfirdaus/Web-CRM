@@ -17,7 +17,7 @@
 
                 <div class="form-group">
                     <label for="code">Kode Cabang</label>
-                    <input type="text" name="branch_code" class="form-control">
+                    <input type="text" name="code" class="form-control">
                 </div>
 
                 <div class="form-group">
