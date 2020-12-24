@@ -10,8 +10,8 @@ class Participant extends Model
 
     protected $guarded = [];
 
-    public function references(){
-        return $this->hasMany('App\Reference');
+    public function reference(){
+        return $this->belongsTo('App\Reference');
     }
 
     public function profession(){
