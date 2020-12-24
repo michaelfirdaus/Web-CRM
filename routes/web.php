@@ -256,35 +256,67 @@ Route::group(['middleware' => 'auth'], function() {
 //
 
 //Programpivot routes
-Route::get('/programpivots',[
-    'uses'  => 'ProgrampivotController@index',
-    'as'    => 'programpivots'
-]);
+    Route::get('/programpivots',[
+        'uses'  => 'ProgrampivotController@index',
+        'as'    => 'programpivots'
+    ]);
 
-Route::get('/programpivot/create',[
-    'uses'  => 'ProgrampivotController@create',
-    'as'    => 'programpivot.create'
-]);
+    Route::get('/programpivot/create',[
+        'uses'  => 'ProgrampivotController@create',
+        'as'    => 'programpivot.create'
+    ]);
 
-Route::post('/programpivot/update/{id}',[
-    'uses'  => 'ProgrampivotController@update',
-    'as'    => 'programpivot.update'
-]);
+    Route::post('/programpivot/update/{id}',[
+        'uses'  => 'ProgrampivotController@update',
+        'as'    => 'programpivot.update'
+    ]);
 
-Route::get('/programpivot/edit/{id}',[
-    'uses' => 'ProgrampivotController@edit',
-    'as'   => 'programpivot.edit'
-]);
+    Route::get('/programpivot/edit/{id}',[
+        'uses' => 'ProgrampivotController@edit',
+        'as'   => 'programpivot.edit'
+    ]);
 
-Route::post('/programpivot/store',[
-    'uses'  => 'ProgrampivotController@store',
-    'as'    => 'programpivot.store'
-]);
+    Route::post('/programpivot/store',[
+        'uses'  => 'ProgrampivotController@store',
+        'as'    => 'programpivot.store'
+    ]);
 
-Route::get('/programpivot/delete/{id}',[
-    'uses' => 'ProgrampivotController@destroy',
-    'as'   => 'programpivot.delete'
-]);
+    Route::get('/programpivot/delete/{id}',[
+        'uses' => 'ProgrampivotController@destroy',
+        'as'   => 'programpivot.delete'
+    ]);
+//
+
+//Participant routes
+    Route::get('/participants',[
+        'uses'  => 'ParticipantController@index',
+        'as'    => 'participants'
+    ]);
+
+    Route::get('/participant/create',[
+        'uses'  => 'ParticipantController@create',
+        'as'    => 'participant.create'
+    ]);
+
+    Route::post('/participant/update/{id}',[
+        'uses'  => 'ParticipantController@update',
+        'as'    => 'participant.update'
+    ]);
+
+    Route::get('/participant/edit/{id}',[
+        'uses' => 'ParticipantController@edit',
+        'as'   => 'participant.edit'
+    ]);
+
+    Route::post('/participant/store',[
+        'uses'  => 'ParticipantController@store',
+        'as'    => 'participant.store'
+    ]);
+
+    Route::get('/participant/delete/{id}',[
+        'uses' => 'ParticipantController@destroy',
+        'as'   => 'participant.delete'
+    ]);
 //
 
 });

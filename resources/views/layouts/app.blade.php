@@ -143,6 +143,14 @@
                                 </ul>
                             </li>
 
+                            <li class="list-group-item">
+                                <a class="dropdown-toggle" href="" data-toggle="dropdown">Peserta<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="m-2"><a href="{{ route('participant.create') }}">Tambah Peserta Baru</a></li>
+                                    <li class="m-2"><a href="{{ route('participants') }}">Tampilkan Semua Peserta</a></li>
+                                </ul>
+                            </li>
+
                         </ul>
                     </div>
                     <div class="col-lg-9">

@@ -11,6 +11,6 @@ class Profession extends Model
     protected $guarded = [];
 
     public function participant(){
-        return $this->belongsTo('App\Participant');
+        return $this->hasOne('App\Participant');
     }
 }

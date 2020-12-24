@@ -8,7 +8,7 @@
         </div>
         <div class="card card-body">
 
-            <table class="table table-hover">
+            <table class="table table-hover table-responsive">
                 <thead>
                     <th>
                         Nama Peserta
@@ -59,6 +59,9 @@
                         Profesi
                     </th>
                     <th>
+                        Referensi
+                    </th>
+                    <th>
                         Edit
                     </th>
                     <th>
@@ -107,16 +110,21 @@
                                     {{ $participant->member_validthru }}
                                 </td>
                                 <td>
-                                    {{ $participant->branch_id }}
+                                    {{ $participant->branch->branch_name }}
                                 </td>
                                 <td>
-                                    {{ $participant->program_id }}
+                                    {{  $participant->program_id != NULL ? $participant->program->name : 'Belum Ada Minat' }}
                                 </td>
                                 <td>
-                                    {{ $participant->knowcn_id }}
+                                    {{ $participant->knowcn->name }}
                                 </td>
                                 <td>
-                                    {{ $participant->profession_id }}
+                                    {{ $participant->profession->name }}
+                                </td>
+                                <td>
+                                    <a href="{{ route('participant.edit', ['id' => $participant ->id]) }}" class="btn btn-xs btn-success">
+                                        <span class="fas fa-address-book"></span>
+                                    </a>
                                 </td>
                                 <td>
                                     <a href="{{ route('participant.edit', ['id' => $participant ->id]) }}" class="btn btn-xs btn-info">
@@ -132,7 +140,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <th colspan="3" class="text-center">Belum ada peserta yang terdaftar.</th>
+                            <th colspan="18" class="text-center">Belum ada peserta yang terdaftar.</th>
                         </tr>
                     @endif
 

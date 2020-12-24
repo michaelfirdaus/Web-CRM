@@ -15,7 +15,7 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="name">Nama Peserta</label>
-                    <input type="text" name="name" class="form-control">
+                    <input type="text" name="name" class="form-control" value={{ old('name') }}>
                 </div>
 
                 <div class="form-group">
@@ -55,12 +55,12 @@
 
                 <div class="form-group">
                     <label for="sp_link">Link SP</label>
-                    <input type="url" name="address" class="form-control">
+                    <input type="url" name="sp_link" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="text">Nama Kontak Darurat</label>
-                    <input type="tel" name="text" class="form-control">
+                    <label for="emergencycontact_name">Nama Kontak Darurat</label>
+                    <input type="tel" name="emergencycontact_name" class="form-control">
                 </div>
 
                 <div class="form-group">
@@ -75,30 +75,42 @@
 
                 <div class="form-group">
                     <label for="branch_id">Lokasi Pendaftaran</label>
+                    <select name="branch_id" id="branch_id" class="form-control">
+                        <option selected value=""> - Pilih Lokasi Pendaftaran - </option>
                     @foreach($branches as $branch)
-                        <option value="{{ $branch->id }}"> {{ $branch->branch_name }} </option> 
+                        <option value="{{ $branch->id }}"> {{ $branch->branch_name }} - {{$branch->branch_code}} </option> 
                     @endforeach
+                    </select>
                 </div>
 
                 <div class="form-group">
                     <label for="program_id">Minat Program</label>
+                    <select name="program_id" id="program_id" class="form-control">
+                    <option selected value=""> - Pilih Minat Program - </option>
                     @foreach($programs as $program)
                         <option value="{{ $program->id }}"> {{ $program->name }} </option>
                     @endforeach
+                    </select>
                 </div>
 
                 <div class="form-group">
                     <label for="knowcn_id">Mengetahui CN dari</label>
+                    <select name="knowcn_id" id="knowcn_id" class="form-control">
+                    <option selected value=""> - Pilih Kanal CN - </option>
                     @foreach($knowcns as $knowcn)
                         <option value="{{ $knowcn->id }}"> {{ $knowcn->name }} </option>
                     @endforeach
+                    </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="knowcn_id">Profesi</label>
+                    <label for="profession_id">Profesi</label>
+                    <select name="profession_id" id="profession_id" class="form-control">
+                    <option selected value=""> - Pilih Profesi - </option>
                     @foreach($professions as $profession)
                         <option value="{{ $profession->id }}"> {{ $profession->name }} </option>
                     @endforeach
+                    </select>
                 </div>
 
                 <div class="form-group">
