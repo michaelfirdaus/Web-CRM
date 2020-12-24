@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
+@section('header') Perbaharui Perusahaan {{ $jobconnector->name }} @endsection
+
 @section('content')
 
-    @include('includes.errors')
-
+@include('includes.errors')
 
     <div class="card">
-        <div class="card-header">
-            Perbaharui Perusahaan {{ $jobconnector->name }}
-        </div>
-
         <div class="card-body">
             <form action="{{ route('jobconnector.update', ['id' => $jobconnector->id]) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -28,9 +25,8 @@
                         <button type="submit" class="btn btn-success">Perbaharui Perusahaan</button>
                     </div>
                 </div>
-
             </form>
         </div>
-
     </div>
+
 @endsection

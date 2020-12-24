@@ -1,14 +1,13 @@
 @extends('layouts.app')
 
+@section('header') List Semua Jadwal Kelas @endsection
+
 @section('content')
 
     <div class="card">
-        <div class="card card-header">
-            <th><strong>List Semua Jadwal Kelas</strong></th>
-        </div>
         <div class="card card-body">
 
-            <table class="table table-hover">
+            <table id="table" class="table table-hover">
                 <thead>
                     <th>
                         Nama Program
@@ -70,4 +69,5 @@
             </table>
         </div>
     </div>
+    
 @endsection

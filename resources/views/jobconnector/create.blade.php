@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
+@section('header') Tambah Perusahaan Penerima Loker @endsection
+
 @section('content')
 
-    @include('includes.errors')
-
+@include('includes.errors')
 
     <div class="card">
-        <div class="card-header">
-            Tambah Perusahaan Penerima Loker
-        </div>
-
         <div class="card-body">
             <form action="{{ route('jobconnector.store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -31,6 +28,6 @@
 
             </form>
         </div>
-
     </div>
+    
 @endsection

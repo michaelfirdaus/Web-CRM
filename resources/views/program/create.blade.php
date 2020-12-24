@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
+@section('header') Tambah Kelas Baru @endsection
+
 @section('content')
 
-    @include('includes.errors')
-
+@include('includes.errors')
 
     <div class="card">
-        <div class="card-header">
-            Tambah Kelas Baru
-        </div>
-
         <div class="card-body">
             <form action="{{ route('program.store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -33,9 +30,8 @@
                         <button type="submit" class="btn btn-success">Tambahkan Program</button>
                     </div>
                 </div>
-
             </form>
         </div>
-
     </div>
+
 @endsection

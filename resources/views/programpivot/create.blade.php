@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
+@section('header') Tambah Jadwal Kelas Baru @endsection
+
 @section('content')
 
-    @include('includes.errors')
-
+@include('includes.errors')
 
     <div class="card">
-        <div class="card-header">
-            Tambah Jadwal Kelas Baru
-        </div>
-
         <div class="card-body">
             <form action="{{ route('programpivot.store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -41,9 +38,8 @@
                         <button type="submit" class="btn btn-success">Tambahkan Jadwal Kelas</button>
                     </div>
                 </div>
-
             </form>
         </div>
-
     </div>
+
 @endsection

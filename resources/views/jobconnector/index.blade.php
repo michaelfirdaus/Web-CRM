@@ -1,14 +1,13 @@
 @extends('layouts.app')
 
+@section('header') List Semua Perusahaan @endsection
+
 @section('content')
 
     <div class="card">
-        <div class="card card-header">
-            <th><strong>List Semua Perusahaan</strong></th>
-        </div>
         <div class="card card-body">
 
-            <table class="table table-hover">
+            <table id="table" class="table table-hover table-responsive">
                 <thead>
                     <th>
                         Nama Perusahaan
@@ -55,4 +54,5 @@
             </table>
         </div>
     </div>
+
 @endsection

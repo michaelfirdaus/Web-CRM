@@ -1,14 +1,12 @@
 @extends('layouts.app')
 
+@section('header') List Semua Profesi @endsection
+
 @section('content')
 
     <div class="card">
-        <div class="card card-header">
-            <th><strong>List Semua Profesi</strong></th>
-        </div>
-        <div class="card card-body">
-
-            <table class="table table-hover">
+        <div class="card-body">
+            <table id="table" class="table table-hover table-responsive">
                 <thead>
                     <th>
                         Nama Profesi
@@ -20,7 +18,7 @@
                         Hapus
                     </th>
                 </thead>
-        
+
                 <tbody>
                     @if($professions->count() > 0)
                         @foreach ($professions as $profession)
@@ -49,4 +47,5 @@
             </table>
         </div>
     </div>
+    
 @endsection

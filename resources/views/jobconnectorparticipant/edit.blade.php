@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
+@section('header') Perbaharui Jadwal Kelas {{ $current_program->name }}, Tanggal {{ $coachprogram->date }} @endsection
+
 @section('content')
 
-    @include('includes.errors')
-
+@include('includes.errors')
 
     <div class="card"> 
-        <div class="card-header">
-            Perbaharui Jadwal Kelas {{ $current_program->name }}, Tanggal {{ $coachprogram->date }}
-        </div>
-
         <div class="card-body">
             <form action="{{ route('programpivot.update', ['id' => $coachprogram->id]) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -54,6 +51,6 @@
                 </div>
             </form>
         </div>
-
     </div>
+    
 @endsection

@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
+@section('header') Perbaharui Kanal {{$knowcn->name}} Course-Net @endsection
+
 @section('content')
 
-    @include('includes.errors')
-
+@include('includes.errors')
 
     <div class="card">
-        <div class="card-header">
-            Perbaharui Kanal {{ $knowcn->name }} Course-Net
-        </div>
-
         <div class="card-body">
             <form action="{{ route('knowcn.update', ['id' => $knowcn->id]) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -23,9 +20,8 @@
                         <button type="submit" class="btn btn-success">Perbaharui Kanal</button>
                     </div>
                 </div>
-
             </form>
         </div>
-
     </div>
+
 @endsection

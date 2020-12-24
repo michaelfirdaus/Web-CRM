@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
+@section('header') Perbaharui Program {{ $program->name }} @endsection
+
 @section('content')
 
-    @include('includes.errors')
-
+@include('includes.errors')
 
     <div class="card"> 
-        <div class="card-header">
-            Perbaharui Program {{ $program->name }}
-        </div>
-
         <div class="card-body">
             <form action="{{ route('program.update', ['id' => $program->id]) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -41,6 +38,6 @@
 
             </form>
         </div>
-
     </div>
+    
 @endsection

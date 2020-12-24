@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
+@section('header') Perbaharui Cabang {{ $branch->name }} @endsection
+
 @section('content')
 
-    @include('includes.errors')
-
+@include('includes.errors')
 
     <div class="card">
-        <div class="card-header">
-            Perbaharui Cabang {{ $branch->name }}
-        </div>
-
         <div class="card-body">
             <form action="{{ route('branch.update', ['id' => $branch->id]) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -28,9 +25,8 @@
                         <button type="submit" class="btn btn-success">Perbaharui Cabang</button>
                     </div>
                 </div>
-
             </form>
         </div>
-
     </div>
+
 @endsection

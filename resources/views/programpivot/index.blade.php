@@ -1,14 +1,12 @@
 @extends('layouts.app')
 
+@section('header') Tambah Jadwal Kelas Baru @endsection
+
 @section('content')
 
     <div class="card">
-        <div class="card card-header">
-            <th><strong>List Semua Jadwal Kelas</strong></th>
-        </div>
-        <div class="card card-body">
-
-            <table class="table table-hover">
+        <div class="card-body">
+            <table id="table" class="table table-hover table-responsive">
                 <thead>
                     <th>
                         Nama Program
@@ -62,12 +60,12 @@
                         @endforeach
                     @else
                         <tr>
-                            <th colspan="3" class="text-center">Tidak ada jadwal kelas yang tersedia, tambahkan jadwal kelas baru.</th>
+                            <th colspan="6" class="text-center">Tidak ada jadwal kelas yang tersedia, tambahkan jadwal kelas baru.</th>
                         </tr>
                     @endif
-
                 </tbody>
             </table>
         </div>
     </div>
+
 @endsection

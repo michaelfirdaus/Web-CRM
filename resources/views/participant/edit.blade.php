@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
+@section('header') Perbaharui Peserta {{ $participant->name }} @endsection
+
 @section('content')
 
-    @include('includes.errors')
-
+@include('includes.errors')
 
     <div class="card">
-        <div class="card-header">
-            Perbaharui Peserta {{ $participant->name }}
-        </div>
-
         <div class="card-body">
             <form action="{{ route('participant.update', ['id' => $participant->id]) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -130,9 +127,8 @@
                         <button type="submit" class="btn btn-success">Perbaharui Peserta</button>
                     </div>
                 </div>
-
             </form>
         </div>
-
     </div>
+    
 @endsection

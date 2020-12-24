@@ -1,14 +1,12 @@
 @extends('layouts.app')
 
+@section('header') List Semua Coach Course-Net @endsection
+
 @section('content')
 
     <div class="card">
-        <div class="card card-header">
-            <th><strong>List Semua Coach</strong></th>
-        </div>
-        <div class="card card-body">
-
-            <table class="table table-hover">
+        <div class="card-body">
+            <table id="table" class="table table-hover table-responsive">
                 <thead>
                     <th>
                         Nama Coach
@@ -20,7 +18,7 @@
                         Hapus
                     </th>
                 </thead>
-        
+
                 <tbody>
                     @if($coaches->count() > 0)
                         @foreach ($coaches as $coach)
@@ -49,4 +47,5 @@
             </table>
         </div>
     </div>
+
 @endsection

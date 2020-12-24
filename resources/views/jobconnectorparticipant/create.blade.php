@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
+@section('header') Tambah Job Connector untuk Peserta @endsection
+
 @section('content')
 
-    @include('includes.errors')
-
+@include('includes.errors')
 
     <div class="card">
-        <div class="card-header">
-            Tambah Job Connector untuk Peserta
-        </div>
-
         <div class="card-body">
             <form action="{{ route('jobconnectorparticipant.store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -52,9 +49,8 @@
                         <button type="submit" class="btn btn-success">Tambahkan Job Connector untuk Peserta</button>
                     </div>
                 </div>
-
             </form>
         </div>
-
     </div>
+
 @endsection

@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
+@section('header') Tambah Peserta Baru @endsection
+
 @section('content')
 
-    @include('includes.errors')
-
+@include('includes.errors')
 
     <div class="card">
-        <div class="card-header">
-            Tambah Peserta Baru
-        </div>
-
         <div class="card-body">
             <form action="{{ route('participant.store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -118,9 +115,8 @@
                         <button type="submit" class="btn btn-success">Tambahkan Peserta Baru</button>
                     </div>
                 </div>
-
             </form>
         </div>
-
     </div>
+    
 @endsection

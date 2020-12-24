@@ -1,14 +1,12 @@
 @extends('layouts.app')
 
+@section('header') List Semua Peserta Course-Net @endsection
+
 @section('content')
 
     <div class="card">
-        <div class="card card-header">
-            <th><strong>List Semua Peserta</strong></th>
-        </div>
         <div class="card card-body">
-
-            <table class="table table-hover table-responsive">
+            <table id="table" class="table table-hover table-responsive">
                 <thead>
                     <th>
                         Nama Peserta
@@ -58,13 +56,13 @@
                     <th> 
                         Profesi
                     </th>
-                    <th>
+                    <th class="text-center">
                         Referensi
                     </th>
-                    <th>
+                    <th class="text-center">
                         Edit
                     </th>
-                    <th>
+                    <th class="text-center">
                         Hapus
                     </th>
                 </thead>
@@ -121,17 +119,17 @@
                                 <td>
                                     {{ $participant->profession->name }}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <a href="{{ route('participant.edit', ['id' => $participant ->id]) }}" class="btn btn-xs btn-success">
                                         <span class="fas fa-address-book"></span>
                                     </a>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <a href="{{ route('participant.edit', ['id' => $participant ->id]) }}" class="btn btn-xs btn-info">
                                         <span class="fas fa-pencil-alt"></span>
                                     </a>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <a href="{{ route('participant.delete', ['id' => $participant ->id]) }}" class="btn btn-xs btn-danger">
                                         <span class="fas fa-trash-alt"></span>
                                     </a>
@@ -140,7 +138,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <th colspan="18" class="text-center">Belum ada peserta yang terdaftar.</th>
+                            <th colspan="19" class="text-center">Belum ada peserta yang terdaftar.</th>
                         </tr>
                     @endif
 
@@ -148,4 +146,5 @@
             </table>
         </div>
     </div>
+    
 @endsection
