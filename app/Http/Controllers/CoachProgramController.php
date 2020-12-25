@@ -11,7 +11,7 @@ use App\Branch;
 use Session;
 use DB;
 
-class ProgrampivotController extends Controller
+class CoachProgramController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +23,7 @@ class ProgrampivotController extends Controller
         $coachprograms = CoachProgram::all();
         $programs = Program::with('coaches','branch')->get();
 
-        return view('programpivot.index')
+        return view('coachprogram.index')
         ->with('programs', $programs)
         ->with('coachprograms', $coachprograms);
     }
@@ -44,7 +44,7 @@ class ProgrampivotController extends Controller
             return redirect()->back();
         }
 
-        return view('programpivot.create')
+        return view('coachprogram.create')
             ->with('programs', $programs)
             ->with('branches', $branches)
             ->with('coaches', $coaches);
@@ -76,7 +76,7 @@ class ProgrampivotController extends Controller
 
         Session::flash('success', 'Berhasil Menambahkan Jadwal Kelas');
 
-        return redirect()->route('programpivots');
+        return redirect()->route('coachprograms');
     }
 
     /**
@@ -105,7 +105,7 @@ class ProgrampivotController extends Controller
         $coaches = Coach::all();
         $branches = Branch::all();
 
-        return view('programpivot.edit')
+        return view('coachprograms.edit')
             ->with('coachprogram', $coachprogram)
             ->with('programs', $programs)
             ->with('current_program', $current_program)
@@ -146,7 +146,7 @@ class ProgrampivotController extends Controller
 
         Session::flash('success', 'Berhasil Memperbaharui Jadwal Kelas');
 
-        return redirect()->route('programpivots');
+        return redirect()->route('coachprograms');
     }
 
     /**
@@ -163,6 +163,6 @@ class ProgrampivotController extends Controller
 
         Session::flash('success', 'Berhasil Menghapus Jadwal Kelas');
 
-        return redirect()->route('programpivots');
+        return redirect()->route('coachprograms');
     }
 }

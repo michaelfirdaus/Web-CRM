@@ -4,11 +4,11 @@
 
 @section('content')
 
-<div class="row">
-    <div class="form-group ml-auto mr-2">
-        <a href="{{ route('reference.create', ['id' => $currentparticipant->id]) }}" class="btn btn-success">Tambah Referensi</a>
+    <div class="row">
+        <div class="form-group ml-auto mr-2">
+            <a href="{{ route('reference.create', ['id' => $currentparticipant->id]) }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Tambah Referensi</a>
+        </div>
     </div>
-</div>
     <div class="card">
         <div class="card-body">
             <table id="table" class="table table-hover table-responsive">

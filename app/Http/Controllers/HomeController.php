@@ -14,7 +14,6 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        Session::flash('success', 'Anda Berhasil Login!');
         $this->middleware('auth');
     }
 
@@ -25,6 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return redirect()->route('participants');
     }
 }

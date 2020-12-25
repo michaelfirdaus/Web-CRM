@@ -259,37 +259,39 @@ Route::group(['middleware' => 'auth'], function() {
     ]);
 //
 
+
 //Programpivot routes
-    Route::get('/programpivots',[
-        'uses'  => 'ProgrampivotController@index',
-        'as'    => 'programpivots'
+    Route::get('/coachprograms',[
+        'uses'  => 'CoachProgramController@index',
+        'as'    => 'coachprograms'
     ]);
 
-    Route::get('/programpivot/create',[
-        'uses'  => 'ProgrampivotController@create',
-        'as'    => 'programpivot.create'
+    Route::get('/coachprogram/create',[
+        'uses'  => 'CoachProgramController@create',
+        'as'    => 'coachprogram.create'
     ]);
 
-    Route::post('/programpivot/update/{id}',[
-        'uses'  => 'ProgrampivotController@update',
-        'as'    => 'programpivot.update'
+    Route::post('/coachprogram/update/{id}',[
+        'uses'  => 'CoachProgramController@update',
+        'as'    => 'coachprogram.update'
     ]);
 
-    Route::get('/programpivot/edit/{id}',[
-        'uses' => 'ProgrampivotController@edit',
-        'as'   => 'programpivot.edit'
+    Route::get('/coachprogram/edit/{id}',[
+        'uses' => 'CoachProgramController@edit',
+        'as'   => 'coachprogram.edit'
     ]);
 
-    Route::post('/programpivot/store',[
-        'uses'  => 'ProgrampivotController@store',
-        'as'    => 'programpivot.store'
+    Route::post('/coachprogram/store',[
+        'uses'  => 'CoachProgramController@store',
+        'as'    => 'coachprogram.store'
     ]);
 
-    Route::get('/programpivot/delete/{id}',[
-        'uses' => 'ProgrampivotController@destroy',
-        'as'   => 'programpivot.delete'
+    Route::get('/coachprogram/delete/{id}',[
+        'uses' => 'CoachProgramController@destroy',
+        'as'   => 'coachprogram.delete'
     ]);
 //
+
 
 //Participant routes
     Route::get('/participants',[

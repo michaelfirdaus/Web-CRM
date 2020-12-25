@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>Admin Course-Net</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -89,239 +89,96 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
               <!-- Add icons to the links using the .nav-icon class
                   with font-awesome or any other icon font library -->
+
               <li class="nav-item">
                 <a href="/" class="nav-link active">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
-                    Dashboard
+                    Dashboard Peserta
                   </p>
                 </a>
               </li>
               
 
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+              <li class="nav-item">
+                <a href="{{ route('professions') }}" class="nav-link">
                   <i class="nav-icon fas fa-user-tie"></i>
                   <p>
                     Profesi
-                    <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('profession.create') }}" class="nav-link">
-                      <i class="fas fa-arrow-right nav-icon"></i>
-                      <p>Tambah Profesi Baru</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ route('professions') }}" class="nav-link">
-                      <i class="fas fa-arrow-right nav-icon"></i>
-                      <p>Semua Profesi</p>
-                    </a>
-                  </li>
-                </ul>
               </li>
 
 
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+              <li class="nav-item">
+                <a href="{{route('coaches')}}" class="nav-link">
                   <i class="nav-icon fas fa-chalkboard-teacher"></i>
                   <p>
                     Coach
-                    <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('coach.create') }}" class="nav-link">
-                      <i class="fas fa-arrow-right nav-icon"></i>
-                      <p>Tambah Coach Baru</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ route('coaches') }}" class="nav-link">
-                      <i class="fas fa-arrow-right nav-icon"></i>
-                      <p>Semua Coach</p>
-                    </a>
-                  </li>
-                </ul>
               </li>
 
 
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+              <li class="nav-item">
+                <a href="{{route('salespersons')}}" class="nav-link">
                   <i class="nav-icon fas fa-universal-access"></i>
                   <p>
                     Sales
-                    <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('profession.create') }}" class="nav-link">
-                      <i class="fas fa-arrow-right nav-icon"></i>
-                      <p>Tambah Sales Baru</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ route('professions') }}" class="nav-link">
-                      <i class="fas fa-arrow-right nav-icon"></i>
-                      <p>Semua Sales</p>
-                    </a>
-                  </li>
-                </ul>
               </li>
 
 
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+              <li class="nav-item">
+                <a href="{{route('knowcns')}}" class="nav-link">
                   <i class="nav-icon fab fa-youtube"></i>
                   <p>
                     Kanal Course-Net
-                    <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('knowcn.create') }}" class="nav-link">
-                      <i class="fas fa-arrow-right nav-icon"></i>
-                      <p>Tambah Kanal Baru</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ route('knowcns') }}" class="nav-link">
-                      <i class="fas fa-arrow-right nav-icon"></i>
-                      <p>Semua Kanal</p>
-                    </a>
-                  </li>
-                </ul>
               </li>
 
 
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+              <li class="nav-item">
+                <a href="{{route('jobconnectors')}}" class="nav-link">
                   <i class="nav-icon fas fa-city"></i>
                   <p>
                     Perusahaan Rekanan
-                    <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('jobconnector.create') }}" class="nav-link">
-                      <i class="fas fa-arrow-right nav-icon"></i>
-                      <p>Tambah Perusahaan Rekanan</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ route('jobconnectors') }}" class="nav-link">
-                      <i class="fas fa-arrow-right nav-icon"></i>
-                      <p>Semua Perusahaan Rekanan</p>
-                    </a>
-                  </li>
-                </ul>
               </li>
 
 
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+              <li class="nav-item">
+                <a href="{{route('branches')}}" class="nav-link">
                   <i class="nav-icon fas fa-building"></i>
                   <p>
                     Cabang
-                    <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('branch.create') }}" class="nav-link">
-                      <i class="fas fa-arrow-right nav-icon"></i>
-                      <p>Tambah Cabang</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ route('branches') }}" class="nav-link">
-                      <i class="fas fa-arrow-right nav-icon"></i>
-                      <p>Semua Cabang</p>
-                    </a>
-                  </li>
-                </ul>
               </li>
 
 
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+              <li class="nav-item">
+                <a href="{{route('programs')}}" class="nav-link">
                   <i class="nav-icon fas fa-book"></i>
                   <p>
                     Program
-                    <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('program.create') }}" class="nav-link">
-                      <i class="fas fa-arrow-right nav-icon"></i>
-                      <p>Tambah Program</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ route('programs') }}" class="nav-link">
-                      <i class="fas fa-arrow-right nav-icon"></i>
-                      <p>Semua Program</p>
-                    </a>
-                  </li>
-                </ul>
               </li>
               
 
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+              <li class="nav-item">
+                <a href="{{route('coachprograms')}}" class="nav-link">
                   <i class="nav-icon fas fa-business-time"></i>
                   <p>
                     Jadwal Kelas
-                    <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('programpivot.create') }}" class="nav-link">
-                      <i class="fas fa-arrow-right nav-icon"></i>
-                      <p>Tambah Jadwal Kelas</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ route('programpivots') }}" class="nav-link">
-                      <i class="fas fa-arrow-right nav-icon"></i>
-                      <p>Semua Jadwal Kelas</p>
-                    </a>
-                  </li>
-                </ul>
               </li>
 
-
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-user-friends"></i>
-                  <p>
-                    Peserta
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('participant.create') }}" class="nav-link">
-                      <i class="fas fa-arrow-right nav-icon"></i>
-                      <p>Tambah Peserta</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ route('participants') }}" class="nav-link">
-                      <i class="fas fa-arrow-right nav-icon"></i>
-                      <p>Semua Peserta</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
 
 
             </ul>

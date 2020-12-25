@@ -4,9 +4,14 @@
 
 @section('content')
 
+    <div class="row">
+        <div class="form-group ml-auto mr-2">
+            <a href="{{ route('coachprogram.create') }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Tambah Jadwal Kelas</a>
+        </div>
+    </div>
     <div class="card">
         <div class="card-body">
-            <table id="table" class="table table-hover table-responsive">
+            <table id="table" class="table table-hover table-bordered table-responsive">
                 <thead>
                     <th>
                         Nama Program

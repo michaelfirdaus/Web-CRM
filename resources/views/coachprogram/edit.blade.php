@@ -8,7 +8,7 @@
 
     <div class="card"> 
         <div class="card-body">
-            <form action="{{ route('programpivot.update', ['id' => $coachprogram->id]) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('coachprogram.update', ['id' => $coachprogram->id]) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="program">Nama Program</label>

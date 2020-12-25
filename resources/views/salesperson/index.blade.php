@@ -4,9 +4,14 @@
 
 @section('content')
 
+    <div class="row">
+        <div class="form-group ml-auto mr-2">
+            <a href="{{ route('salesperson.create') }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Tambah Sales</a>
+        </div>
+    </div>
     <div class="card">
         <div class="card-body">
-            <table class="table table-hover table-responsive">
+            <table id="table" class="table table-hover table-bordered table-responsive">
                 <thead>
                     <th>
                         Nama Sales
