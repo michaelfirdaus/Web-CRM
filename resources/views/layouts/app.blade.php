@@ -343,8 +343,6 @@
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     @yield('breadcrumb')
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Dashboard</li>
                 </ol>
               </div><!-- /.col -->
             </div><!-- /.row -->
@@ -355,7 +353,7 @@
         <!-- Main content -->
         <section class="content">
           <div class="container-fluid">
-            <div class="row">
+            <div class="wrapper">
                 @yield('content')
             </div>
           </div><!-- /.container-fluid -->

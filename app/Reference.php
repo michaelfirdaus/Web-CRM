@@ -10,7 +10,7 @@ class Reference extends Model
 
     protected $guarded = [];
 
-    public function participants(){
-        return $this->hasMany('App\Participant');
+    public function participant(){
+        return $this->hasOne('App\Participant');
     }
 }

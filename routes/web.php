@@ -323,4 +323,35 @@ Route::group(['middleware' => 'auth'], function() {
     ]);
 //
 
+
+//Reference routes
+    Route::get('/references/{id}',[
+        'uses'  => 'ReferenceController@index',
+        'as'    => 'references'
+    ]);
+    Route::get('/reference/{id}/create',[
+        'uses'  => 'ReferenceController@create',
+        'as'    => 'reference.create'
+    ]);
+    Route::post('/reference/update/{id}',[
+        'uses'  => 'ReferenceController@update',
+        'as'    => 'reference.update'
+    ]);
+
+    Route::get('/reference/edit/{id}',[
+        'uses' => 'ReferenceController@edit',
+        'as'   => 'reference.edit'
+    ]);
+
+    Route::post('/reference/store',[
+        'uses'  => 'ReferenceController@store',
+        'as'    => 'reference.store'
+    ]);
+
+    Route::get('/reference/delete/{id}',[
+        'uses' => 'ReferenceController@destroy',
+        'as'   => 'reference.delete'
+    ]);
+//
+
 });

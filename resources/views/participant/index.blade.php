@@ -111,7 +111,7 @@
                                     {{ $participant->branch->name }}
                                 </td>
                                 <td>
-                                    {{  $participant->program_id != NULL ? $participant->program->name : 'Belum Ada Minat' }}
+                                    {{ $participant->program_id != NULL ? $participant->program->name : 'Belum Ada Minat' }}
                                 </td>
                                 <td>
                                     {{ $participant->knowcn->name }}
@@ -120,7 +120,7 @@
                                     {{ $participant->profession->name }}
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('participant.edit', ['id' => $participant ->id]) }}" class="btn btn-xs btn-success">
+                                    <a href="{{ route('references', ['id' => $participant ->id]) }}" class="btn btn-xs btn-success">
                                         <span class="fas fa-address-book"></span>
                                     </a>
                                 </td>
