@@ -24,6 +24,7 @@ Auth::routes([
   ]);
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware' => 'auth'], function() {
 
@@ -260,7 +261,7 @@ Route::group(['middleware' => 'auth'], function() {
 //
 
 
-//Programpivot routes
+//CoachProgram routes
     Route::get('/coachprograms',[
         'uses'  => 'CoachProgramController@index',
         'as'    => 'coachprograms'
@@ -353,6 +354,37 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/reference/delete/{id}',[
         'uses' => 'ReferenceController@destroy',
         'as'   => 'reference.delete'
+    ]);
+//
+
+
+//Transaction routes
+    Route::get('/transactions',[
+        'uses'  => 'TransactionController@index',
+        'as'    => 'transactions'
+    ]);
+    Route::get('/transaction/create',[
+        'uses'  => 'TransactionController@create',
+        'as'    => 'transaction.create'
+    ]);
+    Route::post('/transaction/update/{id}',[
+        'uses'  => 'TransactionController@update',
+        'as'    => 'transaction.update'
+    ]);
+
+    Route::get('/transaction/edit/{id}',[
+        'uses' => 'TransactionController@edit',
+        'as'   => 'transaction.edit'
+    ]);
+
+    Route::post('/transaction/store',[
+        'uses'  => 'TransactionController@store',
+        'as'    => 'transaction.store'
+    ]);
+
+    Route::get('/transaction/delete/{id}',[
+        'uses' => 'TransactionController@destroy',
+        'as'   => 'transaction.delete'
     ]);
 //
 

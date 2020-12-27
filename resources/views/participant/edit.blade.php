@@ -86,6 +86,7 @@
                 <div class="form-group">
                     <label for="program_id">Minat Program</label>
                     <select name="program_id" id="program_id" class="form-control">
+                    <option value=""> - Pilih Minat Program - </option>
                     @foreach($programs as $program)
                             @if($program->id == $participant->program_id)
                                 <option selected value="{{ $program->id }}"> {{ $program->name }} </option>

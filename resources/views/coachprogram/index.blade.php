@@ -51,12 +51,12 @@
                                         {{ $program->branch->name }}
                                     </td>
                                     <td>
-                                        <a href="{{ route('programpivot.edit', $coach->pivot->id) }}" class="btn btn-xs btn-info">
+                                        <a href="{{ route('coachprogram.edit', $coach->pivot->id) }}" class="btn btn-xs btn-info">
                                             <span class="fas fa-pencil-alt"></span>
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('programpivot.delete', ['id' => $coach->pivot ->id]) }}" class="btn btn-xs btn-danger">
+                                        <a href="{{ route('coachprogram.delete', ['id' => $coach->pivot ->id]) }}" class="btn btn-xs btn-danger">
                                             <span class="fas fa-trash-alt"></span>
                                         </a>
                                     </td>

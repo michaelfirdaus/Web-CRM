@@ -180,6 +180,16 @@
               </li>
 
 
+              <li class="nav-item">
+                <a href="{{route('transactions')}}" class="nav-link">
+                  <i class="nav-icon fas fa-business-time"></i>
+                  <p>
+                    Transaksi
+                  </p>
+                </a>
+              </li>
+
+
 
             </ul>
           </nav>

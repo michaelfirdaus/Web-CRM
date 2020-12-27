@@ -14,8 +14,8 @@ class Transaction extends Model
         return $this->belongsTo('App\Salesperson');
     }
 
-    public function programpivot(){
-        return $this->hasOne('App\Programpivot');
+    public function coachprogram(){
+        return $this->hasOne('App\CoachProgram');
     }
 
     public function result(){
