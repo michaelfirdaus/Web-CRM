@@ -105,6 +105,16 @@
               
 
               <li class="nav-item">
+                <a href="{{route('transactions')}}" class="nav-link">
+                  <i class="nav-icon fas fa-money-check"></i>
+                  <p>
+                    Transaksi
+                  </p>
+                </a>
+              </li>
+
+
+              <li class="nav-item">
                 <a href="{{ route('professions') }}" class="nav-link">
                   <i class="nav-icon fas fa-user-tie"></i>
                   <p>
@@ -179,16 +189,6 @@
                   <i class="nav-icon fas fa-business-time"></i>
                   <p>
                     Jadwal Kelas
-                  </p>
-                </a>
-              </li>
-
-
-              <li class="nav-item">
-                <a href="{{route('transactions')}}" class="nav-link">
-                  <i class="nav-icon fas fa-business-time"></i>
-                  <p>
-                    Transaksi
                   </p>
                 </a>
               </li>
