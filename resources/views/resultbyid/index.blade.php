@@ -14,9 +14,6 @@
             <table id="table" class="table table-hover table-bordered table-responsive">
                 <thead>
                     <th>
-                        Tgl Transaksi
-                    </th>
-                    <th>
                         Nama Peserta
                     </th>
                     <th> 
@@ -65,9 +62,6 @@
                         @foreach ($transactions as $transaction)
                             @foreach($coachprograms as $cp)    
                                 <tr>
-                                    <td>
-                                        {{ $transaction->created_at }}
-                                    </td>
                                     <td>
                                         {{ $transaction->participant->name }}
                                     </td>
