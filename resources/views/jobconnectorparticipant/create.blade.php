@@ -13,30 +13,32 @@
                 <div class="form-group">
                     <label for="participant_id">Nama Peserta</label>
                     <select name="participant_id" id="participant_id" class="form-control">
-                        @foreach($participants as $participant)
-                            <option value="{{ $participant->id }}"> {{ $participant->name }} </option>
-                        @endforeach
+                    <option value="" selected disabled hidden> - Pilih Peserta - </option>
+                    @foreach($participants as $participant)
+                        <option value="{{ $participant->id }}"> {{ $participant->name }} </option>
+                    @endforeach
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="jobconnector_id">Perusahaan Rekanan</label>
                     <select name="jobconnector_id" id="jobconnector" class="form-control">
-                        @foreach($jobconnectors as $jobconnector)
-                            <option value="{{ $jobconnector->id }}"> {{ $jobconnector->company_name }} </option>
-                        @endforeach
+                    <option value="" selected disabled hidden> - Pilih Perusahaan Rekanan - </option>
+                    @foreach($jobconnectors as $jobconnector)
+                        <option value="{{ $jobconnector->id }}"> {{ $jobconnector->company_name }} </option>
+                    @endforeach
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="date">Tanggal Batch</label>
-                    <input type="date" id="date" name="date">
+                    <input type="date" id="date" name="date" {{ old('date') }}>
                 </div>
 
                 <div class="form-group">
                     <label for="application_status">Status</label>
                     <select name="application_status" id="application_status" class="form-control">
-                        <option value="1"> Sedang dalam Proses </option>
+                        <option value="1" selected> Sedang dalam Proses </option>
                         <option value="2"> Ditolak </option>
                         <option value="3"> Diterima </option>
                         <option value="4"> Dibatalkan </option>

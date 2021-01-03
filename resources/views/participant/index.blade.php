@@ -98,10 +98,10 @@
                                     {{ $participant->student_idcard }}
                                 </td>
                                 <td>
-                                    {{ $participant->cv_link }}
+                                    <a href="{{ $participant->cv_link }}" target="_blank">{{ $participant->cv_link }}</a>
                                 </td>
                                 <td>
-                                    {{ $participant->sp_link }}
+                                    <a href="{{ $participant->sp_link }}" target="_blank">{{ $participant->sp_link }}</a>
                                 </td>
                                 <td>
                                     {{ $participant->emergencycontact_name }}

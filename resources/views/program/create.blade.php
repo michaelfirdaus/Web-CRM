@@ -12,15 +12,16 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="name">Nama Program</label>
-                    <input type="text" name="name" class="form-control">
+                    <input type="text" name="name" class="form-control" value={{ old('name') }}>
                 </div>
 
                 <div class="form-group">
                     <label for="branch_location">Lokasi Cabang</label>
-                    <select name="branch_location" id="location" class="form-control">
-                        @foreach($branches as $branch)
-                            <option value="{{ $branch->id }}"> {{ $branch->name }} </option>
-                        @endforeach
+                    <select name="branch_location" id="location" class="form-control" value={{ old('branch_location') }}>
+                    <option valie="" selected disabled hidden> - Pilih Lokasi Kelas/Cabang - </option>
+                    @foreach($branches as $branch)
+                        <option value="{{ $branch->id }}"> {{ $branch->name }} </option>
+                    @endforeach
                     </select>
                 </div>
 

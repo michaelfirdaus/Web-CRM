@@ -13,18 +13,20 @@
                 <div class="form-group">
                     <label for="program">Nama Program</label>
                     <select name="program" id="program" class="form-control">
-                        @foreach($programs as $program)
-                            <option value="{{ $program->id }}"> {{ $program->name }} </option>
-                        @endforeach
+                    <option value="" selected disabled hidden> - Pilih Program - </option>
+                    @foreach($programs as $program)
+                        <option value="{{ $program->id }}"> {{ $program->name }} </option>
+                    @endforeach
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="coach">Nama Coach yang Akan Mengajar</label>
                     <select name="coach[]" id="coach" class="form-control">
-                        @foreach($coaches as $coach)
-                            <option value="{{ $coach->id }}"> {{ $coach->name }} </option>
-                        @endforeach
+                    <option value="" selected disabled hidden> - Pilih Coach - </option>
+                    @foreach($coaches as $coach)
+                        <option value="{{ $coach->id }}"> {{ $coach->name }} </option>
+                    @endforeach
                     </select>
                 </div>
 

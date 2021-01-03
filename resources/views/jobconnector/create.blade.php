@@ -12,12 +12,12 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="name">Nama Perusahaan</label>
-                    <input type="text" name="name" class="form-control">
+                    <input type="text" name="name" class="form-control" value={{ old('name') }}>
                 </div>
 
                 <div class="form-group">
                     <label for="location">Lokasi Perusahaan</label>
-                    <input type="text" name="location" class="form-control">
+                    <input type="text" name="location" class="form-control" value={{ old('location') }}>
                 </div>
 
                 <div class="form-group">
