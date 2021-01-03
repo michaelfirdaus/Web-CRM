@@ -18,6 +18,7 @@ class CreateJobconnectorParticipantTable extends Migration
             $table->bigInteger('participant_id');
             $table->bigInteger('jobconnector_id');
             $table->date('date');
+            $table->integer('application_status');
             $table->timestamps();
         });
     }

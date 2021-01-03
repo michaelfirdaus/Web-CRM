@@ -115,6 +115,16 @@
 
 
               <li class="nav-item">
+                <a href="{{route('jobconnectorparticipants')}}" class="nav-link">
+                  <i class="nav-icon fas fa-briefcase"></i>
+                  <p>
+                    Job Connector
+                  </p>
+                </a>
+              </li>
+
+
+              <li class="nav-item">
                 <a href="{{ route('professions') }}" class="nav-link">
                   <i class="nav-icon fas fa-user-tie"></i>
                   <p>
