@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="{{ asset('adminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}"> --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
+    {{-- Additional CSS --}}
+    <link rel="stylesheet" href="{{ asset('css/select3.css') }}">
     @yield('css')
 
 </head>
@@ -101,6 +103,26 @@
                 </a>
               </li>
               
+
+              <li class="nav-item">
+                <a href="{{route('transactions')}}" class="nav-link">
+                  <i class="nav-icon fas fa-money-check"></i>
+                  <p>
+                    Transaksi
+                  </p>
+                </a>
+              </li>
+
+
+              <li class="nav-item">
+                <a href="{{route('jobconnectorparticipants')}}" class="nav-link">
+                  <i class="nav-icon fas fa-briefcase"></i>
+                  <p>
+                    Job Connector
+                  </p>
+                </a>
+              </li>
+
 
               <li class="nav-item">
                 <a href="{{ route('professions') }}" class="nav-link">
@@ -177,16 +199,6 @@
                   <i class="nav-icon fas fa-business-time"></i>
                   <p>
                     Jadwal Kelas
-                  </p>
-                </a>
-              </li>
-
-
-              <li class="nav-item">
-                <a href="{{route('transactions')}}" class="nav-link">
-                  <i class="nav-icon fas fa-business-time"></i>
-                  <p>
-                    Transaksi
                   </p>
                 </a>
               </li>
@@ -351,6 +363,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
+{{-- Additional JS --}}
+<script src="{{ asset('js/select3.js') }}"></script>
 
 <script>
     @if(Session::has('success'))
@@ -361,37 +375,19 @@
         toastr.info("{{ Session::get('info') }}")
     @endif
 
-    // $(document).ready(function () {
-    //       var table = $('#table').DataTable({
-    //           select: true,
-    //           dom: 'Blfrtip',
-    //           lengthMenu: [
-    //               [10, 25, 50, 100, -1],
-    //               ['10 Entri', '25 Entri', '50 Entri', '100 Entri', 'Semua']
-    //           ],
-    //           dom: 'Bfrtip',
-    //           buttons: [
-    //               'pageLength',
-    //               { extend: 'pdf', text: '<span class="fas fa-file-pdf fa" aria-hidden="true"> Ekspor PDF</span>' },
-    //               { extend: 'csv', text: '<span class="fas fa-file-csv fa"> Ekspor CSV</span>' },
-    //               { extend: 'excel', text: '<span class="fas fa-file-excel" aria-hidden="true"> Ekspor Excel</span>' }
-    //           ],
-    //       });
-    //       table.buttons().container()
-    //           .appendTo('#datatable_wrapper .col-md-6');
-    //   });
-
     $('#table').DataTable( {
-    dom: 'lBrtip',
-    buttons: [
-        'copy', 'csv', 'excel', 'pdf', 'print'
-    ]
-} );
-
+      dom: 'lBrtip',
+      buttons: [
+          'copy', 'csv', 'excel', 'pdf', 'print'
+      ]
+    });
+   
+    @yield('scripts')
 </script>
 
 
-@yield('scripts')
+
+
 
 </body>
 </html>

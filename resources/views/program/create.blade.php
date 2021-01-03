@@ -36,3 +36,11 @@
     </div>
 
 @endsection
+
+@section('scripts')
+    $(document).ready(function(e){
+  
+        $('#branch_id').select3({ width: 300, placeholder: ' - Pilih Lokasi Kelas/Cabang - ', zIndex: 100 });  
+  
+    });
+@endsection

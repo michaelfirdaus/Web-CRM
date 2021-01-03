@@ -1,0 +1,88 @@
+.searchSelect3 {
+    position: relative;
+    color: #000;
+    margin-bottom: 10px;
+    /*font-size: 16px;*/
+}
+
+.searchSelect3_Input {
+    width: 250px;
+    height: 32px;
+    background: #fcfcfc;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    text-indent: 10px;
+    padding-right: 20px;
+    width: 200px;
+    
+    /*font: 200 16px/1.5 Helvetica, Verdana, sans-serif;*/
+}
+
+.searchSelect3_Caret_Down {
+    position: absolute;
+    top: 10px;
+    left: 180px;
+    cursor: pointer;
+}
+
+.searchSelect3_Times {
+    position: absolute;
+    top: 10px;
+    left: 210px;
+    cursor: pointer;
+    display: none;
+}
+
+.searchSelect3_List {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    overflow-x: hidden;
+    height: 20em;
+    width: 250px;
+    position: absolute;
+}
+
+.searchSelect3_List li {
+    list-style-type: none;
+    background: #d2d5d9;
+    color: #000000;
+    /*font: 200 16px/1.5 Helvetica, Verdana, sans-serif;*/
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.searchSelect3_List li:hover {
+    cursor: pointer;
+    background: #0069f5;
+    color: #ffffff;
+}
+
+
+.searchSelect3_List li label {
+    padding: 0.5em;
+    cursor: pointer;
+}
+
+.searchSelect3_List li:hover label {
+    color: #ffffff;
+}
+
+.searchSelect3_Input::-ms-clear {
+display: none;
+width: 0;
+height: 0;
+}
+
+.searchSelect3_Input::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.searchSelect3_Input::-webkit-search-decoration,
+.searchSelect3_Input::-webkit-search-cancel-button,
+.searchSelect3_Input::-webkit-search-results-button,
+.searchSelect3_Input::-webkit-search-results-decoration {
+    display: none;
+}

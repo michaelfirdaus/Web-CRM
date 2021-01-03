@@ -13,52 +13,52 @@
         <div class="card-body">
             <table id="table" class="table table-hover table-bordered table-responsive">
                 <thead>
-                    <th>
+                    <th class="text-center">
                         Nama Peserta
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Tempat Lahir
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Tanggal Lahir
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Nomor Telepon
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Alamat
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         E-mail
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         ID Card Mahasiswa
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Link CV
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Link SP
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Nama Kontak Darurat
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Nomor Kontak Darurat
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Member Berlaku S/d
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Lokasi Pendaftaran
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Minat Program
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Mengetahui CN dari
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Profesi
                     </th>
                     <th class="text-center">

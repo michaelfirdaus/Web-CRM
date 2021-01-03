@@ -1,67 +1,70 @@
 @extends('layouts.app')
 
-@section('header') List Semua Jadwal Kelas @endsection
+@section('header') List Semua Job Connector @endsection
 
 @section('content')
 
+    <div class="row">
+        <div class="form-group ml-auto mr-2">
+            <a href="{{ route('jobconnectorparticipant.create') }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Tambah Job Connector</a>
+        </div>
+    </div>
+
     <div class="card">
         <div class="card card-body">
-
-            <table id="table" class="table table-hover">
+            <table id="table" class="table table-hover table-bordered">
                 <thead>
-                    <th>
-                        Nama Program
+                    <th class="text-center">
+                        Nama Peserta
                     </th>
-                    <th> 
-                        Nama Coach
+                    <th class="text-center"> 
+                        Perusahaan Rekanan
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Tanggal Batch
                     </th>
-                    <th> 
-                        Lokasi Kelas
+                    <th class="text-center"> 
+                        Status
                     </th>
-                    <th>
+                    <th class="text-center">
                         Edit
                     </th>
-                    <th>
+                    <th class="text-center">
                         Hapus
                     </th>
                 </thead>
         
                 <tbody>
-                    @if($coachprograms->count() > 0)
-                        @foreach ($programs as $program)
-                            @foreach($program->coaches as $coach)
+                    @if($jcps->count() > 0)
+                        @foreach ($jcps as $jcp)
                                 <tr>
                                     <td>
-                                        {{ $program->name }}
+                                        {{ $jcp->participant->name }}
                                     </td>
                                     <td>
-                                        {{ $coach->name }}
+                                        {{ $jcp->jobconnector->company_name }}
                                     </td>
                                     <td>
-                                        {{ $coach->pivot->date }}
+                                        {{ $jcp->date }}
                                     </td>
                                     <td>
-                                        {{ $program->branch->branch_name }}
+                                        {{ $jcp->application_status }}
                                     </td>
-                                    <td>
-                                        <a href="{{ route('programpivot.edit', $coach->pivot->id) }}" class="btn btn-xs btn-info">
+                                    <td class="text-center">
+                                        <a href="{{ route('jobconnectorparticipant.edit', $jcp->id) }}" class="btn btn-xs btn-info">
                                             <span class="fas fa-pencil-alt"></span>
                                         </a>
                                     </td>
-                                    <td>
-                                        <a href="{{ route('programpivot.delete', ['id' => $coach->pivot ->id]) }}" class="btn btn-xs btn-danger">
+                                    <td class="text-center">
+                                        <a href="{{ route('jobconnectorparticipant.delete', ['id' => $jcp->id]) }}" class="btn btn-xs btn-danger">
                                             <span class="fas fa-trash-alt"></span>
                                         </a>
                                     </td>
                                 </tr>
-                            @endforeach
                         @endforeach
                     @else
                         <tr>
-                            <th colspan="3" class="text-center">Tidak ada jadwal kelas yang tersedia, tambahkan jadwal kelas baru.</th>
+                            <th colspan="6" class="text-center">Tidak ada job connector yang terdaftar.</th>
                         </tr>
                     @endif
 

@@ -417,6 +417,39 @@ Route::group(['middleware' => 'auth'], function() {
         'uses' => 'ResultByIdController@destroy',
         'as'   => 'resultbyid.delete'
     ]);
+//
 
+
+//JobConnectorParticipant Routes
+    Route::get('/jobconnectorparticipants',[
+        'uses'  => 'JobConnectorParticipantController@index',
+        'as'    => 'jobconnectorparticipants'
+    ]);
+
+    Route::get('/jobconnectorparticipant/create',[
+        'uses'  => 'JobConnectorParticipantController@create',
+        'as'    => 'jobconnectorparticipant.create'
+    ]);
+
+    Route::post('/jobconnectorparticipant/update/{id}',[
+        'uses'  => 'JobConnectorParticipantController@update',
+        'as'    => 'jobconnectorparticipant.update'
+    ]);
+
+    Route::get('/jobconnectorparticipant/edit/{id}',[
+        'uses' => 'JobConnectorParticipantController@edit',
+        'as'   => 'jobconnectorparticipant.edit'
+    ]);
+
+    Route::post('jobconnectorparticipant/store',[
+        'uses'  => 'JobConnectorParticipantController@store',
+        'as'    => 'jobconnectorparticipant.store'
+    ]);
+
+    Route::get('/jobconnectorparticipant/delete/{id}',[
+        'uses' => 'JobConnectorParticipantController@destroy',
+        'as'   => 'jobconnectorparticipant.delete'
+    ]);
+//
 
 });
