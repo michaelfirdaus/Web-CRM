@@ -73,7 +73,7 @@
                 <div class="form-group">
                     <label for="branch_id">Lokasi Pendaftaran</label>
                     <select name="branch_id" id="branch_id" class="form-control">
-                        <option value="" selected disabled hidden> - Pilih Lokasi Pendaftaran - </option>
+                        {{-- <option value="" selected disabled hidden> - Pilih Lokasi Pendaftaran - </option> --}}
                     @foreach($branches as $branch)
                         <option value="{{ $branch->id }}"> {{ $branch->name }} - {{$branch->code}} </option> 
                     @endforeach
@@ -83,7 +83,7 @@
                 <div class="form-group">
                     <label for="program_id">Minat Program</label>
                     <select name="program_id" id="program_id" class="form-control">
-                    <option value="" selected disabled hidden> - Pilih Minat Program - </option>
+                    {{-- <option value="" selected disabled hidden> - Pilih Minat Program - </option> --}}
                     @foreach($programs as $program)
                         <option value="{{ $program->id }}"> {{ $program->name }} </option>
                     @endforeach
@@ -91,9 +91,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="knowcn_id">Mengetahui CN dari</label>
+                    <label for="knowcn_id">Mengetahui Course-Net dari</label>
                     <select name="knowcn_id" id="knowcn_id" class="form-control">
-                    <option value="" selected disabled hidden> - Pilih Kanal CN - </option>
+                    {{-- <option value="" selected disabled hidden> - Pilih Kanal CN - </option> --}}
                     @foreach($knowcns as $knowcn)
                         <option value="{{ $knowcn->id }}"> {{ $knowcn->name }} </option>
                     @endforeach
@@ -103,7 +103,7 @@
                 <div class="form-group">
                     <label for="profession_id">Profesi</label>
                     <select name="profession_id" id="profession_id" class="form-control">
-                    <option value="" selected disabled hidden> - Pilih Profesi - </option>
+                    {{-- <option value="" selected disabled hidden> - Pilih Profesi - </option> --}}
                     @foreach($professions as $profession)
                         <option value="{{ $profession->id }}"> {{ $profession->name }} </option>
                     @endforeach
@@ -119,4 +119,15 @@
         </div>
     </div>
     
+@endsection
+
+@section('scripts')
+    $(document).ready(function(e){
+  
+        $('#branch_id').select3({ width: 300, placeholder: ' - Pilih Lokasi Pendaftaran - ', zIndex: 100 });  
+        $('#program_id').select3({ width: 300, placeholder: ' - Pilih Minat Program - ', zIndex: 100 });  
+        $('#knowcn_id').select3({ width: 300, placeholder: ' - Pilih Kanal Course-Net - ', zIndex: 100 });
+        $('#profession_id').select3({ width: 300, placeholder: ' - Pilih Profesi - ', zIndex: 100 });
+  
+    });
 @endsection

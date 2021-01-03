@@ -13,7 +13,7 @@
                 <div class="form-group">
                     <label for="participant_id">Nama Peserta</label>
                     <select name="participant_id" id="participant_id" class="form-control">
-                    <option value="" selected disabled hidden> - Pilih Peserta - </option>
+                    {{-- <option value="" selected disabled hidden> - Pilih Peserta - </option> --}}
                     @foreach($participants as $participant)
                         <option value="{{ $participant->id }}"> {{ $participant->name }} </option>
                     @endforeach
@@ -23,7 +23,7 @@
                 <div class="form-group">
                     <label for="jobconnector_id">Perusahaan Rekanan</label>
                     <select name="jobconnector_id" id="jobconnector" class="form-control">
-                    <option value="" selected disabled hidden> - Pilih Perusahaan Rekanan - </option>
+                    {{-- <option value="" selected disabled hidden> - Pilih Perusahaan Rekanan - </option> --}}
                     @foreach($jobconnectors as $jobconnector)
                         <option value="{{ $jobconnector->id }}"> {{ $jobconnector->company_name }} </option>
                     @endforeach
@@ -55,4 +55,14 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    $(document).ready(function(e){
+  
+        $('#participant_id').select3({ width: 260, placeholder: ' - Pilih Peserta - ', zIndex: 100 });  
+        $('#jobconnector').select3({ width: 320, placeholder: ' - Pilih Perusahaan Rekanan - ', zIndex: 100 });  
+        $('#application_status').select3({ width: 260, zIndex: 100});
+  
+    });
 @endsection

@@ -70,6 +70,21 @@ class ResultByIdController extends Controller
                 'attendancecertificate_pickdate' => $request->attendancecertificate_pickdate,
                 'photo'                          => $fullImage,
             ]);
+
+            $transaction = Transaction::find($request->id);
+
+            $transaction->result = 1;
+    
+            $transaction->save();
+    
+    
+            $results = Result::where('transaction_id', $request->id)->with('transaction')->get();
+            $transaction = Transaction::where('id', $request->id)->first();
+            
+            Session::flash('success', 'Berhasil Memperbaharui Data Nilai');
+            return view('resultbyid.index', ['results'      => $results,
+                                             'transaction'  => $transaction]);
+
         }
         else{
             $result = Result::create([
@@ -82,22 +97,21 @@ class ResultByIdController extends Controller
                 'attendancecertificate_number'   => $request->attendancecertificate_number,
                 'attendancecertificate_pickdate' => $request->attendancecertificate_pickdate,
             ]);
+
+            $transaction = Transaction::find($request->id);
+
+            $transaction->result = 1;
+
+            $transaction->save();
+
+
+            $results = Result::where('transaction_id', $request->id)->with('transaction')->get();
+            $transaction = Transaction::where('id', $request->id)->first();
+            
+            Session::flash('success', 'Berhasil Memperbaharui Data Nilai');
+            return view('resultbyid.index', ['results'      => $results,
+                                            'transaction'  => $transaction]);
         }
-
-        $transaction = Transaction::find($request->id);
-
-        $transaction->result = 1;
-
-        $transaction->save();
-
-        Session::flash('success', 'Berhasil Menambahkan Data Nilai');
-
-        $results = Result::where('transaction_id', $request->id)->with('transaction')->get();
-        $transaction = Transaction::where('id', $request->id)->first();
-        
-        Session::flash('success', 'Berhasil Memperbaharui Data Nilai');
-        return view('resultbyid.index', ['results'      => $results,
-                                         'transaction'  => $transaction]);
     }
 
     /**

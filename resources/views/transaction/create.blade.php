@@ -13,7 +13,7 @@
                 <div class="form-group">
                     <label for="participant">Nama Peserta</label>
                     <select name="participant" id="participant" class="form-control">
-                    <option value="" selected disabled hidden> - Pilih Peserta - </option>
+                    {{-- <option value="" selected disabled hidden> - Pilih Peserta - </option> --}}
                     @foreach($participants as $participant)
                         <option value="{{ $participant->id }}"> {{ $participant->id }} - {{ $participant->name }} </option> 
                     @endforeach
@@ -23,7 +23,7 @@
                 <div class="form-group">
                     <label for="sales">Nama Sales</label>
                     <select name="sales" id="sales" class="form-control">
-                    <option value="" selected disabled hidden> - Pilih Sales - </option>
+                    {{-- <option value="" selected disabled hidden> - Pilih Sales - </option> --}}
                     @foreach($salespersons as $salesperson)
                         <option value="{{ $salesperson->id }}"> {{ $salesperson->name }} </option> 
                     @endforeach
@@ -33,7 +33,7 @@
                 <div class="form-group">
                     <label for="program">Nama Program</label>
                     <select name="program" id="program" class="form-control">
-                    <option value="" selected disabled hidden> - Pilih Program - </option>
+                    {{-- <option value="" selected disabled hidden> - Pilih Program - </option> --}}
                     @foreach($coachprograms as $cp)
                         <option value="{{ $cp->id }}"> {{ $cp->program_id }} - {{$cp->program->name}} </option> 
                     @endforeach
@@ -92,4 +92,13 @@
         </div>
     </div>
     
+@endsection
+@section('scripts')
+    $(document).ready(function(e){
+  
+        $('#participant').select3({ width: 300, placeholder: ' - Pilih Peserta - ', zIndex: 100 });
+        $('#sales').select3({ width: 300, placeholder: ' - Pilih Sales - ', zIndex: 100 });
+        $('#program').select3({ width: 300, placeholder: ' - Pilih Minat Program - ', zIndex: 100 });  
+  
+    });
 @endsection
