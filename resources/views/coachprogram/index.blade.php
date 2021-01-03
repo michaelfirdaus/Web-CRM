@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('header') Tambah Jadwal Kelas Baru @endsection
+@section('header') List Semua Jadwal Kelas @endsection
 
 @section('content')
 
@@ -11,24 +11,24 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <table id="table" class="table table-hover table-bordered table-responsive">
+            <table id="table" class="table table-hover table-bordered">
                 <thead>
-                    <th>
+                    <th class="text-center">
                         Nama Program
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Nama Coach
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Tanggal Batch
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Lokasi Kelas
                     </th>
-                    <th>
+                    <th class="text-center">
                         Edit
                     </th>
-                    <th>
+                    <th class="text-center">
                         Hapus
                     </th>
                 </thead>
@@ -50,12 +50,12 @@
                                     <td>
                                         {{ $program->branch->name }}
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <a href="{{ route('coachprogram.edit', $coach->pivot->id) }}" class="btn btn-xs btn-info">
                                             <span class="fas fa-pencil-alt"></span>
                                         </a>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <a href="{{ route('coachprogram.delete', ['id' => $coach->pivot ->id]) }}" class="btn btn-xs btn-danger">
                                             <span class="fas fa-trash-alt"></span>
                                         </a>

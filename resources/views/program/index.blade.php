@@ -11,18 +11,18 @@
     </div>
     <div class="card">
         <div class="card card-body">
-            <table id="table" class="table table-hover  table-bordered table-responsive">
+            <table id="table" class="table table-hover  table-bordered">
                 <thead>
-                    <th>
+                    <th class="text-center">
                         Nama Program
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Lokasi Cabang
                     </th>
-                    <th>
+                    <th class="text-center">
                         Edit
                     </th>
-                    <th>
+                    <th class="text-center">
                         Hapus
                     </th>
                 </thead>
@@ -37,12 +37,12 @@
                                 <td>
                                     {{ $program->branch->name }}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <a href="{{ route('program.edit', ['id' => $program ->id]) }}" class="btn btn-xs btn-info">
                                         <span class="fas fa-pencil-alt"></span>
                                     </a>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <a href="{{ route('program.delete', ['id' => $program ->id]) }}" class="btn btn-xs btn-danger">
                                         <span class="fas fa-trash-alt"></span>
                                     </a>
@@ -51,7 +51,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <th colspan="3" class="text-center">Tidak ada program yang tersedia, tambahkan program baru.</th>
+                            <th colspan="4" class="text-center">Tidak ada program yang tersedia, tambahkan program baru.</th>
                         </tr>
                     @endif
                 </tbody>

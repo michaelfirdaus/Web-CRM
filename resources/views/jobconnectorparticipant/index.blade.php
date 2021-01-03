@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('header') List Semua Jadwal Kelas @endsection
+@section('header') List Semua Job Connector @endsection
 
 @section('content')
 
@@ -14,22 +14,22 @@
         <div class="card card-body">
             <table id="table" class="table table-hover table-bordered">
                 <thead>
-                    <th>
+                    <th class="text-center">
                         Nama Peserta
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Perusahaan Rekanan
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Tanggal Batch
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Status
                     </th>
-                    <th>
+                    <th class="text-center">
                         Edit
                     </th>
-                    <th>
+                    <th class="text-center">
                         Hapus
                     </th>
                 </thead>
@@ -50,12 +50,12 @@
                                     <td>
                                         {{ $jcp->application_status }}
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <a href="{{ route('jobconnectorparticipant.edit', $jcp->id) }}" class="btn btn-xs btn-info">
                                             <span class="fas fa-pencil-alt"></span>
                                         </a>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <a href="{{ route('jobconnectorparticipant.delete', ['id' => $jcp->id]) }}" class="btn btn-xs btn-danger">
                                             <span class="fas fa-trash-alt"></span>
                                         </a>

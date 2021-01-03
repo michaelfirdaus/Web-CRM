@@ -13,40 +13,40 @@
         <div class="card-body">
             <table id="table" class="table table-hover table-bordered table-responsive">
                 <thead>
-                    <th>
+                    <th class="text-center">
                         Tgl Transaksi
                     </th>
-                    <th>
+                    <th class="text-center">
                         Nama Peserta
                     </th>
-                    <th> 
+                    <th class="text-center">
                         Nama Sales
                     </th>
-                    <th> 
+                    <th class="text-center">
                         Nama Program
                     </th>
-                    <th> 
+                    <th class="text-center">
                         Harga
                     </th>
-                    <th> 
+                    <th class="text-center">
                         DP Pertama
                     </th>
-                    <th> 
+                    <th class="text-center">
                         DP Kedua
                     </th>
-                    <th> 
+                    <th class="text-center">
                         Cashback
                     </th>
-                    <th> 
+                    <th class="text-center">
                         Rating
                     </th>
-                    <th> 
+                    <th class="text-center">
                         Ulasan
                     </th>
-                    <th> 
+                    <th class="text-center">
                         Recoaching?
                     </th>
-                    <th>
+                    <th class="text-center">
                         Catatan
                     </th>
                     <th class="text-center">

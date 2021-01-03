@@ -11,18 +11,18 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <table id="table" class="table table-hover table-responsive">
+            <table id="table" class="table table-hover">
                 <thead>
-                    <th>
+                    <th class="text-center">
                         Nama Referensi
                     </th>
-                    <th> 
+                    <th class="text-center"> 
                         Nomor Telepon Referensi
                     </th>
-                    <th>
+                    <th class="text-center">
                         Edit
                     </th>
-                    <th>
+                    <th class="text-center">
                         Hapus
                     </th>
                 </thead>
@@ -38,12 +38,12 @@
                                 <td>
                                     {{ $reference->phone }}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <a href="{{ route('reference.edit', ['id' => $reference->id]) }}" class="btn btn-xs btn-info">
                                         <span class="fas fa-pencil-alt"></span>
                                     </a>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <a href="{{ route('reference.delete', ['id' => $reference->id]) }}" class="btn btn-xs btn-danger">
                                         <span class="fas fa-trash-alt"></span>
                                     </a>
@@ -53,7 +53,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <th colspan="6" class="text-center">Belum ada referensi, tambahkan referensi baru.</th>
+                            <th colspan="4" class="text-center">Belum ada referensi, tambahkan referensi baru.</th>
                         </tr>
                     @endif
                 </tbody>

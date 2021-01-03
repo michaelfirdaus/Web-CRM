@@ -11,18 +11,18 @@
     </div>
     <div class="card">
         <div class="card card-body">
-            <table id="table" class="table table-hover table-bordered table-responsive">
+            <table id="table" class="table table-hover table-bordered">
                 <thead>
-                    <th>
+                    <th class="text-center">
                         Nama Cabang
                     </th>
-                    <th>
+                    <th class="text-center">
                         Kode Cabang
                     </th>
-                    <th>
+                    <th class="text-center">
                         Edit
                     </th>
-                    <th>
+                    <th class="text-center">
                         Hapus
                     </th>
                 </thead>
@@ -37,12 +37,12 @@
                                 <td>
                                     {{ $branch->code }}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <a href="{{ route('branch.edit', ['id' => $branch ->id]) }}" class="btn btn-xs btn-info">
                                         <span class="fas fa-pencil-alt"></span>
                                     </a>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <a href="{{ route('branch.delete', ['id' => $branch ->id]) }}" class="btn btn-xs btn-danger">
                                         <span class="fas fa-trash-alt"></span>
                                     </a>

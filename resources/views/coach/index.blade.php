@@ -11,15 +11,15 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <table id="table" class="table table-hover table-bordered table-responsive ">
+            <table id="table" class="table table-hover table-bordered">
                 <thead>
-                    <th>
+                    <th class="text-center">
                         Nama Coach
                     </th>
-                    <th>
+                    <th class="text-center">
                         Edit
                     </th>
-                    <th>
+                    <th class="text-center">
                         Hapus
                     </th>
                 </thead>
@@ -31,12 +31,12 @@
                                 <td>
                                     {{ $coach->name }}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <a href="{{ route('coach.edit', ['id' => $coach ->id]) }}" class="btn btn-xs btn-info">
                                         <span class="fas fa-pencil-alt"></span>
                                     </a>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <a href="{{ route('coach.delete', ['id' => $coach ->id]) }}" class="btn btn-xs btn-danger">
                                         <span class="fas fa-trash-alt"></span>
                                     </a>
