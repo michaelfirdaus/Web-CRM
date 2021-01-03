@@ -18,4 +18,8 @@ class CoachProgram extends Pivot
         return $this->hasOne('App\Program', 'id');
     }
 
+    public function transaction(){
+        return $this->belongsto('App\Transaction');
+    }
+
 }

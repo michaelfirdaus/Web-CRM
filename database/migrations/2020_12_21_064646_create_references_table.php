@@ -15,8 +15,9 @@ class CreateReferencesTable extends Migration
     {
         Schema::create('references', function (Blueprint $table) {
             $table->id();
-            $table->string('reference');
-            $table->string('reference_phone');
+            $table->bigInteger('participant_id');
+            $table->string('name');
+            $table->string('phone');
             $table->timestamps();
         });
     }

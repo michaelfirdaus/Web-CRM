@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
+@section('header') Perbaharui Profesi {{ $profession->name }} @endsection
+
 @section('content')
 
-    @include('includes.errors')
+@include('includes.errors')
 
-
-    <div class="card"> 
-        <div class="card-header">
-            Perbaharui Profesi {{ $profession->name }}
-        </div>
-
+    <div class="card">
         <div class="card-body">
             <form action="{{ route('profession.update', ['id' => $profession->id]) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -23,9 +20,8 @@
                         <button type="submit" class="btn btn-success">Perbaharui Profesi</button>
                     </div>
                 </div>
-
             </form>
         </div>
-
     </div>
+
 @endsection

@@ -1,21 +1,18 @@
 @extends('layouts.app')
 
+@section('header') Tambah Sales Baru Course-Net @endsection
+
 @section('content')
 
-    @include('includes.errors')
-
+@include('includes.errors')
 
     <div class="card">
-        <div class="card-header">
-            Tambah Sales Baru
-        </div>
-
         <div class="card-body">
             <form action="{{ route('salesperson.store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="name">Nama Sales</label>
-                    <input type="text" name="name" class="form-control">
+                    <input type="text" name="name" class="form-control" value={{ old('name') }}>
                 </div>
 
                 <div class="form-group">
@@ -26,6 +23,6 @@
 
             </form>
         </div>
-
     </div>
+    
 @endsection

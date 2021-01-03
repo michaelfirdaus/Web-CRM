@@ -1,14 +1,17 @@
 @extends('layouts.app')
 
+@section('header') List Semua Cabang @endsection
+
 @section('content')
 
-    <div class="card">
-        <div class="card card-header">
-            <th><strong>List Semua Cabang</strong></th>
+    <div class="row">
+        <div class="form-group ml-auto mr-2">
+            <a href="{{ route('branch.create') }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Tambah Cabang Baru</a>
         </div>
+    </div>
+    <div class="card">
         <div class="card card-body">
-
-            <table class="table table-hover">
+            <table id="table" class="table table-hover table-bordered table-responsive">
                 <thead>
                     <th>
                         Nama Cabang
@@ -29,10 +32,10 @@
                         @foreach ($branches as $branch)
                             <tr>
                                 <td>
-                                    {{ $branch->branch_name }}
+                                    {{ $branch->name }}
                                 </td>
                                 <td>
-                                    {{ $branch->branch_code }}
+                                    {{ $branch->code }}
                                 </td>
                                 <td>
                                     <a href="{{ route('branch.edit', ['id' => $branch ->id]) }}" class="btn btn-xs btn-info">
@@ -55,4 +58,5 @@
             </table>
         </div>
     </div>
+    
 @endsection

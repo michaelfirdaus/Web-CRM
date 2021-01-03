@@ -1,14 +1,17 @@
 @extends('layouts.app')
 
+@section('header') List Semua Peserta Course-Net @endsection
+
 @section('content')
 
-    <div class="card">
-        <div class="card card-header">
-            <th><strong>List Semua Peserta</strong></th>
+    <div class="row">
+        <div class="form-group ml-auto mr-2">
+            <a href="{{ route('participant.create') }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Tambah Peserta</a>
         </div>
-        <div class="card card-body">
-
-            <table class="table table-hover">
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <table id="table" class="table table-hover table-bordered table-responsive">
                 <thead>
                     <th>
                         Nama Peserta
@@ -58,10 +61,13 @@
                     <th> 
                         Profesi
                     </th>
-                    <th>
+                    <th class="text-center">
+                        Referensi
+                    </th>
+                    <th class="text-center">
                         Edit
                     </th>
-                    <th>
+                    <th class="text-center">
                         Hapus
                     </th>
                 </thead>
@@ -92,10 +98,10 @@
                                     {{ $participant->student_idcard }}
                                 </td>
                                 <td>
-                                    {{ $participant->cv_link }}
+                                    <a href="{{ $participant->cv_link }}" target="_blank">{{ $participant->cv_link }}</a>
                                 </td>
                                 <td>
-                                    {{ $participant->sp_link }}
+                                    <a href="{{ $participant->sp_link }}" target="_blank">{{ $participant->sp_link }}</a>
                                 </td>
                                 <td>
                                     {{ $participant->emergencycontact_name }}
@@ -107,23 +113,28 @@
                                     {{ $participant->member_validthru }}
                                 </td>
                                 <td>
-                                    {{ $participant->branch_id }}
+                                    {{ $participant->branch->name }}
                                 </td>
                                 <td>
-                                    {{ $participant->program_id }}
+                                    {{ $participant->program_id != NULL ? $participant->program->name : 'Belum Ada Minat' }}
                                 </td>
                                 <td>
-                                    {{ $participant->knowcn_id }}
+                                    {{ $participant->knowcn->name }}
                                 </td>
                                 <td>
-                                    {{ $participant->profession_id }}
+                                    {{ $participant->profession->name }}
                                 </td>
-                                <td>
+                                <td class="text-center">
+                                    <a href="{{ route('references', ['id' => $participant ->id]) }}" class="btn btn-xs btn-success">
+                                        <span class="fas fa-address-book"></span>
+                                    </a>
+                                </td>
+                                <td class="text-center">
                                     <a href="{{ route('participant.edit', ['id' => $participant ->id]) }}" class="btn btn-xs btn-info">
                                         <span class="fas fa-pencil-alt"></span>
                                     </a>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <a href="{{ route('participant.delete', ['id' => $participant ->id]) }}" class="btn btn-xs btn-danger">
                                         <span class="fas fa-trash-alt"></span>
                                     </a>
@@ -132,7 +143,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <th colspan="3" class="text-center">Belum ada peserta yang terdaftar.</th>
+                            <th colspan="19" class="text-center">Belum ada peserta yang terdaftar.</th>
                         </tr>
                     @endif
 
@@ -140,4 +151,5 @@
             </table>
         </div>
     </div>
+    
 @endsection

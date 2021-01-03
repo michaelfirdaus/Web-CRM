@@ -17,9 +17,14 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Auth::routes();
+Auth::routes([
+    'register' => false,
+    'reset' => false,
+    'verify' => false,
+  ]);
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware' => 'auth'], function() {
 
@@ -255,36 +260,163 @@ Route::group(['middleware' => 'auth'], function() {
     ]);
 //
 
-//Programpivot routes
-Route::get('/programpivots',[
-    'uses'  => 'ProgrampivotController@index',
-    'as'    => 'programpivots'
-]);
 
-Route::get('/programpivot/create',[
-    'uses'  => 'ProgrampivotController@create',
-    'as'    => 'programpivot.create'
-]);
+//CoachProgram routes
+    Route::get('/coachprograms',[
+        'uses'  => 'CoachProgramController@index',
+        'as'    => 'coachprograms'
+    ]);
 
-Route::post('/programpivot/update/{id}',[
-    'uses'  => 'ProgrampivotController@update',
-    'as'    => 'programpivot.update'
-]);
+    Route::get('/coachprogram/create',[
+        'uses'  => 'CoachProgramController@create',
+        'as'    => 'coachprogram.create'
+    ]);
 
-Route::get('/programpivot/edit/{id}',[
-    'uses' => 'ProgrampivotController@edit',
-    'as'   => 'programpivot.edit'
-]);
+    Route::post('/coachprogram/update/{id}',[
+        'uses'  => 'CoachProgramController@update',
+        'as'    => 'coachprogram.update'
+    ]);
 
-Route::post('/programpivot/store',[
-    'uses'  => 'ProgrampivotController@store',
-    'as'    => 'programpivot.store'
-]);
+    Route::get('/coachprogram/edit/{id}',[
+        'uses' => 'CoachProgramController@edit',
+        'as'   => 'coachprogram.edit'
+    ]);
 
-Route::get('/programpivot/delete/{id}',[
-    'uses' => 'ProgrampivotController@destroy',
-    'as'   => 'programpivot.delete'
-]);
+    Route::post('/coachprogram/store',[
+        'uses'  => 'CoachProgramController@store',
+        'as'    => 'coachprogram.store'
+    ]);
+
+    Route::get('/coachprogram/delete/{id}',[
+        'uses' => 'CoachProgramController@destroy',
+        'as'   => 'coachprogram.delete'
+    ]);
 //
+
+
+//Participant routes
+    Route::get('/participants',[
+        'uses'  => 'ParticipantController@index',
+        'as'    => 'participants'
+    ]);
+
+    Route::get('/participant/create',[
+        'uses'  => 'ParticipantController@create',
+        'as'    => 'participant.create'
+    ]);
+
+    Route::post('/participant/update/{id}',[
+        'uses'  => 'ParticipantController@update',
+        'as'    => 'participant.update'
+    ]);
+
+    Route::get('/participant/edit/{id}',[
+        'uses' => 'ParticipantController@edit',
+        'as'   => 'participant.edit'
+    ]);
+
+    Route::post('/participant/store',[
+        'uses'  => 'ParticipantController@store',
+        'as'    => 'participant.store'
+    ]);
+
+    Route::get('/participant/delete/{id}',[
+        'uses' => 'ParticipantController@destroy',
+        'as'   => 'participant.delete'
+    ]);
+//
+
+
+//Reference routes
+    Route::get('/references/{id}',[
+        'uses'  => 'ReferenceController@index',
+        'as'    => 'references'
+    ]);
+    Route::get('/reference/{id}/create',[
+        'uses'  => 'ReferenceController@create',
+        'as'    => 'reference.create'
+    ]);
+    Route::post('/reference/update/{id}',[
+        'uses'  => 'ReferenceController@update',
+        'as'    => 'reference.update'
+    ]);
+
+    Route::get('/reference/edit/{id}',[
+        'uses' => 'ReferenceController@edit',
+        'as'   => 'reference.edit'
+    ]);
+
+    Route::post('/reference/store',[
+        'uses'  => 'ReferenceController@store',
+        'as'    => 'reference.store'
+    ]);
+
+    Route::get('/reference/delete/{id}',[
+        'uses' => 'ReferenceController@destroy',
+        'as'   => 'reference.delete'
+    ]);
+//
+
+
+//Transaction routes
+    Route::get('/transactions',[
+        'uses'  => 'TransactionController@index',
+        'as'    => 'transactions'
+    ]);
+    Route::get('/transaction/create',[
+        'uses'  => 'TransactionController@create',
+        'as'    => 'transaction.create'
+    ]);
+    Route::post('/transaction/update/{id}',[
+        'uses'  => 'TransactionController@update',
+        'as'    => 'transaction.update'
+    ]);
+
+    Route::get('/transaction/edit/{id}',[
+        'uses' => 'TransactionController@edit',
+        'as'   => 'transaction.edit'
+    ]);
+
+    Route::post('/transaction/store',[
+        'uses'  => 'TransactionController@store',
+        'as'    => 'transaction.store'
+    ]);
+
+    Route::get('/transaction/delete/{id}',[
+        'uses' => 'TransactionController@destroy',
+        'as'   => 'transaction.delete'
+    ]);
+//
+
+
+//ResultById Routes
+    Route::get('/resultbyid/{id}',[
+        'uses'  => 'ResultByIdController@index',
+        'as'    => 'resultbyid'
+    ]);
+    Route::get('/resultbyid/{id}/create',[
+        'uses'  => 'ResultByIdController@create',
+        'as'    => 'resultbyid.create'
+    ]);
+    Route::post('/resultbyid/update/{id}',[
+        'uses'  => 'ResultByIdController@update',
+        'as'    => 'resultbyid.update'
+    ]);
+
+    Route::get('/resultbyid/edit/{id}',[
+        'uses' => 'ResultByIdController@edit',
+        'as'   => 'resultbyid.edit'
+    ]);
+
+    Route::post('/resultbyid/store',[
+        'uses'  => 'ResultByIdController@store',
+        'as'    => 'resultbyid.store'
+    ]);
+
+    Route::get('/resultbyid/delete/{id}',[
+        'uses' => 'ResultByIdController@destroy',
+        'as'   => 'resultbyid.delete'
+    ]);
+
 
 });

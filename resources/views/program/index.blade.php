@@ -1,14 +1,17 @@
 @extends('layouts.app')
 
+@section('header') List Semua Program @endsection
+
 @section('content')
 
-    <div class="card">
-        <div class="card card-header">
-            <th><strong>List Semua Program</strong></th>
+    <div class="row">
+        <div class="form-group ml-auto mr-2">
+            <a href="{{ route('program.create') }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Tambah Program</a>
         </div>
+    </div>
+    <div class="card">
         <div class="card card-body">
-
-            <table class="table table-hover">
+            <table id="table" class="table table-hover  table-bordered table-responsive">
                 <thead>
                     <th>
                         Nama Program
@@ -32,7 +35,7 @@
                                     {{ $program->name }}
                                 </td>
                                 <td>
-                                    {{ $program->branch->branch_name }}
+                                    {{ $program->branch->name }}
                                 </td>
                                 <td>
                                     <a href="{{ route('program.edit', ['id' => $program ->id]) }}" class="btn btn-xs btn-info">
@@ -55,4 +58,5 @@
             </table>
         </div>
     </div>
+
 @endsection

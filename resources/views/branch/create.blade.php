@@ -1,26 +1,23 @@
 @extends('layouts.app')
 
+@section('header') Tambah Cabang Course-Net Baru @endsection
+
 @section('content')
 
-    @include('includes.errors')
-
+@include('includes.errors')
 
     <div class="card">
-        <div class="card-header">
-            Tambah Cabang Course-Net Baru
-        </div>
-
         <div class="card-body">
             <form action="{{ route('branch.store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="name">Nama Cabang</label>
-                    <input type="text" name="name" class="form-control">
+                    <input type="text" name="name" class="form-control" value={{ old('name') }}>
                 </div>
 
                 <div class="form-group">
                     <label for="code">Kode Cabang</label>
-                    <input type="text" name="branch_code" class="form-control">
+                    <input type="text" name="code" class="form-control" value={{ old('code') }}>
                 </div>
 
                 <div class="form-group">
@@ -31,6 +28,6 @@
 
             </form>
         </div>
-
     </div>
+    
 @endsection

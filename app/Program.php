@@ -23,4 +23,8 @@ class Program extends Model
     public function branch(){
         return $this->belongsTo('App\Branch');
     }
+
+    public function participant(){
+        return $this->hasOne('App\Participant');
+    }
 }

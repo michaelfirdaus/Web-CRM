@@ -1,14 +1,17 @@
 @extends('layouts.app')
 
+@section('header') List Semua Coach Course-Net @endsection
+
 @section('content')
 
-    <div class="card">
-        <div class="card card-header">
-            <th><strong>List Semua Coach</strong></th>
+    <div class="row">
+        <div class="form-group ml-auto mr-2">
+            <a href="{{ route('coach.create') }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Tambah Coach</a>
         </div>
-        <div class="card card-body">
-
-            <table class="table table-hover">
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <table id="table" class="table table-hover table-bordered table-responsive ">
                 <thead>
                     <th>
                         Nama Coach
@@ -20,7 +23,7 @@
                         Hapus
                     </th>
                 </thead>
-        
+
                 <tbody>
                     @if($coaches->count() > 0)
                         @foreach ($coaches as $coach)
@@ -49,4 +52,5 @@
             </table>
         </div>
     </div>
+
 @endsection

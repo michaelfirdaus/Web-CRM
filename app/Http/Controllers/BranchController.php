@@ -40,13 +40,13 @@ class BranchController extends Controller
         //Validation to make sure name field should be filled and the category must be unique
         $this->validate($request, [
             'name' => 'required',
-            'branch_code' => 'required|unique:branches'
+            'code' => 'required|unique:branches'
         ]);
 
         $branch = new Branch;
 
-        $branch->branch_name = $request->name;
-        $branch->branch_code = $request->branch_code;
+        $branch->name = $request->name;
+        $branch->code = $request->code;
         //Saving current category to the database
         $branch->save();
 
@@ -95,8 +95,8 @@ class BranchController extends Controller
         //Find category based on category ID
         $branch = Branch::find($id);
         
-        $branch->branch_name = $request->name;
-        $branch->branch_code = $request->branch_code;
+        $branch->name = $request->name;
+        $branch->code = $request->code;
         
         //Save the category to the database
         $branch->save();

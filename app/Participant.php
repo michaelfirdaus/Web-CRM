@@ -10,12 +10,12 @@ class Participant extends Model
 
     protected $guarded = [];
 
-    public function references(){
-        return $this->hasMany('App\Reference');
+    public function reference(){
+        return $this->belongsTo('App\Reference');
     }
 
     public function profession(){
-        return $this->hasOne('App\Profession');
+        return $this->belongsTo('App\Profession');
     }
 
     public function jobconnectors(){
@@ -29,14 +29,14 @@ class Participant extends Model
     }
 
     public function branch(){
-        return $this->hasOne('App\Branch');
+        return $this->belongsTo('App\Branch');
     }
 
-    public function programs(){
-        return $this->hasMany('App\Program');
+    public function program(){
+        return $this->belongsTo('App\Program', 'program_id');
     }
 
     public function knowcn(){
-        return $this->hasOne('App\Knowcn');
+        return $this->belongsTo('App\Knowcn');
     }
 }

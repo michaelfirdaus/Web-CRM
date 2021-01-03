@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
+@section('header') Perbaharui Sales {{$salesperson->name}} @endsection
+
 @section('content')
 
-    @include('includes.errors')
-
+@include('includes.errors')
 
     <div class="card">
-        <div class="card-header">
-            Perbaharui Sales {{ $salesperson->name }}
-        </div>
-
         <div class="card-body">
             <form action="{{ route('salesperson.update', ['id' => $salesperson->id]) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -26,6 +23,6 @@
 
             </form>
         </div>
-
     </div>
+    
 @endsection
