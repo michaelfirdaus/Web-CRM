@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('header') Tambah Transaksi Baru @endsection
+@section('header') Tambah Data Nilai Baru @endsection
 
 @section('content')
 
@@ -8,84 +8,51 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('transaction.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('resultbyid.store', ['id' => $currenttransaction]) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="participant">Nama Peserta</label>
-                    <select name="participant" id="participant" class="form-control">
-                        <option selected value=""> - Pilih Peserta - </option>
-                    @foreach($participants as $participant)
-                        <option value="{{ $participant->id }}"> {{ $participant->id }} - {{ $participant->name }} </option> 
-                    @endforeach
-                    </select>
+                    <label for="score">Nilai Ujian</label>
+                    <input type="text" name="score" placeholder="" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="sales">Nama Sales</label>
-                    <select name="sales" id="sales" class="form-control">
-                        <option selected value=""> - Pilih Sales - </option>
-                    @foreach($salespersons as $salesperson)
-                        <option value="{{ $salesperson->id }}"> {{ $salesperson->name }} </option> 
-                    @endforeach
-                    </select>
+                    <label for="grade">Grade Ujian</label>
+                    <input type="text" name="grade" placeholder="" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="program">Nama Program</label>
-                    <select name="program" id="program" class="form-control">
-                        <option selected value=""> - Pilih Program - </option>
-                    @foreach($coachprograms as $cp)
-                        <option value="{{ $cp->id }}"> {{ $cp->program_id }} - {{$cp->program->name}} </option> 
-                    @endforeach
-                    </select>
+                    <label for="jacket_size">Ukuran Jaket</label>
+                    <input type="text" name="jacket_size" placeholder="" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="price">Harga</label>
-                    <input type="text" name="price" placeholder="Cth : 500000" class="form-control">
+                    <label for="skillcertificate_number">Nomor Sertifikat Skill</label>
+                    <input type="text" name="skillcertificate_number" placeholder="" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="firsttrans">DP Pertama</label>
-                    <input type="text" name="firsttrans" placeholder="Cth : 500000" class="form-control">
+                    <label for="skillcertificate_pickdate">Tanggal Pengambilan Sertifikat Skill</label>
+                    <input type="date" name="skillcertificate_pickdate" placeholder="" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="secondtrans">DP Kedua</label>
-                    <input type="text" name="secondtrans" placeholder="Cth : 500000" class="form-control">
+                    <label for="attendancecertificate_number">Nomor Sertifikat Kehadiran</label>
+                    <input type="text" name="attendancecertificate_number" placeholder="" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="cashback">Cashback</label>
-                    <input type="text" name="cashback" placeholder="Cth : 500000" class="form-control">
+                    <label for="attendancecertificate_pickdate">Tanggal Pengambilan Sertifikat Kehadiran</label>
+                    <input type="date" name="attendancecertificate_pickdate" placeholder="" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="rating">Rating</label>
-                    <input type="text" name="rating" placeholder="Cth : 5" class="form-control">
-                </div>
-
-                <div class="form-group">
-                    <label for="rating_text">Ulasan</label>
-                    <input type="text" name="rating_text" class="form-control">
-                </div>
-
-                <div class="form-group">
-                    <label for="recoaching">Recoaching?</label>
-                    <select name="recoaching" id="recoaching" class="form-control">
-                      <option value="1"> Ya </option>
-                      <option selected value="0"> Tidak </option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="note">Catatan</label>
-                    <input type="text" name="note" class="form-control">
+                    <label for="photo">Bukti Foto</label>
+                    <input type="file" name="photo" placeholder="" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success">Tambahkan Transaksi Baru</button>
+                        <button type="submit" class="btn btn-success">Tambahkan Data</button>
                     </div>
                 </div>
             </form>

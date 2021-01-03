@@ -18,6 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->bigInteger('coach_program_id');
             $table->bigInteger('participant_id');
             $table->bigInteger('salesperson_id');
+            $table->boolean('result')->default(0);
             $table->integer('price');
             $table->integer('firsttrans');
             $table->integer('secondtrans')->nullable();

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('header') Perbaharui Transaksi Peserta {{ $transaction->name }} @endsection
+@section('header') Perbaharui Data Nilai Peserta {{ $result->transaction->participant->name }} @endsection
 
 @section('content')
 
@@ -8,101 +8,51 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('transaction.update', ['id' => $transaction->id]) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('resultbyid.update', ['id' => $result->id]) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="participant">Nama Peserta</label>
-                    <select name="participant" id="participant" class="form-control">
-                    @foreach($participants as $participant)
-                        @if($participant->id == $transaction->participant_id)
-                            <option selected value="{{ $participant->id }}"> {{ $participant->id }} - {{ $participant->name }} </option> 
-                        @else
-                            <option value="{{ $participant->id }}"> {{ $participant->id }} - {{ $participant->name }} </option>
-                        @endif    
-                    @endforeach
-                    </select>
+                    <label for="score">Nilai Ujian</label>
+                    <input type="text" name="score" value="{{ $result->score }}" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="sales">Nama Sales</label>
-                    <select name="sales" id="sales" class="form-control">
-                    @foreach($salespersons as $salesperson)
-                        @if($salesperson->id == $transaction->salesperson_id)
-                            <option selected value="{{ $salesperson->id }}"> {{ $salesperson->name }} </option> 
-                        @else
-                            <option value="{{ $salesperson->id }}"> {{ $salesperson->name }} </option>
-                        @endif    
-                        @endforeach
-                    </select>
+                    <label for="grade">Grade Ujian</label>
+                    <input type="text" name="grade" value="{{ $result->grade }}" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="program">Nama Program</label>
-                    <select name="program" id="program" class="form-control">
-                    @foreach($coachprograms as $cp)
-                        @if($cp->id == $transaction->coach_program_id)
-                            <option selected value="{{ $cp->id }}"> {{$cp->id}} - {{ $cp->program->name }} </option> 
-                        @else
-                            <option value="{{ $cp->id }}"> {{ $cp->program_id }} </option> 
-                        @endif
-                    @endforeach
-                    </select>
+                    <label for="jacket_size">Ukuran Jaket</label>
+                    <input type="text" name="jacket_size" value="{{ $result->jacket_size }}" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="price">Harga</label>
-                    <input type="text" name="price" value="{{ $transaction->price }}" placeholder="Cth : 628111011011" class="form-control">
+                    <label for="skillcertificate_number">Nomor Sertifikat Skill</label>
+                    <input type="text" name="skillcertificate_number" value="{{ $result->skillcertificate_number }}" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="firsttrans">DP Pertama</label>
-                    <input type="text" name="firsttrans" value="{{ $transaction->firsttrans }}" class="form-control">
+                    <label for="skillcertificate_pickdate">Tanggal Pengambilan Sertifikat Skill</label>
+                    <input type="date" name="skillcertificate_pickdate" value="{{ $result->skillcertificate_pickdate }}" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="secondtrans">DP Kedua</label>
-                    <input type="text" name="secondtrans" value="{{ $transaction->secondtrans }}" class="form-control">
+                    <label for="attendancecertificate_number">Nomor Sertifikat Kehadiran</label>
+                    <input type="text" name="attendancecertificate_number" value="{{ $result->attendancecertificate_number }}" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="cashback">Cashback</label>
-                    <input type="text" name="cashback" value="{{ $transaction->cashback }}" class="form-control">
+                    <label for="attendancecertificate_pickdate">Tanggal Pengambilan Sertifikat Kehadiran</label>
+                    <input type="date" name="attendancecertificate_pickdate" value="{{ $result->attendancecertificate_pickdate }}" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="rating">Rating</label>
-                    <input type="text" name="rating" value="{{ $transaction->rating }}" class="form-control">
-                </div>
-
-                <div class="form-group">
-                    <label for="rating_text">Ulasan</label>
-                    <input type="text" name="rating_text" value="{{ $transaction->rating_text }}" class="form-control">
-                </div>
-
-                <div class="form-group">
-                    <label for="recoaching">Recoaching?</label>
-                    <select name="recoaching" id="recoaching" class="form-control">
-                        @if($transaction->recoaching == 0)
-                            <option selected value="0"> Tidak </option>
-                        @else
-                            <option value="0"> Tidak </option>
-                        @endif 
-                        @if($transaction->recoaching == 1)
-                            <option selected value="1"> Ya </option>
-                        @else
-                            <option value="1"> Ya </option>
-                        @endif
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="note">Catatan</label>
-                    <input type="text" name="note" value="{{ $transaction->note }}" class="form-control">
+                    <label for="photo">Bukti Foto (Apabila perlu diupdate, foto sebelumnya akan terhapus!)</label>
+                    <input type="file" name="photo" placeholder="" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success">Perbaharui Transaksi</button>
+                        <button type="submit" class="btn btn-success">Perbaharui Data</button>
                     </div>
                 </div>
             </form>

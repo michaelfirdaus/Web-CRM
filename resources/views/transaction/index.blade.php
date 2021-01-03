@@ -105,17 +105,15 @@
                                     <td>
                                         {{ $transaction->note }}
                                     </td>
-                                    <td>
-                                        @if($transaction->result_id == NULL)
-                                        {{-- <a href="{{ route('resultbyid.create', ['id' => $transaction->id]) }}" class="btn btn-success"> --}}
-                                            <i class="nav-icon fas fa-plus mr-2"></i>  
-                                                Masukkan Nilai
-                                        {{-- </a> --}}
+                                    <td class="text-center">
+                                        @if($transaction->result == 0)
+                                        <a href="{{ route('resultbyid.create', ['id' => $transaction->id]) }}" class="btn btn-xs btn-success">
+                                            <span class="fas fa-plus"></span>
+                                        </a>
                                         @else
-                                        {{-- <a href="{{ route('resultbyid', ['id' => $transaction->id]) }}" class="btn btn-success"> --}}
-                                            <i class="nav-icon fas fa-address-book mr-2"></i>  
-                                                Lihat Nilai
-                                        {{-- </a> --}}
+                                        <a href="{{ route('resultbyid', ['id' => $transaction->id]) }}" class="btn btn-xs btn-success">
+                                            <span class="fas fa-address-book"></span>
+                                        </a>
                                         @endif
                                     </td>
                                     <td class="text-center">

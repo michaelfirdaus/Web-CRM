@@ -388,4 +388,35 @@ Route::group(['middleware' => 'auth'], function() {
     ]);
 //
 
+
+//ResultById Routes
+    Route::get('/resultbyid/{id}',[
+        'uses'  => 'ResultByIdController@index',
+        'as'    => 'resultbyid'
+    ]);
+    Route::get('/resultbyid/{id}/create',[
+        'uses'  => 'ResultByIdController@create',
+        'as'    => 'resultbyid.create'
+    ]);
+    Route::post('/resultbyid/update/{id}',[
+        'uses'  => 'ResultByIdController@update',
+        'as'    => 'resultbyid.update'
+    ]);
+
+    Route::get('/resultbyid/edit/{id}',[
+        'uses' => 'ResultByIdController@edit',
+        'as'   => 'resultbyid.edit'
+    ]);
+
+    Route::post('/resultbyid/store',[
+        'uses'  => 'ResultByIdController@store',
+        'as'    => 'resultbyid.store'
+    ]);
+
+    Route::get('/resultbyid/delete/{id}',[
+        'uses' => 'ResultByIdController@destroy',
+        'as'   => 'resultbyid.delete'
+    ]);
+
+
 });
