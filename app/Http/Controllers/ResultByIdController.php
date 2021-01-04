@@ -183,8 +183,7 @@ class ResultByIdController extends Controller
         $transaction = Transaction::where('id', $result->transaction_id)->first();
         
         Session::flash('success', 'Berhasil Memperbaharui Data Nilai');
-        return view('resultbyid.index', ['results'      => $results,
-                                         'transaction'  => $transaction]);
+        return redirect()->route('resultbyid', ['id' => $result->transaction_id]);
     }
 
     /**

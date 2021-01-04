@@ -12,8 +12,8 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="participant">Nama Peserta</label>
-                    <select name="participant" id="participant" class="form-control">
-                    {{-- <option value="" selected disabled hidden> - Pilih Peserta - </option> --}}
+                    <select name="participant" id="participant" class="form-control select2" style="width: 300px;">
+                    <option value="" selected disabled hidden> - Pilih Peserta - </option>
                     @foreach($participants as $participant)
                         <option value="{{ $participant->id }}"> {{ $participant->id }} - {{ $participant->name }} </option>
                     @endforeach
@@ -22,8 +22,8 @@
 
                 <div class="form-group">
                     <label for="jobconnector">Perusahaan Rekanan</label>
-                    <select name="jobconnector" id="jobconnector" class="form-control">
-                    {{-- <option value="" selected disabled hidden> - Pilih Perusahaan Rekanan - </option> --}}
+                    <select name="jobconnector" id="jobconnector" class="form-control select2" style="width: 300px;">
+                    <option value="" selected disabled hidden> - Pilih Perusahaan Rekanan - </option>
                     @foreach($jobconnectors as $jobconnector)
                         <option value="{{ $jobconnector->id }}"> {{ $jobconnector->company_name }} </option>
                     @endforeach
@@ -37,7 +37,7 @@
 
                 <div class="form-group">
                     <label for="application_status">Status</label>
-                    <select name="application_status" id="application_status" class="form-control">
+                    <select name="application_status" id="application_status" class="form-control select2" style="width: 300px;">
                         <option value="1" selected> Sedang dalam Proses </option>
                         <option value="2"> Ditolak </option>
                         <option value="3"> Diterima </option>
@@ -55,14 +55,4 @@
         </div>
     </div>
 
-@endsection
-
-@section('scripts')
-    $(document).ready(function(e){
-  
-        $('#participant').select3({ width: 260, placeholder: ' - Pilih Peserta - ', zIndex: 100 });  
-        $('#jobconnector').select3({ width: 320, placeholder: ' - Pilih Perusahaan Rekanan - ', zIndex: 100 });  
-        $('#application_status').select3({ width: 260, placeholder: ' - Pilih Status - ', zIndex: 100});
-  
-    });
 @endsection

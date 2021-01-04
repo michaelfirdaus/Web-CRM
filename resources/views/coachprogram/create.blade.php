@@ -12,8 +12,8 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="program">Nama Program</label>
-                    <select name="program" id="program" class="form-control">
-                    {{-- <option value="" selected disabled hidden> - Pilih Program - </option> --}}
+                    <select name="program" id="program" class="form-control select2" style="width: 300px;">
+                    <option value="" selected disabled hidden> - Pilih Program - </option>
                     @foreach($programs as $program)
                         <option value="{{ $program->id }}"> {{ $program->name }} </option>
                     @endforeach
@@ -22,8 +22,8 @@
 
                 <div class="form-group">
                     <label for="coach">Nama Coach yang Akan Mengajar</label>
-                    <select name="coach" id="coach" class="form-control">
-                    {{-- <option value="" selected disabled hidden> - Pilih Coach - </option> --}}
+                    <select name="coach" id="coach" class="form-control select2" style="width: 300px;">
+                    <option value="" selected disabled hidden> - Pilih Coach - </option>
                     @foreach($coaches as $coach)
                         <option value="{{ $coach->id }}"> {{ $coach->name }} </option>
                     @endforeach
@@ -43,14 +43,4 @@
             </form>
         </div>
     </div>
-@endsection
-
-@section('scripts')
-    $(document).ready(function(e){
-  
-        $('#program').select3({ width: 260, placeholder: ' - Pilih Program - ', zIndex: 100 });  
-        $('#coach').select3({ width: 260, placeholder: ' - Pilih Coach - ', zIndex: 100 });  
-  
-  
-    });
 @endsection

@@ -66,13 +66,11 @@ class CoachProgramController extends Controller
             'date'    => 'required',    
         ]);
 
-        foreach($request->coach as $coach){
-            DB::table('coach_program')->insert([
-                'coach_id'      => $coach,
-                'program_id'    => $request->program,
-                'date'          => $request->date,
-            ]);
-        }
+        DB::table('coach_program')->insert([
+            'coach_id'      => $request->coach,
+            'program_id'    => $request->program,
+            'date'          => $request->date,
+        ]);
 
         Session::flash('success', 'Berhasil Menambahkan Jadwal Kelas');
 
@@ -105,7 +103,7 @@ class CoachProgramController extends Controller
         $coaches = Coach::all();
         $branches = Branch::all();
 
-        return view('coachprograms.edit')
+        return view('coachprogram.edit')
             ->with('coachprogram', $coachprogram)
             ->with('programs', $programs)
             ->with('current_program', $current_program)

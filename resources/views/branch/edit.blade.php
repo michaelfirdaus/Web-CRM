@@ -12,12 +12,12 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="name">Nama Cabang</label>
-                    <input type="text" name="name" value="{{ $branch->branch_name }}" class="form-control">
+                    <input type="text" name="name" value="{{ $branch->name }}" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="code">Kode Cabang</label>
-                    <input type="text" name="code" value="{{ $branch->branch_code }}" class="form-control">
+                    <input type="text" name="code" value="{{ $branch->code }}" class="form-control">
                 </div>
 
                 <div class="form-group">

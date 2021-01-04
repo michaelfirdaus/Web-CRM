@@ -72,7 +72,7 @@
 
                 <div class="form-group">
                     <label for="branch_id">Lokasi Pendaftaran</label>
-                    <select name="branch_id" id="branch_id" class="form-control">
+                    <select name="branch_id" id="branch_id" class="form-control select2" style="width: 300px;">
                     @foreach($branches as $branch)
                             @if($branch->id == $participant->branch_id)
                                 <option selected value="{{ $branch->id }}"> {{ $branch->name }} </option>
@@ -85,7 +85,7 @@
 
                 <div class="form-group">
                     <label for="program_id">Minat Program</label>
-                    <select name="program_id" id="program_id" class="form-control">
+                    <select name="program_id" id="program_id" class="form-control select2" style="width: 300px;">
                     <option value=""> - Pilih Minat Program - </option>
                     @foreach($programs as $program)
                             @if($program->id == $participant->program_id)
@@ -99,7 +99,7 @@
 
                 <div class="form-group">
                     <label for="knowcn_id">Mengetahui CN dari</label>
-                    <select name="knowcn_id" id="knowcn_id" class="form-control">
+                    <select name="knowcn_id" id="knowcn_id" class="form-control select2" style="width: 300px;">
                     @foreach($knowcns as $knowcn)
                             @if($knowcn->id == $participant->knowcn_id)
                                 <option selected value="{{ $knowcn->id }}"> {{ $knowcn->name }} </option>
@@ -112,7 +112,7 @@
 
                 <div class="form-group">
                     <label for="profession_id">Profesi</label>
-                    <select name="profession_id" id="profession_id" class="form-control">
+                    <select name="profession_id" id="profession_id" class="form-control select2" style="width: 300px;">
                     @foreach($professions as $profession)
                             @if($profession->id == $participant->profession_id)
                                 <option selected value="{{ $profession->id }}"> {{ $profession->name }} </option>

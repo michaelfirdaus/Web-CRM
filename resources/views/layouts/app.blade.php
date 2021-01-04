@@ -32,8 +32,10 @@
     <link rel="stylesheet" href="{{ asset('adminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}"> --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
-    {{-- Additional CSS --}}
-    <link rel="stylesheet" href="{{ asset('css/select3.css') }}">
+    
+    {{-- Dropdown List W/Search --}}
+    <link rel="stylesheet" href="{{ asset('adminLTE/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminLTE/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     @yield('css')
 
 </head>
@@ -363,8 +365,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
+
+{{-- Dropdown List W/Search --}}
+<script src="{{ asset('adminLTE/plugins/select2/js/select2.full.min.js') }}"></script>
 {{-- Additional JS --}}
-<script src="{{ asset('js/select3.js') }}"></script>
 
 <script>
     @if(Session::has('success'))
@@ -382,11 +386,13 @@
       ]
     });
    
+    //Initialize Select2 Elements
+    $('.select2').select2({
+      theme: 'bootstrap4'
+    })
+
     @yield('scripts')
 </script>
-
-
-
 
 
 </body>
