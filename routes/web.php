@@ -28,7 +28,17 @@ Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware' => 'auth'], function() {
 
+//User (user profile) routes
+    Route::get('user/profile', [
+        'uses' => 'UserProfileController@index',
+        'as' => 'user.profile'
+    ]);
 
+    Route::post('user/profile/update', [
+        'uses' => 'UserProfileController@update',
+        'as' => 'user.profile.update'
+    ]);
+//
 
 //Profession routes
     Route::get('/professions',[
