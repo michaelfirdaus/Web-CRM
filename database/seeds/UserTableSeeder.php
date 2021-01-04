@@ -20,7 +20,7 @@ class UserTableSeeder extends Seeder
 
         $user1 = App\User::create([
             'name' => 'Michael',
-            'email' => 'michael@user.com',
+            'email' => 'michael',
             'password' => bcrypt('password'),
             'admin' => 0,
         ]);
