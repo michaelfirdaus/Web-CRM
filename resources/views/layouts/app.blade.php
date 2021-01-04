@@ -96,6 +96,8 @@
               <!-- Add icons to the links using the .nav-icon class
                   with font-awesome or any other icon font library -->
 
+              <li class="nav-header">Data Utama</li>
+
               <li class="nav-item">
                 <a href="/" class="nav-link active">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -125,7 +127,41 @@
                 </a>
               </li>
 
-
+              
+              <li class="nav-header">Data Kunci</li>
+              
+              <li class="nav-item">
+                <a href="{{route('branches')}}" class="nav-link">
+                  <i class="nav-icon fas fa-building"></i>
+                  <p>
+                    Cabang
+                  </p>
+                </a>
+              </li>
+              
+              
+              <li class="nav-item">
+                <a href="{{route('programs')}}" class="nav-link">
+                  <i class="nav-icon fas fa-book"></i>
+                  <p>
+                    Program
+                  </p>
+                </a>
+              </li>
+              
+              
+              <li class="nav-item">
+                <a href="{{route('coachprograms')}}" class="nav-link">
+                  <i class="nav-icon fas fa-business-time"></i>
+                  <p>
+                    Jadwal Kelas
+                  </p>
+                </a>
+              </li>
+              
+              
+              <li class="nav-header">Data Pendukung</li>
+              
               <li class="nav-item">
                 <a href="{{ route('professions') }}" class="nav-link">
                   <i class="nav-icon fas fa-user-tie"></i>
@@ -174,38 +210,6 @@
                   </p>
                 </a>
               </li>
-
-
-              <li class="nav-item">
-                <a href="{{route('branches')}}" class="nav-link">
-                  <i class="nav-icon fas fa-building"></i>
-                  <p>
-                    Cabang
-                  </p>
-                </a>
-              </li>
-
-
-              <li class="nav-item">
-                <a href="{{route('programs')}}" class="nav-link">
-                  <i class="nav-icon fas fa-book"></i>
-                  <p>
-                    Program
-                  </p>
-                </a>
-              </li>
-              
-
-              <li class="nav-item">
-                <a href="{{route('coachprograms')}}" class="nav-link">
-                  <i class="nav-icon fas fa-business-time"></i>
-                  <p>
-                    Jadwal Kelas
-                  </p>
-                </a>
-              </li>
-
-
 
             </ul>
           </nav>
