@@ -40,7 +40,7 @@
 
                 <div class="form-group">
                     <label for="date">Tanggal Batch</label>
-                    <input type="date" id="date" name="date" {{ old('date') }}>
+                    <input type="date" id="date" name="date" value="{{ $jobconnectorparticipant->date }}">
                 </div>
 
                 <div class="form-group">
@@ -48,14 +48,41 @@
                     <select name="application_status" id="application_status" class="form-control select2" style="width: 300px;">
                         @if($jobconnectorparticipant->application_status == 1)
                         <option value="1" selected> Sedang dalam Proses </option>
-                        @else
                         <option value="2"> Ditolak </option>
                         <option value="3"> Diterima </option>
                         <option value="4"> Dibatalkan </option>
                         <option value="5"> Lainnya </option>
+                            @if($jobconnectorparticipant->application_status == 2)
+                            <option value="1" selected> Sedang dalam Proses </option>
+                            <option value="2"> Ditolak </option>
+                            <option value="3"> Diterima </option>
+                            <option value="4"> Dibatalkan </option>
+                            <option value="5"> Lainnya </option>
+                                @if($jobconnectorparticipant->application_status == 3)
+                                <option value="1" selected> Sedang dalam Proses </option>
+                                <option value="2"> Ditolak </option>
+                                <option value="3"> Diterima </option>
+                                <option value="4"> Dibatalkan </option>
+                                <option value="5"> Lainnya </option>
+                                    @if($jobconnectorparticipant->application_status == 4)
+                                    <option value="1" selected> Sedang dalam Proses </option>
+                                    <option value="2"> Ditolak </option>
+                                    <option value="3"> Diterima </option>
+                                    <option value="4"> Dibatalkan </option>
+                                    <option value="5"> Lainnya </option>
+                                        @if($jobconnectorparticipant->application_status == 5)
+                                        <option value="1" selected> Sedang dalam Proses </option>
+                                        <option value="2"> Ditolak </option>
+                                        <option value="3"> Diterima </option>
+                                        <option value="4"> Dibatalkan </option>
+                                        <option value="5"> Lainnya </option>
+                                        @endif
+                                    @endif
+                                @endif
+                            @endif
                         @endif
 
-                        @if($jobconnectorparticipant->application_status == 2)
+                        {{-- @if($jobconnectorparticipant->application_status == 2)
                         <option value="2" selected> Ditolak </option>
                         @else
                         <option value="1" selected> Sedang dalam Proses </option>
@@ -89,7 +116,7 @@
                         <option value="2"> Ditolak </option>
                         <option value="3"> Diterima </option>
                         <option value="4"> Dibatalkan </option>
-                        @endif
+                        @endif --}}
 
                     </select>
                 </div>

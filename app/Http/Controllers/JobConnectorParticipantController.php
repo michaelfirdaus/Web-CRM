@@ -122,11 +122,11 @@ class JobConnectorParticipantController extends Controller
             'application_status' => 'required',
         ]);
 
-        $jobcconnectorparticipant->id                 = $request->id;
-        $jobcconnectorparticipant->participant_id     = $request->participant;
-        $jobcconnectorparticipant->jobconnector_id    = $request->jobconnector;
-        $jobcconnectorparticipant->date               = $request->date;
-        $jobcconnectorparticipant->application_status = $request->application_status;
+        $jobconnectorparticipant->id                 = $request->id;
+        $jobconnectorparticipant->participant_id     = $request->participant;
+        $jobconnectorparticipant->jobconnector_id    = $request->jobconnector;
+        $jobconnectorparticipant->date               = $request->date;
+        $jobconnectorparticipant->application_status = $request->application_status;
 
         $jobconnectorparticipant->save();
 
