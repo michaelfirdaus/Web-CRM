@@ -380,7 +380,7 @@
     @endif
 
     $('#table').DataTable( {
-      dom: 'lBrtip',
+      dom: 'lBfrtip',
       buttons: [
           'copy', 'csv', 'excel', 'pdf', 'print'
       ]
