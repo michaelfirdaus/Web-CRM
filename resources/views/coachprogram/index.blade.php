@@ -51,7 +51,7 @@
                                         {{ $program->branch->name }}
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('coachprogram.edit', $coach->pivot->id) }}" class="btn btn-xs btn-info">
+                                        <a href="{{ route('coachprogram.edit', ['id'=> $coach->pivot->id]) }}" class="btn btn-xs btn-info">
                                             <span class="fas fa-pencil-alt"></span>
                                         </a>
                                     </td>

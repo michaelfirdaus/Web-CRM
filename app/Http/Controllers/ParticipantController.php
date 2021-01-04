@@ -9,6 +9,7 @@ use App\Branch;
 use App\Program;
 use App\Knowcn;
 use App\Profession;
+use App\Membernumber;
 use Session;
 
 class ParticipantController extends Controller
@@ -80,8 +81,25 @@ class ParticipantController extends Controller
         //         'date'          => $request->date,
         //     ]);
         // }
+        
+        $branch_code = Branch::find($request->branch_id);
+        $membernum = Membernumber::where('branch_id', $request->branch_id)->first();
+
+        if($membernum == null){
+            $membernum = Membernumber::create([
+                'branch_id'     => $request->branch_id,
+                'lastnumber'    => (int)$branch_code->code * 1000000  + 501,
+            ]);
+        }else{
+            $membernum->update([
+                'lastnumber' => (int)$membernum->lastnumber + 1,
+            ]);
+
+            $membernum->save();
+        }
 
         $participants = Participant::create([
+            'id'                        => $membernum->lastnumber,
             'branch_id'                 => $request->branch_id,
             'knowcn_id'                 => $request->knowcn_id,
             'program_id'                => $request->program_id,

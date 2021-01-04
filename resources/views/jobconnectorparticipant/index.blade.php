@@ -35,28 +35,28 @@
                 </thead>
         
                 <tbody>
-                    @if($jcps->count() > 0)
-                        @foreach ($jcps as $jcp)
+                    @if($jobconnectorparticipants->count() > 0)
+                        @foreach ($jobconnectorparticipants as $jobconnectorparticipant)
                                 <tr>
                                     <td>
-                                        {{ $jcp->participant->name }}
+                                        {{ $jobconnectorparticipant->participant->name }}
                                     </td>
                                     <td>
-                                        {{ $jcp->jobconnector->company_name }}
+                                        {{ $jobconnectorparticipant->jobconnector->company_name }}
                                     </td>
                                     <td>
-                                        {{ $jcp->date }}
+                                        {{ $jobconnectorparticipant->date }}
                                     </td>
                                     <td>
-                                        {{ $jcp->application_status }}
+                                        {{ $jobconnectorparticipant->application_status }}
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('jobconnectorparticipant.edit', $jcp->id) }}" class="btn btn-xs btn-info">
+                                        <a href="{{ route('jobconnectorparticipant.edit', ['id' => $jobconnectorparticipant->id]) }}" class="btn btn-xs btn-info">
                                             <span class="fas fa-pencil-alt"></span>
                                         </a>
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('jobconnectorparticipant.delete', ['id' => $jcp->id]) }}" class="btn btn-xs btn-danger">
+                                        <a href="{{ route('jobconnectorparticipant.delete', ['id' => $jobconnectorparticipant->id]) }}" class="btn btn-xs btn-danger">
                                             <span class="fas fa-trash-alt"></span>
                                         </a>
                                     </td>

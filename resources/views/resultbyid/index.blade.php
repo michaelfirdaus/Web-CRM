@@ -26,7 +26,7 @@
                     Nomor Sertifikat Kehadiran : {{ $result->attendancecertificate_number }} <br>
                     Tanggal Pengambilan Sertifikat Kehadiran : {{ $result->attendancecertificate_pickdate }} <br>
                     Bukti Foto <br>
-                    <img src="{{ asset('uploads/photo/'.$result->photo) }}">
+                    <img src="{{ asset('uploads/photo/'.$result->photo) }}" class="img-responsive m-2" style="object-fit: cover" width="100%" height="100%">
 
                     <div class="text-center">
                         <a href="{{ route('resultbyid.edit', ['id' => $result->id]) }}" class="btn btn-md btn-info">

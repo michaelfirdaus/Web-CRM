@@ -12,7 +12,7 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="participant">Nama Peserta</label>
-                    <select name="participant" id="participant" class="form-control">
+                    <select name="participant" id="participant" class="form-control select2" style="width: 300px;">
                     @foreach($participants as $participant)
                         @if($participant->id == $transaction->participant_id)
                             <option selected value="{{ $participant->id }}"> {{ $participant->id }} - {{ $participant->name }} </option> 
@@ -25,7 +25,7 @@
 
                 <div class="form-group">
                     <label for="sales">Nama Sales</label>
-                    <select name="sales" id="sales" class="form-control">
+                    <select name="sales" id="sales" class="form-control select2" style="width: 300px;">
                     @foreach($salespersons as $salesperson)
                         @if($salesperson->id == $transaction->salesperson_id)
                             <option selected value="{{ $salesperson->id }}"> {{ $salesperson->name }} </option> 
@@ -38,7 +38,7 @@
 
                 <div class="form-group">
                     <label for="program">Nama Program</label>
-                    <select name="program" id="program" class="form-control">
+                    <select name="program" id="program" class="form-control select2" style="width: 300px;">
                     @foreach($coachprograms as $cp)
                         @if($cp->id == $transaction->coach_program_id)
                             <option selected value="{{ $cp->id }}"> {{$cp->id}} - {{ $cp->program->name }} </option> 
@@ -81,7 +81,7 @@
 
                 <div class="form-group">
                     <label for="recoaching">Recoaching?</label>
-                    <select name="recoaching" id="recoaching" class="form-control">
+                    <select name="recoaching" id="recoaching" class="form-control select2" style="width: 300px;">
                         @if($transaction->recoaching == 0)
                             <option selected value="0"> Tidak </option>
                         @else

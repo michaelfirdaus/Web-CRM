@@ -38,10 +38,10 @@ class TransactionController extends Controller
      */
     public function create()
     {
+        
         $participants = Participant::all();
-        $coachprograms = CoachProgram::all();
+        $coachprograms = CoachProgram::with('program')->get();
         $salespersons = Salesperson::all();
-
         if($participants->count() == 0 || $coachprograms->count() == 0 || $salespersons->count() == 0){
             Session::flash('info', 'Tidak Dapat Menambahkan Transaksi karena Peserta/Jadwal Kelas/Sales Tidak Terdaftar');
             return redirect()->back();

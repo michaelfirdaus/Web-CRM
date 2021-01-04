@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Participant;
 use App\Jobconnector;
 use App\JobconnectorParticipant;
+use DB;
 use Session;
 
 class JobConnectorParticipantController extends Controller
@@ -17,9 +18,12 @@ class JobConnectorParticipantController extends Controller
      */
     public function index()
     {
-        $jcps = JobconnectorParticipant::with('jobconnector', 'participant')->get();
-
-        return view('jobconnectorparticipant.index')->with('jcps', $jcps);
+        $jobconnectorparticipants = JobconnectorParticipant::with('participant', 'jobconnector')->get();
+        $participants = Participant::with('jobconnectors')->get();
+        // dd( $jobconnectorparticipants);
+        return view('jobconnectorparticipant.index')
+        ->with('jobconnectorparticipants', $jobconnectorparticipants)
+        ->with('participants', $participants);
     }
 
     /**
@@ -57,7 +61,7 @@ class JobConnectorParticipantController extends Controller
             'application_status' => 'required',
         ]);
 
-        $jcp = JobconnectorParticipant::create([
+        DB::table('jobconnector_participant')->insert([
             'participant_id'        => $request->participant,
             'jobconnector_id'       => $request->jobconnector,
             'date'                  => $request->date,
@@ -88,13 +92,13 @@ class JobConnectorParticipantController extends Controller
      */
     public function edit($id)
     {
-        $jcp = JobconnectorParticipant::find($id);
-        $currentparticipant = Participant::find($jcp->id);
+        $jobconnectorparticipant = JobconnectorParticipant::find($id);
+        $currentparticipant = Participant::find($jobconnectorparticipant->participant_id);
         $participants = Participant::all();
         $jobconnectors = Jobconnector::all();
 
         return view('jobconnectorparticipant.edit')
-            ->with('jobconnectorparticipant', $jcp)
+            ->with('jobconnectorparticipant', $jobconnectorparticipant)
             ->with('currentparticipant', $currentparticipant)
             ->with('participants', $participants)
             ->with('jobconnectors', $jobconnectors);
@@ -109,7 +113,7 @@ class JobConnectorParticipantController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $jcp = JobconnectorParticipant::find($id);
+        $jobconnectorparticipant = JobconnectorParticipant::find($id);
 
         $this->validate($request, [
             'participant'        => 'required',
@@ -118,20 +122,13 @@ class JobConnectorParticipantController extends Controller
             'application_status' => 'required',
         ]);
 
-        $jcp = JpbconnectorParticipant::create([
-            'participant_id'        => $request->participant,
-            'jobconnector_id'       => $request->jobconnector,
-            'date'                  => $request->date,
-            'application_status'    => $request->application_status,
-        ]);
+        $jobconnectorparticipant->id                 = $request->id;
+        $jobconnectorparticipant->participant_id     = $request->participant;
+        $jobconnectorparticipant->jobconnector_id    = $request->jobconnector;
+        $jobconnectorparticipant->date               = $request->date;
+        $jobconnectorparticipant->application_status = $request->application_status;
 
-        $jcp->id                 = $request->id;
-        $jcp->participant_id     = $request->participant;
-        $jcp->jobconnector       = $request->jobconnector;
-        $jcp->date               = $request->date;
-        $jcp->application_status = $request->application_status;
-
-        $jcp->save();
+        $jobconnectorparticipant->save();
 
         Session::flash('success', 'Berhasil Memperbaharui Job Connector');
 
@@ -146,9 +143,9 @@ class JobConnectorParticipantController extends Controller
      */
     public function destroy($id)
     {
-        $jcp = JobconnectorParticipant::find($id);
+        $jobconnectorparticipant = JobconnectorParticipant::find($id);
 
-        $jcp->delete();
+        $jobconnectorparticipant->delete();
 
         Session::flash('success', 'Berhasil Menghapus Job Connector');
 

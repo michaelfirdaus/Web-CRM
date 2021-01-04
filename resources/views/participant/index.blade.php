@@ -14,6 +14,9 @@
             <table id="table" class="table table-hover table-bordered table-responsive">
                 <thead>
                     <th class="text-center">
+                        Nomor Member
+                    </th>
+                    <th class="text-center">
                         Nama Peserta
                     </th>
                     <th class="text-center"> 
@@ -76,6 +79,9 @@
                     @if($participants->count() > 0)
                         @foreach ($participants as $participant)
                             <tr>
+                                <td>
+                                    {{ $participant->id }}
+                                </td>
                                 <td>
                                     {{ $participant->name }}
                                 </td>

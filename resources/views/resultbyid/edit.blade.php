@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="photo">Bukti Foto (Apabila perlu diupdate, foto sebelumnya akan terhapus!)</label>
+                    <label for="photo"><div class="text-danger">Bukti Foto (Apabila perlu diupdate, foto sebelumnya akan terhapus!)</div></label>
                     <input type="file" name="photo" placeholder="" class="form-control">
                 </div>
 

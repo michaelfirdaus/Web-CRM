@@ -13,12 +13,12 @@ class BranchTableSeeder extends Seeder
     {
         App\Branch::create([
             'name' => 'Kebon Jeruk',
-            'code' => 'BP'
+            'code' => '9'
         ]);
 
         App\Branch::create([
             'name' => 'Gading Serpong',
-            'code' => 'GS'
+            'code' => '7'
         ]);
     }
 }
