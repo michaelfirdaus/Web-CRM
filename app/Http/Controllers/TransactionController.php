@@ -66,6 +66,7 @@ class TransactionController extends Controller
             'sales'             => 'required',
             'program'           => 'required',
             'price'             => 'required',
+            'firsttrans'        => 'required',
             'recoaching'        => 'required',
         ]);
 
@@ -136,6 +137,7 @@ class TransactionController extends Controller
             'participant'       => 'required',
             'sales'             => 'required',
             'program'           => 'required',
+            'firsttrans'        => 'required',
             'price'             => 'required',
             'recoaching'        => 'required',
         ]);
