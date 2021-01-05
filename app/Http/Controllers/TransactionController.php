@@ -153,6 +153,8 @@ class TransactionController extends Controller
         $transaction->rating_text       = $request->rating_text;
         $transaction->recoaching        = $request->recoaching;
         $transaction->note              = $request->note;
+
+        $transaction->save();
         
         Session::flash('success', 'Berhasil Memperbaharui Transaksi');
 

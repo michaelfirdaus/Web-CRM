@@ -92,7 +92,7 @@
               <img src="{{ asset('assets/logo-cn.png') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-              <a href="#" class="d-block">Admin</a>
+              <a href="#" class="d-block">{{ Auth::user()->name }}</a>
             </div>
           </div>
 
@@ -101,7 +101,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
               <!-- Add icons to the links using the .nav-icon class
                   with font-awesome or any other icon font library -->
-
+                  
               <li class="nav-header">Data Utama</li>
 
               <li class="nav-item">
@@ -217,13 +217,13 @@
                 </a>
               </li>
 
-              <li class="nav-header">Dukungan Lainnya</li>
+              <li class="nav-header">Pengaturan</li>
 
               <li class="nav-item">
                 <a href="{{route('user.profile')}}" class="nav-link">
                   <i class="nav-icon fas fa-user-circle"></i>
                   <p>
-                    Pengaturan Profil
+                    Profil Saya
                   </p>
                 </a>
               </li>
@@ -402,6 +402,7 @@
 {{-- Dropdown List W/Search --}}
 <script src="{{ asset('adminLTE/plugins/select2/js/select2.full.min.js') }}"></script>
 {{-- Additional JS --}}
+
 
 <script>
     @if(Session::has('success'))

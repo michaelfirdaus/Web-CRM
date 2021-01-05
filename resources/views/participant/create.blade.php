@@ -8,6 +8,7 @@
 
     <div class="card">
         <div class="card-body">
+            <p class="text-danger text-bold">* : Data diperlukan.</p>
             <form action="{{ route('participant.store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
@@ -106,9 +107,6 @@
                     </div>
                 </div>
             </form>
-        </div>
-        <div class="card-footer">
-            <span class="text-danger">* : Data diperlukan.</span>
         </div>
     </div>
     

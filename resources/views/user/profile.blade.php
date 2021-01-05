@@ -11,7 +11,7 @@
             <form action="{{ route('user.profile.update') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="username">Username</label>
+                    <label for="username">Username (Untuk Login Akun)</label>
                     <input type="text" name="username" class="form-control" value={{ $user->username }}>
                 </div>
 
