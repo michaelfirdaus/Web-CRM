@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="username">Nama</label>
+                    <label for="name">Nama</label>
                     <input type="text" name="name" class="form-control" value={{ $user->name }}>
                 </div>
 
