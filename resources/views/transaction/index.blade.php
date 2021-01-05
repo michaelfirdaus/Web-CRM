@@ -78,16 +78,16 @@
                                         {{ $cp->program->name }}
                                     </td>
                                     <td>
-                                        {{ $transaction->price }}
+                                        @currency( $transaction->price )
                                     </td>
                                     <td>
-                                        {{ $transaction->firsttrans }}
+                                        @currency( $transaction->firsttrans )
                                     </td>
                                     <td>
-                                        {{ $transaction->secondtrans }}
+                                        @currency( $transaction->secondtrans )
                                     </td>
                                     <td>
-                                        {{ $transaction->cashback }}
+                                        @currency( $transaction->cashback )
                                     </td>
                                     <td>
                                         {{ $transaction->rating }}
