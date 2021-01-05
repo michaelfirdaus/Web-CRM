@@ -19,7 +19,7 @@ class CreateCoachesTable extends Migration
             $table->string('email');
             $table->string('phonenumber');
             $table->string('dob');
-            $table->string('address');
+            $table->text('address');
             $table->timestamps();
         });
     }

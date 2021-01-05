@@ -17,22 +17,22 @@
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" name="email" class="form-control" value={{ $coach->email }}>
+                    <input type="email" name="email" class="form-control" value="{{ $coach->email }}">
                 </div>
 
                 <div class="form-group">
                     <label for="phonenumber">Nomor Telepon</label>
-                    <input type="tel" name="phonenumber" class="form-control" placeholder="Contoh : 628551111111" value={{ $coach->phonenumber }}>
+                    <input type="tel" name="phonenumber" class="form-control" placeholder="Contoh : 628551111111" value="{{ $coach->phonenumber }}">
                 </div>
 
                 <div class="form-group">
                     <label for="dob">Tanggal Lahir</label>
-                    <input type="date" name="dob" class="form-control" value={{ $coach->dob }}>
+                    <input type="date" name="dob" value="{{ $coach->dob }}">
                 </div>
         
                 <div class="form-group">
                     <label for="address">Alamat</label>
-                    <input type="text" name="address" class="form-control" value={{ $coach->address }}>
+                    <input type="text" name="address" class="form-control" value="{{ $coach->address }}">
                 </div>
 
                 <div class="form-group">

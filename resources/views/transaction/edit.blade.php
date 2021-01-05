@@ -41,9 +41,9 @@
                     <select name="program" id="program" class="form-control select2" style="width: 300px;">
                     @foreach($coachprograms as $cp)
                         @if($cp->id == $transaction->coach_program_id)
-                            <option selected value="{{ $cp->id }}"> {{$cp->id}} - {{ $cp->program->name }} </option> 
+                            <option selected value="{{ $cp->id }}"> Batch {{$cp->date}} | {{ $cp->program->name }} </option> 
                         @else
-                            <option value="{{ $cp->id }}"> {{ $cp->program_id }} </option> 
+                            <option value="{{ $cp->id }}"> Batch {{$cp->date}} |  {{ $cp->program_id }} </option> 
                         @endif
                     @endforeach
                     </select>

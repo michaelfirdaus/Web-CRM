@@ -26,6 +26,9 @@
                         Nama Program
                     </th>
                     <th class="text-center">
+                        Tanggal Batch
+                    </th>
+                    <th class="text-center">
                         Harga
                     </th>
                     <th class="text-center">
@@ -79,6 +82,9 @@
                                     </td>
                                     <td>
                                         {{ $cp->program->name }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $cp->date }}
                                     </td>
                                     <td>
                                         @currency( $transaction->price )
