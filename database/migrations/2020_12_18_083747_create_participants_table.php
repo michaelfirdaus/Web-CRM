@@ -26,7 +26,7 @@ class CreateParticipantsTable extends Migration
             $table->string('address');
             $table->string('email');
             $table->string('student_idcard')->nullable();
-            $table->string('cv_link');
+            $table->string('cv_link')->nullable();
             $table->string('sp_link')->nullable();
             $table->string('emergencycontact_name');
             $table->string('emergencycontact_phone');

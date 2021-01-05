@@ -11,32 +11,32 @@
             <form action="{{ route('participant.store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="name">Nama Peserta</label>
+                    <label for="name">Nama Peserta <span class="text-danger">*</span></label>
                     <input type="text" name="name" class="form-control" value={{ old('name') }}>
                 </div>
 
                 <div class="form-group">
-                    <label for="pob">Tempat Lahir</label>
+                    <label for="pob">Tempat Lahir <span class="text-danger">*</span></label>
                     <input type="text" name="pob" class="form-control" value={{ old('pob') }}>
                 </div>
 
                 <div class="form-group">
-                    <label for="dob">Tanggal Lahir</label>
+                    <label for="dob">Tanggal Lahir <span class="text-danger">*</span></label>
                     <input type="date" id="dob" name="dob" value={{ old('dob') }}>
                 </div>
 
                 <div class="form-group">
-                    <label for="phonenumber">Nomor Telepon</label>
+                    <label for="phonenumber">Nomor Telepon <span class="text-danger">*</span></label>
                     <input type="tel" name="phonenumber" class="form-control" placeholder="Cth : 628111011011" value={{ old('phonenumber') }}>
                 </div>
 
                 <div class="form-group">
-                    <label for="address">Alamat</label>
+                    <label for="address">Alamat <span class="text-danger">*</span></label>
                     <input type="text" name="address" class="form-control" value={{ old('address') }}>
                 </div>
 
                 <div class="form-group">
-                    <label for="email">E-mail</label>
+                    <label for="email">E-mail <span class="text-danger">*</span></label>
                     <input type="email" name="email" class="form-control" value={{ old('email') }}>
                 </div>
 

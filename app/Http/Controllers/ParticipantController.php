@@ -66,7 +66,6 @@ class ParticipantController extends Controller
             'phonenumber'               => 'required',
             'address'                   => 'required',
             'email'                     => 'required|email',
-            'cv_link'                   => 'required|url',
             'emergencycontact_name'     => 'required',
             'emergencycontact_phone'    => 'required'   
         ]);
@@ -169,7 +168,6 @@ class ParticipantController extends Controller
             'phonenumber'               => 'required',
             'address'                   => 'required',
             'email'                     => 'required|email',
-            'cv_link'                   => 'required|url',
             'emergencycontact_name'     => 'required',
             'emergencycontact_phone'    => 'required'   
         ]);
