@@ -79,7 +79,7 @@
                     @if($participants->count() > 0)
                         @foreach ($participants as $participant)
                             <tr>
-                                <td>
+                                <td class="text-center">
                                     {{ $participant->id }}
                                 </td>
                                 <td>
@@ -91,7 +91,7 @@
                                 <td>
                                     {{ $participant->dob }}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     {{ $participant->phonenumber }}
                                 </td>
                                 <td>
@@ -115,19 +115,19 @@
                                 <td>
                                     {{ $participant->emergencycontact_phone }}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     {{ $participant->member_validthru }}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     {{ $participant->branch->name }}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     {{ $participant->program_id != NULL ? $participant->program->name : 'Belum Ada Minat' }}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     {{ $participant->knowcn->name }}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     {{ $participant->profession->name }}
                                 </td>
                                 <td class="text-center">

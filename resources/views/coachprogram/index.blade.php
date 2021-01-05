@@ -44,10 +44,10 @@
                                     <td>
                                         {{ $coach->name }}
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         {{ $coach->pivot->date }}
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         {{ $program->branch->name }}
                                     </td>
                                     <td class="text-center">

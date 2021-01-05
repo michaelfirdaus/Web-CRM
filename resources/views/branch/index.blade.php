@@ -34,7 +34,7 @@
                                 <td>
                                     {{ $branch->name }}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     {{ $branch->code }}
                                 </td>
                                 <td class="text-center">
