@@ -81,16 +81,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="program_id">Minat Program</label>
-                    <select name="program_id" id="program_id" class="form-control select2" style="width: 300px;">
-                    <option value="" selected disabled hidden> - Pilih Minat Program - </option>
-                    @foreach($programs as $program)
-                        <option value="{{ $program->id }}"> {{ $program->name }} </option>
-                    @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label for="knowcn_id">Mengetahui Course-Net dari</label>
                     <select name="knowcn_id" id="knowcn_id" class="form-control select2" style="width: 300px;">
                     <option value="" selected disabled hidden> - Pilih Kanal CN - </option>

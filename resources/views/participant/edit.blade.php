@@ -84,20 +84,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="program_id">Minat Program</label>
-                    <select name="program_id" id="program_id" class="form-control select2" style="width: 300px;">
-                    <option value=""> - Pilih Minat Program - </option>
-                    @foreach($programs as $program)
-                            @if($program->id == $participant->program_id)
-                                <option selected value="{{ $program->id }}"> {{ $program->name }} </option>
-                            @else
-                                <option value="{{ $program->id }}"> {{ $program->name }} </option>
-                            @endif 
-                    @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label for="knowcn_id">Mengetahui CN dari</label>
                     <select name="knowcn_id" id="knowcn_id" class="form-control select2" style="width: 300px;">
                     @foreach($knowcns as $knowcn)

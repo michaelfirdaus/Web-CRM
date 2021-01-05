@@ -368,6 +368,37 @@ Route::group(['middleware' => 'auth'], function() {
 //
 
 
+//Interest routes
+Route::get('/interests/{id}',[
+    'uses'  => 'InterestController@index',
+    'as'    => 'interests'
+]);
+Route::get('/interest/{id}/create',[
+    'uses'  => 'InterestController@create',
+    'as'    => 'interest.create'
+]);
+Route::post('/interest/update/{id}',[
+    'uses'  => 'InterestController@update',
+    'as'    => 'interest.update'
+]);
+
+Route::get('/interest/edit/{id}',[
+    'uses' => 'InterestController@edit',
+    'as'   => 'interest.edit'
+]);
+
+Route::post('/interest/store',[
+    'uses'  => 'InterestController@store',
+    'as'    => 'interest.store'
+]);
+
+Route::get('/interest/delete/{id}',[
+    'uses' => 'InterestController@destroy',
+    'as'   => 'interest.delete'
+]);
+//
+
+
 //Transaction routes
     Route::get('/transactions',[
         'uses'  => 'TransactionController@index',

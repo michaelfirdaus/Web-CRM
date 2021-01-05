@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('header') Tambah Jadwal Kelas Baru @endsection
+@section('header') Tambah Referensi Baru @endsection
 
 @section('content')
 

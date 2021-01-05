@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Reference;
+use App\Program;
+use App\Interest;
 use App\Participant;
 use Session;
 
-class ReferenceController extends Controller
+class InterestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +18,13 @@ class ReferenceController extends Controller
      */
     public function index($id)
     {
-        $references = Reference::where('participant_id', $id)->with('participant')->get();
+        $interests = Interest::where('participant_id', $id)->with('participant')->get();
         $currentparticipant = Participant::where('id', $id)->first();
+        $programs = Program::with('branch');
 
-        return view('reference.index', ['references'             => $references, 
-                                        'currentparticipant'     => $currentparticipant]);
+        return view('interest.index',   ['interests'         => $interests, 
+                                        'programs'           => $programs,
+                                        'currentparticipant' => $currentparticipant]);
     }
 
     /**
@@ -33,8 +36,11 @@ class ReferenceController extends Controller
     {
         $currentparticipant = $id;
 
-        return view('reference.create')->with('currentparticipant', $currentparticipant);
-        
+        $programs = Program::all();
+
+        return view('interest.create')
+               ->with('programs', $programs)
+               ->with('currentparticipant', $currentparticipant);
     }
 
     /**
@@ -46,17 +52,15 @@ class ReferenceController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name'    => 'required',
-            'phone'   => 'required',
+            'program_id'    => 'required',
         ]);
 
-        $reference = Reference::create([
+        $interest = Interest::create([
             'participant_id'    => $request->id,
-            'name'              => $request->name,
-            'phone'             => $request->phone,
+            'program_id'        => $request->program_id,
         ]);
 
-        Session::flash('success', 'Berhasil Menambahkan Referensi');
+        Session::flash('success', 'Berhasil Menambahkan Minat Program');
 
         return redirect()->back();
     }
@@ -80,10 +84,12 @@ class ReferenceController extends Controller
      */
     public function edit($id)
     {
-        $reference = Reference::find($id);
+        $interest = Interest::find($id);
+        $programs = Program::all();
         
-        return view('reference.edit')
-            ->with('reference', $reference);
+        return view('interest.edit')
+               ->with('programs', $programs)
+               ->with('interest', $interest);
     }
 
     /**
@@ -95,20 +101,18 @@ class ReferenceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $reference = Reference::find($id);
+        $interest = Interest::find($id);
 
         $this->validate($request, [
-            'name'    => 'required',
-            'phone'   => 'required',
+            'program_id'    => 'required',
         ]);
 
-        $reference->id      = $request->id;
-        $reference->name    = $request->name; 
-        $reference->phone   = $request->phone;
+        $interest->id         = $request->id;
+        $interest->program_id = $request->program_id; 
 
-        $reference->save();
+        $interest->save();
 
-        Session::flash('success', 'Berhasil Memperbaharui Referensi');
+        Session::flash('success', 'Berhasil Memperbaharui Minat Program');
 
         return redirect()->route('participants');
     }
@@ -121,11 +125,11 @@ class ReferenceController extends Controller
      */
     public function destroy($id)
     {
-        $reference = Reference::find($id);
+        $interest = Interest::find($id);
 
-        $reference->delete();
+        $interest->delete();
 
-        Session::flash('success', 'Berhasil Menghapus Referensi');
+        Session::flash('success', 'Berhasil Menghapus Minat Program');
 
         return redirect()->back();
     }

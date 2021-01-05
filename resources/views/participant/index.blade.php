@@ -56,13 +56,13 @@
                         Lokasi Pendaftaran
                     </th>
                     <th class="text-center"> 
-                        Minat Program
-                    </th>
-                    <th class="text-center"> 
                         Mengetahui CN dari
                     </th>
                     <th class="text-center"> 
                         Profesi
+                    </th>
+                    <th class="text-center">
+                        Minat Program
                     </th>
                     <th class="text-center">
                         Referensi
@@ -122,13 +122,15 @@
                                     {{ $participant->branch->name }}
                                 </td>
                                 <td class="text-center">
-                                    {{ $participant->program_id != NULL ? $participant->program->name : 'Belum Ada Minat' }}
-                                </td>
-                                <td class="text-center">
                                     {{ $participant->knowcn->name }}
                                 </td>
                                 <td class="text-center">
                                     {{ $participant->profession->name }}
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ route('interests', ['id' => $participant ->id]) }}" class="btn btn-xs btn-success">
+                                        <span class="fas fa-tasks"></span>
+                                    </a>
                                 </td>
                                 <td class="text-center">
                                     <a href="{{ route('references', ['id' => $participant ->id]) }}" class="btn btn-xs btn-success">
