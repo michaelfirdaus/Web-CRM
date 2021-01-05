@@ -43,7 +43,11 @@ class CoachController extends Controller
 
         $coach = new Coach;
 
-        $coach->name = $request->name;
+        $coach->name        = $request->name;
+        $coach->email       = $request->email;
+        $coach->phonenumber = $request->phonenumber;
+        $coach->dob         = $request->dob;
+        $coach->address     = $request->address;
         //Saving current category to the database
         $coach->save();
 
@@ -92,7 +96,11 @@ class CoachController extends Controller
         //Find category based on category ID
         $coach = Coach::find($id);
         
-        $coach->name = $request->name;
+        $coach->name        = $request->name;
+        $coach->email       = $request->email;
+        $coach->phonenumber = $request->phonenumber;
+        $coach->dob         = $request->dob;
+        $coach->address     = $request->address;
         
         //Save the category to the database
         $coach->save();

@@ -14,7 +14,27 @@
                     <label for="name">Nama Coach</label>
                     <input type="text" name="name" class="form-control" value={{ old('name') }}>
                 </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" class="form-control" value={{ old('email') }}>
+                </div>
+
+                <div class="form-group">
+                    <label for="phonenumber">Nomor Telepon</label>
+                    <input type="tel" name="phonenumber" class="form-control" placeholder="Contoh : 628551111111" value={{ old('phonenumber') }}>
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">Tanggal Lahir</label>
+                    <input type="date" name="dob" class="form-control" value={{ old('dob') }}>
+                </div>
         
+                <div class="form-group">
+                    <label for="address">Alamat</label>
+                    <input type="text" name="address" class="form-control" value={{ old('address') }}>
+                </div>
+
                 <div class="form-group">
                     <div class="text-center">
                         <button type="submit" class="btn btn-success">Tambahkan Coach</button>

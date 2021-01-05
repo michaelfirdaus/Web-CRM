@@ -17,6 +17,18 @@
                         Nama Coach
                     </th>
                     <th class="text-center">
+                        E-mail
+                    </th>
+                    <th class="text-center">
+                        Nomor Telepon
+                    </th>
+                    <th class="text-center">
+                        Tanggal Lahir
+                    </th>
+                    <th class="text-center">
+                        Alamat
+                    </th>
+                    <th class="text-center">
                         Edit
                     </th>
                     <th class="text-center">
@@ -30,6 +42,18 @@
                             <tr>
                                 <td>
                                     {{ $coach->name }}
+                                </td>
+                                <td>
+                                    {{ $coach->email }}
+                                </td>
+                                <td class="text-center">
+                                    {{ $coach->phonenumber }}
+                                </td>
+                                <td class="text-center">
+                                    {{ $coach->dob }}
+                                </td>
+                                <td>
+                                    {{ $coach->address }}
                                 </td>
                                 <td class="text-center">
                                     <a href="{{ route('coach.edit', ['id' => $coach ->id]) }}" class="btn btn-xs btn-info">
