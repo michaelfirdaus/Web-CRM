@@ -47,6 +47,9 @@
                         Recoaching?
                     </th>
                     <th class="text-center">
+                        Status Pelunasan
+                    </th>
+                    <th class="text-center">
                         Catatan
                     </th>
                     <th class="text-center">
@@ -95,11 +98,18 @@
                                     <td>
                                         {{ $transaction->rating_text }}
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         @if($transaction->recoaching == 0)
                                             Tidak
                                         @else
                                             Ya
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        @if($transaction->price == $transaction->firsttrans + $transaction->secondtrans)
+                                            Lunas
+                                        @else
+                                            Belum Lunas
                                         @endif
                                     </td>
                                     <td>
@@ -158,7 +168,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <th colspan="13" class="text-center">Belum ada transaksi.</th>
+                            <th colspan="15" class="text-center">Belum ada transaksi.</th>
                         </tr>
                     @endif
 
