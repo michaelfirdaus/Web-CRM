@@ -12,66 +12,66 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="name">Nama Peserta <span class="text-danger">*</span></label>
-                    <input type="text" name="name" class="form-control" value={{ old('name') }}>
+                    <input type="text" name="name" class="form-control" placeholder="Contoh: Michael" value="{{ old('name') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="pob">Tempat Lahir <span class="text-danger">*</span></label>
-                    <input type="text" name="pob" class="form-control" value={{ old('pob') }}>
+                    <input type="text" name="pob" class="form-control" placeholder="Contoh: Jakarta" value="{{ old('pob') }}">
                 </div>
 
                 <div class="form-group">
-                    <label for="dob">Tanggal Lahir <span class="text-danger">*</span></label>
-                    <input type="date" id="dob" name="dob" value={{ old('dob') }}>
+                    <label for="dob" class="mr-2">Tanggal Lahir <span class="text-danger">*</span></label>
+                    <input type="date" id="dob" name="dob" value="{{ old('dob') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="phonenumber">Nomor Telepon <span class="text-danger">*</span></label>
-                    <input type="tel" name="phonenumber" class="form-control" placeholder="Cth : 628111011011" value={{ old('phonenumber') }}>
+                    <input type="tel" name="phonenumber" class="form-control" placeholder="Contoh: 628111011011" value="{{ old('phonenumber') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="address">Alamat <span class="text-danger">*</span></label>
-                    <input type="text" name="address" class="form-control" value={{ old('address') }}>
+                    <input type="text" name="address" class="form-control" placeholder="Contoh: Villa Permata Berlian, Jalan Sukses 1 Blok E1-9, Jakarta 12345" value="{{ old('address') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="email">E-mail <span class="text-danger">*</span></label>
-                    <input type="email" name="email" class="form-control" value={{ old('email') }}>
+                    <input type="email" name="email" class="form-control" placeholder="Contoh: michael@course-net.com" value="{{ old('email') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="student_idcard">ID Card Mahasiswa</label>
-                    <input type="text" name="student_idcard" class="form-control" value={{ old('student_idcard') }}>
+                    <input type="text" name="student_idcard" class="form-control" placeholder="Contoh: BN001234973253" value="{{ old('student_idcard') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="cv_link">Link CV</label>
-                    <input type="url" name="cv_link" class="form-control" value={{ old('cv_link') }}>
+                    <input type="url" name="cv_link" class="form-control" placeholder="Contoh: https://github.com/michaelfirdaus" value="{{ old('cv_link') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="sp_link">Link SP</label>
-                    <input type="url" name="sp_link" class="form-control" value={{ old('sp_link') }}>
+                    <input type="url" name="sp_link" class="form-control" placeholder="Contoh: https://www.linkedin.com/in/michaelfirdaus/" value="{{ old('sp_link') }}">
                 </div>
 
                 <div class="form-group">
-                    <label for="emergencycontact_name">Nama Kontak Darurat</label>
-                    <input type="tel" name="emergencycontact_name" class="form-control" value={{ old('emergencycontact_name') }}>
+                    <label for="emergencycontact_name">Nama Kontak Darurat <span class="text-danger">*</span></label>
+                    <input type="tel" name="emergencycontact_name" class="form-control" placeholder="Contoh: Budiman Aksara" value="{{ old('emergencycontact_name') }}">
                 </div>
 
                 <div class="form-group">
-                    <label for="emergencycontact_phone">Nomor Kontak Darurat</label>
-                    <input type="text" name="emergencycontact_phone" placeholder="Cth : 628111011011" class="form-control" value={{ old('emergencycontact_phone') }}>
+                    <label for="emergencycontact_phone">Nomor Kontak Darurat <span class="text-danger">*</span></label>
+                    <input type="text" name="emergencycontact_phone" placeholder="Contoh: 628111011011" class="form-control" value="{{ old('emergencycontact_phone') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="member_validthru">Member Berlaku s/d</label>
-                    <input type="date" id="member_validthru" name="member_validthru" value={{ old('member_validthru') }}>
+                    <input type="date" id="member_validthru" name="member_validthru" value="{{ old('member_validthru') }}">
                 </div>
 
                 <div class="form-group">
-                    <label for="branch_id">Lokasi Pendaftaran</label>
+                    <label for="branch_id">Lokasi Pendaftaran <span class="text-danger">*</span></label>
                     <select name="branch_id" id="branch_id" class="form-control select2" style="width: 300px;">
                         <option value="" selected disabled hidden> - Pilih Lokasi Pendaftaran - </option>
                     @foreach($branches as $branch)
@@ -81,7 +81,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="knowcn_id">Mengetahui Course-Net dari</label>
+                    <label for="knowcn_id">Mengetahui Course-Net dari <span class="text-danger">*</span></label>
                     <select name="knowcn_id" id="knowcn_id" class="form-control select2" style="width: 300px;">
                     <option value="" selected disabled hidden> - Pilih Kanal CN - </option>
                     @foreach($knowcns as $knowcn)
@@ -106,6 +106,9 @@
                     </div>
                 </div>
             </form>
+        </div>
+        <div class="card-footer">
+            <span class="text-danger">* : Data diperlukan.</span>
         </div>
     </div>
     
