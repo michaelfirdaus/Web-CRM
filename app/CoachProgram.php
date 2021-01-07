@@ -15,7 +15,7 @@ class CoachProgram extends Pivot
     }
 
     public function program(){
-        return $this->hasOne('App\Program', 'id');
+        return $this->hasOne('App\Program', 'id', 'program_id');
     }
 
     public function transaction(){
