@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('header') List Semua Program @endsection
+@section('header') List Semua Kategori Program @endsection
 
 @section('content')
 

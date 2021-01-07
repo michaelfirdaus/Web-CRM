@@ -105,7 +105,7 @@
               <li class="nav-header">Data Utama</li>
 
               <li class="nav-item">
-                <a href="/" class="nav-link active">
+                <a href="/" class="nav-link @if(Request::segment(1) == 'participants') active @endif">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
                     Dashboard Peserta
@@ -147,7 +147,7 @@
               
               <li class="nav-item">
                 <a href="{{route('programcategories')}}" class="nav-link">
-                  <i class="nav-icon fas fa-building"></i>
+                  <i class="nav-icon fas fa-list"></i>
                   <p>
                     Kategori Program
                   </p>
@@ -413,6 +413,18 @@
 
 
 <script>
+
+    let url = window.location;
+
+    $('ul.nav-sidebar a').filter(function() {
+        return this.href == url;
+    }).addClass('active');
+
+    $('ul.nav-treeview a').filter(function() {
+        return this.href == url;
+    }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');
+
+
     @if(Session::has('success'))
         toastr.success("{{ Session::get('success') }}")
     @endif
