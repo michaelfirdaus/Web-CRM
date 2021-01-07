@@ -15,7 +15,7 @@
                     <select name="program" id="program" class="form-control select2" style="width: 300px;">
                     <option value="" selected disabled hidden> - Pilih Program - </option>
                     @foreach($programs as $program)
-                        <option value="{{ $program->id }}"> {{ $program->name }} </option>
+                        <option value="{{ $program->id }}"> {{ $program->programcategory->name }} - {{ $program->name }} </option>
                     @endforeach
                     </select>
                 </div>

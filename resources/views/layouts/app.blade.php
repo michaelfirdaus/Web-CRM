@@ -145,7 +145,15 @@
                 </a>
               </li>
               
-              
+              <li class="nav-item">
+                <a href="{{route('programcategories')}}" class="nav-link">
+                  <i class="nav-icon fas fa-building"></i>
+                  <p>
+                    Kategori Program
+                  </p>
+                </a>
+              </li>
+
               <li class="nav-item">
                 <a href="{{route('programs')}}" class="nav-link">
                   <i class="nav-icon fas fa-book"></i>

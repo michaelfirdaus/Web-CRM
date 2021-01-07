@@ -16,6 +16,9 @@
                     <th class="text-center">
                         Nama Program
                     </th>
+                    <th class="text-center">
+                        Kategori Program
+                    </th>
                     <th class="text-center"> 
                         Nama Coach
                     </th>
@@ -40,6 +43,9 @@
                                 <tr>
                                     <td>
                                         {{ $program->name }}
+                                    </td>
+                                    <td>
+                                        {{ $program->programcategory->name }}
                                     </td>
                                     <td>
                                         {{ $coach->name }}

@@ -17,7 +17,7 @@
                             @if($program->id == $coachprogram->program_id)
                                 <option selected value="{{ $program->id }}"> {{ $program->name }} </option>
                             @else
-                                <option value="{{ $program->id }}"> {{ $program->name }} </option>
+                                <option value="{{ $program->id }}"> {{ $program->programcategory->name }} - {{ $program->name }} </option>
                             @endif
                         @endforeach
                     </select>

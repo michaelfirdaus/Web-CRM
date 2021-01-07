@@ -14,13 +14,7 @@
             <table id="table" class="table table-hover  table-bordered">
                 <thead>
                     <th class="text-center">
-                        Nama Program
-                    </th>
-                    <th class="text-center">
-                        Kategori Program
-                    </th>
-                    <th class="text-center"> 
-                        Lokasi Cabang
+                        Nama Kategori Program
                     </th>
                     <th class="text-center">
                         Edit
@@ -31,20 +25,14 @@
                 </thead>
         
                 <tbody>
-                    @if($programs->count() > 0)
-                        @foreach ($programs as $program)
+                    @if($programcategories->count() > 0)
+                        @foreach ($programcategories as $programcategory)
                             <tr>
                                 <td>
-                                    {{ $program->name }}
-                                </td>
-                                <td>
-                                    {{ $program->programcategory->name }}
-                                </td>
-                                <td>
-                                    {{ $program->branch->name }}
+                                    {{ $programcategory->name }}
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('program.edit', ['id' => $program ->id]) }}" class="btn btn-xs btn-info">
+                                    <a href="{{ route('programcategory.edit', ['id' => $programcategory ->id]) }}" class="btn btn-xs btn-info">
                                         <span class="fas fa-pencil-alt"></span>
                                     </a>
                                 </td>
@@ -72,7 +60,7 @@
                                               <span class="fas fa-times mr-1"></span>
                                             Batalkan
                                           </button>
-                                          <a href="{{ route('program.delete', ['id' => $program ->id]) }}" class="btn btn btn-danger">
+                                          <a href="{{ route('programcategory.delete', ['id' => $programcategory ->id]) }}" class="btn btn btn-danger">
                                             <span class="fas fa-check mr-1"></span>
                                             Hapus
                                           </a>

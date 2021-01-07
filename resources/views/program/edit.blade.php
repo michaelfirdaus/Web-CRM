@@ -15,6 +15,18 @@
                     <input type="text" name="name" value="{{ $program->name }}" class="form-control">
                 </div>
 
+                <div class="form-group">
+                    <label for="programcategory">Kategori Program</label>
+                    <select name="programcategory" id="programcategory" class="form-control select2" style="width: 300px;">
+                        @foreach($programcategories as $p)
+                            @if($program->programcategory_id == $p->id)
+                                <option selected value="{{ $p->id }}"> {{ $p->name }} </option>
+                            @else
+                                <option value="{{ $p->id }}"> {{ $p->name }} </option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
 
                 <div class="form-group">
                     <label for="branch_location">Lokasi Cabang</label>
@@ -28,7 +40,6 @@
                         @endforeach
                     </select>
                 </div>
-
 
                 <div class="form-group">
                     <div class="text-center">

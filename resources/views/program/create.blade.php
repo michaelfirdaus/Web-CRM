@@ -11,6 +11,16 @@
             <form action="{{ route('program.store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
+                    <label for="programcategory">Kategori Program</label>
+                    <select name="programcategory" id="programcategory" class="form-control select2" style="width: 300px;">
+                    <option value="" selected disabled hidden> - Pilih Kategori Program - </option>
+                    @foreach($programcategories as $p)
+                        <option value="{{ $p->id }}"> {{ $p->name }} </option>
+                    @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label for="name">Nama Program</label>
                     <input type="text" name="name" class="form-control" value={{ old('name') }}>
                 </div>
@@ -24,6 +34,8 @@
                     @endforeach
                     </select>
                 </div>
+
+
 
 
                 <div class="form-group">
