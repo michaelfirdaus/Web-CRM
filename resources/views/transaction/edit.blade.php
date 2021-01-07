@@ -44,7 +44,7 @@
                         @if($cp->id == $transaction->coach_program_id)
                             <option selected value="{{ $cp->id }}"> Batch {{$cp->date}} | {{ $cp->program->name }} </option> 
                         @else
-                            <option value="{{ $cp->id }}"> Batch {{$cp->date}} |  {{ $cp->program_id }} </option> 
+                            <option value="{{ $cp->id }}"> Batch {{$cp->date}} | {{ $cp->program->name }}} </option> 
                         @endif
                     @endforeach
                     </select>

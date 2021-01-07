@@ -19,7 +19,7 @@ class CoachProgram extends Pivot
     }
 
     public function transaction(){
-        return $this->belongsto('App\Transaction');
+        return $this->belongsTo('App\Transaction', 'id', 'transaction_id');
     }
 
 }

@@ -69,108 +69,107 @@
                 <tbody>
                     @if($transactions->count() > 0)
                         @foreach ($transactions as $transaction)
-                            @foreach($coachprograms as $cp)    
-                                <tr>
-                                    <td>
-                                        {{ $transaction->created_at }}
-                                    </td>
-                                    <td>
-                                        {{ $transaction->participant->name }}
-                                    </td>
-                                    <td>
-                                        {{ $transaction->salesperson->name }}
-                                    </td>
-                                    <td>
-                                        {{ $cp->program->name }}
-                                    </td>
-                                    <td class="text-center">
-                                        {{ $cp->date }}
-                                    </td>
-                                    <td>
-                                        @currency( $transaction->price )
-                                    </td>
-                                    <td>
-                                        @currency( $transaction->firsttrans )
-                                    </td>
-                                    <td>
-                                        @currency( $transaction->secondtrans )
-                                    </td>
-                                    <td>
-                                        @currency( $transaction->cashback )
-                                    </td>
-                                    <td>
-                                        {{ $transaction->rating }}
-                                    </td>
-                                    <td>
-                                        {{ $transaction->rating_text }}
-                                    </td>
-                                    <td class="text-center">
-                                        @if($transaction->recoaching == 0)
-                                            Tidak
-                                        @else
-                                            Ya
-                                        @endif
-                                    </td>
-                                    <td class="text-center">
-                                        @if($transaction->price == $transaction->firsttrans + $transaction->secondtrans)
-                                            Lunas
-                                        @else
-                                            Belum Lunas
-                                        @endif
-                                    </td>
-                                    <td>
-                                        {{ $transaction->note }}
-                                    </td>
-                                    <td class="text-center">
-                                        @if($transaction->result == 0)
-                                        <a href="{{ route('resultbyid.create', ['id' => $transaction->id]) }}" class="btn btn-xs btn-success">
-                                            <span class="fas fa-plus"></span>
-                                        </a>
-                                        @else
-                                        <a href="{{ route('resultbyid', ['id' => $transaction->id]) }}" class="btn btn-xs btn-success">
-                                            <span class="fas fa-address-book"></span>
-                                        </a>
-                                        @endif
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="{{ route('transaction.edit', ['id' => $transaction->id]) }}" class="btn btn-xs btn-info">
-                                            <span class="fas fa-pencil-alt"></span>
-                                        </a>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-xs btn-danger"  data-toggle="modal" data-target="#modal-default">
-                                            <span class="fas fa-trash-alt"></span>
-                                        </a>
-                                    </td>
-    
-                                    <div class="modal fade" id="modal-default">
-                                        <div class="modal-dialog">
-                                          <div class="modal-content">
-                                            <div class="modal-header">
-                                              <h4 class="modal-title">Konfirmasi</h4>
-                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                              </button>
-                                            </div>
-                                            <div class="modal-body">
-                                              <p>Yakin Untuk Menghapus Item Ini?</p>
-                                              <p class="text-bold">PERINGATAN! Data yang Sudah Dihapus Tidak Dapat Dikembalikan</p>
-                                            </div>
-                                            <div class="modal-footer justify-content-between">
-                                              <button type="button" class="btn btn-success" data-dismiss="modal">
-                                                  <span class="fas fa-times mr-1"></span>
-                                                Batalkan
-                                              </button>
-                                              <a href="{{ route('transaction.delete', ['id' => $transaction->id]) }}" class="btn btn btn-danger">
-                                                <span class="fas fa-check mr-1"></span>
-                                                Hapus
-                                              </a>
-                                            </div>
-                                          </div>
+                            <tr>
+                                <td>
+                                    {{ $transaction->created_at }}
+                                </td>
+                                <td>
+                                    {{ $transaction->participant->name }}
+                                </td>
+                                <td>
+                                    {{ $transaction->salesperson->name }}
+                                </td>
+                                <td>
+                                    {{ $transaction->coachprogram->program->name }}
+                                </td>
+                                <td class="text-center">
+                                    {{ $transaction->coachprogram->date }}
+                                </td>
+                        
+                                <td>
+                                    @currency( $transaction->price )
+                                </td>
+                                <td>
+                                    @currency( $transaction->firsttrans )
+                                </td>
+                                <td>
+                                    @currency( $transaction->secondtrans )
+                                </td>
+                                <td>
+                                    @currency( $transaction->cashback )
+                                </td>
+                                <td>
+                                    {{ $transaction->rating }}
+                                </td>
+                                <td>
+                                    {{ $transaction->rating_text }}
+                                </td>
+                                <td class="text-center">
+                                    @if($transaction->recoaching == 0)
+                                        Tidak
+                                    @else
+                                        Ya
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    @if($transaction->price == $transaction->firsttrans + $transaction->secondtrans)
+                                        Lunas
+                                    @else
+                                        Belum Lunas
+                                    @endif
+                                </td>
+                                <td>
+                                    {{ $transaction->note }}
+                                </td>
+                                <td class="text-center">
+                                    @if($transaction->result == 0)
+                                    <a href="{{ route('resultbyid.create', ['id' => $transaction->id]) }}" class="btn btn-xs btn-success">
+                                        <span class="fas fa-plus"></span>
+                                    </a>
+                                    @else
+                                    <a href="{{ route('resultbyid', ['id' => $transaction->id]) }}" class="btn btn-xs btn-success">
+                                        <span class="fas fa-address-book"></span>
+                                    </a>
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ route('transaction.edit', ['id' => $transaction->id]) }}" class="btn btn-xs btn-info">
+                                        <span class="fas fa-pencil-alt"></span>
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="" class="btn btn-xs btn-danger"  data-toggle="modal" data-target="#modal-default">
+                                        <span class="fas fa-trash-alt"></span>
+                                    </a>
+                                </td>
+
+                                <div class="modal fade" id="modal-default">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Konfirmasi</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Yakin Untuk Menghapus Item Ini?</p>
+                                            <p class="text-bold">PERINGATAN! Data yang Sudah Dihapus Tidak Dapat Dikembalikan</p>
+                                        </div>
+                                        <div class="modal-footer justify-content-between">
+                                            <button type="button" class="btn btn-success" data-dismiss="modal">
+                                                <span class="fas fa-times mr-1"></span>
+                                            Batalkan
+                                            </button>
+                                            <a href="{{ route('transaction.delete', ['id' => $transaction->id]) }}" class="btn btn btn-danger">
+                                            <span class="fas fa-check mr-1"></span>
+                                            Hapus
+                                            </a>
+                                        </div>
                                         </div>
                                     </div>
-                                </tr>
-                            @endforeach
+                                </div>
+                            </tr>
                         @endforeach
                     @else
                         <tr>

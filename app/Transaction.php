@@ -15,7 +15,7 @@ class Transaction extends Model
     }
 
     public function coachprogram(){
-        return $this->hasOne('App\CoachProgram');
+        return $this->hasOne('App\CoachProgram', 'id');
     }
 
     public function result(){
