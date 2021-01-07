@@ -8,6 +8,9 @@ use App\Transaction;
 use App\CoachProgram;
 use App\Participant;
 use App\Salesperson;
+use App\Program;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Session;
 
 class TransactionController extends Controller
@@ -40,7 +43,8 @@ class TransactionController extends Controller
     {
         
         $participants = Participant::all();
-        $coachprograms = CoachProgram::with('program')->get();
+        $date = Carbon::today()->subDays(7);
+        $coachprograms = CoachProgram::with('program')->where('date', '>=', $date)->get();
         $salespersons = Salesperson::all();
         if($participants->count() == 0 || $coachprograms->count() == 0 || $salespersons->count() == 0){
             Session::flash('info', 'Tidak Dapat Menambahkan Transaksi karena Peserta/Jadwal Kelas/Sales Tidak Terdaftar');
@@ -110,7 +114,8 @@ class TransactionController extends Controller
     public function edit($id)
     {
         $transaction = Transaction::find($id);
-        $coachprograms = CoachProgram::all();
+        $date = Carbon::today()->subDays(7);
+        $coachprograms = CoachProgram::with('program')->where('date', '>=', $date)->get();
         $participants = Participant::all();
         $salespersons = Salesperson::all();
 

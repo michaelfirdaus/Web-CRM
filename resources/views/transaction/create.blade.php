@@ -36,7 +36,7 @@
                     <select name="program" id="program" class="form-control select2" style="width: 300px;">
                     <option value="" selected disabled hidden> - Pilih Program - </option>
                     @foreach($coachprograms as $cp)
-                        <option value="{{ $cp->id }}"> {{ $cp->date }} - {{$cp->program->name}} </option> 
+                        <option value="{{ $cp->id }}"> {{ $cp->date }} - {{ $cp->program->name }} </option> 
                     @endforeach
                     </select>
                 </div>
