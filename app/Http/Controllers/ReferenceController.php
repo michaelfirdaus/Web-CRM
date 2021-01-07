@@ -17,7 +17,7 @@ class ReferenceController extends Controller
      */
     public function index($id)
     {
-        $references = Reference::where('participant_id', $id)->with('participant')->get();
+        $references = Reference::where('participant_id', $id)->get();
         $currentparticipant = Participant::where('id', $id)->first();
 
         return view('reference.index', ['references'             => $references, 
