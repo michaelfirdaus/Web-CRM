@@ -4,8 +4,6 @@
 
 @section('content')
 
-@include('includes.errors')
-
     <div class="card"> 
         <div class="card-body">
             <p class="text-danger text-bold">* : Data diperlukan.</p>
@@ -22,6 +20,9 @@
                         @endif
                     @endforeach
                     </select>
+                    @if( $errors->has('program_id') )
+                        <div class="text-danger">{{ $errors->first('program_id') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">

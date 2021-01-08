@@ -60,13 +60,22 @@ class CoachProgramController extends Controller
     public function store(Request $request)
     {
 
-        $this->validate($request, [
+        $rules = [
             'program' => 'required',
             'coach'   => 'required',
-            'date'    => 'required',    
-        ]);
+            'date'    => 'required|date',
+        ];
 
-        DB::table('coach_program')->insert([
+        $customMessages = [
+            'program.required'         => 'Nama Program harus diisi.',
+            'coach.required'           => 'Nama Coach harus diisi.',
+            'date.required'            => 'Tanggal Batch harus diisi.',
+            'date.date'                => 'Tanggal Batch harus berupa tanggal.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
+        $coachprogram = CoachProgram::create([
             'coach_id'      => $request->coach,
             'program_id'    => $request->program,
             'date'          => $request->date,
@@ -122,12 +131,21 @@ class CoachProgramController extends Controller
     {
         $coachprogram = CoachProgram::find($id);
 
-        $this->validate($request, [
+        
+        $rules = [
             'program' => 'required',
             'coach'   => 'required',
-            'branch'  => 'required',
-            'date'    => 'required',
-        ]);
+            'date'    => 'required|date',
+        ];
+
+        $customMessages = [
+            'program.required'         => 'Nama Program harus diisi.',
+            'coach.required'           => 'Nama Coach harus diisi.',
+            'date.required'            => 'Tanggal Batch harus diisi.',
+            'date.date'                => 'Tanggal Batch harus berupa tanggal.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         $coachprogram->id           = $request->id;
         $coachprogram->coach_id     = $request->coach;

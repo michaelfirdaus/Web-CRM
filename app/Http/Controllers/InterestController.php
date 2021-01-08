@@ -51,9 +51,15 @@ class InterestController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'program_id'    => 'required',
-        ]);
+        $rules = [
+            'program_id' => 'required',
+        ];
+
+        $customMessages = [
+            'program_id.required' => 'Minat Program harus diisi.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         $interest = Interest::create([
             'participant_id'    => $request->id,
@@ -103,9 +109,15 @@ class InterestController extends Controller
     {
         $interest = Interest::find($id);
 
-        $this->validate($request, [
-            'program_id'    => 'required',
-        ]);
+        $rules = [
+            'program_id' => 'required',
+        ];
+
+        $customMessages = [
+            'program_id.required' => 'Minat Program harus diisi.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         $interest->id         = $request->id;
         $interest->program_id = $request->program_id; 

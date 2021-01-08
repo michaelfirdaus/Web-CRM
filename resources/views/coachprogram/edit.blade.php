@@ -4,8 +4,6 @@
 
 @section('content')
 
-@include('includes.errors')
-
     <div class="card"> 
         <div class="card-body">
             <p class="text-danger text-bold">* : Data diperlukan.</p>
@@ -22,6 +20,9 @@
                             @endif
                         @endforeach
                     </select>
+                    @if( $errors->has('program') )
+                        <div class="text-danger">{{ $errors->first('program') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
@@ -35,11 +36,17 @@
                             @endif 
                         @endforeach
                     </select>
+                    @if( $errors->has('coach') )
+                        <div class="text-danger">{{ $errors->first('coach') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="date">Tanggal Batch <span class="text-danger">*</span></label>
                     <input type="date" id="date" name="date" value="{{ $coachprogram->date }}">
+                    @if( $errors->has('date') )
+                        <div class="text-danger">{{ $errors->first('date') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
@@ -53,6 +60,9 @@
                             @endif 
                         @endforeach
                     </select>
+                    @if( $errors->has('branch') )
+                        <div class="text-danger">{{ $errors->first('branch') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
