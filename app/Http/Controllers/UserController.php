@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Validator;
 use App\User;
 use Session;
 
@@ -40,12 +41,29 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name'      => 'required',
-            'username'  => 'required',
-            'password'  => 'required',
-        ]);
 
+        Validator::extend('without_spaces', function($attr, $value){
+            return preg_match('/^\S*$/u', $value);
+        });
+ 
+        $rules = [
+            'name'            => 'required',
+            'username'        => 'required|without_spaces|unique:username',
+            'password'        => 'required',
+            'confirmpassword' => 'required',
+        ];
+
+        $customMessages = [
+            'name.required'            => 'Nama harus diisi.',
+            'username.required'        => 'Username harus diisi.',
+            'password.required'        => 'Password harus diisi.',
+            'confirmpassword.required' => 'Konfirmasi Password harus diisi.',
+            'username.without_spaces'  => 'Username tidak boleh mengandung spasi.',
+            'username.unique'          => 'Username sudah terpakai, silahkan coba lagi.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+            
         $user = User::create([
             'name'      => $request->name,
             'username'  => $request->username,
@@ -90,10 +108,18 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'username' => 'required',
-            'name' => 'required',
-        ]);
+        $rules = [
+            'name'            => 'required',
+            'username'        => 'required|without_spaces',
+        ];
+
+        $customMessages = [
+            'name.required'            => 'Nama harus diisi.',
+            'username.required'        => 'Username harus diisi.',
+            'username.without_spaces'  => 'Username tidak boleh mengandung spasi.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         $user = User::find($id);
 

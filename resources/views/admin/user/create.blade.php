@@ -4,8 +4,6 @@
 
 @section('content')
 
-@include('includes.errors')
-
     <div class="card">
         <div class="card-header text-danger text-bold">Informasi Penting</div>
         <div class="card-body text-bold">
@@ -21,21 +19,33 @@
                 <div class="form-group">
                     <label for="name">Nama User <span class="text-danger">*</span></label>
                     <input type="text" name="name" class="form-control" placeholder="Contoh: Michael" value="{{ old('name') }}">
+                    @if( $errors->has('name') )
+                        <div class="text-danger">{{ $errors->first('name') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="username">Username (Untuk Login) <span class="text-danger">*</span></label>
                     <input type="text" name="username" class="form-control" placeholder="Contoh: michael" value="{{ old('username') }}">
+                    @if( $errors->has('username') )
+                        <div class="text-danger">{{ $errors->first('username') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="password">Password <span class="text-danger">*</span></label>
                     <input name="password" type="password" placeholder="Password" id="password" class="form-control">
+                    @if( $errors->has('password') )
+                        <div class="text-danger">{{ $errors->first('password') }}</div>
+                    @endif
                 </div>
                 
                 <div class="form-group">
                     <label for="confirmpassword">Konfirmasi Password <span class="text-danger">*</span></label>
                     <input name="confirmpassword" type="password" placeholder="Konfirmasi Ubah Password" id="confirm_password" class="form-control">
+                    @if( $errors->has('confirmpassword') )
+                        <div class="text-danger">{{ $errors->first('confirmpassword') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
