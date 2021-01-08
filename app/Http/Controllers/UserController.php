@@ -157,10 +157,10 @@ class UserController extends Controller
 
         if($user->admin == 0){
             $user->admin = 1;
-            Session::flash('success', 'Berhasil Menjadikan Admin');
+            Session::flash('success', 'Berhasil Menjadikan ' .$user->name. ' sebagai Admin');
         }else{
             $user->admin = 0;
-            Session::flash('success', 'Berhasil Menjadikan User');
+            Session::flash('success', 'Berhasil Menjadikan ' .$user->name. ' sebagai User');
         }
 
         $user->save();
