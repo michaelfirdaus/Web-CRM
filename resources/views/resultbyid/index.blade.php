@@ -25,8 +25,12 @@
                     Tanggal Pengambilan Sertifikat Skill : {{ $result->skillcertificate_pickdate }} <br>
                     Nomor Sertifikat Kehadiran : {{ $result->attendancecertificate_number }} <br>
                     Tanggal Pengambilan Sertifikat Kehadiran : {{ $result->attendancecertificate_pickdate }} <br>
+                    @if($result->photo)
                     Bukti Foto <br>
                     <img src="{{ asset('uploads/photo/'.$result->photo) }}" class="img-responsive m-2" style="object-fit: cover" width="100%" height="100%">
+                    @else
+                    <div class="text-bold">Bukti Foto Belum di Upload.</div>
+                    @endif
 
                     <div class="text-center">
                         <a href="{{ route('resultbyid.edit', ['id' => $result->id]) }}" class="btn btn-md btn-info">

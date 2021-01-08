@@ -8,36 +8,33 @@
 
     <div class="card">
         <div class="card-body">
+            <p class="text-danger text-bold">* : Data diperlukan.</p>
             <form action="{{ route('resultbyid.store', ['id' => $currenttransaction]) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="score">Nilai Ujian</label>
-                    <input type="text" name="score" placeholder="" class="form-control" value={{ old('score') }}>
-                </div>
-
-                <div class="form-group">
-                    <label for="grade">Grade Ujian</label>
-                    <input type="text" name="grade" placeholder="" class="form-control" value={{ old('grade') }}>
+                    <label for="score">Nilai Ujian <span class="text-danger">*</span></label>
+                    <input type="text" name="score" class="form-control" placeholder="Contoh: 100" value={{ old('score') }}>
                 </div>
 
                 <div class="form-group">
                     <label for="jacket_size">Ukuran Jaket</label>
-                    <input type="text" name="jacket_size" placeholder="" class="form-control" value={{ old('jacket_size') }}>
+                    <input type="text" name="jacket_size" placeholder="Contoh: XL" class="form-control" value={{ old('jacket_size') }}>
                 </div>
 
                 <div class="form-group">
                     <label for="skillcertificate_number">Nomor Sertifikat Skill</label>
-                    <input type="text" name="skillcertificate_number" placeholder="" class="form-control" value={{ old('skillcertificate_number') }}>
+                    <input type="text" name="skillcertificate_number" placeholder="Contoh: 2021/CCNA/01-2222" class="form-control" value={{ old('skillcertificate_number') }}>
                 </div>
 
                 <div class="form-group">
                     <label for="skillcertificate_pickdate">Tanggal Pengambilan Sertifikat Skill</label>
                     <input type="date" name="skillcertificate_pickdate" placeholder="" class="form-control" value={{ old('skillcertificate_pickdate') }}>
                 </div>
+                 
 
                 <div class="form-group">
                     <label for="attendancecertificate_number">Nomor Sertifikat Kehadiran</label>
-                    <input type="text" name="attendancecertificate_number" placeholder="" class="form-control" value={{ old('attendancecertificate_number') }}>
+                    <input type="text" name="attendancecertificate_number" placeholder="Contoh: 2021/CCNA/01-2222" class="form-control" value={{ old('attendancecertificate_number') }}>
                 </div>
 
                 <div class="form-group">
@@ -46,8 +43,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="photo">Bukti Foto</label>
-                    <input type="file" name="photo" placeholder="" class="form-control">
+                    <label for="photo">Bukti Foto</label><br>
+                    <input type="file" name="photo" placeholder="">
                 </div>
 
                 <div class="form-group">

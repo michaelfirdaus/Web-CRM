@@ -8,35 +8,44 @@
 
     <div class="card">
         <div class="card-body">
+            <p class="text-danger text-bold">* : Data diperlukan.</p>
             <form action="{{ route('jobconnectorparticipant.store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="participant">Nama Peserta</label>
+                    <label for="participant">Nama Peserta <span class="text-danger">*</span></label>
                     <select name="participant" id="participant" class="form-control select2" style="width: 300px;">
                     <option value="" selected disabled hidden> - Pilih Peserta - </option>
                     @foreach($participants as $participant)
-                        <option value="{{ $participant->id }}"> {{ $participant->id }} - {{ $participant->name }} </option>
+                        @if( old('participant') )
+                            <option selected value="{{ $participant->id }}"> {{ $participant->id }} - {{ $participant->name }} </option>
+                        @else
+                            <option value="{{ $participant->id }}"> {{ $participant->id }} - {{ $participant->name }} </option>
+                        @endif
                     @endforeach
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="jobconnector">Perusahaan Rekanan</label>
+                    <label for="jobconnector">Perusahaan Rekanan <span class="text-danger">*</span></label>
                     <select name="jobconnector" id="jobconnector" class="form-control select2" style="width: 300px;">
                     <option value="" selected disabled hidden> - Pilih Perusahaan Rekanan - </option>
                     @foreach($jobconnectors as $jobconnector)
-                        <option value="{{ $jobconnector->id }}"> {{ $jobconnector->company_name }} </option>
+                        @if( old('jobconnector') )
+                            <option selected value="{{ $jobconnector->id }}"> {{ $jobconnector->company_name }} </option>
+                        @else
+                            <option value="{{ $jobconnector->id }}"> {{ $jobconnector->company_name }} </option>
+                        @endif
                     @endforeach
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="date">Tanggal Batch</label>
-                    <input type="date" id="date" name="date" value={{ old('date') }}>
+                    <label for="date">Tanggal Apply <span class="text-danger">*</span></label>
+                    <input type="date" id="date" name="date" value="{{ old('date') }}">
                 </div>
 
                 <div class="form-group">
-                    <label for="application_status">Status</label>
+                    <label for="application_status">Status <span class="text-danger">*</span></label>
                     <select name="application_status" id="application_status" class="form-control select2" style="width: 300px;">
                         <option value="1" selected> Sedang dalam Proses </option>
                         <option value="2"> Ditolak </option>

@@ -8,15 +8,11 @@
 
     <div class="card"> 
         <div class="card-body">
+            <p class="text-danger text-bold">* : Data diperlukan.</p>
             <form action="{{ route('program.update', ['id' => $program->id]) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="name">Nama Program</label>
-                    <input type="text" name="name" value="{{ $program->name }}" class="form-control">
-                </div>
-
-                <div class="form-group">
-                    <label for="programcategory">Kategori Program</label>
+                    <label for="programcategory">Kategori Program <span class="text-danger">*</span></label>
                     <select name="programcategory" id="programcategory" class="form-control select2" style="width: 300px;">
                         @foreach($programcategories as $p)
                             @if($program->programcategory_id == $p->id)
@@ -29,7 +25,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="branch_location">Lokasi Cabang</label>
+                    <label for="name">Nama Program <span class="text-danger">*</span></label>
+                    <input type="text" name="name" placeholder="Contoh: CCNA" value="{{ $program->name }}" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="branch_location">Lokasi Cabang <span class="text-danger">*</span></label>
                     <select name="branch_location" id="location" class="form-control select2" style="width: 300px;">
                         @foreach($branches as $branch)
                             @if($branch->id == $current_branch)

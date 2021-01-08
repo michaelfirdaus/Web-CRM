@@ -52,22 +52,22 @@
 
                 <div class="form-group">
                     <label for="price">Harga <span class="text-danger">*</span></label>
-                    <input type="text" name="price" value="{{ $transaction->price }}" placeholder="Contoh: 5000000" class="form-control">
+                    <input type="text" name="price" value="{{ $transaction->price }}" placeholder="Contoh: 5000000" class="form-control currency">
                 </div>
 
                 <div class="form-group">
                     <label for="firsttrans">DP Pertama <span class="text-danger">*</span></label>
-                    <input type="text" name="firsttrans" value="{{ $transaction->firsttrans }}" placeholder="Contoh: 2500000" class="form-control">
+                    <input type="text" name="firsttrans" value="{{ $transaction->firsttrans }}" placeholder="Contoh: 2500000" class="form-control currency">
                 </div>
 
                 <div class="form-group">
                     <label for="secondtrans">DP Kedua</label>
-                    <input type="text" name="secondtrans" value="{{ $transaction->secondtrans }}" placeholder="Contoh: 2500000" class="form-control">
+                    <input type="text" name="secondtrans" value="{{ $transaction->secondtrans }}" placeholder="Contoh: 2500000" class="form-control currency">
                 </div>
 
                 <div class="form-group">
                     <label for="cashback">Cashback</label>
-                    <input type="text" name="cashback" value="{{ $transaction->cashback }}" placeholder="Contoh: 50000" class="form-control">
+                    <input type="text" name="cashback" value="{{ $transaction->cashback }}" placeholder="Contoh: 50000" class="form-control currency">
                 </div>
 
                 <div class="form-group">
@@ -110,4 +110,22 @@
         </div>
     </div>
     
+@endsection
+
+@section('scripts')
+
+$('.currency').keyup(function(event) {
+
+    // skip for arrow keys
+    if(event.which >= 37 && event.which <= 40) return;
+  
+    // format number
+    $(this).val(function(index, value) {
+      return value
+      .replace(/\D/g, "")
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+      ;
+    });
+});
+
 @endsection

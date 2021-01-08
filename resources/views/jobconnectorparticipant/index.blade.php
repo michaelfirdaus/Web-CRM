@@ -48,7 +48,17 @@
                                         {{ $jobconnectorparticipant->date }}
                                     </td>
                                     <td>
-                                        {{ $jobconnectorparticipant->application_status }}
+                                        @if( $jobconnectorparticipant->application_status == 1 )
+                                            Sedang Dalam Proses
+                                        @elseif( $jobconnectorparticipant->application_status == 2 )
+                                            Ditolak
+                                        @elseif( $jobconnectorparticipant->application_status == 3 )
+                                            Diterima
+                                        @elseif( $jobconnectorparticipant->application_status == 4 )
+                                            Dibatalkan
+                                        @else
+                                            Lainnya
+                                        @endif
                                     </td>
                                     <td class="text-center">
                                         <a href="{{ route('jobconnectorparticipant.edit', ['id' => $jobconnectorparticipant->id]) }}" class="btn btn-xs btn-info">

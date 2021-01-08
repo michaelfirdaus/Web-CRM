@@ -46,8 +46,7 @@ class ResultByIdController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'score'    => 'required',
-            'grade'    => 'required',
+            'score'    => 'required|numeric|max:100|min:0',
         ]);
 
         if($request->hasFile('photo')){
@@ -59,10 +58,26 @@ class ResultByIdController extends Controller
             
             $image->move($path, $fullImage);
             
+            $s = $request->score;
+            $g;
+
+            if($s >= 85 && $s <= 100){
+                $g = 'A';
+            }
+            else if($s >= 75 && $s <= 84){
+                $g = 'B';
+            }
+            else if($s >= 65 && $s <= 74){
+                $g = 'C';
+            }
+            else if($s <= 64){
+                $g = 'Gagal';
+            }
+
             $result = Result::create([
                 'transaction_id'                 => $request->id,
-                'score'                          => $request->score,
-                'grade'                          => $request->grade,
+                'score'                          => $s,
+                'grade'                          => $g,
                 'jacket_size'                    => $request->jacket_size,
                 'skillcertificate_number'        => $request->skillcertificate_number,
                 'skillcertificate_pickdate'      => $request->skillcertificate_pickdate,
@@ -87,10 +102,27 @@ class ResultByIdController extends Controller
 
         }
         else{
+
+            $s = $request->score;
+            $g;
+
+            if($s >= 85 && $s <= 100){
+                $g = 'A';
+            }
+            else if($s >= 75 && $s <= 84){
+                $g = 'B';
+            }
+            else if($s >= 65 && $s <= 74){
+                $g = 'C';
+            }
+            else if($s <= 64){
+                $g = 'Gagal';
+            }
+
             $result = Result::create([
                 'transaction_id'                 => $request->id,
-                'score'                          => $request->score,
-                'grade'                          => $request->grade,
+                'score'                          => $s,
+                'grade'                          => $g,
                 'jacket_size'                    => $request->jacket_size,
                 'skillcertificate_number'        => $request->skillcertificate_number,
                 'skillcertificate_pickdate'      => $request->skillcertificate_pickdate,
@@ -151,7 +183,6 @@ class ResultByIdController extends Controller
 
         $this->validate($request, [
             'score'    => 'required',
-            'grade'    => 'required',
         ]);
 
         if($request->hasFile('photo')){
@@ -167,9 +198,25 @@ class ResultByIdController extends Controller
             $result->photo = $fullImage;
         }
 
+        $s = $request->score;
+        $g;
+
+        if($s >= 85 && $s <= 100){
+            $g = 'A';
+        }
+        else if($s >= 75 && $s <= 84){
+            $g = 'B';
+        }
+        else if($s >= 65 && $s <= 74){
+            $g = 'C';
+        }
+        else if($s <= 64){
+            $g = 'Gagal';
+        }
+
         $result->id                             = $request->id;
-        $result->score                          = $request->score;
-        $result->grade                          = $request->grade;
+        $result->score                          = $s;
+        $result->grade                          = $g;
         $result->jacket_size                    = $request->jacket_size;
         $result->skillcertificate_number        = $request->skillcertificate_number;
         $result->skillcertificate_pickdate      = $request->skillcertificate_pickdate;

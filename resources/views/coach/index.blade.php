@@ -92,7 +92,6 @@
                                       </div>
                                     </div>
                                   </div>
-
                             </tr>
                         @endforeach
                     @else

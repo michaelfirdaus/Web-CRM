@@ -76,7 +76,11 @@
                     <select name="branch_id" id="branch_id" class="form-control select2" style="width: 300px;">
                         <option value="" selected disabled hidden> - Pilih Lokasi Pendaftaran - </option>
                     @foreach($branches as $branch)
-                        <option value="{{ $branch->id }}"> {{ $branch->name }} - {{$branch->code}} </option> 
+                        @if( old('branch_id') )
+                            <option selected value="{{ $branch->id }}"> {{$branch->code}} - {{ $branch->name }} </option>
+                        @else
+                            <option value="{{ $branch->id }}"> {{$branch->code}} - {{ $branch->name }} </option> 
+                        @endif
                     @endforeach
                     </select>
                 </div>
@@ -86,7 +90,11 @@
                     <select name="knowcn_id" id="knowcn_id" class="form-control select2" style="width: 300px;">
                     <option value="" selected disabled hidden> - Pilih Kanal CN - </option>
                     @foreach($knowcns as $knowcn)
-                        <option value="{{ $knowcn->id }}"> {{ $knowcn->name }} </option>
+                        @if( old('knowcn_id') )
+                            <option selected value="{{ $knowcn->id }}"> {{ $knowcn->name }} </option>
+                        @else
+                            <option value="{{ $knowcn->id }}"> {{ $knowcn->name }} </option>
+                        @endif
                     @endforeach
                     </select>
                 </div>
@@ -96,7 +104,11 @@
                     <select name="profession_id" id="profession_id" class="form-control select2" style="width: 300px;">
                     <option value="" selected disabled hidden> - Pilih Profesi - </option>
                     @foreach($professions as $profession)
-                        <option value="{{ $profession->id }}"> {{ $profession->name }} </option>
+                        @if( old('profession_id') )
+                            <option selected value="{{ $profession->id }}"> {{ $profession->name }} </option>
+                        @else
+                            <option value="{{ $profession->id }}"> {{ $profession->name }} </option>
+                        @endif
                     @endforeach
                     </select>
                 </div>

@@ -8,11 +8,12 @@
 
     <div class="card">
         <div class="card-body">
+            <p class="text-danger text-bold">* : Data diperlukan.</p>
             <form action="{{ route('salesperson.store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="name">Nama Sales</label>
-                    <input type="text" name="name" class="form-control" value={{ old('name') }}>
+                    <label for="name">Nama Sales <span class="text-danger">*</span></label>
+                    <input type="text" name="name" class="form-control" placeholder="Contoh: Michael" value="{{ old('name') }}">
                 </div>
 
                 <div class="form-group">

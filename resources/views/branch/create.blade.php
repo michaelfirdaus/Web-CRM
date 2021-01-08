@@ -8,16 +8,17 @@
 
     <div class="card">
         <div class="card-body">
+            <p class="text-danger text-bold">* : Data diperlukan.</p>
             <form action="{{ route('branch.store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="name">Nama Cabang</label>
-                    <input type="text" name="name" class="form-control" value={{ old('name') }}>
+                    <label for="name">Nama Cabang <span class="text-danger">*</span></label>
+                    <input type="text" name="name" class="form-control" placeholder="Contoh: Bandung" value="{{ old('name') }}">
                 </div>
 
                 <div class="form-group">
-                    <label for="code">Kode Cabang</label>
-                    <input type="text" name="code" class="form-control" value={{ old('code') }}>
+                    <label for="code">Kode Cabang <span class="text-danger">*</span></label>
+                    <input type="text" name="code" class="form-control" placeholder="Contoh: 1" value="{{ old('code') }}">
                 </div>
 
                 <div class="form-group">

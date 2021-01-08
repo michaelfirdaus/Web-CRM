@@ -8,10 +8,11 @@
 
     <div class="card"> 
         <div class="card-body">
+            <p class="text-danger text-bold">* : Data diperlukan.</p>
             <form action="{{ route('jobconnectorparticipant.update', ['id' => $jobconnectorparticipant->id]) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="participant">Nama Peserta</label>
+                    <label for="participant">Nama Peserta <span class="text-danger">*</span></label>
                     <select name="participant" id="participant" class="form-control select2" style="width: 300px;">
                     <option value="" selected disabled hidden> - Pilih Peserta - </option>
                     @foreach($participants as $participant)
@@ -25,26 +26,26 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="jobconnector">Perusahaan Rekanan</label>
+                    <label for="jobconnector">Perusahaan Rekanan <span class="text-danger">*</span></label>
                     <select name="jobconnector" id="jobconnector" class="form-control select2" style="width: 300px;">
                     <option value="" selected disabled hidden> - Pilih Perusahaan Rekanan - </option>
                     @foreach($jobconnectors as $jobconnector)
                         @if($jobconnectorparticipant->jobconnector_id == $jobconnector->id)
                             <option value="{{ $jobconnector->id }}" selected> {{ $jobconnector->company_name }} </option>
                         @else
-                            <option value="{{ $jobconnector->id }}" selected> {{ $jobconnector->company_name }} </option>
+                            <option value="{{ $jobconnector->id }}"> {{ $jobconnector->company_name }} </option>
                         @endif
                     @endforeach
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="date">Tanggal Batch</label>
+                    <label for="date">Tanggal Batch <span class="text-danger">*</span></label>
                     <input type="date" id="date" name="date" value="{{ $jobconnectorparticipant->date }}">
                 </div>
 
                 <div class="form-group">
-                    <label for="application_status">Status</label>
+                    <label for="application_status">Status <span class="text-danger">*</span></label>
                     <select name="application_status" id="application_status" class="form-control select2" style="width: 300px;">
                         @if($jobconnectorparticipant->application_status == 1)
                         <option value="1" selected> Sedang dalam Proses </option>
@@ -52,72 +53,31 @@
                         <option value="3"> Diterima </option>
                         <option value="4"> Dibatalkan </option>
                         <option value="5"> Lainnya </option>
-                            @if($jobconnectorparticipant->application_status == 2)
-                            <option value="1" selected> Sedang dalam Proses </option>
-                            <option value="2"> Ditolak </option>
+                        @elseif($jobconnectorparticipant->application_status == 2)
+                            <option value="1"> Sedang dalam Proses </option>
+                            <option value="2" selected> Ditolak </option>
                             <option value="3"> Diterima </option>
                             <option value="4"> Dibatalkan </option>
                             <option value="5"> Lainnya </option>
-                                @if($jobconnectorparticipant->application_status == 3)
-                                <option value="1" selected> Sedang dalam Proses </option>
-                                <option value="2"> Ditolak </option>
-                                <option value="3"> Diterima </option>
-                                <option value="4"> Dibatalkan </option>
-                                <option value="5"> Lainnya </option>
-                                    @if($jobconnectorparticipant->application_status == 4)
-                                    <option value="1" selected> Sedang dalam Proses </option>
-                                    <option value="2"> Ditolak </option>
-                                    <option value="3"> Diterima </option>
-                                    <option value="4"> Dibatalkan </option>
-                                    <option value="5"> Lainnya </option>
-                                        @if($jobconnectorparticipant->application_status == 5)
-                                        <option value="1" selected> Sedang dalam Proses </option>
-                                        <option value="2"> Ditolak </option>
-                                        <option value="3"> Diterima </option>
-                                        <option value="4"> Dibatalkan </option>
-                                        <option value="5"> Lainnya </option>
-                                        @endif
-                                    @endif
-                                @endif
-                            @endif
+                        @elseif($jobconnectorparticipant->application_status == 3)
+                            <option value="1"> Sedang dalam Proses </option>
+                            <option value="2"> Ditolak </option>
+                            <option value="3" selected> Diterima </option>
+                            <option value="4"> Dibatalkan </option>
+                            <option value="5"> Lainnya </option>
+                        @elseif($jobconnectorparticipant->application_status == 4)
+                            <option value="1"> Sedang dalam Proses </option>
+                            <option value="2"> Ditolak </option>
+                            <option value="3"> Diterima </option>
+                            <option value="4" selected> Dibatalkan </option>
+                            <option value="5"> Lainnya </option>
+                        @elseif($jobconnectorparticipant->application_status == 5)
+                            <option value="1"> Sedang dalam Proses </option>
+                            <option value="2"> Ditolak </option>
+                            <option value="3"> Diterima </option>
+                            <option value="4"> Dibatalkan </option>
+                            <option value="5" selected> Lainnya </option>
                         @endif
-
-                        {{-- @if($jobconnectorparticipant->application_status == 2)
-                        <option value="2" selected> Ditolak </option>
-                        @else
-                        <option value="1" selected> Sedang dalam Proses </option>
-                        <option value="3"> Diterima </option>
-                        <option value="4"> Dibatalkan </option>
-                        <option value="5"> Lainnya </option>
-                        @endif
-
-                        @if($jobconnectorparticipant->application_status == 3)
-                        <option value="3" selected> Diterima </option>
-                        @else
-                        <option value="1"> Sedang dalam Proses </option>
-                        <option value="2"> Ditolak </option>
-                        <option value="4"> Dibatalkan </option>
-                        <option value="5"> Lainnya </option>
-                        @endif
-
-                        @if($jobconnectorparticipant->application_status == 4)
-                        <option value="4" selected> Dibatalkan </option>
-                        @else
-                        <option value="1" selected> Sedang dalam Proses </option>
-                        <option value="2"> Ditolak </option>
-                        <option value="3"> Diterima </option>
-                        <option value="5"> Lainnya </option>
-                        @endif
-
-                        @if($jobconnectorparticipant->application_status == 1)
-                        <option value="5" selected> Lainnya </option>
-                        @else
-                        <option value="1"> Sedang dalam Proses </option>
-                        <option value="2"> Ditolak </option>
-                        <option value="3"> Diterima </option>
-                        <option value="4"> Dibatalkan </option>
-                        @endif --}}
-
                     </select>
                 </div>
 

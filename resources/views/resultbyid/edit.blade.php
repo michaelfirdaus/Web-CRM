@@ -16,11 +16,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="grade">Grade Ujian</label>
-                    <input type="text" name="grade" value="{{ $result->grade }}" class="form-control">
-                </div>
-
-                <div class="form-group">
                     <label for="jacket_size">Ukuran Jaket</label>
                     <input type="text" name="jacket_size" value="{{ $result->jacket_size }}" class="form-control">
                 </div>

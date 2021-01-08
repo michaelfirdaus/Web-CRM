@@ -7,26 +7,34 @@
 @include('includes.errors')
 
     <div class="card">
+        <div class="card-header text-danger text-bold">Informasi Penting</div>
+        <div class="card-body text-bold">
+            PASTIKAN username tidak mengandung spasi.      
+        </div>
+    </div>
+
+    <div class="card">
         <div class="card-body">
+            <p class="text-danger text-bold">* : Data diperlukan.</p>
             <form action="{{ route('user.store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="name">Nama User</label>
-                    <input type="text" name="name" class="form-control" value={{ old('name') }}>
+                    <label for="name">Nama User <span class="text-danger">*</span></label>
+                    <input type="text" name="name" class="form-control" placeholder="Contoh: Michael" value="{{ old('name') }}">
                 </div>
 
                 <div class="form-group">
-                    <label for="username">Username (Untuk Login)</label>
-                    <input type="text" name="username" class="form-control" value={{ old('username') }}>
+                    <label for="username">Username (Untuk Login) <span class="text-danger">*</span></label>
+                    <input type="text" name="username" class="form-control" placeholder="Contoh: michael" value="{{ old('username') }}">
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Password <span class="text-danger">*</span></label>
                     <input name="password" type="password" placeholder="Password" id="password" class="form-control">
                 </div>
                 
                 <div class="form-group">
-                    <label for="confirmpassword">Konfirmasi Password</label>
+                    <label for="confirmpassword">Konfirmasi Password <span class="text-danger">*</span></label>
                     <input name="confirmpassword" type="password" placeholder="Konfirmasi Ubah Password" id="confirm_password" class="form-control">
                 </div>
 

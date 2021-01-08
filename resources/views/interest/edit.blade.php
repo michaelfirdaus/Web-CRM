@@ -8,10 +8,11 @@
 
     <div class="card"> 
         <div class="card-body">
+            <p class="text-danger text-bold">* : Data diperlukan.</p>
             <form action="{{ route('interest.update', ['id' => $interest->id]) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="program_id">Minat Program</label>
+                    <label for="program_id">Minat Program <span class="text-danger">*</span></label>
                     <select name="program_id" id="program_id" class="form-control select2" style="width: 300px;">
                     @foreach($programs as $program)
                         @if($interest->program->id == $interest->program_id)

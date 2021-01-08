@@ -7,17 +7,25 @@
 @include('includes.errors')
 
     <div class="card">
+        <div class="card-header text-danger text-bold">Informasi Penting</div>
+        <div class="card-body text-bold">
+            PASTIKAN username tidak mengandung spasi.      
+        </div>
+    </div>
+
+    <div class="card">
         <div class="card-body">
+            <p class="text-danger text-bold">* : Data diperlukan.</p>
             <form action="{{ route('user.profile.update') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="username">Username (Untuk Login Akun)</label>
-                    <input type="text" name="username" class="form-control" value={{ $user->username }}>
+                    <label for="username">Username (Untuk Login Akun) <span class="text-danger">*</span></label>
+                    <input type="text" name="username" class="form-control" placeholder="Contoh: michael" value={{ $user->username }}>
                 </div>
 
                 <div class="form-group">
-                    <label for="name">Nama</label>
-                    <input type="text" name="name" class="form-control" value={{ $user->name }}>
+                    <label for="name">Nama <span class="text-danger">*</span></label>
+                    <input type="text" name="name" class="form-control" placeholder="Contoh: Michael Firdaus" value={{ $user->name }}>
                 </div>
 
                 <br>
