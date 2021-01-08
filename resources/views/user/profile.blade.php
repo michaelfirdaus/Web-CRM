@@ -8,8 +8,8 @@
 
     <div class="card">
         <div class="card-header text-danger text-bold">Informasi Penting</div>
-        <div class="card-body text-bold">
-            PASTIKAN username tidak mengandung spasi.      
+        <div class="card-body">
+            PASTIKAN Username tidak mengandung spasi.      
         </div>
     </div>
 

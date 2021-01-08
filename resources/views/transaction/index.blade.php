@@ -4,22 +4,22 @@
 
 @section('content')
 
+    <div class="card">
+        <div class="card-header text-danger text-bold">Informasi Penting</div>
+        <div class="card-body">
+            <ul>
+                <li>Apabila ikon nilai <span class="fas fa-plus"></span>, maka nilai belum diinput.</li>
+                <li>Apabila ikon nilai <span class="fas fa-address-book"></span>, maka nilai sudah diinput.</li>
+                <li class="text-bold">Transaksi dapat dibuat apabila jadwal kelas yang tersedia paling lambat 7 hari sebelum dari tanggal hari ini.</li> 
+            </ul>
+        </div>
+    </div>
+
     <div class="row">
         <div class="form-group ml-auto mr-2">
             <a href="{{ route('transaction.create') }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Buat Transaksi</a>
         </div>
     </div>
-
-        <div class="card">
-            <div class="card-header text-danger text-bold">Informasi Penting</div>
-            <div class="card-body">
-                <ul>
-                    <li>Apabila ikon nilai <span class="fas fa-plus"></span>, maka nilai belum diinput.</li>
-                    <li>Apabila ikon nilai <span class="fas fa-address-book"></span>, maka nilai sudah diinput.</li>
-                    <li class="text-bold">Transaksi dapat dibuat apabila jadwal kelas yang tersedia paling lambat 7 hari sebelum dari tanggal hari ini.</li> 
-                </ul>
-            </div>
-        </div>
 
     <div class="card">
         <div class="card-body">
