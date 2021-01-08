@@ -15,11 +15,11 @@ class CoachProgram extends Pivot
     }
 
     public function program(){
-        return $this->hasOne('App\Program', 'id');
+        return $this->hasOne('App\Program', 'id', 'program_id');
     }
 
     public function transaction(){
-        return $this->belongsto('App\Transaction');
+        return $this->belongsTo('App\Transaction', 'id', 'transaction_id');
     }
 
 }

@@ -12,7 +12,11 @@ class CoachTableSeeder extends Seeder
     public function run()
     {
         App\Coach::create([
-            'name' => 'Chandra'
+            'name' => 'Coach',
+            'email' => 'coach@coach.com',
+            'phonenumber'   => '628561111111',
+            'dob'   => '1970-01-01',
+            'address'   => 'An Address',
         ]);
     }
 }

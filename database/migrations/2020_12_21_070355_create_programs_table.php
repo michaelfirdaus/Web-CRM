@@ -16,6 +16,7 @@ class CreateProgramsTable extends Migration
         Schema::create('programs', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('branch_id');
+            $table->bigInteger('programcategory_id');
             $table->string('name');
             $table->timestamps();
         });

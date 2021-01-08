@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UserTableSeeder::class);
         $this->call(BranchTableSeeder::class);
+        $this->call(ProgramTableSeeder::class);
+        $this->call(ProgramcategoryTableSeeder::class);
         $this->call(JobconnectorTableSeeder::class);
         $this->call(KnowcnTableSeeder::class);
         $this->call(ProfessionTableSeeder::class);

@@ -17,7 +17,7 @@ class ReferenceController extends Controller
      */
     public function index($id)
     {
-        $references = Reference::where('participant_id', $id)->with('participant')->get();
+        $references = Reference::where('participant_id', $id)->get();
         $currentparticipant = Participant::where('id', $id)->first();
 
         return view('reference.index', ['references'             => $references, 
@@ -125,7 +125,7 @@ class ReferenceController extends Controller
 
         $reference->delete();
 
-        Session::flash('success', 'Berhasil Menghapus Program');
+        Session::flash('success', 'Berhasil Menghapus Referensi');
 
         return redirect()->back();
     }

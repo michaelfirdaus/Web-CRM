@@ -8,6 +8,8 @@ use App\Transaction;
 use App\CoachProgram;
 use App\Participant;
 use App\Salesperson;
+use App\Program;
+use Carbon\Carbon;
 use Session;
 
 class TransactionController extends Controller
@@ -19,7 +21,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::all();
+        $transactions = Transaction::with('coachprogram.program')->get();
         $participants = Participant::all();
         $coachprograms = CoachProgram::all();
         $salespersons = Salesperson::all();
@@ -40,7 +42,8 @@ class TransactionController extends Controller
     {
         
         $participants = Participant::all();
-        $coachprograms = CoachProgram::with('program')->get();
+        $date = Carbon::today()->subDays(7);
+        $coachprograms = CoachProgram::orderBy('date', 'DESC')->with('program')->where('date', '>=', $date)->get();
         $salespersons = Salesperson::all();
         if($participants->count() == 0 || $coachprograms->count() == 0 || $salespersons->count() == 0){
             Session::flash('info', 'Tidak Dapat Menambahkan Transaksi karena Peserta/Jadwal Kelas/Sales Tidak Terdaftar');
@@ -66,17 +69,23 @@ class TransactionController extends Controller
             'sales'             => 'required',
             'program'           => 'required',
             'price'             => 'required',
+            'firsttrans'        => 'required',
             'recoaching'        => 'required',
         ]);
+
+        $price = (int)str_replace(".", "", $request->price);
+        $firsttrans = (int)str_replace(".", "", $request->firsttrans);
+        $secondtrans = (int)str_replace(".", "", $request->secondtrans);
+        $cashback = (int)str_replace(".", "", $request->cashback);
 
         $transactions = Transaction::create([
             'participant_id'    => $request->participant,
             'salesperson_id'    => $request->sales,
             'coach_program_id'  => $request->program,
-            'price'             => $request->price,
-            'firsttrans'        => $request->firsttrans,
-            'secondtrans'       => $request->secondtrans,
-            'cashback'          => $request->cashback,
+            'price'             => $price,
+            'firsttrans'        => $firsttrans,
+            'secondtrans'       => $secondtrans,
+            'cashback'          => $cashback,
             'rating'            => $request->rating,
             'rating_text'       => $request->rating_text,
             'recoaching'        => $request->recoaching,
@@ -109,7 +118,8 @@ class TransactionController extends Controller
     public function edit($id)
     {
         $transaction = Transaction::find($id);
-        $coachprograms = CoachProgram::all();
+        $date = Carbon::today()->subDays(7);
+        $coachprograms = CoachProgram::with('program')->where('date', '>=', $date)->get();
         $participants = Participant::all();
         $salespersons = Salesperson::all();
 
@@ -136,21 +146,29 @@ class TransactionController extends Controller
             'participant'       => 'required',
             'sales'             => 'required',
             'program'           => 'required',
+            'firsttrans'        => 'required',
             'price'             => 'required',
             'recoaching'        => 'required',
         ]);
 
+        $price = (int)str_replace(".", "", $request->price);
+        $firsttrans = (int)str_replace(".", "", $request->firsttrans);
+        $secondtrans = (int)str_replace(".", "", $request->secondtrans);
+        $cashback = (int)str_replace(".", "", $request->cashback);
+
         $transaction->participant_id    = $request->participant;
         $transaction->salesperson_id    = $request->sales;
         $transaction->coach_program_id  = $request->program;
-        $transaction->price             = $request->price;
-        $transaction->firsttrans        = $request->firsttrans;
-        $transaction->secondtrans       = $request->secondtrans;
-        $transaction->cashback          = $request->cashback;
-        $transaction->rating            = $request->rating;
+        $transaction->price             = $price;
+        $transaction->firsttrans        = $firsttrans;
+        $transaction->secondtrans       = $secondtrans;
+        $transaction->cashback          = $cashback;
+        $transaction->rating            = $rating;
         $transaction->rating_text       = $request->rating_text;
         $transaction->recoaching        = $request->recoaching;
         $transaction->note              = $request->note;
+
+        $transaction->save();
         
         Session::flash('success', 'Berhasil Memperbaharui Transaksi');
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Program;
 use App\Branch;
+use App\Programcategory;
 use Session;
 
 class ProgramController extends Controller
@@ -17,7 +18,8 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $programs = Program::all();
+        $programs = Program::with('programcategory')->get();
+        $programcategories = Programcategory::all();
         $branches = Branch::all();
 
         return view('program.index')
@@ -33,13 +35,16 @@ class ProgramController extends Controller
     public function create()
     {
         $branches = Branch::all();
+        $programcategories = Programcategory::all();
 
-        if($branches->count() == 0){
-            Session::flash('info', 'Tidak Dapat Menambahkan Program karena Tidak Ada Cabang yang Terdaftar');
+        if($branches->count() == 0 || $programcategories->count() == 0){
+            Session::flash('info', 'Tidak Dapat Menambahkan Program karena Tidak Ada Cabang/Kategori Program yang Terdaftar');
             return redirect()->back();
         }
 
-        return view('program.create')->with('branches', $branches);
+        return view('program.create')
+               ->with('programcategories', $programcategories)
+               ->with('branches', $branches);
     }
 
     /**
@@ -53,11 +58,13 @@ class ProgramController extends Controller
         $this->validate($request, [
             'name'              => 'required|unique:programs',
             'branch_location'   => 'required',
+            'programcategory'   => 'required',
         ]);
 
         $programs = Program::create([
-            'name'          => $request->name,
-            'branch_id'     => $request->branch_location
+            'name'               => $request->name,
+            'branch_id'          => $request->branch_location,
+            'programcategory_id' => $request->programcategory,
         ]);
 
         Session::flash('success', 'Berhasil Menambahkan Program');
@@ -86,11 +93,13 @@ class ProgramController extends Controller
     {
         $program = Program::find($id);
         $branches = Branch::all();
+        $programcategories = Programcategory::all();
         $current_branch = $program->branch->id;
 
         return view('program.edit')
             ->with('program', $program)
             ->with('branches', $branches)
+            ->with('programcategories', $programcategories)
             ->with('current_branch', $current_branch);
     }
 
@@ -108,11 +117,13 @@ class ProgramController extends Controller
         $this->validate($request, [
             'name'              => 'required',
             'branch_location'   => 'required',
+            'programcategory'   => 'required',
         ]);
 
-        $program->id        = $request->id;
-        $program->name      = $request->name;
-        $program->branch_id = $request->branch_location;
+        $program->id                 = $request->id;
+        $program->name               = $request->name;
+        $program->branch_id          = $request->branch_location;
+        $program->programcategory_id = $request->programcategory;
 
         $program->save();
 

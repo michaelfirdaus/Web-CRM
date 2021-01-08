@@ -54,16 +54,24 @@
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
           <!-- Notifications Dropdown Menu -->
-          <li class="nav-item">
-            <a class="dropdown-item" href="{{ route('logout') }}"
-                onclick="event.preventDefault();
-                              document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
+          <li class="nav-item dropdown">
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+              {{ Auth::user()->name }}
             </a>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <div class="dropdown-item disabled">Halo, {{ Auth::user()->name }}!</div>
+              <a href="{{ route('user.profile') }}" class="dropdown-item">Profil Saya<a>
+              <a class="dropdown-item" href="{{ route('logout') }}"
+                  onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                  {{ __('Logout') }}
+              </a>
+
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                  @csrf
+              </form>
+            </div>
           </li>
         </ul>
       </nav>
@@ -86,7 +94,7 @@
               <img src="{{ asset('assets/logo-cn.png') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-              <a href="#" class="d-block">Admin</a>
+              <a href="#" class="d-block">{{ Auth::user()->name }}</a>
             </div>
           </div>
 
@@ -95,9 +103,11 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
               <!-- Add icons to the links using the .nav-icon class
                   with font-awesome or any other icon font library -->
+                  
+              <li class="nav-header">Data Utama</li>
 
               <li class="nav-item">
-                <a href="/" class="nav-link active">
+                <a href="/" class="nav-link @if(Request::segment(1) == 'participants') active @endif">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
                     Dashboard Peserta
@@ -125,7 +135,49 @@
                 </a>
               </li>
 
+              
+              <li class="nav-header">Data Kunci</li>
+              
+              <li class="nav-item">
+                <a href="{{route('branches')}}" class="nav-link">
+                  <i class="nav-icon fas fa-building"></i>
+                  <p>
+                    Cabang
+                  </p>
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="{{route('programcategories')}}" class="nav-link">
+                  <i class="nav-icon fas fa-list"></i>
+                  <p>
+                    Kategori Program
+                  </p>
+                </a>
+              </li>
 
+              <li class="nav-item">
+                <a href="{{route('programs')}}" class="nav-link">
+                  <i class="nav-icon fas fa-book"></i>
+                  <p>
+                    Program
+                  </p>
+                </a>
+              </li>
+              
+              
+              <li class="nav-item">
+                <a href="{{route('coachprograms')}}" class="nav-link">
+                  <i class="nav-icon fas fa-business-time"></i>
+                  <p>
+                    Jadwal Kelas
+                  </p>
+                </a>
+              </li>
+              
+              
+              <li class="nav-header">Data Pendukung</li>
+              
               <li class="nav-item">
                 <a href="{{ route('professions') }}" class="nav-link">
                   <i class="nav-icon fas fa-user-tie"></i>
@@ -175,37 +227,43 @@
                 </a>
               </li>
 
+              @if(Auth::user()->admin)
+
+              <li class="nav-header">Fitur Admin</li>
 
               <li class="nav-item">
-                <a href="{{route('branches')}}" class="nav-link">
-                  <i class="nav-icon fas fa-building"></i>
+                <a href="{{route('users')}}" class="nav-link">
+                  <i class="nav-icon fas fa-users-cog"></i>
                   <p>
-                    Cabang
+                    User
                   </p>
                 </a>
               </li>
 
+              @endif
+
+              <li class="nav-header">Pengaturan</li>
 
               <li class="nav-item">
-                <a href="{{route('programs')}}" class="nav-link">
-                  <i class="nav-icon fas fa-book"></i>
+                <a href="{{route('user.profile')}}" class="nav-link">
+                  <i class="nav-icon fas fa-user-circle"></i>
                   <p>
-                    Program
-                  </p>
-                </a>
-              </li>
-              
-
-              <li class="nav-item">
-                <a href="{{route('coachprograms')}}" class="nav-link">
-                  <i class="nav-icon fas fa-business-time"></i>
-                  <p>
-                    Jadwal Kelas
+                    Profil Saya
                   </p>
                 </a>
               </li>
 
-
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                    {{ __('Logout') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+              </li>
 
             </ul>
           </nav>
@@ -370,13 +428,30 @@
 <script src="{{ asset('adminLTE/plugins/select2/js/select2.full.min.js') }}"></script>
 {{-- Additional JS --}}
 
+
 <script>
+
+    let url = window.location;
+
+    $('ul.nav-sidebar a').filter(function() {
+        return this.href == url;
+    }).addClass('active');
+
+    $('ul.nav-treeview a').filter(function() {
+        return this.href == url;
+    }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');
+
+
     @if(Session::has('success'))
         toastr.success("{{ Session::get('success') }}")
     @endif
 
     @if(Session::has('info'))
         toastr.info("{{ Session::get('info') }}")
+    @endif
+
+    @if(Session::has('warning'))
+        toastr.warning("{{ Session::get('warning') }}")
     @endif
 
     $('#table').DataTable( {

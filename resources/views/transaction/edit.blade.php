@@ -8,10 +8,11 @@
 
     <div class="card">
         <div class="card-body">
+            <p class="text-danger text-bold">* : Data diperlukan.</p>
             <form action="{{ route('transaction.update', ['id' => $transaction->id]) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="participant">Nama Peserta</label>
+                    <label for="participant">Nama Peserta <span class="text-danger">*</span></label>
                     <select name="participant" id="participant" class="form-control select2" style="width: 300px;">
                     @foreach($participants as $participant)
                         @if($participant->id == $transaction->participant_id)
@@ -24,7 +25,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="sales">Nama Sales</label>
+                    <label for="sales">Nama Sales <span class="text-danger">*</span></label>
                     <select name="sales" id="sales" class="form-control select2" style="width: 300px;">
                     @foreach($salespersons as $salesperson)
                         @if($salesperson->id == $transaction->salesperson_id)
@@ -37,46 +38,46 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="program">Nama Program</label>
+                    <label for="program">Nama Program <span class="text-danger">*</span></label>
                     <select name="program" id="program" class="form-control select2" style="width: 300px;">
                     @foreach($coachprograms as $cp)
                         @if($cp->id == $transaction->coach_program_id)
-                            <option selected value="{{ $cp->id }}"> {{$cp->id}} - {{ $cp->program->name }} </option> 
+                            <option selected value="{{ $cp->id }}"> Batch {{$cp->date}} | {{ $cp->program->name }} </option> 
                         @else
-                            <option value="{{ $cp->id }}"> {{ $cp->program_id }} </option> 
+                            <option value="{{ $cp->id }}"> Batch {{$cp->date}} | {{ $cp->program->name }}} </option> 
                         @endif
                     @endforeach
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="price">Harga</label>
-                    <input type="text" name="price" value="{{ $transaction->price }}" placeholder="Cth : 628111011011" class="form-control">
+                    <label for="price">Harga <span class="text-danger">*</span></label>
+                    <input type="text" name="price" value="{{ $transaction->price }}" placeholder="Contoh: 5000000" class="form-control currency">
                 </div>
 
                 <div class="form-group">
-                    <label for="firsttrans">DP Pertama</label>
-                    <input type="text" name="firsttrans" value="{{ $transaction->firsttrans }}" class="form-control">
+                    <label for="firsttrans">DP Pertama <span class="text-danger">*</span></label>
+                    <input type="text" name="firsttrans" value="{{ $transaction->firsttrans }}" placeholder="Contoh: 2500000" class="form-control currency">
                 </div>
 
                 <div class="form-group">
                     <label for="secondtrans">DP Kedua</label>
-                    <input type="text" name="secondtrans" value="{{ $transaction->secondtrans }}" class="form-control">
+                    <input type="text" name="secondtrans" value="{{ $transaction->secondtrans }}" placeholder="Contoh: 2500000" class="form-control currency">
                 </div>
 
                 <div class="form-group">
                     <label for="cashback">Cashback</label>
-                    <input type="text" name="cashback" value="{{ $transaction->cashback }}" class="form-control">
+                    <input type="text" name="cashback" value="{{ $transaction->cashback }}" placeholder="Contoh: 50000" class="form-control currency">
                 </div>
 
                 <div class="form-group">
                     <label for="rating">Rating</label>
-                    <input type="text" name="rating" value="{{ $transaction->rating }}" class="form-control">
+                    <input type="text" name="rating" value="{{ $transaction->rating }}" placeholder="Contoh: 5" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="rating_text">Ulasan</label>
-                    <input type="text" name="rating_text" value="{{ $transaction->rating_text }}" class="form-control">
+                    <input type="text" name="rating_text" value="{{ $transaction->rating_text }}" placeholder="Contoh: Coachnya sangat berpengalaman" class="form-control">
                 </div>
 
                 <div class="form-group">
@@ -97,7 +98,7 @@
 
                 <div class="form-group">
                     <label for="note">Catatan</label>
-                    <input type="text" name="note" value="{{ $transaction->note }}" class="form-control">
+                    <input type="text" name="note" value="{{ $transaction->note }}" placeholder="Contoh: Peserta minta dikirimkan harga program CCNA terbaru." class="form-control">
                 </div>
 
                 <div class="form-group">
@@ -109,4 +110,22 @@
         </div>
     </div>
     
+@endsection
+
+@section('scripts')
+
+$('.currency').keyup(function(event) {
+
+    // skip for arrow keys
+    if(event.which >= 37 && event.which <= 40) return;
+  
+    // format number
+    $(this).val(function(index, value) {
+      return value
+      .replace(/\D/g, "")
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+      ;
+    });
+});
+
 @endsection

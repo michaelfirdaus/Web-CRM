@@ -20,11 +20,15 @@ class Program extends Model
         return $this->belongsTo('App\CoachProgram', 'program_id');
     }
 
+    public function programcategory(){
+        return $this->hasOne('App\Programcategory', 'id', 'programcategory_id');
+    }
+
     public function branch(){
         return $this->belongsTo('App\Branch');
     }
 
-    public function participant(){
-        return $this->hasOne('App\Participant');
+    public function interest(){
+        return $this->belongsTo('App\Interest');
     }
 }

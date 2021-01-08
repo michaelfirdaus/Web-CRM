@@ -38,10 +38,19 @@ class BranchController extends Controller
     public function store(Request $request)
     {
         //Validation to make sure name field should be filled and the category must be unique
-        $this->validate($request, [
+        $rules = [
             'name' => 'required',
-            'code' => 'required|unique:branches'
-        ]);
+            'code' => 'required|numeric|unique:branches',
+        ];
+
+        $customMessages = [
+            'name.required' => 'Nama Cabang harus diisi.',
+            'code.required' => 'Kode Cabang harus diisi.',
+            'code.unique'   => 'Kode Cabang sudah terdaftar, silahkan coba lagi.',
+            'code.numeric'  => 'Kode Cabang harus angka.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         $branch = new Branch;
 
@@ -92,6 +101,20 @@ class BranchController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $rules = [
+            'name' => 'required',
+            'code' => 'required|numeric|unique:branches',
+        ];
+
+        $customMessages = [
+            'name.required' => 'Nama Cabang harus diisi.',
+            'code.required' => 'Kode Cabang harus diisi.',
+            'code.unique'   => 'Kode Cabang sudah terdaftar, silahkan coba lagi.',
+            'code.numeric'  => 'Kode Cabang harus angka.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
         //Find category based on category ID
         $branch = Branch::find($id);
         

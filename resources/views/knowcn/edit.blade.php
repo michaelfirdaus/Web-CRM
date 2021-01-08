@@ -8,11 +8,12 @@
 
     <div class="card">
         <div class="card-body">
+            <p class="text-danger text-bold">* : Data diperlukan.</p>
             <form action="{{ route('knowcn.update', ['id' => $knowcn->id]) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="name">Nama Kanal</label>
-                    <input type="text" name="name" value="{{ $knowcn->name }}" class="form-control">
+                    <label for="name">Nama Kanal <span class="text-danger">*</span></label>
+                    <input type="text" name="name" placeholder="Contoh: Youtube" value="{{ $knowcn->name }}" class="form-control">
                 </div>
 
                 <div class="form-group">

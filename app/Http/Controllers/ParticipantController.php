@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Participant;
 use App\Branch;
-use App\Program;
 use App\Knowcn;
 use App\Profession;
 use App\Membernumber;
@@ -21,7 +20,7 @@ class ParticipantController extends Controller
      */
     public function index()
     {
-        $participants = Participant::with('branch', 'knowcn', 'program', 'profession')->get();
+        $participants = Participant::with('branch', 'knowcn', 'profession')->get();
 
         return view('participant.index')
             ->with('participants', $participants);
@@ -36,18 +35,16 @@ class ParticipantController extends Controller
     public function create()
     {
         $branches = Branch::all();
-        $programs = Program::all();
         $knowcns = Knowcn::all();
         $professions = Profession::all();
 
-        if($branches->count() == 0 || $programs->count() == 0){
-            Session::flash('info', 'Tidak Dapat Menambahkan Peserta karena Lokasi Kelas/Program Tidak Tersedia');
+        if($branches->count() == 0){
+            Session::flash('info', 'Tidak Dapat Menambahkan Peserta karena Lokasi Kelas Tidak Tersedia');
             return redirect()->back();
         }
 
         return view('participant.create')
             ->with('branches', $branches)
-            ->with('programs', $programs)
             ->with('knowcns', $knowcns)
             ->with('professions', $professions);
     }
@@ -69,7 +66,6 @@ class ParticipantController extends Controller
             'phonenumber'               => 'required',
             'address'                   => 'required',
             'email'                     => 'required|email',
-            'cv_link'                   => 'required|url',
             'emergencycontact_name'     => 'required',
             'emergencycontact_phone'    => 'required'   
         ]);
@@ -102,7 +98,6 @@ class ParticipantController extends Controller
             'id'                        => $membernum->lastnumber,
             'branch_id'                 => $request->branch_id,
             'knowcn_id'                 => $request->knowcn_id,
-            'program_id'                => $request->program_id,
             'profession_id'             => $request->profession_id,
             'name'                      => $request->name,
             'pob'                       => $request->pob,
@@ -143,13 +138,11 @@ class ParticipantController extends Controller
     {
         $participant = Participant::find($id);
         $branches = Branch::all();
-        $programs = Program::all();
         $knowcns = Knowcn::all();
         $professions = Profession::all();
 
         return view('participant.edit')
             ->with('branches', $branches)
-            ->with('programs', $programs)
             ->with('knowcns', $knowcns)
             ->with('participant', $participant)
             ->with('professions', $professions);
@@ -175,7 +168,6 @@ class ParticipantController extends Controller
             'phonenumber'               => 'required',
             'address'                   => 'required',
             'email'                     => 'required|email',
-            'cv_link'                   => 'required|url',
             'emergencycontact_name'     => 'required',
             'emergencycontact_phone'    => 'required'   
         ]);
@@ -190,7 +182,6 @@ class ParticipantController extends Controller
 
         $participant->branch_id                 = $request->branch_id;
         $participant->knowcn_id                 = $request->knowcn_id;
-        $participant->program_id                = $request->program_id;
         $participant->profession_id             = $request->profession_id;
         $participant->name                      = $request->name;
         $participant->pob                       = $request->pob;
