@@ -28,6 +28,43 @@ Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware' => 'auth'], function() {
 
+//Profession routes
+    Route::get('/users',[
+        'uses'  => 'UserController@index',
+        'as'    => 'users'
+    ]);
+
+    Route::get('/user/create',[
+        'uses'  => 'UserController@create',
+        'as'    => 'user.create'
+    ]);
+
+    Route::post('/ser/update/{id}',[
+        'uses'  => 'UserController@update',
+        'as'    => 'user.update'
+    ]);
+
+    Route::get('/user/edit/{id}',[
+        'uses' => 'UserController@edit',
+        'as'   => 'user.edit'
+    ]);
+
+    Route::post('/user/store',[
+        'uses'  => 'UserController@store',
+        'as'    => 'user.store'
+    ]);
+
+    Route::get('/user/delete/{id}',[
+        'uses' => 'UserController@destroy',
+        'as'   => 'user.delete'
+    ]);
+
+    Route::get('/userchangerole/{id}',[
+        'uses' => 'UserController@changerole',
+        'as'   => 'user.changerole'
+    ]);
+//
+
 //User (user profile) routes
     Route::get('user/profile', [
         'uses' => 'UserProfileController@index',

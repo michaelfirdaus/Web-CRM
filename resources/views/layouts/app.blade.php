@@ -225,6 +225,21 @@
                 </a>
               </li>
 
+              @if(Auth::user()->admin)
+
+              <li class="nav-header">Fitur Admin</li>
+
+              <li class="nav-item">
+                <a href="{{route('users')}}" class="nav-link">
+                  <i class="nav-icon fas fa-users-cog"></i>
+                  <p>
+                    User
+                  </p>
+                </a>
+              </li>
+
+              @endif
+
               <li class="nav-header">Pengaturan</li>
 
               <li class="nav-item">
@@ -431,6 +446,10 @@
 
     @if(Session::has('info'))
         toastr.info("{{ Session::get('info') }}")
+    @endif
+
+    @if(Session::has('warning'))
+        toastr.warning("{{ Session::get('warning') }}")
     @endif
 
     $('#table').DataTable( {

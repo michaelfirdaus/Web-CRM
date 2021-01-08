@@ -20,6 +20,12 @@
                     <input type="text" name="name" class="form-control" value={{ $user->name }}>
                 </div>
 
+                <br>
+                <hr>
+                <div class="text-danger text-bold">
+                    Apabila tidak perlu pengubahan password, silahkan kosongkan textbox dibawah ini.
+                </div>
+                <br>
                 <div class="form-group">
                     <label for="password">Ubah Password</label>
                     <input name="password" type="password" placeholder="Password" id="password" class="form-control">
@@ -43,15 +49,16 @@
 @endsection
 
 @section('scripts')
-    var password = document.getElementById("password")
-    , confirm_password = document.getElementById("confirm_password");
+
+    var password = document.getElementById("password"),
+    confirm_password = document.getElementById("confirm_password");
 
     function validatePassword(){
-    if(password.value != confirm_password.value) {
-        confirm_password.setCustomValidity("Password Tidak Sesuai");
-    } else {
-        confirm_password.setCustomValidity('');
-    }
+        if(password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Password Tidak Sesuai");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
     }
 
     password.onchange = validatePassword;
