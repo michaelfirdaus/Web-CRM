@@ -1,10 +1,8 @@
 @extends('layouts.app')
 
-@section('header') Perbaharui Program Kategori {{ $programcategory->name }} @endsection
+@section('header') Perbaharui Kategori Program {{ $programcategory->name }} @endsection
 
 @section('content')
-
-@include('includes.errors')
 
     <div class="card"> 
         <div class="card-body">
@@ -14,6 +12,9 @@
                 <div class="form-group">
                     <label for="name">Nama Kategori Program <span class="text-danger">*</span></label>
                     <input type="text" name="name" placeholder="Contoh: Advanced" value="{{ $programcategory->name }}" class="form-control">
+                    @if( $errors->has('name') )
+                        <div class="text-danger">{{ $errors->first('name') }}</div>
+                    @endif
                 </div>
 
 

@@ -57,18 +57,38 @@ class ParticipantController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+
+        $rules = [
             'branch_id'                 => 'required',
             'knowcn_id'                 => 'required',
             'name'                      => 'required',
             'pob'                       => 'required',
-            'dob'                       => 'required',
-            'phonenumber'               => 'required',
+            'dob'                       => 'required|date',
+            'phonenumber'               => 'required|numeric',
             'address'                   => 'required',
             'email'                     => 'required|email',
             'emergencycontact_name'     => 'required',
-            'emergencycontact_phone'    => 'required'   
-        ]);
+            'emergencycontact_phone'    => 'required|numeric'
+        ];
+
+        $customMessages = [
+            'branch_id.required'                => 'Lokasi Pendaftaran harus dipilih.',
+            'knowcn_id.required'                => 'Mengetahui Course-Net dari harus diisi.',
+            'name.required'                     => 'Nama Peserta harus diisi.',
+            'pob.required'                      => 'Tempat Lahir harus diisi.',
+            'dob.required'                      => 'Tanggal Lahir harus diisi.',
+            'dob.date'                          => 'Tanggal Lahir harus berupa tanggal.',
+            'phonenumber.required'              => 'Nomor Telepon harus diisi.',
+            'phonenumber.numeric'               => 'Nomor Telepon harus berupa angka.',
+            'address.required'                  => 'Alamat harus diisi.',
+            'email.required'                    => 'E-mail harus diisi.',
+            'email.email'                       => 'Format e-mail tidak sesuai.',
+            'emergencycontact_name.required'    => 'Nama Kontak Darurat harus diisi.',
+            'emergencycontact_phone.required'   => 'Nomor Kontak Darurat harus diisi.',
+            'emergencycontact_phone.numeric'    => 'Nomor Kontak Darurat harus berupa angka.'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         // foreach($request->program as $program){
         //     DB::table('participants')->insert([
@@ -159,18 +179,37 @@ class ParticipantController extends Controller
     {
         $participant = Participant::find($id);
 
-        $this->validate($request, [
+        $rules = [
             'branch_id'                 => 'required',
             'knowcn_id'                 => 'required',
             'name'                      => 'required',
             'pob'                       => 'required',
-            'dob'                       => 'required',
-            'phonenumber'               => 'required',
+            'dob'                       => 'required|date',
+            'phonenumber'               => 'required|numeric',
             'address'                   => 'required',
             'email'                     => 'required|email',
             'emergencycontact_name'     => 'required',
-            'emergencycontact_phone'    => 'required'   
-        ]);
+            'emergencycontact_phone'    => 'required|numeric'
+        ];
+
+        $customMessages = [
+            'branch_id.required'                => 'Lokasi Pendaftaran harus dipilih.',
+            'knowcn_id.required'                => 'Mengetahui Course-Net dari harus diisi.',
+            'name.required'                     => 'Nama Peserta harus diisi.',
+            'pob.required'                      => 'Tempat Lahir harus diisi.',
+            'dob.required'                      => 'Tanggal Lahir harus diisi.',
+            'dob.date'                          => 'Tanggal Lahir harus berupa tanggal.',
+            'phonenumber.required'              => 'Nomor Telepon harus diisi.',
+            'phonenumber.numeric'               => 'Nomor Telepon harus berupa angka.',
+            'address.required'                  => 'Alamat harus diisi.',
+            'email.required'                    => 'E-mail harus diisi.',
+            'email.email'                       => 'Format e-mail tidak sesuai.',
+            'emergencycontact_name.required'    => 'Nama Kontak Darurat harus diisi.',
+            'emergencycontact_phone.required'   => 'Nomor Kontak Darurat harus diisi.',
+            'emergencycontact_phone.numeric'    => 'Nomor Kontak Darurat harus berupa angka.'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         // foreach($request->program as $program){
         //     DB::table('participants')->insert([

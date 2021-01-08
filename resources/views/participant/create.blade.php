@@ -4,8 +4,6 @@
 
 @section('content')
 
-@include('includes.errors')
-
     <div class="card">
         <div class="card-body">
             <p class="text-danger text-bold">* : Data diperlukan.</p>
@@ -14,31 +12,49 @@
                 <div class="form-group">
                     <label for="name">Nama Peserta <span class="text-danger">*</span></label>
                     <input type="text" name="name" class="form-control" placeholder="Contoh: Michael" value="{{ old('name') }}">
+                    @if( $errors->has('name') )
+                        <div class="text-danger">{{ $errors->first('name') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="pob">Tempat Lahir <span class="text-danger">*</span></label>
                     <input type="text" name="pob" class="form-control" placeholder="Contoh: Jakarta" value="{{ old('pob') }}">
+                    @if( $errors->has('pob') )
+                        <div class="text-danger">{{ $errors->first('pob') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="dob" class="mr-2">Tanggal Lahir <span class="text-danger">*</span></label>
                     <input type="date" id="dob" name="dob" value="{{ old('dob') }}">
+                    @if( $errors->has('dob') )
+                        <div class="text-danger">{{ $errors->first('dob') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="phonenumber">Nomor Telepon <span class="text-danger">*</span></label>
                     <input type="tel" name="phonenumber" class="form-control" placeholder="Contoh: 628111011011" value="{{ old('phonenumber') }}">
+                    @if( $errors->has('phonenumber') )
+                        <div class="text-danger">{{ $errors->first('phonenumber') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="address">Alamat <span class="text-danger">*</span></label>
                     <input type="text" name="address" class="form-control" placeholder="Contoh: Villa Permata Berlian, Jalan Sukses 1 Blok E1-9, Jakarta 12345" value="{{ old('address') }}">
+                    @if( $errors->has('address') )
+                        <div class="text-danger">{{ $errors->first('address') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="email">E-mail <span class="text-danger">*</span></label>
                     <input type="email" name="email" class="form-control" placeholder="Contoh: michael@course-net.com" value="{{ old('email') }}">
+                    @if( $errors->has('email') )
+                        <div class="text-danger">{{ $errors->first('email') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
@@ -59,11 +75,17 @@
                 <div class="form-group">
                     <label for="emergencycontact_name">Nama Kontak Darurat <span class="text-danger">*</span></label>
                     <input type="tel" name="emergencycontact_name" class="form-control" placeholder="Contoh: Budiman Aksara" value="{{ old('emergencycontact_name') }}">
+                    @if( $errors->has('emergencycontact_name') )
+                        <div class="text-danger">{{ $errors->first('emergencycontact_name') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="emergencycontact_phone">Nomor Kontak Darurat <span class="text-danger">*</span></label>
                     <input type="text" name="emergencycontact_phone" placeholder="Contoh: 628111011011" class="form-control" value="{{ old('emergencycontact_phone') }}">
+                    @if( $errors->has('emergencycontact_phone') )
+                        <div class="text-danger">{{ $errors->first('emergencycontact_phone') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
@@ -83,6 +105,9 @@
                         @endif
                     @endforeach
                     </select>
+                    @if( $errors->has('branch_id') )
+                        <div class="text-danger">{{ $errors->first('branch_id') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
@@ -97,6 +122,9 @@
                         @endif
                     @endforeach
                     </select>
+                    @if( $errors->has('knowcn_id') )
+                        <div class="text-danger">{{ $errors->first('knowcn_id') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">

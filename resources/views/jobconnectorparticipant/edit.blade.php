@@ -4,8 +4,6 @@
 
 @section('content')
 
-@include('includes.errors')
-
     <div class="card"> 
         <div class="card-body">
             <p class="text-danger text-bold">* : Data diperlukan.</p>
@@ -23,6 +21,9 @@
                         @endif
                     @endforeach
                     </select>
+                    @if( $errors->has('participant') )
+                        <div class="text-danger">{{ $errors->first('participant') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
@@ -31,17 +32,23 @@
                     <option value="" selected disabled hidden> - Pilih Perusahaan Rekanan - </option>
                     @foreach($jobconnectors as $jobconnector)
                         @if($jobconnectorparticipant->jobconnector_id == $jobconnector->id)
-                            <option value="{{ $jobconnector->id }}" selected> {{ $jobconnector->company_name }} </option>
+                            <option value="{{ $jobconnector->id }}" selected> {{ $jobconnector->company_name }} - {{ $jobconnector->location }} </option>
                         @else
-                            <option value="{{ $jobconnector->id }}"> {{ $jobconnector->company_name }} </option>
+                            <option value="{{ $jobconnector->id }}"> {{ $jobconnector->company_name }} - {{ $jobconnector->location }} </option>
                         @endif
                     @endforeach
                     </select>
+                    @if( $errors->has('jobconnector') )
+                        <div class="text-danger">{{ $errors->first('jobconnector') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="date">Tanggal Batch <span class="text-danger">*</span></label>
                     <input type="date" id="date" name="date" value="{{ $jobconnectorparticipant->date }}">
+                    @if( $errors->has('date') )
+                        <div class="text-danger">{{ $errors->first('date') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
@@ -79,11 +86,14 @@
                             <option value="5" selected> Lainnya </option>
                         @endif
                     </select>
+                    @if( $errors->has('application_status') )
+                        <div class="text-danger">{{ $errors->first('application_status') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success">Perbaharui Job Connector Untuk Peserta</button>
+                        <button type="submit" class="btn btn-success">Perbaharui Job Connector Peserta</button>
                     </div>
                 </div>
             </form>

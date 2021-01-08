@@ -103,7 +103,7 @@ class BranchController extends Controller
     {
         $rules = [
             'name' => 'required',
-            'code' => 'required|numeric|unique:branches',
+            'code' => 'required|numeric',
         ];
 
         $customMessages = [

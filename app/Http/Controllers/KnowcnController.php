@@ -38,9 +38,17 @@ class KnowcnController extends Controller
     public function store(Request $request)
     {
         //Validation to make sure name field should be filled and the category must be unique
-        $this->validate($request, [
-            'name' => 'required',
-        ]);
+
+        $rules = [
+            'name'            => 'required|unique:knowcns',
+        ];
+
+        $customMessages = [
+            'name.required' => 'Nama Kanal harus diisi.',
+            'name.unique'   => 'Nama Kanal sudah terdaftar, silahkan coba lagi.'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         $knowcn = new Knowcn;
 
@@ -90,6 +98,16 @@ class KnowcnController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $rules = [
+            'name' => 'required',
+        ];
+
+        $customMessages = [
+            'name.required' => 'Nama Kanal harus diisi.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
         //Find category based on category ID
         $knowcn = Knowcn::find($id);
         

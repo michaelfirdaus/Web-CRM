@@ -6,7 +6,7 @@
 
     <div class="row">
         <div class="form-group ml-auto mr-2">
-            <a href="{{ route('program.create') }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Tambah Program</a>
+            <a href="{{ route('programcategory.create') }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Tambah Kategori Program</a>
         </div>
     </div>
     <div class="card">

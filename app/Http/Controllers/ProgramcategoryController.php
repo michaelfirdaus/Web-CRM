@@ -29,7 +29,7 @@ class ProgramcategoryController extends Controller
      */
     public function create()
     {
-        return view('programcategory.create')->with('programcategories', $branches);
+        return view('programcategory.create');
     }
 
     /**
@@ -40,9 +40,16 @@ class ProgramcategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name'              => 'required|unique:programcategories',
-        ]);
+        $rules = [
+            'name' => 'required|unique:programcategories',
+        ];
+
+        $customMessages = [
+            'name.required' => 'Nama Kategori Program harus diisi.',
+            'name.unique'   => 'Nama Kategori Program sudah terdaftar, silahkan coba lagi.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         $programcategory = Programcategory::create([
             'name'          => $request->name
@@ -86,6 +93,16 @@ class ProgramcategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $rules = [
+            'name' => 'required',
+        ];
+
+        $customMessages = [
+            'name.required' => 'Nama Kategori Program harus diisi.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
         $programcategory = Programcategory::find($id);
 
         $this->validate($request, [

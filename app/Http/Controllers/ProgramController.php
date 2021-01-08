@@ -55,11 +55,21 @@ class ProgramController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+
+        $rules = [
             'name'              => 'required|unique:programs',
             'branch_location'   => 'required',
             'programcategory'   => 'required',
-        ]);
+        ];
+
+        $customMessages = [
+            'name.required'            => 'Nama Program harus diisi.',
+            'name.unique'              => 'Nama Program sudah terdaftar, silahkan coba lagi.',
+            'branch_location.required' => 'Lokasi Cabang harus dipilih.',
+            'programcategory.required' => 'Kategori Program harus dipilih.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         $programs = Program::create([
             'name'               => $request->name,
@@ -114,11 +124,19 @@ class ProgramController extends Controller
     {
         $program = Program::find($id);
 
-        $this->validate($request, [
+        $rules = [
             'name'              => 'required',
             'branch_location'   => 'required',
             'programcategory'   => 'required',
-        ]);
+        ];
+
+        $customMessages = [
+            'name.required'            => 'Nama Program harus diisi.',
+            'branch_location.required' => 'Lokasi Cabang harus dipilih.',
+            'programcategory.required' => 'Kategori Program harus dipilih.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         $program->id                 = $request->id;
         $program->name               = $request->name;

@@ -4,8 +4,6 @@
 
 @section('content')
 
-@include('includes.errors')
-
     <div class="card"> 
         <div class="card-body">
             <p class="text-danger text-bold">* : Data diperlukan.</p>
@@ -22,11 +20,17 @@
                             @endif
                         @endforeach
                     </select>
+                    @if( $errors->has('programcategory') )
+                        <div class="text-danger">{{ $errors->first('programcategory') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="name">Nama Program <span class="text-danger">*</span></label>
                     <input type="text" name="name" placeholder="Contoh: CCNA" value="{{ $program->name }}" class="form-control">
+                    @if( $errors->has('name') )
+                        <div class="text-danger">{{ $errors->first('name') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
@@ -40,6 +44,9 @@
                             @endif
                         @endforeach
                     </select>
+                    @if( $errors->has('branch_location') )
+                        <div class="text-danger">{{ $errors->first('branch_location') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
