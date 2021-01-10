@@ -45,9 +45,19 @@ class ResultByIdController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+
+        $rules = [
             'score'    => 'required|numeric|max:100|min:0',
-        ]);
+        ];
+
+        $customMessages = [
+            'score.required' => 'Nilai Ujian harus diisi.',
+            'score.numeric'  => 'Nilai Ujian harus berupa angka.',
+            'score.max'      => 'Nilai Ujian maksimum adalah 100.',
+            'score.min'      => 'Nilai Ujian minimum adalah 0.'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         if($request->hasFile('photo')){
             $image = $request->file('photo');
@@ -181,9 +191,18 @@ class ResultByIdController extends Controller
     {
         $result = Result::find($id);
 
-        $this->validate($request, [
-            'score'    => 'required',
-        ]);
+        $rules = [
+            'score'    => 'required|numeric|max:100|min:0',
+        ];
+
+        $customMessages = [
+            'score.required' => 'Nilai Ujian harus diisi.',
+            'score.numeric'  => 'Nilai Ujian harus berupa angka.',
+            'score.max'      => 'Nilai Ujian maksimum adalah 100.',
+            'score.min'      => 'Nilai Ujian minimum adalah 0.'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         if($request->hasFile('photo')){
             $image = $request->file('photo');

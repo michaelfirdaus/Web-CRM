@@ -4,8 +4,6 @@
 
 @section('content')
 
-@include('includes.errors')
-
     <div class="card">
         <div class="card-body">
             <form action="{{ route('resultbyid.update', ['id' => $result->id]) }}" method="post" enctype="multipart/form-data">
@@ -13,6 +11,9 @@
                 <div class="form-group">
                     <label for="score">Nilai Ujian</label>
                     <input type="text" name="score" value="{{ $result->score }}" class="form-control">
+                    @if( $errors->has('score') )
+                        <div class="text-danger">{{ $errors->first('score') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">

@@ -4,8 +4,6 @@
 
 @section('content')
 
-@include('includes.errors')
-
     <div class="card">
         <div class="card-body">
             <p class="text-danger text-bold">* : Data diperlukan.</p>
@@ -14,11 +12,17 @@
                 <div class="form-group">
                     <label for="name">Nama Referensi <span class="text-danger">*</span></label>
                     <input type="text" id="name" name="name" class="form-control" placeholder="Contoh: Michael" value="{{ old('name') }}">
+                    @if( $errors->has('name') )
+                        <div class="text-danger">{{ $errors->first('name') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Nomor Telepon Referensi <span class="text-danger">*</span></label>
                     <input type="text" id="phone" name="phone" class="form-control" placeholder="Contoh: 628561111011" value="{{ old('phone') }}">
+                    @if( $errors->has('phone') )
+                        <div class="text-danger">{{ $errors->first('phone') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
