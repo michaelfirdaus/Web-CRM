@@ -35,8 +35,8 @@ class ParticipantController extends Controller
     public function create()
     {
         $branches = Branch::all();
-        $knowcns = Knowcn::all();
-        $professions = Profession::all();
+        $knowcns = Knowcn::where('status','1')->get();
+        $professions = Profession::where('status','1')->get();
         $participants = Participant::all();
 
         if($branches->count() == 0){

@@ -38,7 +38,7 @@ class CoachProgramController extends Controller
     public function create()
     {
         $programs = Program::all();
-        $coaches = Coach::all();
+        $coaches = Coach::where('status','1')->get();
         $branches = Branch::all();
 
         if($programs->count() == 0 || $coaches->count() == 0){
