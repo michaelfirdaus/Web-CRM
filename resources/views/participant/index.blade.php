@@ -129,11 +129,7 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                    @if($participant->profession_id)
-                                        {{ $participant->profession->name }}
-                                    @else
-                                        Belum Bekerja
-                                    @endif
+                                    {{ $participant->profession->name }}
                                 </td>
                                 <td class="text-center">
                                     <a href="{{ route('interests', ['id' => $participant ->id]) }}" class="btn btn-xs btn-success">

@@ -147,7 +147,6 @@
                 <div class="form-group">
                     <label for="profession_id">Profesi</label>
                     <select name="profession_id" id="profession_id" class="form-control select2" style="width: 300px;">
-                    <option value="" selected disabled hidden> - Pilih Profesi - </option>
                     @foreach($professions as $profession)
                         @if( old('profession_id') )
                             <option selected value="{{ $profession->id }}"> {{ $profession->name }} </option>

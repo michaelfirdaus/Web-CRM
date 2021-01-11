@@ -208,7 +208,6 @@ class ParticipantController extends Controller
     public function update(Request $request, $id)
     {
         $participant = Participant::find($id);
-        $p = Participant::find($request->memberreference_id);
 
         $rules = [
             'branch_id'                 => 'required',
@@ -250,22 +249,41 @@ class ParticipantController extends Controller
         //     ]);
         // }
 
-        $participant->branch_id                 = $request->branch_id;
-        $participant->knowcn_id                 = $request->knowcn_id;
-        $participant->profession_id             = $request->profession_id;
-        $participant->name                      = $request->name;
-        $participant->pob                       = $request->pob;
-        $participant->dob                       = $request->dob;
-        $participant->phonenumber               = $request->phonenumber;
-        $participant->address                   = $request->address;
-        $participant->email                     = $request->email;
-        $participant->cv_link                   = $request->cv_link;
-        $participant->sp_link                   = $request->sp_link;
-        $participant->member_validthru          = $request->member_validthru;
-        $participant->emergencycontact_name     = $request->emergencycontact_name;
-        $participant->emergencycontact_phone    = $request->emergencycontact_phone;
-        $participant->memberreference_id        = $p->id;
-        $participant->memberreference_name      = $p->name;
+        if($participant->memberreference_id){
+            $p = Participant::find($request->memberreference_id);
+            
+            $participant->branch_id                 = $request->branch_id;
+            $participant->knowcn_id                 = $request->knowcn_id;
+            $participant->profession_id             = $request->profession_id;
+            $participant->name                      = $request->name;
+            $participant->pob                       = $request->pob;
+            $participant->dob                       = $request->dob;
+            $participant->phonenumber               = $request->phonenumber;
+            $participant->address                   = $request->address;
+            $participant->email                     = $request->email;
+            $participant->cv_link                   = $request->cv_link;
+            $participant->sp_link                   = $request->sp_link;
+            $participant->member_validthru          = $request->member_validthru;
+            $participant->emergencycontact_name     = $request->emergencycontact_name;
+            $participant->emergencycontact_phone    = $request->emergencycontact_phone;
+            $participant->memberreference_id        = $request->memberreference_id;
+            $participant->memberreference_name      = $p->name;
+        }else{
+            $participant->branch_id                 = $request->branch_id;
+            $participant->knowcn_id                 = $request->knowcn_id;
+            $participant->profession_id             = $request->profession_id;
+            $participant->name                      = $request->name;
+            $participant->pob                       = $request->pob;
+            $participant->dob                       = $request->dob;
+            $participant->phonenumber               = $request->phonenumber;
+            $participant->address                   = $request->address;
+            $participant->email                     = $request->email;
+            $participant->cv_link                   = $request->cv_link;
+            $participant->sp_link                   = $request->sp_link;
+            $participant->member_validthru          = $request->member_validthru;
+            $participant->emergencycontact_name     = $request->emergencycontact_name;
+            $participant->emergencycontact_phone    = $request->emergencycontact_phone;
+        }
 
 
         $participant->save();
