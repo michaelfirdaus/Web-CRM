@@ -8,6 +8,8 @@ use App\Program;
 use App\Coach;
 use App\CoachProgram;
 use App\Branch;
+use App\Transaction;
+use App\Result;
 use Session;
 use DB;
 
@@ -181,4 +183,27 @@ class CoachProgramController extends Controller
 
         return redirect()->route('coachprograms');
     }
+
+    public function detail($id){
+        $coachprogram = CoachProgram::find($id);
+
+
+        $transactions = Transaction::find($coachprogram->id);
+        if($transactions == null){
+            Session::flash('warning', 'Belum Ada Peserta Di Kelas Ini!');
+            return redirect()->back();
+        }
+        
+        $transactions = Transaction::find($coachprogram->id)
+        ->with('participant','result')->get();
+        $countparticipant = $transactions->count();
+        $programs = Program::with('coaches','branch')->get();
+
+        return view('coachprogram.detail')
+               ->with('coachprogram', $coachprogram)
+               ->with('transactions', $transactions)
+               ->with('programs', $programs)
+               ->with('countparticipant', $countparticipant);
+    }
+
 }

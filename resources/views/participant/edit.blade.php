@@ -126,6 +126,23 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="memberreference_id">Jika mengetahui Course-Net dari teman, sebutkan :</label>
+                    <select name="memberreference_id" id="memberreference_id" class="form-control select2" style="width: 300px;">
+                    <option value="" selected disabled hidden> - Pilih Member/Peserta - </option>
+                    @foreach($allparticipant as $p)
+                        @if( $participant->memberreference_id == $p->id )
+                            <option selected value="{{ $p->id }}"> {{ $p->id }} - {{ $p->name }} </option>
+                        @else
+                            <option value="{{ $p->id }}"> {{ $p->id }} - {{ $p->name }} </option>
+                        @endif
+                    @endforeach
+                    </select>
+                    @if( $errors->has('memberreference_id') )
+                        <div class="text-danger">{{ $errors->first('memberreference_id') }}</div>
+                    @endif
+                </div>
+
+                <div class="form-group">
                     <label for="profession_id">Profesi</label>
                     <select name="profession_id" id="profession_id" class="form-control select2" style="width: 300px;">
                     @foreach($professions as $profession)

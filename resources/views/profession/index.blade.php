@@ -19,9 +19,6 @@
                     <th class="text-center">
                         Edit
                     </th>
-                    <th class="text-center">
-                        Hapus
-                    </th>
                 </thead>
 
                 <tbody>
@@ -51,20 +48,7 @@
                                             <span aria-hidden="true">&times;</span>
                                           </button>
                                         </div>
-                                        <div class="modal-body">
-                                          <p>Yakin Untuk Menghapus Item Ini?</p>
-                                          <p class="text-bold">PERINGATAN! Data yang Sudah Dihapus Tidak Dapat Dikembalikan</p>
-                                        </div>
-                                        <div class="modal-footer justify-content-between">
-                                          <button type="button" class="btn btn-success" data-dismiss="modal">
-                                              <span class="fas fa-times mr-1"></span>
-                                            Batalkan
-                                          </button>
-                                          <a href="{{ route('profession.delete', ['id' => $profession ->id]) }}" class="btn btn btn-danger">
-                                            <span class="fas fa-check mr-1"></span>
-                                            Hapus
-                                          </a>
-                                        </div>
+    
                                       </div>
                                     </div>
                                 </div>

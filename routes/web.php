@@ -367,6 +367,11 @@ Route::group(['middleware' => 'auth'], function() {
         'as'    => 'coachprogram.store'
     ]);
 
+    Route::get('/coachprogram/detail/{id}',[
+        'uses' => 'CoachProgramController@detail',
+        'as'   => 'coachprogram.detail'
+    ]);
+
     Route::get('/coachprogram/delete/{id}',[
         'uses' => 'CoachProgramController@destroy',
         'as'   => 'coachprogram.delete'

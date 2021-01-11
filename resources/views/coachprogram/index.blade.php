@@ -28,6 +28,9 @@
                     <th class="text-center"> 
                         Lokasi Kelas
                     </th>
+                    <th class="text-center"> 
+                        Lihat Detail Kelas
+                    </th>
                     <th class="text-center">
                         Edit
                     </th>
@@ -55,6 +58,11 @@
                                     </td>
                                     <td class="text-center">
                                         {{ $program->branch->name }}
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="{{ route('coachprogram.detail', ['id'=> $coach->pivot->id]) }}" class="btn btn-xs btn-success">
+                                            <span class="far fa-eye"></span>
+                                        </a>
                                     </td>
                                     <td class="text-center">
                                         <a href="{{ route('coachprogram.edit', ['id'=> $coach->pivot->id]) }}" class="btn btn-xs btn-info">

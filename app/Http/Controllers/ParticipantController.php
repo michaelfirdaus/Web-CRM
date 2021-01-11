@@ -37,6 +37,7 @@ class ParticipantController extends Controller
         $branches = Branch::all();
         $knowcns = Knowcn::all();
         $professions = Profession::all();
+        $participants = Participant::all();
 
         if($branches->count() == 0){
             Session::flash('info', 'Tidak Dapat Menambahkan Peserta karena Lokasi Kelas Tidak Tersedia');
@@ -46,6 +47,7 @@ class ParticipantController extends Controller
         return view('participant.create')
             ->with('branches', $branches)
             ->with('knowcns', $knowcns)
+            ->with('participants', $participants)
             ->with('professions', $professions);
     }
 
@@ -114,23 +116,49 @@ class ParticipantController extends Controller
             $membernum->save();
         }
 
-        $participants = Participant::create([
-            'id'                        => $membernum->lastnumber,
-            'branch_id'                 => $request->branch_id,
-            'knowcn_id'                 => $request->knowcn_id,
-            'profession_id'             => $request->profession_id,
-            'name'                      => $request->name,
-            'pob'                       => $request->pob,
-            'dob'                       => $request->dob,
-            'phonenumber'               => $request->phonenumber,
-            'address'                   => $request->address,
-            'email'                     => $request->email,
-            'cv_link'                   => $request->cv_link,
-            'sp_link'                   => $request->sp_link,
-            'member_validthru'          => $request->member_validthru,
-            'emergencycontact_name'     => $request->emergencycontact_name,
-            'emergencycontact_phone'    => $request->emergencycontact_phone  
-        ]);
+        $checkParticipant = Participant::all();
+
+        if($checkParticipant->count() > 0){
+            $p = Participant::find($request->memberreference_id);
+    
+            $participant = Participant::create([
+                'id'                        => $membernum->lastnumber,
+                'branch_id'                 => $request->branch_id,
+                'knowcn_id'                 => $request->knowcn_id,
+                'profession_id'             => $request->profession_id,
+                'name'                      => $request->name,
+                'pob'                       => $request->pob,
+                'dob'                       => $request->dob,
+                'phonenumber'               => $request->phonenumber,
+                'address'                   => $request->address,
+                'email'                     => $request->email,
+                'cv_link'                   => $request->cv_link,
+                'sp_link'                   => $request->sp_link,
+                'member_validthru'          => $request->member_validthru,
+                'emergencycontact_name'     => $request->emergencycontact_name,
+                'emergencycontact_phone'    => $request->emergencycontact_phone,
+                'memberreference_id'        => $request->memberreference_id,
+                'memberreference_name'      => $p->name
+            ]);
+        }else{
+            $participant = Participant::create([
+                'id'                        => $membernum->lastnumber,
+                'branch_id'                 => $request->branch_id,
+                'knowcn_id'                 => $request->knowcn_id,
+                'profession_id'             => $request->profession_id,
+                'name'                      => $request->name,
+                'pob'                       => $request->pob,
+                'dob'                       => $request->dob,
+                'phonenumber'               => $request->phonenumber,
+                'address'                   => $request->address,
+                'email'                     => $request->email,
+                'cv_link'                   => $request->cv_link,
+                'sp_link'                   => $request->sp_link,
+                'member_validthru'          => $request->member_validthru,
+                'emergencycontact_name'     => $request->emergencycontact_name,
+                'emergencycontact_phone'    => $request->emergencycontact_phone,
+            ]);
+        }
 
         Session::flash('success', 'Berhasil Menambahkan Peserta');
 
@@ -157,6 +185,7 @@ class ParticipantController extends Controller
     public function edit($id)
     {
         $participant = Participant::find($id);
+        $allparticipant = Participant::all();
         $branches = Branch::all();
         $knowcns = Knowcn::all();
         $professions = Profession::all();
@@ -165,6 +194,7 @@ class ParticipantController extends Controller
             ->with('branches', $branches)
             ->with('knowcns', $knowcns)
             ->with('participant', $participant)
+            ->with('allparticipant', $allparticipant)
             ->with('professions', $professions);
     }
 
@@ -178,6 +208,7 @@ class ParticipantController extends Controller
     public function update(Request $request, $id)
     {
         $participant = Participant::find($id);
+        $p = Participant::find($request->memberreference_id);
 
         $rules = [
             'branch_id'                 => 'required',
@@ -233,6 +264,9 @@ class ParticipantController extends Controller
         $participant->member_validthru          = $request->member_validthru;
         $participant->emergencycontact_name     = $request->emergencycontact_name;
         $participant->emergencycontact_phone    = $request->emergencycontact_phone;
+        $participant->memberreference_id        = $p->id;
+        $participant->memberreference_name      = $p->name;
+
 
         $participant->save();
 
