@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ProfessionTableSeeder::class);
         $this->call(SalespersonTableSeeder::class);
         $this->call(CoachTableSeeder::class);
+        $this->call(CoachProgramTableSeeder::class);
     }
 }
