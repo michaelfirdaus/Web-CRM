@@ -17,6 +17,9 @@
                         Nama Profesi
                     </th>
                     <th class="text-center">
+                        Status
+                    </th>
+                    <th class="text-center">
                         Edit
                     </th>
                 </thead>
@@ -28,30 +31,18 @@
                                 <td>
                                     {{ $profession->name }}
                                 </td>
+                                <td>
+                                    @if($profession->status == 1)
+                                        Aktif
+                                    @else
+                                        Tidak Aktif
+                                    @endif
+                                </td>
                                 <td class="text-center">
                                     <a href="{{ route('profession.edit', ['id' => $profession ->id]) }}" class="btn btn-xs btn-info">
                                         <span class="fas fa-pencil-alt"></span>
                                     </a>
                                 </td>
-                                <td class="text-center">
-                                    <a href="" class="btn btn-xs btn-danger"  data-toggle="modal" data-target="#modal-default">
-                                        <span class="fas fa-trash-alt"></span>
-                                    </a>
-                                </td>
-
-                                <div class="modal fade" id="modal-default">
-                                    <div class="modal-dialog">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h4 class="modal-title">Konfirmasi</h4>
-                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                          </button>
-                                        </div>
-    
-                                      </div>
-                                    </div>
-                                </div>
                             </tr>
                         @endforeach
                     @else

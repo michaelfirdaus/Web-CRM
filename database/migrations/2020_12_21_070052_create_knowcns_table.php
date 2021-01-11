@@ -16,6 +16,7 @@ class CreateKnowcnsTable extends Migration
         Schema::create('knowcns', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('status')->default('1');
             $table->timestamps();
         });
     }

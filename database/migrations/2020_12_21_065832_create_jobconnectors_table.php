@@ -17,6 +17,7 @@ class CreateJobconnectorsTable extends Migration
             $table->id();
             $table->string('company_name');
             $table->string('location');
+            $table->boolean('status')->default('1');
             $table->timestamps();
         });
     }

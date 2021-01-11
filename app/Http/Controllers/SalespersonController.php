@@ -39,12 +39,14 @@ class SalespersonController extends Controller
     {
         //Validation to make sure name field should be filled and the category must be unique
         $this->validate($request, [
-            'name' => 'required',
+            'name'   => 'required',
+            'status' => 'required'
         ]);
 
         $salesperson = new Salesperson;
 
-        $salesperson->name = $request->name;
+        $salesperson->name   = $request->name;
+        $salesperson->status = $request->status;
         //Saving current category to the database
         $salesperson->save();
 
@@ -94,7 +96,8 @@ class SalespersonController extends Controller
         //Find category based on category ID
         $salesperson = Salesperson::find($id);
         
-        $salesperson->name = $request->name;
+        $salesperson->name   = $request->name;
+        $salesperson->status = $request->status;
         
         //Save the category to the database
         $salesperson->save();

@@ -18,6 +18,22 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="status">Status Kanal <span class="text-danger">*</span></label>
+                    <select name="status" id="status" class="form-control select2" style="width: 300px;">
+                        @if($knowcn->status == 1)
+                            <option value="1" selected> Aktif </option>
+                            <option value="0"> Tidak Aktif </option>
+                        @else
+                            <option value="1"> Aktif </option>
+                            <option value="0" selected> Tidak Aktif </option>
+                        @endif
+                    </select>
+                    @if( $errors->has('status') )
+                        <div class="text-danger">{{ $errors->first('status') }}</div>
+                    @endif
+                </div>
+
+                <div class="form-group">
                     <div class="text-center">
                         <button type="submit" class="btn btn-success">Perbaharui Kanal</button>
                     </div>

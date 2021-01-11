@@ -43,7 +43,8 @@ class CoachController extends Controller
             'email'         => 'required',
             'phonenumber'   => 'required|numeric',
             'dob'           => 'required|date',
-            'address'       => 'required'
+            'address'       => 'required',
+            'status'        => 'required'
         ];
 
         $customMessages = [
@@ -53,7 +54,8 @@ class CoachController extends Controller
             'phonenumber.numeric'      => 'Nomor Telepon harus angka.',
             'dob.required'             => 'Tanggal Lahir harus diisi.',
             'dob.date'                 => 'Tanggal Lahir harus berupa tanggal.',
-            'address.required'         => 'Alamat harus diisi.'
+            'address.required'         => 'Alamat harus diisi.',
+            'status.required'          => 'Status Coach harus dipilih.'
         ];
 
         $this->validate($request, $rules, $customMessages);
@@ -65,6 +67,7 @@ class CoachController extends Controller
         $coach->phonenumber = $request->phonenumber;
         $coach->dob         = $request->dob;
         $coach->address     = $request->address;
+        $coach->status      = $request->status;
         //Saving current category to the database
         $coach->save();
 
@@ -115,7 +118,8 @@ class CoachController extends Controller
             'email'         => 'required',
             'phonenumber'   => 'required|numeric',
             'dob'           => 'required|date',
-            'address'       => 'required'
+            'address'       => 'required',
+            'status'        => 'required'
         ];
 
         $customMessages = [
@@ -125,7 +129,8 @@ class CoachController extends Controller
             'phonenumber.numeric'      => 'Nomor Telepon harus angka.',
             'dob.required'             => 'Tanggal Lahir harus diisi.',
             'dob.date'                 => 'Tanggal Lahir harus berupa tanggal.',
-            'address.required'         => 'Alamat harus diisi.'
+            'address.required'         => 'Alamat harus diisi.',
+            'status.required'          => 'Status Coach harus dipilih.'
         ];
 
         $this->validate($request, $rules, $customMessages);
@@ -138,6 +143,7 @@ class CoachController extends Controller
         $coach->phonenumber = $request->phonenumber;
         $coach->dob         = $request->dob;
         $coach->address     = $request->address;
+        $coach->status      = $request->status;
         
         //Save the category to the database
         $coach->save();
