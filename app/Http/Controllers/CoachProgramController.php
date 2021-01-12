@@ -22,17 +22,6 @@ class CoachProgramController extends Controller
      */
     public function index()
     {
-        // $coachprograms = CoachProgram::with('program', 'coaches')->get();
- 
-        // $coachprograms2 =DB::table('coach_program')
-        // ->join('coaches', 'coaches.id', '=', 'coach_program.coach_id')
-        // ->join('programs', 'programs.id', '=', 'coach_program.program_id')
-        // ->join('programcategories', 'programcategories.id', '=', 'programs.programcategory_id')
-        // ->join('branches', 'branches.id', '=', 'programs.branch_id')
-        // ->select('coach_program.*', 'coaches.name AS coachName', 'programs.name AS programName', 'programs.date AS date', 'programcategories.name AS categoryName', 'branches.name AS branchName')
-        // ->get()
-        // ->groupBy('program_id');
-
         $programs = Program::with('coachprograms', 'branch')->get();
 
         return view('coachprogram.index')
@@ -151,7 +140,6 @@ class CoachProgramController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
-        //$program->id = $id;
         $program->date = $request->date;
         $program->branch_id = $request->branch;
         $program->save();
