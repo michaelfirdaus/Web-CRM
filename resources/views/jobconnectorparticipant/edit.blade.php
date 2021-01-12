@@ -11,7 +11,7 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="participant">Nama Peserta <span class="text-danger">*</span></label>
-                    <select name="participant" id="participant" class="form-control select2" style="width: 300px;">
+                    <select name="participant" id="participant" class="form-control select2" style="width: auto;">
                     <option value="" selected disabled hidden> - Pilih Peserta - </option>
                     @foreach($participants as $participant)
                         @if($jobconnectorparticipant->participant_id == $participant->id)
@@ -28,7 +28,7 @@
 
                 <div class="form-group">
                     <label for="jobconnector">Perusahaan Rekanan <span class="text-danger">*</span></label>
-                    <select name="jobconnector" id="jobconnector" class="form-control select2" style="width: 300px;">
+                    <select name="jobconnector" id="jobconnector" class="form-control select2" style="width: auto;">
                     <option value="" selected disabled hidden> - Pilih Perusahaan Rekanan - </option>
                     @foreach($jobconnectors as $jobconnector)
                         @if($jobconnectorparticipant->jobconnector_id == $jobconnector->id)
@@ -44,8 +44,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="date">Tanggal Batch <span class="text-danger">*</span></label>
-                    <input type="date" id="date" name="date" value="{{ $jobconnectorparticipant->date }}">
+                    <label for="date">Tanggal Apply <span class="text-danger">*</span></label>
+                    <input type="date" id="date" name="date" value="{{ $jobconnectorparticipant->date }}" class="ml-2">
                     @if( $errors->has('date') )
                         <div class="text-danger">{{ $errors->first('date') }}</div>
                     @endif
@@ -53,7 +53,7 @@
 
                 <div class="form-group">
                     <label for="application_status">Status <span class="text-danger">*</span></label>
-                    <select name="application_status" id="application_status" class="form-control select2" style="width: 300px;">
+                    <select name="application_status" id="application_status" class="form-control select2" style="width: auto;">
                         @if($jobconnectorparticipant->application_status == 1)
                         <option value="1" selected> Sedang dalam Proses </option>
                         <option value="2"> Ditolak </option>

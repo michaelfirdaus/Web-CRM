@@ -8,16 +8,12 @@
         <div class="card-header text-danger text-bold">Informasi Penting</div>
         <div class="card-body">
             <ul>
+                <li>Data yang ada di halaman ini diambil dari menu <a href="{{ route('programs') }}">Batch Program</a>.
                 <li>Apabila kolom Nama Coach berisi <span class="text-bold text-danger">'Belum Ada Coach!'</span>, maka coach belum dipilih untuk kelas tersebut.</li>
             </ul>
         </div>
     </div>
 
-    <div class="row">
-        <div class="form-group ml-auto mr-2">
-            <a href="{{ route('coachprogram.create') }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Tambah Jadwal Kelas</a>
-        </div>
-    </div>
     <div class="card">
         <div class="card-body">
             <table id="table" class="table table-hover table-bordered">

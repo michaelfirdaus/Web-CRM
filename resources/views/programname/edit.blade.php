@@ -11,7 +11,7 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="name">Nama Program <span class="text-danger">*</span></label>
-                    <input type="text" name="name" placeholder="Contoh: Youtube" value="{{ $programname->name }}" class="form-control">
+                    <input type="text" name="name" placeholder="Contoh: CCNA" value="{{ $programname->name }}" class="form-control">
                     @if( $errors->has('name') )
                         <div class="text-danger">{{ $errors->first('name') }}</div>
                     @endif
@@ -19,7 +19,7 @@
 
                 <div class="form-group">
                     <label for="status">Status Program <span class="text-danger">*</span></label>
-                    <select name="status" id="status" class="form-control select2" style="width: 300px;">
+                    <select name="status" id="status" class="form-control select2" style="width: auto;">
                         @if($programname->status == 1)
                             <option value="1" selected> Aktif </option>
                             <option value="0"> Tidak Aktif </option>

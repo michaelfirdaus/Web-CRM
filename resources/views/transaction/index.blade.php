@@ -8,8 +8,8 @@
         <div class="card-header text-danger text-bold">Informasi Penting</div>
         <div class="card-body">
             <ul>
-                <li>Apabila ikon nilai <span class="fas fa-plus"></span>, maka nilai belum diinput.</li>
-                <li>Apabila ikon nilai <span class="fas fa-address-book"></span>, maka nilai sudah diinput.</li>
+                <li>Apabila ikon pada kolom Nilai <span class="fas fa-plus"></span>, maka nilai peserta belum diinput.</li>
+                <li>Apabila ikon pada kolom Nilai <span class="fas fa-address-book"></span>, maka nilai peserta sudah diinput.</li>
                 <li class="text-bold">Transaksi dapat dibuat apabila jadwal kelas yang tersedia paling lambat 7 hari sebelum dari tanggal hari ini.</li> 
             </ul>
         </div>
@@ -27,6 +27,9 @@
                 <thead>
                     <th class="text-center">
                         Tgl Transaksi
+                    </th>
+                    <th class="text-center">
+                        Nomor Member
                     </th>
                     <th class="text-center">
                         Nama Peserta
@@ -87,6 +90,9 @@
                             <tr>
                                 <td>
                                     {{ $transaction->created_at }}
+                                </td>
+                                <td class="text-center">
+                                    {{ $transaction->participant->id }}
                                 </td>
                                 <td>
                                     {{ $transaction->participant->name }}

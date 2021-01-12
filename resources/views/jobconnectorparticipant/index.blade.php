@@ -21,7 +21,7 @@
                         Perusahaan Rekanan
                     </th>
                     <th class="text-center"> 
-                        Tanggal Batch
+                        Tanggal Apply
                     </th>
                     <th class="text-center"> 
                         Status

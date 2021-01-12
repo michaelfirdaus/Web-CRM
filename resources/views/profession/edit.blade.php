@@ -19,7 +19,7 @@
 
                 <div class="form-group">
                     <label for="status">Status Profesi <span class="text-danger">*</span></label>
-                    <select name="status" id="status" class="form-control select2" style="width: 300px;">
+                    <select name="status" id="status" class="form-control select2" style="width: auto;">
                         @if($profession->status == 1)
                             <option value="1" selected> Aktif </option>
                             <option value="0"> Tidak Aktif </option>

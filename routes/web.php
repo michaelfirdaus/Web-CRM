@@ -380,10 +380,10 @@ Route::group(['middleware' => 'auth'], function() {
         'as'    => 'coachprograms'
     ]);
 
-    Route::get('/coachprogram/create',[
-        'uses'  => 'CoachProgramController@create',
-        'as'    => 'coachprogram.create'
-    ]);
+    // Route::get('/coachprogram/create',[
+    //     'uses'  => 'CoachProgramController@create',
+    //     'as'    => 'coachprogram.create'
+    // ]);
 
     Route::post('/coachprogram/update/{id}',[
         'uses'  => 'CoachProgramController@update',
@@ -395,10 +395,10 @@ Route::group(['middleware' => 'auth'], function() {
         'as'   => 'coachprogram.edit'
     ]);
 
-    Route::post('/coachprogram/store',[
-        'uses'  => 'CoachProgramController@store',
-        'as'    => 'coachprogram.store'
-    ]);
+    // Route::post('/coachprogram/store',[
+    //     'uses'  => 'CoachProgramController@store',
+    //     'as'    => 'coachprogram.store'
+    // ]);
 
     Route::get('/coachprogram/detail/{id}',[
         'uses' => 'CoachProgramController@detail',

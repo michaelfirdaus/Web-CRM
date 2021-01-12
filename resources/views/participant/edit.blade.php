@@ -90,17 +90,17 @@
 
                 <div class="form-group">
                     <label for="member_validthru">Member Berlaku s/d</label>
-                    <input type="date" id="member_validthru" name="member_validthru">
+                    <input type="date" id="member_validthru" name="member_validthru" value="{{ $participant->dob }}" class="ml-2">
                 </div>
 
                 <div class="form-group">
                     <label for="branch_id">Lokasi Pendaftaran <span class="text-danger">*</span></label>
-                    <select name="branch_id" id="branch_id" class="form-control select2" style="width: 300px;">
+                    <select name="branch_id" id="branch_id" class="form-control select2" style="width: auto;">
                     @foreach($branches as $branch)
                             @if($branch->id == $participant->branch_id)
-                                <option selected value="{{ $branch->id }}"> {{ $branch->id }} - {{ $branch->name }} </option>
+                                <option selected value="{{ $branch->id }}"> {{ $branch->code }} - {{ $branch->name }} </option>
                             @else
-                                <option value="{{ $branch->id }}"> {{ $branch->id }} - {{ $branch->name }} </option>
+                                <option value="{{ $branch->id }}"> {{ $branch->code }} - {{ $branch->name }} </option>
                             @endif 
                     @endforeach
                     </select>
@@ -110,8 +110,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="knowcn_id">Mengetahui CN dari <span class="text-danger">*</span></label>
-                    <select name="knowcn_id" id="knowcn_id" class="form-control select2" style="width: 300px;">
+                    <label for="knowcn_id">Mengetahui Course-Net dari <span class="text-danger">*</span></label>
+                    <select name="knowcn_id" id="knowcn_id" class="form-control select2" style="width: auto;">
                     @foreach($knowcns as $knowcn)
                             @if($knowcn->id == $participant->knowcn_id)
                                 <option selected value="{{ $knowcn->id }}"> {{ $knowcn->name }} </option>
@@ -126,16 +126,22 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="memberreference_id">Jika mengetahui Course-Net dari teman, sebutkan :</label>
-                    <select name="memberreference_id" id="memberreference_id" class="form-control select2" style="width: 300px;">
-                    <option value="" selected disabled hidden> - Pilih Member/Peserta - </option>
-                    @foreach($allparticipant as $p)
-                        @if( $participant->memberreference_id == $p->id )
-                            <option selected value="{{ $p->id }}"> {{ $p->id }} - {{ $p->name }} </option>
+                    <label for="memberreference_id">Jika mengetahui Course-Net dari teman alumni Course-Net, sebutkan :</label>
+                    <select name="memberreference_id" id="memberreference_id" class="form-control select2" style="width: auto;">
+                        @if($participant->memberreference_id == null)
+                            <option value="" selected disabled hidden> - Pilih Member/Peserta - </option>
+                            @foreach($allparticipant as $p)
+                                <option value="{{ $p->id }}"> {{ $p->id }} - {{ $p->name }} </option>
+                            @endforeach    
                         @else
-                            <option value="{{ $p->id }}"> {{ $p->id }} - {{ $p->name }} </option>
+                            @foreach($allparticipant as $p)
+                                @if( $participant->memberreference_id == $p->id )
+                                    <option selected value="{{ $p->id }}"> {{ $p->id }} - {{ $p->name }} </option>
+                                @else
+                                    <option value="{{ $p->id }}"> {{ $p->id }} - {{ $p->name }} </option>
+                                @endif
+                            @endforeach
                         @endif
-                    @endforeach
                     </select>
                     @if( $errors->has('memberreference_id') )
                         <div class="text-danger">{{ $errors->first('memberreference_id') }}</div>
@@ -144,7 +150,7 @@
 
                 <div class="form-group">
                     <label for="profession_id">Profesi</label>
-                    <select name="profession_id" id="profession_id" class="form-control select2" style="width: 300px;">
+                    <select name="profession_id" id="profession_id" class="form-control select2" style="width: auto;">
                     @foreach($professions as $profession)
                             @if($profession->id == $participant->profession_id)
                                 <option selected value="{{ $profession->id }}"> {{ $profession->name }} </option>

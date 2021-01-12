@@ -27,7 +27,7 @@
 
                 <div class="form-group">
                     <label for="dob" class="mr-2">Tanggal Lahir <span class="text-danger">*</span></label>
-                    <input type="date" id="dob" name="dob" value="{{ old('dob') }}">
+                    <input type="date" id="dob" name="dob" value="{{ old('dob') }}" class="ml-2">
                     @if( $errors->has('dob') )
                         <div class="text-danger">{{ $errors->first('dob') }}</div>
                     @endif
@@ -89,13 +89,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="member_validthru">Member Berlaku s/d</label>
-                    <input type="date" id="member_validthru" name="member_validthru" value="{{ old('member_validthru') }}">
+                    <label for="member_validthru">Member Berlaku s/d </label>
+                    <input type="date" id="member_validthru" name="member_validthru" value="{{ old('member_validthru') }}" class="ml-2">
                 </div>
 
                 <div class="form-group">
                     <label for="branch_id">Lokasi Pendaftaran <span class="text-danger">*</span></label>
-                    <select name="branch_id" id="branch_id" class="form-control select2" style="width: 300px;">
+                    <select name="branch_id" id="branch_id" class="form-control select2" style="width: auto;">
                         <option value="" selected disabled hidden> - Pilih Lokasi Pendaftaran - </option>
                     @foreach($branches as $branch)
                         @if( old('branch_id') )
@@ -112,7 +112,7 @@
 
                 <div class="form-group">
                     <label for="knowcn_id">Mengetahui Course-Net dari <span class="text-danger">*</span></label>
-                    <select name="knowcn_id" id="knowcn_id" class="form-control select2" style="width: 300px;">
+                    <select name="knowcn_id" id="knowcn_id" class="form-control select2" style="width: auto;">
                     <option value="" selected disabled hidden> - Pilih Kanal CN - </option>
                     @foreach($knowcns as $knowcn)
                         @if( old('knowcn_id') )
@@ -128,8 +128,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="memberreference_id">Jika mengetahui Course-Net dari teman, sebutkan :</label>
-                    <select name="memberreference_id" id="memberreference_id" class="form-control select2" style="width: 300px;">
+                    <label for="memberreference_id">Jika mengetahui Course-Net dari teman alumni Course-Net, sebutkan :</label>
+                    <select name="memberreference_id" id="memberreference_id" class="form-control select2" style="width: auto;">
                     <option value="" selected disabled hidden> - Pilih Member/Peserta - </option>
                     @foreach($participants as $participant)
                         @if( old('memberreference_id') )
@@ -146,7 +146,7 @@
 
                 <div class="form-group">
                     <label for="profession_id">Profesi</label>
-                    <select name="profession_id" id="profession_id" class="form-control select2" style="width: 300px;">
+                    <select name="profession_id" id="profession_id" class="form-control select2" style="width: auto;">
                     @foreach($professions as $profession)
                         @if( old('profession_id') )
                             <option selected value="{{ $profession->id }}"> {{ $profession->name }} </option>

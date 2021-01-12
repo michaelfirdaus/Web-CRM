@@ -11,13 +11,13 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="program">Pilih Batch Program <span class="text-danger">*</span></label>
-                    <select name="program" id="program" class="form-control select2" style="width: 300px;">
+                    <select name="program" id="program" class="form-control select2" style="width: auto;">
                     <option value="" selected disabled hidden> - Pilih Program - </option>
                     @foreach($programs as $program)
                         @if( old('program') )
-                        <option selected value="{{ $program->id }}"> {{ $program->programcategory->name }} - {{ $program->programname->name }} - Batch {{ $program->date }} </option>
+                        <option selected value="{{ $program->id }}"> {{ $program->programcategory->name }} | {{ $program->programname->name }} | Batch {{ $program->date }} </option>
                         @else
-                            <option value="{{ $program->id }}"> {{ $program->programcategory->name }} - {{ $program->programname->name }} - Batch {{ $program->date }} </option>
+                            <option value="{{ $program->id }}"> {{ $program->programcategory->name }} | {{ $program->programname->name }} | Batch {{ $program->date }} </option>
                         @endif
                     @endforeach
                     </select>
