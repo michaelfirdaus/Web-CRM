@@ -13,7 +13,7 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="participant">Nama Peserta <span class="text-danger">*</span></label>
-                    <select name="participant" id="participant" class="form-control select2" style="width: 300px;">
+                    <select name="participant" id="participant" class="form-control select2" style="width: 500px;">
                     @foreach($participants as $participant)
                         @if($participant->id == $transaction->participant_id)
                             <option selected value="{{ $participant->id }}"> {{ $participant->id }} - {{ $participant->name }} </option> 
@@ -26,7 +26,7 @@
 
                 <div class="form-group">
                     <label for="sales">Nama Sales <span class="text-danger">*</span></label>
-                    <select name="sales" id="sales" class="form-control select2" style="width: 300px;">
+                    <select name="sales" id="sales" class="form-control select2" style="width: 500px;">
                     @foreach($salespersons as $salesperson)
                         @if($salesperson->id == $transaction->salesperson_id)
                             <option selected value="{{ $salesperson->id }}"> {{ $salesperson->name }} </option> 
@@ -39,12 +39,12 @@
 
                 <div class="form-group">
                     <label for="program">Nama Program <span class="text-danger">*</span></label>
-                    <select name="program" id="program" class="form-control select2" style="width: 300px;">
-                    @foreach($coachprograms as $cp)
-                        @if($cp->id == $transaction->coach_program_id)
-                            <option selected value="{{ $cp->id }}"> Batch {{$cp->date}} | {{ $cp->program->name }} </option> 
+                    <select name="program" id="program" class="form-control select2" style="width: 500px;">
+                    @foreach($programs as $p)
+                        @if($p->id == $transaction->program->id)
+                            <option selected value="{{ $p->id }}"> Batch {{$p->date}} | {{ $p->programname->name }} | {{ $p->branch->name}} </option> 
                         @else
-                            <option value="{{ $cp->id }}"> Batch {{$cp->date}} | {{ $cp->program->name }}} </option> 
+                            <option value="{{ $p->id }}"> Batch {{$p->date}} | {{ $p->programname->name }} | {{ $p->branch->name }} </option> 
                         @endif
                     @endforeach
                     </select>
@@ -81,7 +81,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="recoaching">Recoaching?</label>
+                    <label for="recoaching">Recoaching? <span class="text-danger">*</span></label>
                     <select name="recoaching" id="recoaching" class="form-control select2" style="width: 300px;">
                         @if($transaction->recoaching == 0)
                             <option selected value="0"> Tidak </option>

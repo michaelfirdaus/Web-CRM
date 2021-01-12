@@ -13,7 +13,8 @@ class Coach extends Model
     public function programs(){
         return $this->belongsToMany('App\Program')
                     ->using('App\CoachProgram')
-                    ->withPivot('date', 'id');
+                    // ->withPivot('date', 'id');
+                    ->withPivot('id');
     }
 
     public function coachprogram(){

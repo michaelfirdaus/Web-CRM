@@ -13,11 +13,12 @@ class Program extends Model
     public function coaches(){
         return $this->belongsToMany('App\Coach')
                     ->using('App\CoachProgram')
-                    ->withPivot('date', 'id');
+                    // ->withPivot('date', 'id');
+                    ->withPivot('id');
     }
 
-    public function coachprogram(){
-        return $this->belongsTo('App\CoachProgram', 'program_id');
+    public function coachprograms(){
+        return $this->hasMany('App\CoachProgram', 'program_id');
     }
 
     public function programcategory(){
@@ -28,7 +29,15 @@ class Program extends Model
         return $this->belongsTo('App\Branch');
     }
 
-    public function interest(){
-        return $this->belongsTo('App\Interest');
+    public function transaction(){
+        return $this->belongsTo('App\Transaction', 'id', 'program_id');
     }
+
+    public function programname(){
+        return $this->hasOne('App\Programname', 'id', 'programname_id');
+    }
+
+    // public function interest(){
+    //     return $this->belongsTo('App\Interest');
+    // }
 }

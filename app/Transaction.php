@@ -14,8 +14,8 @@ class Transaction extends Model
         return $this->belongsTo('App\Salesperson');
     }
 
-    public function coachprogram(){
-        return $this->hasOne('App\CoachProgram', 'id');
+    public function program(){
+        return $this->hasOne('App\Program', 'id', 'program_id');
     }
 
     public function result(){

@@ -41,6 +41,9 @@
                         Tanggal Batch
                     </th>
                     <th class="text-center">
+                        Lokasi Kelas
+                    </th>
+                    <th class="text-center">
                         Harga
                     </th>
                     <th class="text-center">
@@ -92,12 +95,14 @@
                                     {{ $transaction->salesperson->name }}
                                 </td>
                                 <td>
-                                    {{ $transaction->coachprogram->program->name }}
+                                    {{ $transaction->program->programname->name }}
                                 </td>
                                 <td class="text-center">
-                                    {{ $transaction->coachprogram->date }}
+                                    {{ $transaction->program->date }}
                                 </td>
-                        
+                                <td class="text-center">
+                                    {{ $transaction->program->branch->name }}
+                                </td>
                                 <td>
                                     @currency( $transaction->price )
                                 </td>

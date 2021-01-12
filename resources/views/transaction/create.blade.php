@@ -13,7 +13,7 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="participant">Nama Peserta <span class="text-danger">*</span></label>
-                    <select name="participant" id="participant" class="form-control select2" style="width: 300px;">
+                    <select name="participant" id="participant" class="form-control select2" style="width: 500px;">
                     <option value="" selected disabled hidden> - Pilih Peserta - </option>
                     @foreach($participants as $participant)
                         <option value="{{ $participant->id }}"> {{ $participant->id }} - {{ $participant->name }} </option> 
@@ -23,7 +23,7 @@
 
                 <div class="form-group">
                     <label for="sales">Nama Sales <span class="text-danger">*</span></label>
-                    <select name="sales" id="sales" class="form-control select2" style="width: 300px;">
+                    <select name="sales" id="sales" class="form-control select2" style="width: 500px;">
                     <option value="" selected disabled hidden> - Pilih Sales - </option>
                     @foreach($salespersons as $salesperson)
                         <option value="{{ $salesperson->id }}"> {{ $salesperson->name }} </option> 
@@ -32,14 +32,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="program">Nama Program <span class="text-danger">*</span></label>
-                    <select name="program" id="program" class="form-control select2" style="width: 300px;">
-                    <option value="" selected disabled hidden> - Pilih Program - </option>
-                    @foreach($coachprograms as $cp)
+                    <label for="program">Pilih Batch Program <span class="text-danger">*</span></label>
+                    <select name="program" id="program" class="form-control select2" style="width: 500px;">
+                    <option value="" selected disabled hidden> - Pilih Batch Program - </option>
+                    @foreach($programs as $p)
                         @if( old('program') )
-                            <option selected value="{{ $cp->id }}"> Batch {{$cp->date}} | {{ $cp->program->name }} </option>
+                            <option selected value="{{ $p->id }}"> Batch {{$p->date}} | {{ $p->programname->name }} | {{ $p->branch->name }} </option>
                         @else
-                            <option value="{{ $cp->id }}"> Batch {{$cp->date}} | {{ $cp->program->name }} </option> 
+                            <option value="{{ $p->id }}"> Batch {{$p->date}} | {{ $p->programname->name }} | {{ $p->branch->name }} </option> 
                         @endif
                     @endforeach
                     </select>

@@ -16,9 +16,6 @@
                     <th class="text-center">
                         Minat Program
                     </th>
-                    <th class="text-center"> 
-                        Lokasi Kelas
-                    </th>
                     <th class="text-center">
                         Edit
                     </th>
@@ -33,10 +30,7 @@
                             
                             <tr>
                                 <td>
-                                    {{ $interest->program->name }}
-                                </td>
-                                <td>
-                                    {{ $interest->program->branch->name }}
+                                    {{ $interest->programname->name }}
                                 </td>
                                 <td class="text-center">
                                     <a href="{{ route('interest.edit', ['id' => $interest->id]) }}" class="btn btn-xs btn-info">

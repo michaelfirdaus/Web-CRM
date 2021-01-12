@@ -4,6 +4,15 @@
 
 @section('content')
 
+    <div class="card">
+        <div class="card-header text-danger text-bold">Informasi Penting</div>
+        <div class="card-body">
+            <ul>
+                <li>Apabila kolom Nama Coach berisi <span class="text-bold text-danger">'Belum Ada Coach!'</span>, maka coach belum dipilih untuk kelas tersebut.</li>
+            </ul>
+        </div>
+    </div>
+
     <div class="row">
         <div class="form-group ml-auto mr-2">
             <a href="{{ route('coachprogram.create') }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Tambah Jadwal Kelas</a>
@@ -37,37 +46,53 @@
                 </thead>
         
                 <tbody>
-                    @if($coachprograms->count() > 0)
-                        @foreach ($programs as $program)
-                            @foreach($program->coaches as $coach)
+                    @if($programs->count() > 0)
+                        @foreach ($programs as $p)
                                 <tr>
                                     <td>
-                                        {{ $program->name }}
+                                        {{ $p->programname->name }}
                                     </td>
                                     <td>
-                                        {{ $program->programcategory->name }}
+                                        {{ $p->programcategory->name }}
                                     </td>
                                     <td>
-                                        {{ $coach->name }}
+                                        @php
+                                        $c = $p->coaches->count();
+                                        $a = 0;
+                                        @endphp
+                                        @if($c == 1)
+                                            @foreach($p->coaches as $coach)
+                                                {{ $coach->name }}
+                                            @endforeach
+                                        @elseif($p->coaches->count() > 1)
+                                            @foreach($p->coaches as $coach)
+                                                @if(++$a == $c)
+                                                    {{ $coach->name }}
+                                                @else
+                                                    {{ $coach->name }},
+                                                @endif 
+                                            @endforeach
+                                        @else
+                                            <div class="text-bold text-danger">'Belum Ada Coach!'</div>
+                                        @endif
                                     </td>
                                     <td class="text-center">
-                                        {{ $coach->pivot->date }}
+                                        {{ $p->date }}
                                     </td>
                                     <td class="text-center">
-                                        {{ $program->branch->name }}
+                                        {{ $p->branch->name }}
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('coachprogram.detail', ['id'=> $coach->pivot->id]) }}" class="btn btn-xs btn-success">
+                                        <a href="{{ route('coachprogram.detail', ['id'=> $p->id]) }}" class="btn btn-xs btn-success">
                                             <span class="far fa-eye"></span>
                                         </a>
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('coachprogram.edit', ['id'=> $coach->pivot->id]) }}" class="btn btn-xs btn-info">
+                                        <a href="{{ route('coachprogram.edit', ['id'=> $p->id]) }}" class="btn btn-xs btn-info">
                                             <span class="fas fa-pencil-alt"></span>
                                         </a>
                                     </td>
                                 </tr>
-                            @endforeach
                         @endforeach
                     @else
                         <tr>

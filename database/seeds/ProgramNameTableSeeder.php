@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class CoachProgramTableSeeder extends Seeder
+class ProgramNameTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,9 +11,8 @@ class CoachProgramTableSeeder extends Seeder
      */
     public function run()
     {
-        App\CoachProgram::create([
-            'coach_id' => '1',
-            'program_id' => '1',
+        App\Programname::create([
+            'name' => 'CCNA',
         ]);
     }
 }

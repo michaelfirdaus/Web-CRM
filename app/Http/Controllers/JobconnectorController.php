@@ -54,8 +54,8 @@ class JobconnectorController extends Controller
 
         $jobconnector = new Jobconnector;
 
-        $jobconnector->company_name = $request->name;
-        $jobconnector->location     = $request->location;
+        $jobconnector->name     = $request->name;
+        $jobconnector->location = $request->location;
         //Saving current category to the database
         $jobconnector->save();
 

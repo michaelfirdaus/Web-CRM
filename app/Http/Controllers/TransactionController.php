@@ -21,15 +21,15 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::with('coachprogram.program')->get();
+        $transactions = Transaction::with('program.programname')->get();
         $participants = Participant::all();
-        $coachprograms = CoachProgram::all();
+        $programs = Program::all();
         $salespersons = Salesperson::all();
 
         return view('transaction.index')
             ->with('transactions', $transactions)
             ->with('participants', $participants)
-            ->with('coachprograms', $coachprograms)
+            ->with('programs', $programs)
             ->with('salespersons', $salespersons);
     }
 
@@ -43,16 +43,16 @@ class TransactionController extends Controller
         
         $participants = Participant::all();
         $date = Carbon::today()->subDays(7);
-        $coachprograms = CoachProgram::orderBy('date', 'DESC')->with('program')->where('date', '>=', $date)->get();
+        $programs = Program::orderBy('date', 'DESC')->where('date', '>=', $date)->get();
         $salespersons = Salesperson::where('status','1')->get();
-        if($participants->count() == 0 || $coachprograms->count() == 0 || $salespersons->count() == 0){
+        if($participants->count() == 0 || $programs->count() == 0 || $salespersons->count() == 0){
             Session::flash('info', 'Tidak Dapat Menambahkan Transaksi karena Peserta/Jadwal Kelas/Sales Tidak Terdaftar');
             return redirect()->back();
         }
 
         return view('transaction.create')
             ->with('participants', $participants)
-            ->with('coachprograms', $coachprograms)
+            ->with('programs', $programs)
             ->with('salespersons', $salespersons);
     }
 
@@ -81,7 +81,7 @@ class TransactionController extends Controller
         $transactions = Transaction::create([
             'participant_id'    => $request->participant,
             'salesperson_id'    => $request->sales,
-            'coach_program_id'  => $request->program,
+            'program_id'        => $request->program,
             'price'             => $price,
             'firsttrans'        => $firsttrans,
             'secondtrans'       => $secondtrans,
@@ -119,14 +119,14 @@ class TransactionController extends Controller
     {
         $transaction = Transaction::find($id);
         $date = Carbon::today()->subDays(7);
-        $coachprograms = CoachProgram::with('program')->where('date', '>=', $date)->get();
+        $programs = Program::with('programname','branch')->where('date', '>=', $date)->get();
         $participants = Participant::all();
         $salespersons = Salesperson::all();
 
         return view('transaction.edit')
             ->with('transaction', $transaction)
             ->with('participants', $participants)
-            ->with('coachprograms', $coachprograms)
+            ->with('programs', $programs)
             ->with('salespersons', $salespersons);
 
     }
@@ -158,12 +158,12 @@ class TransactionController extends Controller
 
         $transaction->participant_id    = $request->participant;
         $transaction->salesperson_id    = $request->sales;
-        $transaction->coach_program_id  = $request->program;
+        $transaction->program_id        = $request->program;
         $transaction->price             = $price;
         $transaction->firsttrans        = $firsttrans;
         $transaction->secondtrans       = $secondtrans;
         $transaction->cashback          = $cashback;
-        $transaction->rating            = $rating;
+        $transaction->rating            = $request->rating;
         $transaction->rating_text       = $request->rating_text;
         $transaction->recoaching        = $request->recoaching;
         $transaction->note              = $request->note;

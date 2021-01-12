@@ -17,7 +17,8 @@ class CreateProgramsTable extends Migration
             $table->id();
             $table->bigInteger('branch_id');
             $table->bigInteger('programcategory_id');
-            $table->string('name');
+            $table->bigInteger('programname_id');
+            $table->date('date');
             $table->timestamps();
         });
     }

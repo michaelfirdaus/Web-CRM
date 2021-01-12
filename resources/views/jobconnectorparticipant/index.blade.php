@@ -42,7 +42,7 @@
                                         {{ $jobconnectorparticipant->participant->name }}
                                     </td>
                                     <td>
-                                        {{ $jobconnectorparticipant->jobconnector->company_name }}
+                                        {{ $jobconnectorparticipant->jobconnector->name }}
                                     </td>
                                     <td>
                                         {{ $jobconnectorparticipant->date }}

@@ -16,7 +16,7 @@ class CreateInterestsTable extends Migration
         Schema::create('interests', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('participant_id');
-            $table->bigInteger('program_id');
+            $table->bigInteger('programname_id');
             $table->timestamps();
         });
     }

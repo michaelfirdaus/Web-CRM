@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('header') List Semua Perusahaan Rekanan @endsection
+@section('header') List Semua Program Course-Net @endsection
 
 @section('content')
 
     <div class="row">
         <div class="form-group ml-auto mr-2">
-            <a href="{{ route('jobconnector.create') }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Tambah Perusahaan Rekanan</a>
+            <a href="{{ route('programname.create') }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Tambah Kanal</a>
         </div>
     </div>
     <div class="card">
@@ -14,13 +14,10 @@
             <table id="table" class="table table-hover table-bordered">
                 <thead>
                     <th class="text-center">
-                        Nama Perusahaan
+                        Nama Program
                     </th>
                     <th class="text-center">
-                        Lokasi Perusahaan
-                    </th>
-                    <th class="text-center">
-                        Status Perusahaan
+                        Status Program
                     </th>
                     <th class="text-center">
                         Edit
@@ -28,24 +25,21 @@
                 </thead>
         
                 <tbody>
-                    @if($jobconnectors->count() > 0)
-                        @foreach ($jobconnectors as $jobconnector)
+                    @if($programnames->count() > 0)
+                        @foreach ($programnames as $programname)
                             <tr>
                                 <td>
-                                    {{ $jobconnector->name }}
-                                </td>
-                                <td>
-                                    {{ $jobconnector->location }}
+                                    {{ $programname->name }}
                                 </td>
                                 <td class="text-center">
-                                    @if( $jobconnector->status == 1 )
+                                    @if($programname->status == 1)
                                         Aktif
                                     @else
                                         Tidak Aktif
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('jobconnector.edit', ['id' => $jobconnector ->id]) }}" class="btn btn-xs btn-info">
+                                    <a href="{{ route('programname.edit', ['id' => $programname ->id]) }}" class="btn btn-xs btn-info">
                                         <span class="fas fa-pencil-alt"></span>
                                     </a>
                                 </td>
@@ -53,7 +47,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <th colspan="4" class="text-center">Tidak ada perusahaan yang tersedia, tambahkan perusahaan penerima loker terlebih dahulu.</th>
+                            <th colspan="3" class="text-center">Tidak ada nama program yang tersedia, tambahkan nama program terlebih dahulu.</th>
                         </tr>
                     @endif
                 </tbody>

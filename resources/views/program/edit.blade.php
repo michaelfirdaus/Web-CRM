@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('header') Perbaharui Program {{ $program->name }} @endsection
+@section('header') Perbaharui Batch Program {{ $program->programname->name }}, Tanggal {{ $program->date }} @endsection
 
 @section('content')
 
@@ -9,6 +9,22 @@
             <p class="text-danger text-bold">* : Data diperlukan.</p>
             <form action="{{ route('program.update', ['id' => $program->id]) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
+                <div class="form-group">
+                    <label for="programcategory">Nama Program <span class="text-danger">*</span></label>
+                    <select name="programname" id="programname" class="form-control select2" style="width: 300px;">
+                    @foreach($programnames as $p)
+                        @if($p->id == $program->programname->id)
+                            <option selected value="{{ $p->id }}"> {{ $p->name }} </option>
+                        @else
+                            <option value="{{ $p->id }}"> {{ $p->name }} </option>
+                        @endif
+                    @endforeach
+                    </select>
+                    @if( $errors->has('programname') )
+                        <div class="text-danger">{{ $errors->first('programname') }}</div>
+                    @endif
+                </div>
+                
                 <div class="form-group">
                     <label for="programcategory">Kategori Program <span class="text-danger">*</span></label>
                     <select name="programcategory" id="programcategory" class="form-control select2" style="width: 300px;">
@@ -26,10 +42,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="name">Nama Program <span class="text-danger">*</span></label>
-                    <input type="text" name="name" placeholder="Contoh: CCNA" value="{{ $program->name }}" class="form-control">
-                    @if( $errors->has('name') )
-                        <div class="text-danger">{{ $errors->first('name') }}</div>
+                    <label for="date">Tanggal Batch <span class="text-danger">*</span></label>
+                    <input type="date" id="date" name="date" value="{{ $program->date }}">
+                    @if( $errors->has('date') )
+                        <div class="text-danger">{{ $errors->first('date') }}</div>
                     @endif
                 </div>
 
@@ -38,9 +54,9 @@
                     <select name="branch_location" id="location" class="form-control select2" style="width: 300px;">
                         @foreach($branches as $branch)
                             @if($branch->id == $current_branch)
-                                <option selected value="{{ $branch->id }}"> {{ $branch->name }} </option>
+                                <option selected value="{{ $branch->id }}"> {{ $branch->code }} - {{ $branch->name }} </option>
                             @else
-                                <option value="{{ $branch->id }}"> {{ $branch->name }} </option>
+                                <option value="{{ $branch->id }}"> {{ $branch->code }} - {{ $branch->name }} </option>
                             @endif
                         @endforeach
                     </select>
@@ -51,7 +67,7 @@
 
                 <div class="form-group">
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success">Perbaharui Program</button>
+                        <button type="submit" class="btn btn-success">Perbaharui Batch Program</button>
                     </div>
                 </div>
 

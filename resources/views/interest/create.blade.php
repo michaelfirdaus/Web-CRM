@@ -13,11 +13,11 @@
                     <label for="program_id">Minat Program <span class="text-danger">*</span></label>
                     <select name="program_id" id="program_id" class="form-control select2" style="width: 300px;">
                         <option value="" selected disabled hidden> - Pilih Minat Program - </option>
-                    @foreach($programs as $program)
+                    @foreach($programnames as $p)
                         @if( old('program_id') )
-                            <option selected value="{{ $program->id }}"> {{ $program->name }} - {{ $program->branch->name }} </option>
+                            <option selected value="{{ $p->id }}"> {{ $p->name }}</option>
                         @else
-                            <option value="{{ $program->id }}"> {{ $program->name }} - {{ $program->branch->name }} </option> 
+                            <option value="{{ $p->id }}"> {{ $p->name }}</option> 
                         @endif
                     @endforeach
                     </select>

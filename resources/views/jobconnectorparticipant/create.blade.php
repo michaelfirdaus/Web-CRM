@@ -32,9 +32,9 @@
                     <option value="" selected disabled hidden> - Pilih Perusahaan Rekanan - </option>
                     @foreach($jobconnectors as $jobconnector)
                         @if( old('jobconnector') )
-                            <option selected value="{{ $jobconnector->id }}"> {{ $jobconnector->company_name }} - {{ $jobconnector->location }} </option>
+                            <option selected value="{{ $jobconnector->id }}"> {{ $jobconnector->name }} - {{ $jobconnector->location }} </option>
                         @else
-                            <option value="{{ $jobconnector->id }}"> {{ $jobconnector->company_name }} - {{ $jobconnector->location }} </option>
+                            <option value="{{ $jobconnector->id }}"> {{ $jobconnector->name }} - {{ $jobconnector->location }} </option>
                         @endif
                     @endforeach
                     </select>

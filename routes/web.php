@@ -275,6 +275,39 @@ Route::group(['middleware' => 'auth'], function() {
 //
 
 
+//KnowCN routes
+    Route::get('/programnames',[
+        'uses'  => 'ProgramnameController@index',
+        'as'    => 'programnames'
+    ]);
+
+    Route::get('/programname/create',[
+        'uses'  => 'ProgramnameController@create',
+        'as'    => 'programname.create'
+    ]);
+
+    Route::post('/programname/update/{id}',[
+        'uses'  => 'ProgramnameController@update',
+        'as'    => 'programname.update'
+    ]);
+
+    Route::get('/programname/edit/{id}',[
+        'uses' => 'ProgramnameController@edit',
+        'as'   => 'programname.edit'
+    ]);
+
+    Route::post('/programname/store',[
+        'uses'  => 'ProgramnameController@store',
+        'as'    => 'programname.store'
+    ]);
+
+    // Route::get('/knowcn/delete/{id}',[
+    //     'uses' => 'KnowcnController@destroy',
+    //     'as'   => 'knowcn.delete'
+    // ]);
+//
+
+
 //Program routes
     Route::get('/programs',[
         'uses'  => 'ProgramController@index',

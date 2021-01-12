@@ -22,12 +22,21 @@ class CoachProgramController extends Controller
      */
     public function index()
     {
-        $coachprograms = CoachProgram::all();
-        $programs = Program::with('coaches','branch')->get();
+        // $coachprograms = CoachProgram::with('program', 'coaches')->get();
+ 
+        // $coachprograms2 =DB::table('coach_program')
+        // ->join('coaches', 'coaches.id', '=', 'coach_program.coach_id')
+        // ->join('programs', 'programs.id', '=', 'coach_program.program_id')
+        // ->join('programcategories', 'programcategories.id', '=', 'programs.programcategory_id')
+        // ->join('branches', 'branches.id', '=', 'programs.branch_id')
+        // ->select('coach_program.*', 'coaches.name AS coachName', 'programs.name AS programName', 'programs.date AS date', 'programcategories.name AS categoryName', 'branches.name AS branchName')
+        // ->get()
+        // ->groupBy('program_id');
+
+        $programs = Program::with('coachprograms', 'branch')->get();
 
         return view('coachprogram.index')
-        ->with('programs', $programs)
-        ->with('coachprograms', $coachprograms);
+        ->with('programs', $programs);
     }
 
     /**
@@ -65,23 +74,21 @@ class CoachProgramController extends Controller
         $rules = [
             'program' => 'required',
             'coach'   => 'required',
-            'date'    => 'required|date',
         ];
 
         $customMessages = [
             'program.required'         => 'Nama Program harus diisi.',
             'coach.required'           => 'Nama Coach harus diisi.',
-            'date.required'            => 'Tanggal Batch harus diisi.',
-            'date.date'                => 'Tanggal Batch harus berupa tanggal.',
         ];
 
         $this->validate($request, $rules, $customMessages);
 
-        $coachprogram = CoachProgram::create([
-            'coach_id'      => $request->coach,
-            'program_id'    => $request->program,
-            'date'          => $request->date,
-        ]);
+        foreach($request->coach as $coachprogram){
+            CoachProgram::create([
+                'coach_id'      => $coachprogram,
+                'program_id'    => $request->program,
+            ]);
+        }
 
         Session::flash('success', 'Berhasil Menambahkan Jadwal Kelas');
 
@@ -107,17 +114,14 @@ class CoachProgramController extends Controller
      */
     public function edit($id)
     {
-
-        $coachprogram = CoachProgram::find($id);
-        $current_program = Program::find($coachprogram->program_id);
         $programs = Program::all();
+        $program = Program::where('id',$id)->with('coachprograms', 'branch')->first();
         $coaches = Coach::all();
         $branches = Branch::all();
 
         return view('coachprogram.edit')
-            ->with('coachprogram', $coachprogram)
             ->with('programs', $programs)
-            ->with('current_program', $current_program)
+            ->with('program', $program)
             ->with('branches', $branches)
             ->with('coaches', $coaches);
     }
@@ -131,36 +135,28 @@ class CoachProgramController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $coachprogram = CoachProgram::find($id);
-
-        
+        $program = Program::find($id);
+    
         $rules = [
-            'program' => 'required',
             'coach'   => 'required',
-            'date'    => 'required|date',
+            'branch'  => 'required',
+            'date'    => 'required'
         ];
 
         $customMessages = [
-            'program.required'         => 'Nama Program harus diisi.',
             'coach.required'           => 'Nama Coach harus diisi.',
-            'date.required'            => 'Tanggal Batch harus diisi.',
-            'date.date'                => 'Tanggal Batch harus berupa tanggal.',
+            'branch.required'          => 'Lokasi Kelas harus dipilih.',
+            'date.required'            => 'Tanggal Batch harus diisi.'
         ];
 
         $this->validate($request, $rules, $customMessages);
 
-        $coachprogram->id           = $request->id;
-        $coachprogram->coach_id     = $request->coach;
-        $coachprogram->program_id   = $request->program;
-        $coachprogram->date         = $request->date;
-
-        $coachprogram->save();
-
-        $program = Program::find($coachprogram->program_id);
-
+        //$program->id = $id;
+        $program->date = $request->date;
         $program->branch_id = $request->branch;
-
         $program->save();
+
+        $program->coaches()->sync($request->coach);
 
         Session::flash('success', 'Berhasil Memperbaharui Jadwal Kelas');
 

@@ -1,34 +1,26 @@
 @extends('layouts.app')
 
-@section('header') Perbaharui Perusahaan {{ $jobconnector->name }} @endsection
+@section('header') Perbaharui Nama Program {{$programname->name}} Course-Net @endsection
 
 @section('content')
 
     <div class="card">
         <div class="card-body">
             <p class="text-danger text-bold">* : Data diperlukan.</p>
-            <form action="{{ route('jobconnector.update', ['id' => $jobconnector->id]) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('programname.update', ['id' => $programname->id]) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="name">Nama Perusahaan <span class="text-danger">*</span></label>
-                    <input type="text" name="name" placeholder="Contoh: BCA" value="{{ $jobconnector->name }}" class="form-control">
+                    <label for="name">Nama Program <span class="text-danger">*</span></label>
+                    <input type="text" name="name" placeholder="Contoh: Youtube" value="{{ $programname->name }}" class="form-control">
                     @if( $errors->has('name') )
                         <div class="text-danger">{{ $errors->first('name') }}</div>
                     @endif
                 </div>
 
                 <div class="form-group">
-                    <label for="location">Lokasi Perusahaan <span class="text-danger">*</span></label>
-                    <input type="text" name="location" placeholder="Contoh: BCA" value="{{ $jobconnector->location }}" class="form-control">
-                    @if( $errors->has('location') )
-                        <div class="text-danger">{{ $errors->first('location') }}</div>
-                    @endif
-                </div>
-
-                <div class="form-group">
-                    <label for="status">Status Perusahaan <span class="text-danger">*</span></label>
+                    <label for="status">Status Program <span class="text-danger">*</span></label>
                     <select name="status" id="status" class="form-control select2" style="width: 300px;">
-                        @if($jobconnector->status == 1)
+                        @if($programname->status == 1)
                             <option value="1" selected> Aktif </option>
                             <option value="0"> Tidak Aktif </option>
                         @else
@@ -43,7 +35,7 @@
 
                 <div class="form-group">
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success">Perbaharui Perusahaan Rekanan</button>
+                        <button type="submit" class="btn btn-success">Perbaharui Program</button>
                     </div>
                 </div>
             </form>

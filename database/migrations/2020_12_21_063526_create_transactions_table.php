@@ -15,7 +15,7 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('coach_program_id');
+            $table->bigInteger('program_id');
             $table->bigInteger('participant_id');
             $table->bigInteger('salesperson_id');
             $table->boolean('result')->default(0);

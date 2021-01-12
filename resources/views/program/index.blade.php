@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('header') List Semua Program @endsection
+@section('header') List Semua Batch Program @endsection
 
 @section('content')
 
@@ -19,6 +19,9 @@
                     <th class="text-center">
                         Kategori Program
                     </th>
+                    <th class="text-center">
+                        Tanggal Batch
+                    </th>
                     <th class="text-center"> 
                         Lokasi Cabang
                     </th>
@@ -32,10 +35,13 @@
                         @foreach ($programs as $program)
                             <tr>
                                 <td>
-                                    {{ $program->name }}
+                                    {{ $program->programname->name }}
                                 </td>
                                 <td>
                                     {{ $program->programcategory->name }}
+                                </td>
+                                <td>
+                                    {{ $program->date }}
                                 </td>
                                 <td>
                                     {{ $program->branch->name }}

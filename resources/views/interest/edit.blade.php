@@ -12,11 +12,11 @@
                 <div class="form-group">
                     <label for="program_id">Minat Program <span class="text-danger">*</span></label>
                     <select name="program_id" id="program_id" class="form-control select2" style="width: 300px;">
-                    @foreach($programs as $program)
-                        @if($interest->program->id == $interest->program_id)
-                            <option selected value="{{ $program->id }}"> {{ $program->name }} - {{ $program->branch->name }} </option> 
+                    @foreach($programnames as $program)
+                        @if($program->id == $interest->programname_id)
+                            <option selected value="{{ $program->id }}"> {{ $program->name }} </option> 
                         @else
-                            <option value="{{ $program->id }}"> {{ $program->name }} - {{ $program->branch->name }} </option> 
+                            <option value="{{ $program->id }}"> {{ $program->name }} </option> 
                         @endif
                     @endforeach
                     </select>

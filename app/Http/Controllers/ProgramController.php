@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Program;
 use App\Branch;
 use App\Programcategory;
+use App\Programname;
 use Session;
 
 class ProgramController extends Controller
@@ -18,7 +19,7 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $programs = Program::with('programcategory')->get();
+        $programs = Program::with('programcategory','programname')->get();
         $programcategories = Programcategory::all();
         $branches = Branch::all();
 
@@ -35,15 +36,17 @@ class ProgramController extends Controller
     public function create()
     {
         $branches = Branch::all();
+        $programnames = Programname::all();
         $programcategories = Programcategory::all();
 
-        if($branches->count() == 0 || $programcategories->count() == 0){
-            Session::flash('info', 'Tidak Dapat Menambahkan Program karena Tidak Ada Cabang/Kategori Program yang Terdaftar');
+        if($branches->count() == 0 || $programnames->count() == 0 || $programcategories->count() == 0){
+            Session::flash('info', 'Tidak Dapat Menambahkan Batch Program karena Tidak Ada Cabang/Kategori Program/Program yang Terdaftar');
             return redirect()->back();
         }
 
         return view('program.create')
                ->with('programcategories', $programcategories)
+               ->with('programnames', $programnames)
                ->with('branches', $branches);
     }
 
@@ -57,24 +60,27 @@ class ProgramController extends Controller
     {
 
         $rules = [
-            'name'              => 'required|unique:programs',
+            'programname'       => 'required',
             'branch_location'   => 'required',
             'programcategory'   => 'required',
+            'date'              => 'required|date',
         ];
 
         $customMessages = [
-            'name.required'            => 'Nama Program harus diisi.',
-            'name.unique'              => 'Nama Program sudah terdaftar, silahkan coba lagi.',
+            'programname.required'     => 'Nama Program harus dipilih.',
             'branch_location.required' => 'Lokasi Cabang harus dipilih.',
             'programcategory.required' => 'Kategori Program harus dipilih.',
+            'date.required'            => 'Tanggal Batch harus diisi.',
+            'date.date'                => 'Tanggal Batch harus berupa tanggal.'
         ];
 
         $this->validate($request, $rules, $customMessages);
 
         $programs = Program::create([
-            'name'               => $request->name,
+            'programname_id'     => $request->programname,
             'branch_id'          => $request->branch_location,
             'programcategory_id' => $request->programcategory,
+            'date'               => $request->date,
         ]);
 
         Session::flash('success', 'Berhasil Menambahkan Program');
@@ -102,6 +108,7 @@ class ProgramController extends Controller
     public function edit($id)
     {
         $program = Program::find($id);
+        $programnames = Programname::all();
         $branches = Branch::all();
         $programcategories = Programcategory::all();
         $current_branch = $program->branch->id;
@@ -109,6 +116,7 @@ class ProgramController extends Controller
         return view('program.edit')
             ->with('program', $program)
             ->with('branches', $branches)
+            ->with('programnames', $programnames)
             ->with('programcategories', $programcategories)
             ->with('current_branch', $current_branch);
     }
@@ -125,23 +133,27 @@ class ProgramController extends Controller
         $program = Program::find($id);
 
         $rules = [
-            'name'              => 'required',
+            'programname'       => 'required',
             'branch_location'   => 'required',
             'programcategory'   => 'required',
+            'date'              => 'required|date'
         ];
 
         $customMessages = [
-            'name.required'            => 'Nama Program harus diisi.',
+            'programname.required'     => 'Nama Program harus diisi.',
             'branch_location.required' => 'Lokasi Cabang harus dipilih.',
             'programcategory.required' => 'Kategori Program harus dipilih.',
+            'date.required'            => 'Tanggal Batch harus dipilih.',
+            'date.date'                => 'Tanggal Batch harus berupa tanggal.'
         ];
 
         $this->validate($request, $rules, $customMessages);
 
         $program->id                 = $request->id;
-        $program->name               = $request->name;
+        $program->programname_id     = $request->programname;
         $program->branch_id          = $request->branch_location;
         $program->programcategory_id = $request->programcategory;
+        $program->date               = $request->date;
 
         $program->save();
 

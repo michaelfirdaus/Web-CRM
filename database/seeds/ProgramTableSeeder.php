@@ -12,9 +12,10 @@ class ProgramTableSeeder extends Seeder
     public function run()
     {
         App\Program::create([
-            'name' => 'CCNA',
             'branch_id' => '1',
-            'programcategory_id' => '1'
+            'programcategory_id' => '1',
+            'programname_id' => '1',
+            'date'   => '2021-01-20',
         ]);
     }
 }
