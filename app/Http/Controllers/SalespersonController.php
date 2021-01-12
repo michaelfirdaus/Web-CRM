@@ -38,10 +38,19 @@ class SalespersonController extends Controller
     public function store(Request $request)
     {
         //Validation to make sure name field should be filled and the category must be unique
-        $this->validate($request, [
-            'name'   => 'required',
-            'status' => 'required'
-        ]);
+
+        $rules = [
+            'name'   => 'required|unique:salespersons',
+            'status' => 'required|boolean'
+        ];
+
+        $customMessages = [
+            'name.required'   => 'Nilai Sales harus diisi.',
+            'name.unique'     => 'Nama Sales sudah terdaftar, silahkan coba lagi.',
+            'status.required' => 'Status harus dipilih.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         $salesperson = new Salesperson;
 
@@ -93,6 +102,18 @@ class SalespersonController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $rules = [
+            'name'   => 'required',
+            'status' => 'required|boolean'
+        ];
+
+        $customMessages = [
+            'name.required'   => 'Nilai Sales harus diisi.',
+            'status.required' => 'Status harus dipilih.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
         //Find category based on category ID
         $salesperson = Salesperson::find($id);
         

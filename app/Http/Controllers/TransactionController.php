@@ -49,6 +49,7 @@ class TransactionController extends Controller
             Session::flash('info', 'Tidak Dapat Menambahkan Transaksi karena Peserta/Jadwal Kelas/Sales Tidak Terdaftar');
             return redirect()->back();
         }
+        
 
         return view('transaction.create')
             ->with('participants', $participants)
@@ -64,14 +65,26 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+
+        $rules = [
             'participant'       => 'required',
             'sales'             => 'required',
             'program'           => 'required',
-            'price'             => 'required',
-            'firsttrans'        => 'required',
-            'recoaching'        => 'required',
-        ]);
+            'price'             => 'required|min:0',
+            'firsttrans'        => 'required|min:0',
+            'recoaching'        => 'required|boolean',
+        ];
+
+        $customMessages = [
+            'participant.required'   => 'Nilai Peserta harus dipilih.',
+            'sales.required'         => 'Nama Sales harus dipilih.',
+            'program.required'       => 'Batch Program harus dipilih.',
+            'price.required'         => 'Harga harus diisi.',
+            'firsttrans.required'    => 'DP Pertama harus diisi.',
+            'recoaching.required'    => 'Recoaching harus dipilih.'    
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         $price = (int)str_replace(".", "", $request->price);
         $firsttrans = (int)str_replace(".", "", $request->firsttrans);
@@ -142,14 +155,25 @@ class TransactionController extends Controller
     {
         $transaction = Transaction::find($id);
 
-        $this->validate($request, [
+        $rules = [
             'participant'       => 'required',
             'sales'             => 'required',
             'program'           => 'required',
-            'firsttrans'        => 'required',
-            'price'             => 'required',
-            'recoaching'        => 'required',
-        ]);
+            'price'             => 'required|min:0',
+            'firsttrans'        => 'required|min:0',
+            'recoaching'        => 'required|boolean',
+        ];
+
+        $customMessages = [
+            'participant.required'   => 'Nilai Peserta harus dipilih.',
+            'sales.required'         => 'Nama Sales harus dipilih.',
+            'program.required'       => 'Batch Program harus dipilih.',
+            'price.required'         => 'Harga harus diisi.',
+            'firsttrans.required'    => 'DP Pertama harus diisi.',
+            'recoaching.required'    => 'Recoaching harus dipilih.'    
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         $price = (int)str_replace(".", "", $request->price);
         $firsttrans = (int)str_replace(".", "", $request->firsttrans);
