@@ -138,24 +138,6 @@
               
               <li class="nav-header">Data Kunci</li>
               
-              <li class="nav-item">
-                <a href="{{route('branches')}}" class="nav-link">
-                  <i class="nav-icon fas fa-building"></i>
-                  <p>
-                    Cabang
-                  </p>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="{{route('programcategories')}}" class="nav-link">
-                  <i class="nav-icon fas fa-list"></i>
-                  <p>
-                    Kategori Program
-                  </p>
-                </a>
-              </li>
-
 
               <li class="nav-item">
                 <a href="{{route('programs')}}" class="nav-link">
@@ -179,6 +161,24 @@
               
               <li class="nav-header">Data Pendukung</li>
               
+              <li class="nav-item">
+                <a href="{{route('branches')}}" class="nav-link">
+                  <i class="nav-icon fas fa-building"></i>
+                  <p>
+                    Cabang/Lokasi Kelas
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{route('programcategories')}}" class="nav-link">
+                  <i class="nav-icon fas fa-list"></i>
+                  <p>
+                    Kategori Program
+                  </p>
+                </a>
+              </li>
+
               <li class="nav-item">
                 <a href="{{route('programnames')}}" class="nav-link">
                   <i class="nav-icon fas fa-book"></i>

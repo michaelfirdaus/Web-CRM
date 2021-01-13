@@ -100,27 +100,27 @@ class ParticipantController extends Controller
         //     ]);
         // }
         
-        $branch_code = Branch::find($request->branch_id);
-        $membernum = Membernumber::where('branch_id', $request->branch_id)->first();
-
-        if($membernum == null){
-            $membernum = Membernumber::create([
-                'branch_id'     => $request->branch_id,
-                'lastnumber'    => (int)$branch_code->code * 1000000  + 501,
-            ]);
-        }else{
-            $membernum->update([
-                'lastnumber' => (int)$membernum->lastnumber + 1,
-            ]);
-
-            $membernum->save();
-        }
-
         $checkParticipant = Participant::all();
 
-        if($checkParticipant->count() > 0){
-            $p = Participant::find($request->memberreference_id);
+        if($checkParticipant->count() > 0 && $request->has('memberreference_id')){
+            $p = Participant::where('id',$request->memberreference_id)->get();
+            
+            $branch_code = Branch::find($request->branch_id);
+            $membernum = Membernumber::where('branch_id', $request->branch_id)->first();
     
+            if($membernum == null){
+                $membernum = Membernumber::create([
+                    'branch_id'     => $request->branch_id,
+                    'lastnumber'    => (int)$branch_code->code * 1000000  + 501,
+                ]);
+            }else{
+                $membernum->update([
+                    'lastnumber' => (int)$membernum->lastnumber + 1,
+                ]);
+    
+                $membernum->save();
+            }
+
             $participant = Participant::create([
                 'id'                        => $membernum->lastnumber,
                 'branch_id'                 => $request->branch_id,
@@ -141,6 +141,22 @@ class ParticipantController extends Controller
                 'memberreference_name'      => $p->name
             ]);
         }else{
+            $branch_code = Branch::find($request->branch_id);
+            $membernum = Membernumber::where('branch_id', $request->branch_id)->first();
+    
+            if($membernum == null){
+                $membernum = Membernumber::create([
+                    'branch_id'     => $request->branch_id,
+                    'lastnumber'    => (int)$branch_code->code * 1000000  + 501,
+                ]);
+            }else{
+                $membernum->update([
+                    'lastnumber' => (int)$membernum->lastnumber + 1,
+                ]);
+    
+                $membernum->save();
+            }
+
             $participant = Participant::create([
                 'id'                        => $membernum->lastnumber,
                 'branch_id'                 => $request->branch_id,

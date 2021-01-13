@@ -32,9 +32,8 @@ class ResultByIdController extends Controller
      */
     public function create($id)
     {
-        $currenttransaction = $id;
 
-        return view('resultbyid.create')->with('currenttransaction', $currenttransaction);
+        return view('resultbyid.create')->with('currenttransaction', $id);
     }
 
     /**
@@ -98,6 +97,7 @@ class ResultByIdController extends Controller
 
             $transaction = Transaction::find($request->id);
 
+            $transaction->result_id = $result->id;
             $transaction->result = 1;
     
             $transaction->save();
@@ -108,7 +108,7 @@ class ResultByIdController extends Controller
             
             Session::flash('success', 'Berhasil Memperbaharui Data Nilai');
             return view('resultbyid.index', ['results'      => $results,
-                                             'transaction'  => $transaction]);
+                                                        'transaction'  => $transaction]);
 
         }
         else{
@@ -142,6 +142,7 @@ class ResultByIdController extends Controller
 
             $transaction = Transaction::find($request->id);
 
+            $transaction->result_id = $result->id;
             $transaction->result = 1;
 
             $transaction->save();
