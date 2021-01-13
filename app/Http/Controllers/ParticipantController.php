@@ -44,6 +44,16 @@ class ParticipantController extends Controller
             return redirect()->back();
         }
 
+        if($knowcns->count() == 0){
+            Session::flash('info', 'Tidak Dapat Menambahkan Peserta karena Tidak Ada Kanal Course-Net yang Terdaftar');
+            return redirect()->back();
+        }
+
+        if($professions->count() ==0){
+            Session::flash('info', 'Tidak Dapat Menambahkan Peserta karena Tidak Ada Profesi yang Terdaftar');
+            return redirect()->back();
+        }
+
         return view('participant.create')
             ->with('branches', $branches)
             ->with('knowcns', $knowcns)

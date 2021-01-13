@@ -49,6 +49,7 @@ class TransactionController extends Controller
             Session::flash('info', 'Tidak Dapat Menambahkan Transaksi karena Peserta/Jadwal Kelas/Sales Tidak Terdaftar');
             return redirect()->back();
         }
+        
 
         return view('transaction.create')
             ->with('participants', $participants)
@@ -69,8 +70,8 @@ class TransactionController extends Controller
             'participant'       => 'required',
             'sales'             => 'required',
             'program'           => 'required',
-            'price'             => 'required',
-            'firsttrans'        => 'required',
+            'price'             => 'required|min:0',
+            'firsttrans'        => 'required|min:0',
             'recoaching'        => 'required|boolean',
         ];
 
@@ -80,7 +81,7 @@ class TransactionController extends Controller
             'program.required'     => 'Batch Program harus dipilih.',
             'price.required'       => 'Harga harus diisi.',
             'firsttrans.required'  => 'DP Pertama harus diisi.',
-            'recoaching.required'  => 'Status Recoaching harus dipilih.',
+            'recoaching.required'  => 'Recoaching harus dipilih.',
         ];
 
         $this->validate($request, $rules, $customMessages);
@@ -158,18 +159,18 @@ class TransactionController extends Controller
             'participant'       => 'required',
             'sales'             => 'required',
             'program'           => 'required',
-            'price'             => 'required',
-            'firsttrans'        => 'required',
+            'price'             => 'required|min:0',
+            'firsttrans'        => 'required|min:0',
             'recoaching'        => 'required|boolean',
         ];
 
         $customMessages = [
-            'participant.required' => 'Nama Peserta harus dipilih.',
-            'sales.required'       => 'Nama Sales harus dipilih.',
-            'program.required'     => 'Batch Program harus dipilih.',
-            'price.required'       => 'Harga harus diisi.',
-            'firsttrans.required'  => 'DP Pertama harus diisi.',
-            'recoaching.required'  => 'Status Recoaching harus dipilih.',
+            'participant.required'   => 'Nilai Peserta harus dipilih.',
+            'sales.required'         => 'Nama Sales harus dipilih.',
+            'program.required'       => 'Batch Program harus dipilih.',
+            'price.required'         => 'Harga harus diisi.',
+            'firsttrans.required'    => 'DP Pertama harus diisi.',
+            'recoaching.required'    => 'Recoaching harus dipilih.'    
         ];
 
         $this->validate($request, $rules, $customMessages);
