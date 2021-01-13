@@ -562,10 +562,10 @@ Route::group(['middleware' => 'auth'], function() {
         'as'    => 'resultbyid.store'
     ]);
 
-    Route::get('/resultbyid/delete/{id}',[
-        'uses' => 'ResultByIdController@destroy',
-        'as'   => 'resultbyid.delete'
-    ]);
+    // Route::get('/resultbyid/delete/{id}',[
+    //     'uses' => 'ResultByIdController@destroy',
+    //     'as'   => 'resultbyid.delete'
+    // ]);
 //
 
 

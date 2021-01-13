@@ -107,8 +107,7 @@ class ResultByIdController extends Controller
             $transaction = Transaction::where('id', $request->id)->first();
             
             Session::flash('success', 'Berhasil Memperbaharui Data Nilai');
-            return view('resultbyid.index', ['results'      => $results,
-                                                        'transaction'  => $transaction]);
+            return view('resultbyid.index', ['transaction'  => $transaction]);
 
         }
         else{
@@ -152,8 +151,7 @@ class ResultByIdController extends Controller
             $transaction = Transaction::where('id', $request->id)->first();
             
             Session::flash('success', 'Berhasil Memperbaharui Data Nilai');
-            return view('resultbyid.index', ['results'      => $results,
-                                            'transaction'  => $transaction]);
+            return view('resultbyid.index', ['transaction'  => $transaction]);
         }
     }
 
