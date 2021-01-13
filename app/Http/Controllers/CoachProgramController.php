@@ -169,10 +169,10 @@ class CoachProgramController extends Controller
     }
 
     public function detail($id){
-        $coachprogram = CoachProgram::find($id);
+        $program = Program::where('id',$id)->with('coachprograms', 'branch', 'transaction', 'coaches')->first();
 
-
-        $transactions = Transaction::find($coachprogram->id);
+        $transactions = Transaction::find($program->id);
+        dd($transactions);
         if($transactions == null){
             Session::flash('warning', 'Belum Ada Peserta Di Kelas Ini!');
             return redirect()->back();

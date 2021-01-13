@@ -96,7 +96,7 @@
                 <div class="form-group">
                     <label for="branch_id">Lokasi Pendaftaran <span class="text-danger">*</span></label>
                     <select name="branch_id" id="branch_id" class="form-control select2" style="width: auto;">
-                        <option value="" selected disabled hidden> - Pilih Lokasi Pendaftaran - </option>
+                    <option value="" selected disabled hidden> - Pilih Lokasi Pendaftaran - </option>
                     @foreach($branches as $branch)
                         @if( old('branch_id') )
                             <option selected value="{{ $branch->id }}"> {{$branch->code}} - {{ $branch->name }} </option>
@@ -128,7 +128,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="memberreference_id">Jika mengetahui Course-Net dari teman alumni Course-Net, sebutkan :</label>
+                    <label for="memberreference_id">Jika mengetahui Course-Net dari alumni Course-Net, sebutkan :</label>
                     <select name="memberreference_id" id="memberreference_id" class="form-control select2" style="width: auto;">
                     <option value="" selected disabled hidden> - Pilih Member/Peserta - </option>
                     @foreach($participants as $participant)

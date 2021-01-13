@@ -12,6 +12,10 @@ class KnowcnTableSeeder extends Seeder
     public function run()
     {
         App\KnowCN::create([
+            'name' => 'Alumni'
+        ]);
+
+        App\KnowCN::create([
             'name' => 'Teman'
         ]);
 

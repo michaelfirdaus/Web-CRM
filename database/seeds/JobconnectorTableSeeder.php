@@ -12,7 +12,7 @@ class JobconnectorTableSeeder extends Seeder
     public function run()
     {
         App\Jobconnector::create([
-            'company_name' => 'BCA',
+            'name' => 'BCA',
             'location' => 'Jakarta'
         ]);
     }

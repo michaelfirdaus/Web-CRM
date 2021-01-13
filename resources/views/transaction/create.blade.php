@@ -4,8 +4,6 @@
 
 @section('content')
 
-@include('includes.errors')
-
     <div class="card mb-5">
         <div class="card-header text-danger text-bold">Informasi Penting</div>
         <div class="card-body">
@@ -26,9 +24,16 @@
                     <select name="participant" id="participant" class="form-control select2" style="width: auto;">
                     <option value="" selected disabled hidden> - Pilih Peserta - </option>
                     @foreach($participants as $participant)
-                        <option value="{{ $participant->id }}"> {{ $participant->id }} - {{ $participant->name }} </option> 
+                        @if( old('participant') )
+                            <option selected value="{{ $participant->id }}"> {{$participant->id}} - {{ $participant->name }} </option>
+                        @else
+                            <option value="{{ $participant->id }}"> {{$participant->id}} - {{ $participant->name }} </option> 
+                        @endif
                     @endforeach
                     </select>
+                    @if( $errors->has('participant') )
+                        <div class="text-danger">{{ $errors->first('participant') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
@@ -36,9 +41,16 @@
                     <select name="sales" id="sales" class="form-control select2" style="width: auto;">
                     <option value="" selected disabled hidden> - Pilih Sales - </option>
                     @foreach($salespersons as $salesperson)
-                        <option value="{{ $salesperson->id }}"> {{ $salesperson->name }} </option> 
+                        @if( old('sales') )
+                            <option selected value="{{ $salesperson->id }}"> {{ $salesperson->name }} </option> 
+                        @else
+                            <option value="{{ $salesperson->id }}"> {{ $salesperson->name }} </option>
+                        @endif 
                     @endforeach
                     </select>
+                    @if( $errors->has('sales') )
+                        <div class="text-danger">{{ $errors->first('sales') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
@@ -53,16 +65,25 @@
                         @endif
                     @endforeach
                     </select>
+                    @if( $errors->has('program') )
+                        <div class="text-danger">{{ $errors->first('program') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="price">Harga <span class="text-danger">*</span></label>
                     <input type="text" name="price" placeholder="Contoh: 5000000" class="form-control currency" value="{{ old('price') }}">
+                    @if( $errors->has('price') )
+                        <div class="text-danger">{{ $errors->first('price') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="firsttrans">DP Pertama <span class="text-danger">*</span></label>
                     <input type="text" name="firsttrans" placeholder="Contoh: 2500000" class="form-control currency" value="{{ old('firsttrans') }}">
+                    @if( $errors->has('firsttrans') )
+                        <div class="text-danger">{{ $errors->first('firsttrans') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
@@ -91,6 +112,9 @@
                       <option value="1"> Ya </option>
                       <option selected value="0"> Tidak </option>
                     </select>
+                    @if( $errors->has('recoaching') )
+                        <div class="text-danger">{{ $errors->first('recoaching') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">

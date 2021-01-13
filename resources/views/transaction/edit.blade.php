@@ -4,8 +4,6 @@
 
 @section('content')
 
-@include('includes.errors')
-
     <div class="card">
         <div class="card-body">
             <p class="text-danger text-bold">* : Data diperlukan.</p>
@@ -22,42 +20,57 @@
                         @endif    
                     @endforeach
                     </select>
+                    @if( $errors->has('participant') )
+                        <div class="text-danger">{{ $errors->first('participant') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="sales">Nama Sales <span class="text-danger">*</span></label>
                     <select name="sales" id="sales" class="form-control select2" style="width: auto;">
-                    @foreach($salespersons as $salesperson)
-                        @if($salesperson->id == $transaction->salesperson_id)
-                            <option selected value="{{ $salesperson->id }}"> {{ $salesperson->name }} </option> 
-                        @else
-                            <option value="{{ $salesperson->id }}"> {{ $salesperson->name }} </option>
-                        @endif    
+                        @foreach($salespersons as $salesperson)
+                            @if($salesperson->id == $transaction->salesperson_id)
+                                <option selected value="{{ $salesperson->id }}"> {{ $salesperson->name }} </option> 
+                            @else
+                                <option value="{{ $salesperson->id }}"> {{ $salesperson->name }} </option>
+                            @endif    
                         @endforeach
                     </select>
+                    @if( $errors->has('sales') )
+                        <div class="text-danger">{{ $errors->first('sales') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="program">Nama Program <span class="text-danger">*</span></label>
                     <select name="program" id="program" class="form-control select2" style="width: auto;">
-                    @foreach($programs as $p)
-                        @if($p->id == $transaction->program->id)
-                            <option selected value="{{ $p->id }}"> Batch {{$p->date}} | {{ $p->programname->name }} | {{ $p->branch->name}} </option> 
-                        @else
-                            <option value="{{ $p->id }}"> Batch {{$p->date}} | {{ $p->programname->name }} | {{ $p->branch->name }} </option> 
-                        @endif
-                    @endforeach
+                        @foreach($programs as $p)
+                            @if($p->id == $transaction->program->id)
+                                <option selected value="{{ $p->id }}"> Batch {{$p->date}} | {{ $p->programname->name }} | {{ $p->branch->name}} </option> 
+                            @else
+                                <option value="{{ $p->id }}"> Batch {{$p->date}} | {{ $p->programname->name }} | {{ $p->branch->name }} </option> 
+                            @endif
+                        @endforeach
                     </select>
+                    @if( $errors->has('program') )
+                        <div class="text-danger">{{ $errors->first('program') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="price">Harga <span class="text-danger">*</span></label>
                     <input type="text" name="price" value="{{ $transaction->price }}" placeholder="Contoh: 5000000" class="form-control currency">
+                    @if( $errors->has('price') )
+                        <div class="text-danger">{{ $errors->first('price') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="firsttrans">DP Pertama <span class="text-danger">*</span></label>
                     <input type="text" name="firsttrans" value="{{ $transaction->firsttrans }}" placeholder="Contoh: 2500000" class="form-control currency">
+                    @if( $errors->has('firsttrans') )
+                        <div class="text-danger">{{ $errors->first('firsttrans') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
@@ -94,6 +107,9 @@
                             <option value="1"> Ya </option>
                         @endif
                     </select>
+                    @if( $errors->has('recoaching') )
+                        <div class="text-danger">{{ $errors->first('recoaching') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
