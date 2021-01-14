@@ -11,7 +11,7 @@
                     <li>
                         Coach : 
                         @php
-                            $c = $program->coachprograms->count();
+                            $c = $pc->count();
                             $a = 0;
                         @endphp
                         @if($c == 1)

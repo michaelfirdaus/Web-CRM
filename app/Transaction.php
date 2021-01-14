@@ -19,7 +19,7 @@ class Transaction extends Model
     }
 
     public function result(){
-        return $this->hasOne('App\Result', 'id','transaction_id', 'result_id');
+        return $this->hasOne('App\Result', 'id', 'result_id', 'transaction_id');
     }
 
     public function participant(){
