@@ -17,6 +17,9 @@
                         Nama Kategori Program
                     </th>
                     <th class="text-center">
+                        Status Kategori Program
+                    </th>
+                    <th class="text-center">
                         Edit
                     </th>
                 </thead>
@@ -27,6 +30,13 @@
                             <tr>
                                 <td>
                                     {{ $programcategory->name }}
+                                </td>
+                                <td class="text-center">
+                                    @if($programcategory->status == 1)
+                                        Aktif
+                                    @else
+                                        Tidak Aktif
+                                    @endif
                                 </td>
                                 <td class="text-center">
                                     <a href="{{ route('programcategory.edit', ['id' => $programcategory ->id]) }}" class="btn btn-xs btn-info">

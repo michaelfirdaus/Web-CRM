@@ -41,18 +41,21 @@ class ProgramcategoryController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name' => 'required|unique:programcategories',
+            'name'   => 'required|unique:programcategories',
+            'status' => 'required|boolean'
         ];
 
         $customMessages = [
-            'name.required' => 'Nama Kategori Program harus diisi.',
-            'name.unique'   => 'Nama Kategori Program sudah terdaftar, silahkan coba lagi.',
+            'name.required'   => 'Nama Kategori Program harus diisi.',
+            'name.unique'     => 'Nama Kategori Program sudah terdaftar, silahkan coba lagi.',
+            'status.required' => 'Status Kategori Program harus dipilih.',
         ];
 
         $this->validate($request, $rules, $customMessages);
 
         $programcategory = Programcategory::create([
-            'name'          => $request->name
+            'name'   => $request->name,
+            'status' => $request->status  
         ]);
 
         Session::flash('success', 'Berhasil Menambahkan Kategori Program');
@@ -94,23 +97,22 @@ class ProgramcategoryController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'name' => 'required',
+            'name'   => 'required',
+            'status' => 'required|boolean'
         ];
 
         $customMessages = [
-            'name.required' => 'Nama Kategori Program harus diisi.',
+            'name.required'   => 'Nama Kategori Program harus diisi.',
+            'status.required' => 'Status Kategori Program harus dipilih.'
         ];
 
         $this->validate($request, $rules, $customMessages);
 
         $programcategory = Programcategory::find($id);
 
-        $this->validate($request, [
-            'name'              => 'required',
-        ]);
-
         $programcategory->id        = $request->id;
         $programcategory->name      = $request->name;
+        $programcategory->status    = $request->status;
 
         $programcategory->save();
 

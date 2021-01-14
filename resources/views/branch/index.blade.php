@@ -20,6 +20,9 @@
                         Kode Cabang
                     </th>
                     <th class="text-center">
+                        Status Cabang
+                    </th>
+                    <th class="text-center">
                         Edit
                     </th>
                 </thead>
@@ -33,6 +36,13 @@
                                 </td>
                                 <td class="text-center">
                                     {{ $branch->code }}
+                                </td>
+                                <td class="text-center">
+                                    @if($branch->status == 1)
+                                        Aktif
+                                    @else
+                                        Tidak Aktif
+                                    @endif
                                 </td>
                                 <td class="text-center">
                                     <a href="{{ route('branch.edit', ['id' => $branch ->id]) }}" class="btn btn-xs btn-info">

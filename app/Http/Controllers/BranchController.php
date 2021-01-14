@@ -39,23 +39,26 @@ class BranchController extends Controller
     {
         //Validation to make sure name field should be filled and the category must be unique
         $rules = [
-            'name' => 'required',
-            'code' => 'required|numeric|unique:branches',
+            'name'   => 'required',
+            'code'   => 'required|numeric|unique:branches',
+            'status' => 'required|boolean'
         ];
 
         $customMessages = [
-            'name.required' => 'Nama Cabang harus diisi.',
-            'code.required' => 'Kode Cabang harus diisi.',
-            'code.unique'   => 'Kode Cabang sudah terdaftar, silahkan coba lagi.',
-            'code.numeric'  => 'Kode Cabang harus angka.',
+            'name.required'   => 'Nama Cabang harus diisi.',
+            'code.required'   => 'Kode Cabang harus diisi.',
+            'code.unique'     => 'Kode Cabang sudah terdaftar, silahkan coba lagi.',
+            'code.numeric'    => 'Kode Cabang harus angka.',
+            'status.required' => 'Status Cabang harus dipilih.'
         ];
 
         $this->validate($request, $rules, $customMessages);
 
         $branch = new Branch;
 
-        $branch->name = $request->name;
-        $branch->code = $request->code;
+        $branch->name   = $request->name;
+        $branch->code   = $request->code;
+        $branch->status = $request->status;
         //Saving current category to the database
         $branch->save();
 
@@ -102,15 +105,17 @@ class BranchController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'name' => 'required',
-            'code' => 'required|numeric',
+            'name'   => 'required',
+            'code'   => 'required|numeric',
+            'status' => 'required|boolean'
         ];
 
         $customMessages = [
-            'name.required' => 'Nama Cabang harus diisi.',
-            'code.required' => 'Kode Cabang harus diisi.',
-            'code.unique'   => 'Kode Cabang sudah terdaftar, silahkan coba lagi.',
-            'code.numeric'  => 'Kode Cabang harus angka.',
+            'name.required'   => 'Nama Cabang harus diisi.',
+            'code.required'   => 'Kode Cabang harus diisi.',
+            'code.unique'     => 'Kode Cabang sudah terdaftar, silahkan coba lagi.',
+            'code.numeric'    => 'Kode Cabang harus angka.',
+            'status.required' => 'Status Cabang harus dipilih.'
         ];
 
         $this->validate($request, $rules, $customMessages);
@@ -118,8 +123,9 @@ class BranchController extends Controller
         //Find category based on category ID
         $branch = Branch::find($id);
         
-        $branch->name = $request->name;
-        $branch->code = $request->code;
+        $branch->name   = $request->name;
+        $branch->code   = $request->code;
+        $branch->status = $request->status;
         
         //Save the category to the database
         $branch->save();
