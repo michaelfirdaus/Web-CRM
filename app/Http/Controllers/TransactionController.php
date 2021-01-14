@@ -88,7 +88,7 @@ class TransactionController extends Controller
         $transactions = Transaction::where('program_id',$request->program)->get();
         foreach($transactions as $t)
             if($t->participant_id == $request->participant){
-                Session::flash('warning', 'Peserta ini sudah terdaftar di kelas ini!');
+                Session::flash('warning', 'Peserta ini sudah terdaftar di kelas ini! Apabila ingin recoaching, silahkan edit data transaksi peserta');
                  return redirect()->back();
             }
 
