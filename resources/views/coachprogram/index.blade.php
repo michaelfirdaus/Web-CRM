@@ -33,9 +33,9 @@
                     <th class="text-center"> 
                         Lokasi Kelas
                     </th>
-                    {{-- <th class="text-center"> 
+                    <th class="text-center"> 
                         Lihat Detail Kelas
-                    </th> --}}
+                    </th>
                     <th class="text-center">
                         Edit
                     </th>
