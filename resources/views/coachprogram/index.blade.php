@@ -78,11 +78,11 @@
                                     <td class="text-center">
                                         {{ $p->branch->name }}
                                     </td>
-                                    {{-- <td class="text-center">
+                                    <td class="text-center">
                                         <a href="{{ route('coachprogram.detail', ['id'=> $p->id]) }}" class="btn btn-xs btn-success">
                                             <span class="far fa-eye"></span>
                                         </a>
-                                    </td> --}}
+                                    </td>
                                     <td class="text-center">
                                         <a href="{{ route('coachprogram.edit', ['id'=> $p->id]) }}" class="btn btn-xs btn-info">
                                             <span class="fas fa-pencil-alt"></span>

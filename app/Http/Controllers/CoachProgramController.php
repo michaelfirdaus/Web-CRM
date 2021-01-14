@@ -169,21 +169,20 @@ class CoachProgramController extends Controller
     }
 
     public function detail($id){
-        $program = Program::where('id',$id)->with('coachprograms','branch','coachprograms.coaches')->get();
+        $program = Program::where('id',$id)->with('branch', 'coaches')->first();
         // dd($program);
         $transactions = Transaction::where('program_id', $id)->with('participant','result')->get();
+        // dd($transactions);
 
         $countparticipant = $transactions->count();
         if($countparticipant == 0){
             Session::flash('warning', 'Belum Ada Peserta Di Kelas Ini!');
             return redirect()->back();
         }
-        $programs = Program::with('coaches','branch')->get();
 
         return view('coachprogram.detail')
                ->with('program', $program)
                ->with('transactions', $transactions)
-               ->with('programs', $programs)
                ->with('countparticipant', $countparticipant);
     }
 

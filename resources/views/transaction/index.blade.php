@@ -151,7 +151,7 @@
                                     {{ $transaction->note }}
                                 </td>
                                 <td class="text-center">
-                                    @if($transaction->result == 0)
+                                    @if($transaction->result_flag == 0)
                                     <a href="{{ route('resultbyid.create', ['id' => $transaction->id]) }}" class="btn btn-xs btn-success">
                                         <span class="fas fa-plus"></span>
                                     </a>

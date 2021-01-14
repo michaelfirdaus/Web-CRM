@@ -95,7 +95,7 @@ class ResultByIdController extends Controller
             $transaction = Transaction::find($request->id);
 
             $transaction->result_id = $result->id;
-            $transaction->result = 1;
+            $transaction->result_flag = 1;
     
             $transaction->save();
             
@@ -135,7 +135,7 @@ class ResultByIdController extends Controller
             $transaction = Transaction::find($request->id);
 
             $transaction->result_id = $result->id;
-            $transaction->result = 1;
+            $transaction->result_flag = 1;
 
             $transaction->save();
 
@@ -249,7 +249,7 @@ class ResultByIdController extends Controller
 
         $transaction = Transaction::find($result->transaction_id);
 
-        $transaction->result = 0;
+        $transaction->result_flag = 0;
 
         $transaction->save();
 
