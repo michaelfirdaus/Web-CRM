@@ -18,11 +18,8 @@ class ResultByIdController extends Controller
      */
     public function index($id)
     {
-        $results = Result::where('transaction_id', $id)->with('transaction')->get();
-        $transaction = Transaction::where('id', $id)->first();
-
-        return view('resultbyid.index', ['results'      => $results,
-                                         'transaction'  => $transaction]);
+        $result = Result::where('transaction_id', $id)->with('transaction','transaction.participant')->first();
+        return view('resultbyid.index', ['result'=> $result]);
     }
 
     /**
@@ -101,13 +98,9 @@ class ResultByIdController extends Controller
             $transaction->result = 1;
     
             $transaction->save();
-    
-    
-            $results = Result::where('transaction_id', $request->id)->with('transaction')->get();
-            $transaction = Transaction::where('id', $request->id)->first();
             
             Session::flash('success', 'Berhasil Memperbaharui Data Nilai');
-            return view('resultbyid.index', ['transaction'  => $transaction]);
+            return redirect()->route('resultbyid', ['id'  => $transaction->id]);
 
         }
         else{
@@ -146,12 +139,9 @@ class ResultByIdController extends Controller
 
             $transaction->save();
 
-
-            $results = Result::where('transaction_id', $request->id)->with('transaction')->get();
-            $transaction = Transaction::where('id', $request->id)->first();
             
             Session::flash('success', 'Berhasil Memperbaharui Data Nilai');
-            return view('resultbyid.index', ['transaction'  => $transaction]);
+            return redirect()->route('resultbyid', ['id'  => $transaction->id]);
         }
     }
 
@@ -174,7 +164,7 @@ class ResultByIdController extends Controller
      */
     public function edit($id)
     {
-        $result = Result::find($id)->with('transaction')->first();
+        $result = Result::where('id', $id)->with('transaction', 'transaction.participant')->first();
 
         return view('resultbyid.edit')->with('result', $result);
     }
@@ -242,13 +232,9 @@ class ResultByIdController extends Controller
         $result->attendancecertificate_pickdate = $request->attendancecertificate_pickdate;
 
         $result->save();
-
-        
-        $results = Result::where('transaction_id', $result->transaction_id)->with('transaction')->get();
-        $transaction = Transaction::where('id', $result->transaction_id)->first();
         
         Session::flash('success', 'Berhasil Memperbaharui Data Nilai');
-        return redirect()->route('resultbyid', ['id' => $result->transaction_id]);
+        return redirect()->route('resultbyid', ['id' => $result->transaction->id]);
     }
 
     /**

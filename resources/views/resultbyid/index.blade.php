@@ -1,23 +1,21 @@
 @extends('layouts.app')
 
-@section('header') Data Nilai Peserta {{ $transaction->participant->name }} @endsection
+@section('header') Data Nilai Peserta {{ $result->transaction->participant->name }} @endsection
 
 @section('content')
 
-
-    @if($results->count() == 0)
-
-        <div class="row">
-            <strong>Belum Ada Data Nilai.</strong>
-            <div class="form-group ml-auto mr-2">
-                <a href="{{ route('resultbyid.create', ['id' => $transaction->id]) }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Tambahkan Data Nilai</a>
+    {{-- @foreach($transaction as $t) --}}
+        @if($result == null)
+            <div class="row">
+                <strong>Belum Ada Data Nilai.</strong>
+                <div class="form-group ml-auto mr-2">
+                    <a href="{{ route('resultbyid.create', ['id' => $t->id]) }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Tambahkan Data Nilai</a>
+                </div>
             </div>
-        </div>
-    @else
-        <div class="card">
-            <div class="card-body">
-                @foreach($results as $result)
-                    Nama Peserta : {{ $transaction->participant->name }} <br>
+        @else
+            <div class="card">
+                <div class="card-body">
+                    Nama Peserta : {{ $result->transaction->participant->name }} <br>
                     Nilai : {{ $result->score }} <br>
                     Grade : {{ $result->grade }} <br>
                     Ukuran Jaket : {{ $result->jacket_size }} <br>
@@ -37,9 +35,9 @@
                             <span class="fas fa-pencil-alt"></span> Edit
                         </a>
                     </div>
-                @endforeach
+                </div>
             </div>
-        </div>
-    @endif
+        @endif
+    {{-- @endforeach --}}
 
 @endsection
