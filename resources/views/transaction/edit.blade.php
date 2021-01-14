@@ -95,7 +95,11 @@
 
                 <div class="form-group">
                     <label for="recoaching">Recoaching? <span class="text-danger">*</span></label>
-                    <select name="recoaching" id="recoaching" class="form-control select2" style="width: 100px;">
+                    <select name="recoaching" id="recoaching" class="form-control select2" style="width: 100px;"
+                        @if($transaction->recoaching_count == 3 && $transaction->recoaching == 0)
+                            disabled
+                        @endif
+                    >
                         @if($transaction->recoaching == 0)
                             <option selected value="0"> Tidak </option>
                         @else
@@ -109,6 +113,9 @@
                     </select>
                     @if( $errors->has('recoaching') )
                         <div class="text-danger">{{ $errors->first('recoaching') }}</div>
+                    @endif
+                    @if($transaction->recoaching_count == 3 && $transaction->recoaching == 0)
+                        <div class="text-danger">Peserta ini tidak dapat recoaching lagi, karena sudah mencapai batas maksimal 3x recoaching.</div>
                     @endif
                 </div>
 

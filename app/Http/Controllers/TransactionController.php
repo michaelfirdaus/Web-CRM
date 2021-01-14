@@ -72,7 +72,6 @@ class TransactionController extends Controller
             'program'           => 'required',
             'price'             => 'required|min:0',
             'firsttrans'        => 'required|min:0',
-            'recoaching'        => 'required|boolean',
         ];
 
         $customMessages = [
@@ -81,7 +80,6 @@ class TransactionController extends Controller
             'program.required'     => 'Batch Program harus dipilih.',
             'price.required'       => 'Harga harus diisi.',
             'firsttrans.required'  => 'DP Pertama harus diisi.',
-            'recoaching.required'  => 'Recoaching harus dipilih.',
         ];
 
         $this->validate($request, $rules, $customMessages);
@@ -101,7 +99,6 @@ class TransactionController extends Controller
             'cashback'          => $cashback,
             'rating'            => $request->rating,
             'rating_text'       => $request->rating_text,
-            'recoaching'        => $request->recoaching,
             'note'              => $request->note
         ]);
         
@@ -180,17 +177,36 @@ class TransactionController extends Controller
         $secondtrans = (int)str_replace(".", "", $request->secondtrans);
         $cashback = (int)str_replace(".", "", $request->cashback);
 
-        $transaction->participant_id    = $request->participant;
-        $transaction->salesperson_id    = $request->sales;
-        $transaction->program_id        = $request->program;
-        $transaction->price             = $price;
-        $transaction->firsttrans        = $firsttrans;
-        $transaction->secondtrans       = $secondtrans;
-        $transaction->cashback          = $cashback;
-        $transaction->rating            = $request->rating;
-        $transaction->rating_text       = $request->rating_text;
-        $transaction->recoaching        = $request->recoaching;
-        $transaction->note              = $request->note;
+        
+        if($request->recoaching == 1 && $transaction->recoaching_count < 3){
+            $transaction->recoaching_count++;
+        }
+
+        if($transaction->recoaching_count < 4){
+            $transaction->participant_id    = $request->participant;
+            $transaction->salesperson_id    = $request->sales;
+            $transaction->program_id        = $request->program;
+            $transaction->price             = $price;
+            $transaction->firsttrans        = $firsttrans;
+            $transaction->secondtrans       = $secondtrans;
+            $transaction->cashback          = $cashback;
+            $transaction->rating            = $request->rating;
+            $transaction->rating_text       = $request->rating_text;
+            $transaction->recoaching        = $request->recoaching;
+            $transaction->note              = $request->note;
+        }
+        else{
+            $transaction->participant_id    = $request->participant;
+            $transaction->salesperson_id    = $request->sales;
+            $transaction->program_id        = $request->program;
+            $transaction->price             = $price;
+            $transaction->firsttrans        = $firsttrans;
+            $transaction->secondtrans       = $secondtrans;
+            $transaction->cashback          = $cashback;
+            $transaction->rating            = $request->rating;
+            $transaction->rating_text       = $request->rating_text;
+            $transaction->note              = $request->note;
+        }
 
         $transaction->save();
         

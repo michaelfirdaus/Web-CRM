@@ -108,13 +108,14 @@
 
                 <div class="form-group">
                     <label for="recoaching">Recoaching? <span class="text-danger">*</span></label>
-                    <select name="recoaching" id="recoaching" class="form-control" style="width: 100px;">
+                    <select name="recoaching" id="recoaching" class="form-control" style="width: 100px;" disabled>
                       <option value="1"> Ya </option>
                       <option selected value="0"> Tidak </option>
                     </select>
                     @if( $errors->has('recoaching') )
                         <div class="text-danger">{{ $errors->first('recoaching') }}</div>
                     @endif
+                    <div class="text-danger">Anda dapat merubah status recoaching saat pengeditan data.</div>
                 </div>
 
                 <div class="form-group">

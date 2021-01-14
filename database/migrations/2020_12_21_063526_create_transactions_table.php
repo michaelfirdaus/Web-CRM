@@ -27,7 +27,8 @@ class CreateTransactionsTable extends Migration
             $table->string('note')->nullable();
             $table->integer('rating')->nullable();
             $table->string('rating_text')->nullable();
-            $table->integer('recoaching');
+            $table->boolean('recoaching')->default(0);
+            $table->integer('recoaching_count')->default(0);
             $table->timestamps();
         });
     }

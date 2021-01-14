@@ -65,6 +65,9 @@
                         Ulasan
                     </th>
                     <th class="text-center">
+                        Jumlah Recoaching
+                    </th>
+                    <th class="text-center">
                         Recoaching?
                     </th>
                     <th class="text-center">
@@ -126,6 +129,9 @@
                                 </td>
                                 <td>
                                     {{ $transaction->rating_text }}
+                                </td>
+                                <td class="text-center">
+                                    {{ $transaction->recoaching_count }}
                                 </td>
                                 <td class="text-center">
                                     @if($transaction->recoaching == 0)
