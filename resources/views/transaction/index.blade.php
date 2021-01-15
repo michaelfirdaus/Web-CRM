@@ -50,15 +50,6 @@
                         Harga
                     </th>
                     <th class="text-center">
-                        DP Pertama
-                    </th>
-                    <th class="text-center">
-                        DP Kedua
-                    </th>
-                    <th class="text-center">
-                        Cashback
-                    </th>
-                    <th class="text-center">
                         Rating
                     </th>
                     <th class="text-center">
@@ -69,9 +60,6 @@
                     </th>
                     <th class="text-center">
                         Recoaching?
-                    </th>
-                    <th class="text-center">
-                        Status Pelunasan
                     </th>
                     <th class="text-center">
                         Catatan
@@ -116,15 +104,6 @@
                                     @currency( $transaction->price )
                                 </td>
                                 <td>
-                                    @currency( $transaction->firsttrans )
-                                </td>
-                                <td>
-                                    @currency( $transaction->secondtrans )
-                                </td>
-                                <td>
-                                    @currency( $transaction->cashback )
-                                </td>
-                                <td>
                                     {{ $transaction->rating }}
                                 </td>
                                 <td>
@@ -138,13 +117,6 @@
                                         Tidak
                                     @else
                                         Ya
-                                    @endif
-                                </td>
-                                <td class="text-center">
-                                    @if($transaction->price == $transaction->firsttrans + $transaction->secondtrans)
-                                        Lunas
-                                    @else
-                                        Belum Lunas
                                     @endif
                                 </td>
                                 <td>

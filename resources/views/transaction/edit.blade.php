@@ -43,7 +43,7 @@
 
                 <div class="form-group">
                     <label for="program">Nama Program <span class="text-danger">*</span></label>
-                    <select name="program" id="program" class="form-control select2" style="width: auto;">
+                    <select name="program" id="program" class="form-control select2 program" style="width: auto;">
                         @foreach($programs as $p)
                             @if($p->id == $transaction->program->id)
                                 <option selected value="{{ $p->id }}"> Batch {{$p->date}} | {{ $p->programname->name }} | {{ $p->branch->name}} </option> 
@@ -59,28 +59,10 @@
 
                 <div class="form-group">
                     <label for="price">Harga <span class="text-danger">*</span></label>
-                    <input type="text" name="price" value="{{ $transaction->price }}" placeholder="Contoh: 5000000" class="form-control currency">
+                    <input type="text" name="price" value="{{ $transaction->price }}" placeholder="Contoh: 5000000" class="form-control currency price">
                     @if( $errors->has('price') )
                         <div class="text-danger">{{ $errors->first('price') }}</div>
                     @endif
-                </div>
-
-                <div class="form-group">
-                    <label for="firsttrans">DP Pertama <span class="text-danger">*</span></label>
-                    <input type="text" name="firsttrans" value="{{ $transaction->firsttrans }}" placeholder="Contoh: 2500000" class="form-control currency">
-                    @if( $errors->has('firsttrans') )
-                        <div class="text-danger">{{ $errors->first('firsttrans') }}</div>
-                    @endif
-                </div>
-
-                <div class="form-group">
-                    <label for="secondtrans">DP Kedua</label>
-                    <input type="text" name="secondtrans" value="{{ $transaction->secondtrans }}" placeholder="Contoh: 2500000" class="form-control currency">
-                </div>
-
-                <div class="form-group">
-                    <label for="cashback">Cashback</label>
-                    <input type="text" name="cashback" value="{{ $transaction->cashback }}" placeholder="Contoh: 50000" class="form-control currency">
                 </div>
 
                 <div class="form-group">
@@ -121,7 +103,7 @@
 
                 <div class="form-group">
                     <label for="note">Catatan</label>
-                    <input type="text" name="note" value="{{ $transaction->note }}" placeholder="Contoh: Peserta minta dikirimkan harga program CCNA terbaru." class="form-control">
+                    <input type="text" name="note" value="{{ $transaction->note }}" placeholder="Contoh: Online" class="form-control">
                 </div>
 
                 <div class="form-group">
@@ -149,6 +131,31 @@ $('.currency').keyup(function(event) {
       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
       ;
     });
+});
+
+$('.program').change(function() {
+    var program_id =  $(this).val();
+    var a = $(this).parent();
+    var op ="";
+
+    console.log("Its Change !"),
+    $.ajax({
+        type: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('transaction.fetch') }}",
+        data: {'id': program_id},
+        dataType: 'json',
+        success: function(data){
+            {{-- console.log(data.program_price); --}}
+            $('.price').val(data.program_price);
+        },
+        error:function(){
+
+        }
+    });
+
 });
 
 @endsection

@@ -127,7 +127,7 @@
                     @endif
                 </div>
 
-                <div class="form-group">
+                <div class="form-group memberreference">
                     <label for="memberreference_id">Jika mengetahui Course-Net dari alumni Course-Net, sebutkan :</label>
                     <select name="memberreference_id" id="memberreference_id" class="form-control select2" style="width: auto;">
                     <option value="" selected disabled hidden> - Pilih Member/Peserta - </option>
@@ -166,4 +166,13 @@
         </div>
     </div>
     
+@endsection
+
+@section('scripts')
+$('.memberreference').hide();
+
+$('#knowcn_id').change(function() {
+    if($(this).val() == 1 ) $('.memberreference').show();
+    else $('.memberreference').hide();
+});
 @endsection

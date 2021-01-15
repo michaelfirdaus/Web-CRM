@@ -40,21 +40,27 @@ class ProgramnameController extends Controller
     {
         $rules = [
             'name'   => 'required|unique:programnames',
+            'price'  => 'required|min:0',
             'status' => 'required'      
         ];
 
         $customMessages = [
             'name.required'   => 'Nama Program harus diisi.',
             'name.unique'     => 'Nama Program sudah terdaftar, silahkan coba lagi.',
+            'price.required'  => 'Harga harus diisi.',
+            'price.min'       => 'Harga minimal 0.',
             'status.required' => 'Status Program harus dipilih.'
         ];
 
         $this->validate($request, $rules, $customMessages);
 
+        $p = (int)str_replace(".", "", $request->price);
+
         $pn = new Programname;
 
-        $pn->name   = $request->name;
-        $pn->status = $request->status;
+        $pn->name           = $request->name;
+        $pn->program_price  = $p;
+        $pn->status         = $request->status;
         //Saving current category to the database
         $pn->save();
 
@@ -100,21 +106,28 @@ class ProgramnameController extends Controller
     {
         $rules = [
             'name'   => 'required',
-            'status' => 'required'
+            'price'  => 'required|min:0',
+            'status' => 'required'      
         ];
 
         $customMessages = [
-            'name.required' => 'Nama Program harus diisi.',
+            'name.required'   => 'Nama Program harus diisi.',
+            'name.unique'     => 'Nama Program sudah terdaftar, silahkan coba lagi.',
+            'price.required'  => 'Harga harus diisi.',
+            'price.min'       => 'Harga minimal 0.',
             'status.required' => 'Status Program harus dipilih.'
         ];
 
         $this->validate($request, $rules, $customMessages);
 
+        $p = (int)str_replace(".", "", $request->price);
+
         //Find category based on category ID
         $pn = Programname::find($id);
         
-        $pn->name   = $request->name;
-        $pn->status = $request->status; 
+        $pn->name           = $request->name;
+        $pn->program_price  = $p;
+        $pn->status         = $request->status; 
         //Save the category to the database
         $pn->save();
 

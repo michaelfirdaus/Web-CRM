@@ -17,6 +17,9 @@
                         Nama Program
                     </th>
                     <th class="text-center">
+                        Harga Program
+                    </th>
+                    <th class="text-center">
                         Status Program
                     </th>
                     <th class="text-center">
@@ -30,6 +33,9 @@
                             <tr>
                                 <td>
                                     {{ $programname->name }}
+                                </td>
+                                <td>
+                                    @currency( $programname->program_price )
                                 </td>
                                 <td class="text-center">
                                     @if($programname->status == 1)

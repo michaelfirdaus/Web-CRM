@@ -55,7 +55,7 @@
 
                 <div class="form-group">
                     <label for="program">Pilih Batch Program <span class="text-danger">*</span></label>
-                    <select name="program" id="program" class="form-control select2" style="width: auto;">
+                    <select name="program" id="program" class="form-control select2 program" style="width: auto;">
                     <option value="" selected disabled hidden> - Pilih Batch Program - </option>
                     @foreach($programs as $p)
                         @if( old('program') )
@@ -72,28 +72,12 @@
 
                 <div class="form-group">
                     <label for="price">Harga <span class="text-danger">*</span></label>
-                    <input type="text" name="price" placeholder="Contoh: 5000000" class="form-control currency" value="{{ old('price') }}">
+                    <input type="text" name="price" id="price" placeholder="Contoh: 5000000" class="form-control currency price" value="{{ old('price') }}">
+                    <div class="text-success">Harga akan otomatis tampil sesuai dengan program yang dipilih.</div>
                     @if( $errors->has('price') )
                         <div class="text-danger">{{ $errors->first('price') }}</div>
                     @endif
-                </div>
-
-                <div class="form-group">
-                    <label for="firsttrans">DP Pertama <span class="text-danger">*</span></label>
-                    <input type="text" name="firsttrans" placeholder="Contoh: 2500000" class="form-control currency" value="{{ old('firsttrans') }}">
-                    @if( $errors->has('firsttrans') )
-                        <div class="text-danger">{{ $errors->first('firsttrans') }}</div>
-                    @endif
-                </div>
-
-                <div class="form-group">
-                    <label for="secondtrans">DP Kedua</label>
-                    <input type="text" name="secondtrans" placeholder="Contoh: 2500000" class="form-control currency" value="{{ old('secondtrans') }}">
-                </div>
-
-                <div class="form-group">
-                    <label for="cashback">Cashback</label>
-                    <input type="text" name="cashback" placeholder="Contoh: 500000" class="form-control currency" value="{{ old('cashback') }}">
+                    
                 </div>
 
                 <div class="form-group">
@@ -115,12 +99,12 @@
                     @if( $errors->has('recoaching') )
                         <div class="text-danger">{{ $errors->first('recoaching') }}</div>
                     @endif
-                    <div class="text-danger">Anda dapat merubah status recoaching saat pengeditan data.</div>
+                    <div class="text-success">Anda dapat merubah status recoaching saat pengeditan data.</div>
                 </div>
 
                 <div class="form-group">
                     <label for="note">Catatan</label>
-                    <input type="text" name="note" class="form-control" placeholder="Contoh: Peserta minta dikirimkan harga program CCNA terbaru." value="{{ old('note') }}">
+                    <input type="text" name="note" class="form-control" placeholder="Contoh: Online" value="{{ old('note') }}">
                 </div>
 
                 <div class="form-group">
@@ -150,6 +134,33 @@ $('.currency').keyup(function(event) {
       ;
     });
 });
+
+
+$('.program').change(function() {
+    var program_id =  $(this).val();
+    var a = $(this).parent();
+    var op ="";
+
+    console.log("Its Change !"),
+    $.ajax({
+        type: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('transaction.fetch') }}",
+        data: {'id': program_id},
+        dataType: 'json',
+        success: function(data){
+            {{-- console.log(data.program_price); --}}
+            $('.price').val(data.program_price);
+        },
+        error:function(){
+
+        }
+    });
+
+});
+
 
 @endsection
 

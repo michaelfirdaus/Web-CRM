@@ -13,6 +13,7 @@ class ProgramNameTableSeeder extends Seeder
     {
         App\Programname::create([
             'name' => 'CCNA',
+            'program_price' => '5000000'
         ]);
     }
 }

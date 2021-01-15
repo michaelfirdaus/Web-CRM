@@ -16,6 +16,7 @@ class CreateProgramnameTable extends Migration
         Schema::create('programnames', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('program_price');
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

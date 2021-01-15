@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Transaction;
 use App\CoachProgram;
 use App\Participant;
+use App\Programname;
 use App\Salesperson;
 use App\Program;
 use Carbon\Carbon;
@@ -71,7 +72,6 @@ class TransactionController extends Controller
             'sales'             => 'required',
             'program'           => 'required',
             'price'             => 'required|min:0',
-            'firsttrans'        => 'required|min:0',
         ];
 
         $customMessages = [
@@ -80,7 +80,6 @@ class TransactionController extends Controller
             'program.required'     => 'Batch Program harus dipilih.',
             'program.unique'       => 'Peserta sudah terdaftar di kelas ini.',
             'price.required'       => 'Harga harus diisi.',
-            'firsttrans.required'  => 'DP Pertama harus diisi.',
         ];
 
         $this->validate($request, $rules, $customMessages);
@@ -93,18 +92,12 @@ class TransactionController extends Controller
             }
 
         $price = (int)str_replace(".", "", $request->price);
-        $firsttrans = (int)str_replace(".", "", $request->firsttrans);
-        $secondtrans = (int)str_replace(".", "", $request->secondtrans);
-        $cashback = (int)str_replace(".", "", $request->cashback);
 
         $transactions = Transaction::create([
             'participant_id'    => $request->participant,
             'salesperson_id'    => $request->sales,
             'program_id'        => $request->program,
             'price'             => $price,
-            'firsttrans'        => $firsttrans,
-            'secondtrans'       => $secondtrans,
-            'cashback'          => $cashback,
             'rating'            => $request->rating,
             'rating_text'       => $request->rating_text,
             'note'              => $request->note
@@ -165,8 +158,6 @@ class TransactionController extends Controller
             'sales'             => 'required',
             'program'           => 'required',
             'price'             => 'required|min:0',
-            'firsttrans'        => 'required|min:0',
-            'recoaching'        => 'required|boolean',
         ];
 
         $customMessages = [
@@ -174,16 +165,12 @@ class TransactionController extends Controller
             'sales.required'         => 'Nama Sales harus dipilih.',
             'program.required'       => 'Batch Program harus dipilih.',
             'price.required'         => 'Harga harus diisi.',
-            'firsttrans.required'    => 'DP Pertama harus diisi.',
             'recoaching.required'    => 'Recoaching harus dipilih.'    
         ];
 
         $this->validate($request, $rules, $customMessages);
 
         $price = (int)str_replace(".", "", $request->price);
-        $firsttrans = (int)str_replace(".", "", $request->firsttrans);
-        $secondtrans = (int)str_replace(".", "", $request->secondtrans);
-        $cashback = (int)str_replace(".", "", $request->cashback);
 
         
         if($request->recoaching == 1 && $transaction->recoaching_count < 3){
@@ -195,9 +182,6 @@ class TransactionController extends Controller
             $transaction->salesperson_id    = $request->sales;
             $transaction->program_id        = $request->program;
             $transaction->price             = $price;
-            $transaction->firsttrans        = $firsttrans;
-            $transaction->secondtrans       = $secondtrans;
-            $transaction->cashback          = $cashback;
             $transaction->rating            = $request->rating;
             $transaction->rating_text       = $request->rating_text;
             $transaction->recoaching        = $request->recoaching;
@@ -208,12 +192,10 @@ class TransactionController extends Controller
             $transaction->salesperson_id    = $request->sales;
             $transaction->program_id        = $request->program;
             $transaction->price             = $price;
-            $transaction->firsttrans        = $firsttrans;
-            $transaction->secondtrans       = $secondtrans;
-            $transaction->cashback          = $cashback;
             $transaction->rating            = $request->rating;
             $transaction->rating_text       = $request->rating_text;
             $transaction->note              = $request->note;
+            $transaction->recoaching        = 0;;
         }
 
         $transaction->save();
@@ -239,4 +221,10 @@ class TransactionController extends Controller
 
         return redirect()->route('transactions');
     }
+
+    function fetch(Request $request){
+        $fill = Programname::find($request->id);
+        return response()->json($fill);
+    }
+
 }
