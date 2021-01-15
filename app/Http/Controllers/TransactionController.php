@@ -78,11 +78,19 @@ class TransactionController extends Controller
             'participant.required' => 'Nama Peserta harus dipilih.',
             'sales.required'       => 'Nama Sales harus dipilih.',
             'program.required'     => 'Batch Program harus dipilih.',
+            'program.unique'       => 'Peserta sudah terdaftar di kelas ini.',
             'price.required'       => 'Harga harus diisi.',
             'firsttrans.required'  => 'DP Pertama harus diisi.',
         ];
 
         $this->validate($request, $rules, $customMessages);
+
+        $transactions = Transaction::where('program_id',$request->program)->get();
+        foreach($transactions as $t)
+            if($t->participant_id == $request->participant){
+                Session::flash('warning', 'Peserta ini sudah terdaftar di kelas ini! Apabila ingin recoaching, silahkan edit data transaksi peserta');
+                 return redirect()->back();
+            }
 
         $price = (int)str_replace(".", "", $request->price);
         $firsttrans = (int)str_replace(".", "", $request->firsttrans);

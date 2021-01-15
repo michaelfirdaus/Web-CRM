@@ -11,19 +11,19 @@
                     <li>
                         Coach : 
                         @php
-                            $c = $pc->count();
+                            $c = $program->coaches->count();
                             $a = 0;
                         @endphp
                         @if($c == 1)
-                            @foreach($program->coachprograms as $pc)
-                                {{ $pc->coaches->name }}
+                            @foreach($program->coaches as $pc)
+                                {{ $pc->name }}
                             @endforeach
                         @elseif($program->coachprograms->count() > 1)
-                            @foreach($program->coachprograms as $pc)
+                            @foreach($program->coaches as $pc)
                                 @if(++$a == $c)
-                                    {{ $pc->coaches->name }}
+                                    {{ $pc->name }}
                                 @else
-                                    {{ $pc->coaches->name }},
+                                    {{ $pc->name }},
                                 @endif 
                             @endforeach
                         @else
@@ -76,7 +76,7 @@
                                 <td>
                                     {{ $t->participant->name }}
                                 </td>
-                                @if($t->result != null)
+                                @if($t->result_flag == 1)
                                     <td class="text-center">
                                         {{ $t->result->score }}
                                     </td>
