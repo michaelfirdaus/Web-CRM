@@ -36,8 +36,8 @@ class CoachProgramController extends Controller
     public function create()
     {
         $programs = Program::all();
-        $coaches = Coach::where('status','1')->get();
-        $branches = Branch::all();
+        $coaches = Coach::where('status',1)->get();
+        $branches = Branch::where('status', 1)->get();
 
         if($programs->count() == 0 || $coaches->count() == 0){
             Session::flash('info', 'Tidak Dapat Menambahkan Jadwal Kelas karena Program/Coach Tidak Tersedia');

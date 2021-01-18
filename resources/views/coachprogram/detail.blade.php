@@ -9,7 +9,7 @@
             <div class="card-body">
                 <ul>
                     <li>
-                        Coach : 
+                        Coach: 
                         @php
                             $c = $program->coaches->count();
                             $a = 0;
@@ -30,9 +30,9 @@
                             <span class="text-bold text-danger">Coach Belum Dipilih</span>
                         @endif
                     </li>
-                    <li>Tanggal Batch : {{ $program->date }}</li>
-                    <li>Jumlah Peserta : {{ $countparticipant }}</li>
-                    <li>Lokasi Kelas : {{ $program->branch->name }}</li>
+                    <li>Tanggal Batch: {{ $program->date }}</li>
+                    <li>Jumlah Peserta: {{ $countparticipant }}</li>
+                    <li>Lokasi Kelas: {{ $program->branch->name }}</li>
                 </ul>
             </div>
         </div>
@@ -63,7 +63,10 @@
                             Tanggal Pengambilan Sertifikat Kehadiran
                         </th>
                         <th class="text-center">
-                            Edit
+                            Edit Data Peserta
+                        </th>
+                        <th class="text-center">
+                            Edit Nilai
                         </th>
                     </thead>
             
@@ -97,6 +100,11 @@
                                         Belum Ada Data Nilai yang Diinput
                                     </td>
                                 @endif
+                                <td class="text-center">
+                                    <a href="{{ route('participant.edit', ['id'=> $t->participant_id]) }}" class="btn btn-xs btn-info">
+                                        <span class="fas fa-users-cog"></span>
+                                    </a>
+                                </td>
                                 <td class="text-center">
                                     <a href="{{ route('resultbyid', ['id'=> $t->id]) }}" class="btn btn-xs btn-info">
                                         <span class="fas fa-pencil-alt"></span>

@@ -32,7 +32,7 @@ class JobConnectorParticipantController extends Controller
     public function create()
     {
         $participants = Participant::all();
-        $jobconnectors = Jobconnector::where('status','1')->get();
+        $jobconnectors = Jobconnector::where('status', 1)->get();
 
         if($participants->count() == 0 || $jobconnectors->count() == 0 ){
             Session::flash('info', 'Tidak Dapat Menambahkan Job Connector karena Peserta/Perusahaan Tidak Tersedia');

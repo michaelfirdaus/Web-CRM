@@ -45,7 +45,7 @@ class TransactionController extends Controller
         $participants = Participant::all();
         $date = Carbon::today()->subDays(7);
         $programs = Program::orderBy('date', 'DESC')->where('date', '>=', $date)->get();
-        $salespersons = Salesperson::where('status','1')->get();
+        $salespersons = Salesperson::where('status', 1)->get();
         if($participants->count() == 0 || $programs->count() == 0 || $salespersons->count() == 0){
             Session::flash('info', 'Tidak Dapat Menambahkan Transaksi karena Peserta/Jadwal Kelas/Sales Tidak Terdaftar');
             return redirect()->back();

@@ -128,7 +128,7 @@
                 </div>
 
                 <div class="form-group memberreference">
-                    <label for="memberreference_id">Jika mengetahui Course-Net dari alumni Course-Net, sebutkan :</label>
+                    <label for="memberreference_id">Jika mengetahui Course-Net dari alumni Course-Net, sebutkan : <span class="text-danger">*</span></label>
                     <select name="memberreference_id" id="memberreference_id" class="form-control select2" style="width: auto;">
                     <option value="" selected disabled hidden> - Pilih Member/Peserta - </option>
                     @foreach($participants as $participant)

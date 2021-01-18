@@ -34,9 +34,9 @@ class ParticipantController extends Controller
      */
     public function create()
     {
-        $branches = Branch::all();
-        $knowcns = Knowcn::where('status','1')->get();
-        $professions = Profession::where('status','1')->get();
+        $branches = Branch::where('status', 1)->get();
+        $knowcns = Knowcn::where('status', 1)->get();
+        $professions = Profession::where('status', 1)->get();
         $participants = Participant::all();
 
         if($branches->count() == 0){
@@ -102,13 +102,17 @@ class ParticipantController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
-        // foreach($request->program as $program){
-        //     DB::table('participants')->insert([
-        //         'coach_id'      => $coach,
-        //         'program_id'    => $request->program,
-        //         'date'          => $request->date,
-        //     ]);
-        // }
+        if($request->knowcn_id == 1){
+            $rule = [
+                'memberreference_id' => 'required',
+            ];
+
+            $customMessage = [
+                'memberreference_id.required' => 'Data Alumni harus dipilih.'
+            ];
+
+            $this->validate($request, $rule, $customMessage);
+        }
         
         $checkParticipant = Participant::all();
 
@@ -267,13 +271,17 @@ class ParticipantController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
-        // foreach($request->program as $program){
-        //     DB::table('participants')->insert([
-        //         'coach_id'      => $coach,
-        //         'program_id'    => $request->program,
-        //         'date'          => $request->date,
-        //     ]);
-        // }
+        if($request->knowcn_id == 1){
+            $rule = [
+                'memberreference_id' => 'required',
+            ];
+
+            $customMessage = [
+                'memberreference_id.required' => 'Data Alumni harus dipilih.'
+            ];
+
+            $this->validate($request, $rule, $customMessage);
+        }
 
         if($participant->memberreference_id){
             $p = Participant::find($request->memberreference_id);

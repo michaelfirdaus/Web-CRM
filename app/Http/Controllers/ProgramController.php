@@ -35,9 +35,9 @@ class ProgramController extends Controller
      */
     public function create()
     {
-        $branches = Branch::all();
-        $programnames = Programname::all();
-        $programcategories = Programcategory::all();
+        $branches = Branch::where('status',1)->get();
+        $programnames = Programname::where('status',1)->get();
+        $programcategories = Programcategory::where('status',1)->get();
 
         if($branches->count() == 0 || $programnames->count() == 0 || $programcategories->count() == 0){
             Session::flash('info', 'Tidak Dapat Menambahkan Batch Program karena Tidak Ada Cabang/Kategori Program/Program yang Terdaftar');
