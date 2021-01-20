@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->boolean('admin')->default(0);
-            $table->string('username')->unique();
+            $table->string('username');
             $table->string('password');
             $table->string('photo')->default('logo-cn.png');
             $table->rememberToken();
