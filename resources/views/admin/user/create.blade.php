@@ -42,10 +42,20 @@
                 
                 <div class="form-group">
                     <label for="confirmpassword">Konfirmasi Password <span class="text-danger">*</span></label>
-                    <input name="confirmpassword" type="password" placeholder="Konfirmasi Ubah Password" id="confirm_password" class="form-control">
+                    <input name="confirmpassword" type="password" placeholder="Konfirmasi Password" id="confirm_password" class="form-control">
                     @if( $errors->has('confirmpassword') )
                         <div class="text-danger">{{ $errors->first('confirmpassword') }}</div>
                     @endif
+                </div>
+
+                <br>
+                <hr>
+                <div class="text-danger text-bold">
+                    Secara default, foto profil akan menggunakan logo Course-Net.
+                </div>
+                <div class="form-group">
+                    <label for="photo">Upload Foto Profil</label><br>
+                    <input type="file" name="photo" placeholder="">
                 </div>
 
                 <div class="form-group">

@@ -16,6 +16,7 @@ class UserTableSeeder extends Seeder
             'username' => 'michael',
             'password' => bcrypt('password'),
             'admin' => 1,
+            'photo' => 'logo-cn.png'
         ]);
 
         $user1 = App\User::create([
@@ -23,6 +24,7 @@ class UserTableSeeder extends Seeder
             'username' => 'user',
             'password' => bcrypt('password'),
             'admin' => 0,
+            'photo' => 'logo-cn.png'
         ]);
     }
 }

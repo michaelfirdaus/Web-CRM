@@ -44,6 +44,16 @@
                     <input name="confirmpassword" type="password" placeholder="Konfirmasi Ubah Password" id="confirm_password" class="form-control">
                 </div>
 
+                <br>
+                <hr>
+                <div class="text-danger text-bold">
+                    Apabila tidak perlu pengubahan foto profil, silahkan lewati.
+                </div>
+                <div class="form-group">
+                    <label for="photo">Upload Foto Profil</label><br>
+                    <input type="file" name="photo" placeholder="">
+                </div>
+
                 <div class="form-group">
                     <div class="text-center">
                         <button type="submit" class="btn btn-success">Perbaharui Profil</button>

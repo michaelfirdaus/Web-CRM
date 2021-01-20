@@ -56,7 +56,7 @@
                                         <span class="fas fa-users-cog"></span>
                                     </a>
                                 @else
-                                    Tidak Dapat Mengubah Role Sendiri
+                                    <span class="fas fa-times-circle"></span>
                                 @endif
 
                                 </td>
@@ -66,9 +66,13 @@
                                     </a>
                                 </td>
                                 <td class="text-center">
-                                    <a href="" class="btn btn-xs btn-danger"  data-toggle="modal" data-target="#delete">
-                                        <span class="fas fa-trash-alt"></span>
-                                    </a>
+                                    @if($user->id != Auth::user()->id)
+                                        <a href="" class="btn btn-xs btn-danger"  data-toggle="modal" data-target="#delete">
+                                            <span class="fas fa-trash-alt"></span>
+                                        </a>
+                                    @else
+                                        <span class="fas fa-times-circle"></span>
+                                    @endif
                                 </td>
 
                                 <div class="modal fade" id="delete">
