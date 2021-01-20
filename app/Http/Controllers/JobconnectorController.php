@@ -38,14 +38,23 @@ class JobconnectorController extends Controller
     public function store(Request $request)
     {
         //Validation to make sure name field should be filled and the category must be unique
-        $this->validate($request, [
-            'name'      => 'required',
-            'location'  => 'required'
-        ]);
+
+        $rules = [
+            'name'            => 'required|unique:jobconnectors',
+            'location'        => 'required',
+        ];
+
+        $customMessages = [
+            'name.required'            => 'Nama Perusahaan harus diisi.',
+            'location.required'        => 'Lokasi Perusahaan harus diisi.',
+            'name.unique'              => 'Nama Peerusahaan sudah terdaftar, silahkan coba lagi.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         $jobconnector = new Jobconnector;
 
-        $jobconnector->company_name = $request->name;
+        $jobconnector->name     = $request->name;
         $jobconnector->location = $request->location;
         //Saving current category to the database
         $jobconnector->save();
@@ -92,11 +101,23 @@ class JobconnectorController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $rules = [
+            'name'            => 'required',
+            'location'        => 'required',
+        ];
+
+        $customMessages = [
+            'name.required'            => 'Nama Perusahaan harus diisi.',
+            'location.required'        => 'Lokasi Perusahaan harus diisi.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
         //Find category based on category ID
         $jobconnector = Jobconnector::find($id);
         
         $jobconnector->company_name = $request->name;
-        $jobconnector->location = $request->location;
+        $jobconnector->location     = $request->location;
         
         //Save the category to the database
         $jobconnector->save();

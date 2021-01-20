@@ -84,6 +84,18 @@ class UserProfileController extends Controller
         if($request->has('password')){
             $user->password = bcrypt($request->password);
         }
+
+        if($request->has('photo')){
+            $image = $request->file('photo');
+
+            $fullImage = time().'.'.$image->getClientOriginalExtension();
+            
+            $path = public_path('/uploads/userphoto/');
+            
+            $image->move($path, $fullImage);
+
+            $user->photo = $fullImage;
+        }
         
         $user->save();
         Session::flash('success', 'Profil Anda Telah Diperbaharui');

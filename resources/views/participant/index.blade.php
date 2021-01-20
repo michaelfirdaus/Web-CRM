@@ -122,10 +122,18 @@
                                     {{ $participant->branch->name }}
                                 </td>
                                 <td class="text-center">
-                                    {{ $participant->knowcn->name }}
+                                    @if($participant->knowcn_id == 1)
+                                        {{ $participant->memberreference_id }} - {{ $participant->memberreference_name }}
+                                    @else
+                                        {{ $participant->knowcn->name }}
+                                    @endif
                                 </td>
                                 <td class="text-center">
-                                    {{ $participant->profession->name }}
+                                    @if($participant->profession)
+                                        {{ $participant->profession->name }}
+                                    @else
+                                        <div class="text-bold text-danger">Tidak Ada Data</div>
+                                    @endif
                                 </td>
                                 <td class="text-center">
                                     <a href="{{ route('interests', ['id' => $participant ->id]) }}" class="btn btn-xs btn-success">

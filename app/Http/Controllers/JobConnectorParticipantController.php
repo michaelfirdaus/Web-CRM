@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Participant;
 use App\Jobconnector;
 use App\JobconnectorParticipant;
-use DB;
 use Session;
 
 class JobConnectorParticipantController extends Controller
@@ -20,7 +19,6 @@ class JobConnectorParticipantController extends Controller
     {
         $jobconnectorparticipants = JobconnectorParticipant::with('participant', 'jobconnector')->get();
         $participants = Participant::with('jobconnectors')->get();
-        // dd( $jobconnectorparticipants);
         return view('jobconnectorparticipant.index')
         ->with('jobconnectorparticipants', $jobconnectorparticipants)
         ->with('participants', $participants);
@@ -34,7 +32,7 @@ class JobConnectorParticipantController extends Controller
     public function create()
     {
         $participants = Participant::all();
-        $jobconnectors = Jobconnector::all();
+        $jobconnectors = Jobconnector::where('status', 1)->get();
 
         if($participants->count() == 0 || $jobconnectors->count() == 0 ){
             Session::flash('info', 'Tidak Dapat Menambahkan Job Connector karena Peserta/Perusahaan Tidak Tersedia');
@@ -54,14 +52,25 @@ class JobConnectorParticipantController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+
+        $rules = [
             'participant'        => 'required',
             'jobconnector'       => 'required',
-            'date'               => 'required',
+            'date'               => 'required|date',
             'application_status' => 'required',
-        ]);
+        ];
 
-        DB::table('jobconnector_participant')->insert([
+        $customMessages = [
+            'participant.required'        => 'Nama Peserta harus dipilih.',
+            'jobconnector.required'       => 'Perusahaan Rekanan harus diisi.',
+            'date.required'               => 'Tanggal Apply harus diisi.',
+            'date.date'                   => 'Tanggal Apply harus berupa tanggal.',
+            'application_status.required' => 'Status harus dipilih.'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
+        $jcp = JobconnectorParticipant::create([
             'participant_id'        => $request->participant,
             'jobconnector_id'       => $request->jobconnector,
             'date'                  => $request->date,
@@ -115,12 +124,22 @@ class JobConnectorParticipantController extends Controller
     {
         $jobconnectorparticipant = JobconnectorParticipant::find($id);
 
-        $this->validate($request, [
+        $rules = [
             'participant'        => 'required',
             'jobconnector'       => 'required',
-            'date'               => 'required',
+            'date'               => 'required|date',
             'application_status' => 'required',
-        ]);
+        ];
+
+        $customMessages = [
+            'participant.required'        => 'Nama Peserta harus dipilih.',
+            'jobconnector.required'       => 'Perusahaan Rekanan harus diisi.',
+            'date.required'               => 'Tanggal Apply harus diisi.',
+            'date.date'                   => 'Tanggal Apply harus berupa tanggal.',
+            'application_status.required' => 'Status harus dipilih.'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         $jobconnectorparticipant->id                 = $request->id;
         $jobconnectorparticipant->participant_id     = $request->participant;

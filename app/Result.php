@@ -11,6 +11,6 @@ class Result extends Model
     protected $guarded = [];
 
     public function transaction(){
-        return $this->belongsTo('App\Transaction');
+        return $this->belongsTo('App\Transaction', 'id', 'result_id');
     }
 }

@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Admin Course-Net</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -91,7 +92,7 @@
           <!-- Sidebar user panel (optional) -->
           <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-              <img src="{{ asset('assets/logo-cn.png') }}" class="img-circle elevation-2" alt="User Image">
+              <img src="{{ asset('uploads/userphoto/'.Auth::user()->photo) }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
               <a href="#" class="d-block">{{ Auth::user()->name }}</a>
@@ -138,29 +139,12 @@
               
               <li class="nav-header">Data Kunci</li>
               
-              <li class="nav-item">
-                <a href="{{route('branches')}}" class="nav-link">
-                  <i class="nav-icon fas fa-building"></i>
-                  <p>
-                    Cabang
-                  </p>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="{{route('programcategories')}}" class="nav-link">
-                  <i class="nav-icon fas fa-list"></i>
-                  <p>
-                    Kategori Program
-                  </p>
-                </a>
-              </li>
 
               <li class="nav-item">
                 <a href="{{route('programs')}}" class="nav-link">
                   <i class="nav-icon fas fa-book"></i>
                   <p>
-                    Program
+                    Batch Program
                   </p>
                 </a>
               </li>
@@ -178,6 +162,33 @@
               
               <li class="nav-header">Data Pendukung</li>
               
+              <li class="nav-item">
+                <a href="{{route('branches')}}" class="nav-link">
+                  <i class="nav-icon fas fa-building"></i>
+                  <p>
+                    Cabang/Lokasi Kelas
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{route('programcategories')}}" class="nav-link">
+                  <i class="nav-icon fas fa-list"></i>
+                  <p>
+                    Kategori Program
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{route('programnames')}}" class="nav-link">
+                  <i class="nav-icon fas fa-book"></i>
+                  <p>
+                    Program
+                  </p>
+                </a>
+              </li>
+
               <li class="nav-item">
                 <a href="{{ route('professions') }}" class="nav-link">
                   <i class="nav-icon fas fa-user-tie"></i>
@@ -458,7 +469,7 @@
       dom: 'lBfrtip',
       buttons: [
           'copy', 'csv', 'excel', 'pdf', 'print'
-      ]
+      ],
     });
    
     //Initialize Select2 Elements

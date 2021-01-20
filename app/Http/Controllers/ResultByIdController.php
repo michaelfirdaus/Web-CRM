@@ -18,11 +18,8 @@ class ResultByIdController extends Controller
      */
     public function index($id)
     {
-        $results = Result::where('transaction_id', $id)->with('transaction')->get();
-        $transaction = Transaction::where('id', $id)->first();
-
-        return view('resultbyid.index', ['results'      => $results,
-                                         'transaction'  => $transaction]);
+        $result = Result::where('transaction_id', $id)->with('transaction','transaction.participant')->first();
+        return view('resultbyid.index', ['result'=> $result]);
     }
 
     /**
@@ -32,9 +29,8 @@ class ResultByIdController extends Controller
      */
     public function create($id)
     {
-        $currenttransaction = $id;
 
-        return view('resultbyid.create')->with('currenttransaction', $currenttransaction);
+        return view('resultbyid.create')->with('currenttransaction', $id);
     }
 
     /**
@@ -45,9 +41,19 @@ class ResultByIdController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+
+        $rules = [
             'score'    => 'required|numeric|max:100|min:0',
-        ]);
+        ];
+
+        $customMessages = [
+            'score.required' => 'Nilai Ujian harus diisi.',
+            'score.numeric'  => 'Nilai Ujian harus berupa angka.',
+            'score.max'      => 'Nilai Ujian maksimum adalah 100.',
+            'score.min'      => 'Nilai Ujian minimum adalah 0.'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         if($request->hasFile('photo')){
             $image = $request->file('photo');
@@ -88,17 +94,13 @@ class ResultByIdController extends Controller
 
             $transaction = Transaction::find($request->id);
 
-            $transaction->result = 1;
+            $transaction->result_id = $result->id;
+            $transaction->result_flag = 1;
     
             $transaction->save();
-    
-    
-            $results = Result::where('transaction_id', $request->id)->with('transaction')->get();
-            $transaction = Transaction::where('id', $request->id)->first();
             
             Session::flash('success', 'Berhasil Memperbaharui Data Nilai');
-            return view('resultbyid.index', ['results'      => $results,
-                                             'transaction'  => $transaction]);
+            return redirect()->route('resultbyid', ['id'  => $transaction->id]);
 
         }
         else{
@@ -132,17 +134,14 @@ class ResultByIdController extends Controller
 
             $transaction = Transaction::find($request->id);
 
-            $transaction->result = 1;
+            $transaction->result_id = $result->id;
+            $transaction->result_flag = 1;
 
             $transaction->save();
 
-
-            $results = Result::where('transaction_id', $request->id)->with('transaction')->get();
-            $transaction = Transaction::where('id', $request->id)->first();
             
             Session::flash('success', 'Berhasil Memperbaharui Data Nilai');
-            return view('resultbyid.index', ['results'      => $results,
-                                            'transaction'  => $transaction]);
+            return redirect()->route('resultbyid', ['id'  => $transaction->id]);
         }
     }
 
@@ -165,7 +164,7 @@ class ResultByIdController extends Controller
      */
     public function edit($id)
     {
-        $result = Result::find($id)->with('transaction')->first();
+        $result = Result::where('id', $id)->with('transaction', 'transaction.participant')->first();
 
         return view('resultbyid.edit')->with('result', $result);
     }
@@ -181,9 +180,18 @@ class ResultByIdController extends Controller
     {
         $result = Result::find($id);
 
-        $this->validate($request, [
-            'score'    => 'required',
-        ]);
+        $rules = [
+            'score'    => 'required|numeric|max:100|min:0',
+        ];
+
+        $customMessages = [
+            'score.required' => 'Nilai Ujian harus diisi.',
+            'score.numeric'  => 'Nilai Ujian harus berupa angka.',
+            'score.max'      => 'Nilai Ujian maksimum adalah 100.',
+            'score.min'      => 'Nilai Ujian minimum adalah 0.'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         if($request->hasFile('photo')){
             $image = $request->file('photo');
@@ -224,13 +232,9 @@ class ResultByIdController extends Controller
         $result->attendancecertificate_pickdate = $request->attendancecertificate_pickdate;
 
         $result->save();
-
-        
-        $results = Result::where('transaction_id', $result->transaction_id)->with('transaction')->get();
-        $transaction = Transaction::where('id', $result->transaction_id)->first();
         
         Session::flash('success', 'Berhasil Memperbaharui Data Nilai');
-        return redirect()->route('resultbyid', ['id' => $result->transaction_id]);
+        return redirect()->route('resultbyid', ['id' => $result->transaction->id]);
     }
 
     /**
@@ -245,7 +249,7 @@ class ResultByIdController extends Controller
 
         $transaction = Transaction::find($result->transaction_id);
 
-        $transaction->result = 0;
+        $transaction->result_flag = 0;
 
         $transaction->save();
 

@@ -13,7 +13,7 @@ class Interest extends Model
         return $this->hasOne('App\Participant', 'id', 'participant_id');
     }
 
-    public function program(){
-        return $this->hasOne('App\Program', 'id', 'program_id');
+    public function programname(){
+        return $this->hasOne('App\Programname', 'id', 'programname_id');
     }
 }

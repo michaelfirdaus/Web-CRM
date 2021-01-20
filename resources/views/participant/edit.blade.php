@@ -4,8 +4,6 @@
 
 @section('content')
 
-@include('includes.errors')
-
     <div class="card">
         <div class="card-body">
             <p class="text-danger text-bold">* : Data diperlukan.</p>
@@ -14,31 +12,49 @@
                 <div class="form-group">
                     <label for="name">Nama Peserta <span class="text-danger">*</span></label>
                     <input type="text" name="name" value="{{ $participant->name }}" placeholder="Contoh: Michael" class="form-control">
+                    @if( $errors->has('name') )
+                        <div class="text-danger">{{ $errors->first('name') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="pob">Tempat Lahir <span class="text-danger">*</span></label>
                     <input type="text" name="pob" value="{{ $participant->pob }}" placeholder="Contoh: Jakarta" class="form-control">
+                    @if( $errors->has('pob') )
+                        <div class="text-danger">{{ $errors->first('pob') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="dob">Tanggal Lahir <span class="text-danger">*</span></label>
                     <input type="date" id="dob" name="dob" value="{{ $participant->dob }}">
+                    @if( $errors->has('dob') )
+                        <div class="text-danger">{{ $errors->first('dob') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="phonenumber">Nomor Telepon <span class="text-danger">*</span></label>
                     <input type="tel" name="phonenumber" value="{{ $participant->phonenumber }}" placeholder="Contoh: 628111011011" class="form-control">
+                    @if( $errors->has('phonenumber') )
+                        <div class="text-danger">{{ $errors->first('phonenumber') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="address">Alamat <span class="text-danger">*</span></label>
                     <input type="text" name="address" value="{{ $participant->address }}" placeholder="Contoh: Villa Permata Berlian, Jalan Sukses 1 Blok E1-9, Jakarta 12345" class="form-control">
+                    @if( $errors->has('address') )
+                        <div class="text-danger">{{ $errors->first('address') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="email">E-mail <span class="text-danger">*</span></label>
                     <input type="email" name="email" value="{{ $participant->email }}" placeholder="Contoh: michael@course-net.com" class="form-control">
+                    @if( $errors->has('emaik') )
+                        <div class="text-danger">{{ $errors->first('email') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
@@ -59,34 +75,43 @@
                 <div class="form-group">
                     <label for="emergencycontact_name">Nama Kontak Darurat <span class="text-danger">*</span></label>
                     <input type="text" name="emergencycontact_name" value="{{ $participant->emergencycontact_name }}" placeholder="Contoh: Budiman Aksara" class="form-control">
+                    @if( $errors->has('emergencycontact_name') )
+                        <div class="text-danger">{{ $errors->first('emergencycontact_name') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="emergencycontact_phone">Nomor Kontak Darurat <span class="text-danger">*</span></label>
                     <input type="tel" name="emergencycontact_phone" value="{{ $participant->emergencycontact_phone }}" placeholder="Contoh: 628111011011" class="form-control">
+                    @if( $errors->has('emergencycontact_phone') )
+                        <div class="text-danger">{{ $errors->first('emergencycontact_phone') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="member_validthru">Member Berlaku s/d</label>
-                    <input type="date" id="member_validthru" name="member_validthru">
+                    <input type="date" id="member_validthru" name="member_validthru" value="{{ $participant->dob }}" class="ml-2">
                 </div>
 
                 <div class="form-group">
                     <label for="branch_id">Lokasi Pendaftaran <span class="text-danger">*</span></label>
-                    <select name="branch_id" id="branch_id" class="form-control select2" style="width: 300px;">
+                    <select name="branch_id" id="branch_id" class="form-control select2" style="width: auto;">
                     @foreach($branches as $branch)
                             @if($branch->id == $participant->branch_id)
-                                <option selected value="{{ $branch->id }}"> {{ $branch->id }} - {{ $branch->name }} </option>
+                                <option selected value="{{ $branch->id }}"> {{ $branch->code }} - {{ $branch->name }} </option>
                             @else
-                                <option value="{{ $branch->id }}"> {{ $branch->id }} - {{ $branch->name }} </option>
+                                <option value="{{ $branch->id }}"> {{ $branch->code }} - {{ $branch->name }} </option>
                             @endif 
                     @endforeach
                     </select>
+                    @if( $errors->has('branch_id') )
+                        <div class="text-danger">{{ $errors->first('branch_id') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
-                    <label for="knowcn_id">Mengetahui CN dari <span class="text-danger">*</span></label>
-                    <select name="knowcn_id" id="knowcn_id" class="form-control select2" style="width: 300px;">
+                    <label for="knowcn_id">Mengetahui Course-Net dari <span class="text-danger">*</span></label>
+                    <select name="knowcn_id" id="knowcn_id" class="form-control select2" style="width: auto;">
                     @foreach($knowcns as $knowcn)
                             @if($knowcn->id == $participant->knowcn_id)
                                 <option selected value="{{ $knowcn->id }}"> {{ $knowcn->name }} </option>
@@ -95,11 +120,37 @@
                             @endif 
                     @endforeach
                     </select>
+                    @if( $errors->has('knowcn_id') )
+                        <div class="text-danger">{{ $errors->first('knowcn_id') }}</div>
+                    @endif
+                </div>
+
+                <div class="form-group memberreference">
+                    <label for="memberreference_id">Jika mengetahui Course-Net dari teman alumni Course-Net, sebutkan :</label>
+                    <select name="memberreference_id" id="memberreference_id" class="form-control select2" style="width: auto;">
+                        @if($participant->memberreference_id == null)
+                            <option value="" selected disabled hidden> - Pilih Member/Peserta - </option>
+                            @foreach($allparticipant as $p)
+                                <option value="{{ $p->id }}"> {{ $p->id }} - {{ $p->name }} </option>
+                            @endforeach    
+                        @else
+                            @foreach($allparticipant as $p)
+                                @if( $participant->memberreference_id == $p->id )
+                                    <option selected value="{{ $p->id }}"> {{ $p->id }} - {{ $p->name }} </option>
+                                @else
+                                    <option value="{{ $p->id }}"> {{ $p->id }} - {{ $p->name }} </option>
+                                @endif
+                            @endforeach
+                        @endif
+                    </select>
+                    @if( $errors->has('memberreference_id') )
+                        <div class="text-danger">{{ $errors->first('memberreference_id') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="profession_id">Profesi</label>
-                    <select name="profession_id" id="profession_id" class="form-control select2" style="width: 300px;">
+                    <select name="profession_id" id="profession_id" class="form-control select2" style="width: auto;">
                     @foreach($professions as $profession)
                             @if($profession->id == $participant->profession_id)
                                 <option selected value="{{ $profession->id }}"> {{ $profession->name }} </option>
@@ -119,4 +170,13 @@
         </div>
     </div>
     
+@endsection
+
+@section('scripts')
+$('.memberreference').hide();
+
+$('#knowcn_id').change(function() {
+    if($(this).val() == 1 ) $('.memberreference').show();
+    else $('.memberreference').hide();
+});
 @endsection

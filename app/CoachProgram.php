@@ -10,16 +10,16 @@ class CoachProgram extends Pivot
 
     protected $guarded = [];
 
-    public function coach(){
-        return $this->hasOne('App\Coach', 'id');
+    public function coaches(){
+        return $this->hasMany('App\Coach', 'id' , 'coach_id');
     }
 
     public function program(){
-        return $this->hasOne('App\Program', 'id', 'program_id');
+        return $this->belongsTo('App\Program', 'id');
     }
 
-    public function transaction(){
-        return $this->belongsTo('App\Transaction', 'id', 'transaction_id');
-    }
+    // public function transaction(){
+    //     return $this->belongsTo('App\Transaction', 'id', 'transaction_id');
+    // }
 
 }

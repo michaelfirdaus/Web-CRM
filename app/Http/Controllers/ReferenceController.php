@@ -45,10 +45,19 @@ class ReferenceController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+
+        $rules = [
             'name'    => 'required',
-            'phone'   => 'required',
-        ]);
+            'phone'   => 'required|numeric',
+        ];
+
+        $customMessages = [
+            'name.required'  => 'Nama Referensi harus diisi.',
+            'phone.required' => 'Nomor Telepon Referensi harus diisi.',
+            'phone.numeric'  => 'Nomor Telepon harus berupa angka.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         $reference = Reference::create([
             'participant_id'    => $request->id,
@@ -97,10 +106,18 @@ class ReferenceController extends Controller
     {
         $reference = Reference::find($id);
 
-        $this->validate($request, [
+        $rules = [
             'name'    => 'required',
-            'phone'   => 'required',
-        ]);
+            'phone'   => 'required|numeric',
+        ];
+
+        $customMessages = [
+            'name.required'  => 'Nama Referensi harus diisi.',
+            'phone.required' => 'Nomor Telepon Referensi harus diisi.',
+            'phone.numeric'  => 'Nomor Telepon harus berupa angka.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         $reference->id      = $request->id;
         $reference->name    = $request->name; 

@@ -12,6 +12,10 @@ class ProfessionTableSeeder extends Seeder
     public function run()
     {
         App\Profession::create([
+            'name' => 'Belum Bekerja'
+        ]);
+
+        App\Profession::create([
             'name' => 'CEO'
         ]);
     }

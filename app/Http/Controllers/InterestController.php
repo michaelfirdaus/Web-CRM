@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Program;
 use App\Interest;
 use App\Participant;
+use App\Programname;
 use Session;
 
 class InterestController extends Controller
@@ -36,10 +37,10 @@ class InterestController extends Controller
     {
         $currentparticipant = $id;
 
-        $programs = Program::all();
+        $programnames = Programname::all();
 
         return view('interest.create')
-               ->with('programs', $programs)
+               ->with('programnames', $programnames)
                ->with('currentparticipant', $currentparticipant);
     }
 
@@ -63,7 +64,7 @@ class InterestController extends Controller
 
         $interest = Interest::create([
             'participant_id'    => $request->id,
-            'program_id'        => $request->program_id,
+            'programname_id'    => $request->program_id,
         ]);
 
         Session::flash('success', 'Berhasil Menambahkan Minat Program');
@@ -91,10 +92,10 @@ class InterestController extends Controller
     public function edit($id)
     {
         $interest = Interest::find($id);
-        $programs = Program::all();
+        $programnames = Programname::all();
         
         return view('interest.edit')
-               ->with('programs', $programs)
+               ->with('programnames', $programnames)
                ->with('interest', $interest);
     }
 
@@ -119,8 +120,8 @@ class InterestController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
-        $interest->id         = $request->id;
-        $interest->program_id = $request->program_id; 
+        $interest->id             = $request->id;
+        $interest->programname_id = $request->program_id; 
 
         $interest->save();
 

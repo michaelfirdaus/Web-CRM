@@ -28,7 +28,7 @@ Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware' => 'auth'], function() {
 
-//Profession routes
+//User routes
     Route::get('/users',[
         'uses'  => 'UserController@index',
         'as'    => 'users'
@@ -39,7 +39,7 @@ Route::group(['middleware' => 'auth'], function() {
         'as'    => 'user.create'
     ]);
 
-    Route::post('/ser/update/{id}',[
+    Route::post('/user/update/{id}',[
         'uses'  => 'UserController@update',
         'as'    => 'user.update'
     ]);
@@ -103,10 +103,10 @@ Route::group(['middleware' => 'auth'], function() {
         'as'    => 'profession.store'
     ]);
 
-    Route::get('/profession/delete/{id}',[
-        'uses' => 'ProfessionController@destroy',
-        'as'   => 'profession.delete'
-    ]);
+    // Route::get('/profession/delete/{id}',[
+    //     'uses' => 'ProfessionController@destroy',
+    //     'as'   => 'profession.delete'
+    // ]);
 //
 
 
@@ -136,10 +136,10 @@ Route::group(['middleware' => 'auth'], function() {
         'as'    => 'coach.store'
     ]);
 
-    Route::get('/coach/delete/{id}',[
-        'uses' => 'CoachController@destroy',
-        'as'   => 'coach.delete'
-    ]);
+    // Route::get('/coach/delete/{id}',[
+    //     'uses' => 'CoachController@destroy',
+    //     'as'   => 'coach.delete'
+    // ]);
 //
 
 
@@ -169,10 +169,10 @@ Route::group(['middleware' => 'auth'], function() {
         'as'    => 'salesperson.store'
     ]);
 
-    Route::get('/salesperson/delete/{id}',[
-        'uses' => 'SalespersonController@destroy',
-        'as'   => 'salesperson.delete'
-    ]);
+    // Route::get('/salesperson/delete/{id}',[
+    //     'uses' => 'SalespersonController@destroy',
+    //     'as'   => 'salesperson.delete'
+    // ]);
 //
 
 
@@ -202,10 +202,10 @@ Route::group(['middleware' => 'auth'], function() {
         'as'    => 'knowcn.store'
     ]);
 
-    Route::get('/knowcn/delete/{id}',[
-        'uses' => 'KnowcnController@destroy',
-        'as'   => 'knowcn.delete'
-    ]);
+    // Route::get('/knowcn/delete/{id}',[
+    //     'uses' => 'KnowcnController@destroy',
+    //     'as'   => 'knowcn.delete'
+    // ]);
 //
 
 
@@ -235,10 +235,10 @@ Route::group(['middleware' => 'auth'], function() {
         'as'    => 'jobconnector.store'
     ]);
 
-    Route::get('/jobconnector/delete/{id}',[
-        'uses' => 'JobconnectorController@destroy',
-        'as'   => 'jobconnector.delete'
-    ]);
+    // Route::get('/jobconnector/delete/{id}',[
+    //     'uses' => 'JobconnectorController@destroy',
+    //     'as'   => 'jobconnector.delete'
+    // ]);
 //
 
 
@@ -268,10 +268,43 @@ Route::group(['middleware' => 'auth'], function() {
         'as'    => 'branch.store'
     ]);
 
-    Route::get('/branch/delete/{id}',[
-        'uses' => 'BranchController@destroy',
-        'as'   => 'branch.delete'
+    // Route::get('/branch/delete/{id}',[
+    //     'uses' => 'BranchController@destroy',
+    //     'as'   => 'branch.delete'
+    // ]);
+//
+
+
+//KnowCN routes
+    Route::get('/programnames',[
+        'uses'  => 'ProgramnameController@index',
+        'as'    => 'programnames'
     ]);
+
+    Route::get('/programname/create',[
+        'uses'  => 'ProgramnameController@create',
+        'as'    => 'programname.create'
+    ]);
+
+    Route::post('/programname/update/{id}',[
+        'uses'  => 'ProgramnameController@update',
+        'as'    => 'programname.update'
+    ]);
+
+    Route::get('/programname/edit/{id}',[
+        'uses' => 'ProgramnameController@edit',
+        'as'   => 'programname.edit'
+    ]);
+
+    Route::post('/programname/store',[
+        'uses'  => 'ProgramnameController@store',
+        'as'    => 'programname.store'
+    ]);
+
+    // Route::get('/knowcn/delete/{id}',[
+    //     'uses' => 'KnowcnController@destroy',
+    //     'as'   => 'knowcn.delete'
+    // ]);
 //
 
 
@@ -301,10 +334,10 @@ Route::group(['middleware' => 'auth'], function() {
         'as'    => 'program.store'
     ]);
 
-    Route::get('/program/delete/{id}',[
-        'uses' => 'ProgramController@destroy',
-        'as'   => 'program.delete'
-    ]);
+    // Route::get('/program/delete/{id}',[
+    //     'uses' => 'ProgramController@destroy',
+    //     'as'   => 'program.delete'
+    // ]);
 //
 
 
@@ -334,10 +367,10 @@ Route::group(['middleware' => 'auth'], function() {
         'as'    => 'programcategory.store'
     ]);
 
-    Route::get('/programcategory/delete/{id}',[
-        'uses' => 'ProgramcategoryController@destroy',
-        'as'   => 'programcategory.delete'
-    ]);
+    // Route::get('/programcategory/delete/{id}',[
+    //     'uses' => 'ProgramcategoryController@destroy',
+    //     'as'   => 'programcategory.delete'
+    // ]);
 //
 
 
@@ -347,10 +380,10 @@ Route::group(['middleware' => 'auth'], function() {
         'as'    => 'coachprograms'
     ]);
 
-    Route::get('/coachprogram/create',[
-        'uses'  => 'CoachProgramController@create',
-        'as'    => 'coachprogram.create'
-    ]);
+    // Route::get('/coachprogram/create',[
+    //     'uses'  => 'CoachProgramController@create',
+    //     'as'    => 'coachprogram.create'
+    // ]);
 
     Route::post('/coachprogram/update/{id}',[
         'uses'  => 'CoachProgramController@update',
@@ -362,15 +395,20 @@ Route::group(['middleware' => 'auth'], function() {
         'as'   => 'coachprogram.edit'
     ]);
 
-    Route::post('/coachprogram/store',[
-        'uses'  => 'CoachProgramController@store',
-        'as'    => 'coachprogram.store'
+    // Route::post('/coachprogram/store',[
+    //     'uses'  => 'CoachProgramController@store',
+    //     'as'    => 'coachprogram.store'
+    // ]);
+
+    Route::get('/coachprogram/detail/{id}',[
+        'uses' => 'CoachProgramController@detail',
+        'as'   => 'coachprogram.detail'
     ]);
 
-    Route::get('/coachprogram/delete/{id}',[
-        'uses' => 'CoachProgramController@destroy',
-        'as'   => 'coachprogram.delete'
-    ]);
+    // Route::get('/coachprogram/delete/{id}',[
+    //     'uses' => 'CoachProgramController@destroy',
+    //     'as'   => 'coachprogram.delete'
+    // ]);
 //
 
 
@@ -478,6 +516,12 @@ Route::group(['middleware' => 'auth'], function() {
         'uses'  => 'TransactionController@create',
         'as'    => 'transaction.create'
     ]);
+
+    Route::Get('/transaction/fetch',[
+        'uses'  => 'TransactionController@fetch',
+        'as'    => 'transaction.fetch'
+    ]);
+
     Route::post('/transaction/update/{id}',[
         'uses'  => 'TransactionController@update',
         'as'    => 'transaction.update'
@@ -524,10 +568,10 @@ Route::group(['middleware' => 'auth'], function() {
         'as'    => 'resultbyid.store'
     ]);
 
-    Route::get('/resultbyid/delete/{id}',[
-        'uses' => 'ResultByIdController@destroy',
-        'as'   => 'resultbyid.delete'
-    ]);
+    // Route::get('/resultbyid/delete/{id}',[
+    //     'uses' => 'ResultByIdController@destroy',
+    //     'as'   => 'resultbyid.delete'
+    // ]);
 //
 
 

@@ -12,16 +12,22 @@
 
     <div class="card">
         <div class="card card-body">
-            <table id="table" class="table table-hover table-bordered">
+            <table id="table" class="table table-hover table-bordered table-responsive">
                 <thead>
                     <th class="text-center">
+                        Nomor Member
+                    </th>
+                    <th class="text-center">
                         Nama Peserta
+                    </th>
+                    <th class="text-center">
+                        Link CV
                     </th>
                     <th class="text-center"> 
                         Perusahaan Rekanan
                     </th>
                     <th class="text-center"> 
-                        Tanggal Batch
+                        Tanggal Apply
                     </th>
                     <th class="text-center"> 
                         Status
@@ -39,10 +45,16 @@
                         @foreach ($jobconnectorparticipants as $jobconnectorparticipant)
                                 <tr>
                                     <td>
+                                        {{ $jobconnectorparticipant->participant->id }}
+                                    </td>
+                                    <td>
                                         {{ $jobconnectorparticipant->participant->name }}
                                     </td>
                                     <td>
-                                        {{ $jobconnectorparticipant->jobconnector->company_name }}
+                                        <a href="{{ $jobconnectorparticipant->participant->cv_link }}" target="_blank">{{ $jobconnectorparticipant->participant->cv_link }}</a>
+                                    </td>
+                                    <td>
+                                        {{ $jobconnectorparticipant->jobconnector->name }}
                                     </td>
                                     <td>
                                         {{ $jobconnectorparticipant->date }}

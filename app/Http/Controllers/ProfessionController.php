@@ -37,13 +37,24 @@ class ProfessionController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required'
-        ]);
+
+        $rules = [
+            'name'   => 'required|unique:professions',
+            'status' => 'required'
+        ];
+
+        $customMessages = [
+            'name.required'   => 'Nama Profesi harus diisi.',
+            'name.unique'     => 'Nama Profesi sudah terdaftar, silahkan coba lagi.',
+            'status.required' => 'Status harus dipilih.'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         $profession = new Profession;
 
-        $profession->name = $request->name;
+        $profession->name   = $request->name;
+        $profession->status = $request->status;
 
         $profession->save();
 
@@ -86,9 +97,22 @@ class ProfessionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $rules = [
+            'name'   => 'required',
+            'status' => 'required'
+        ];
+
+        $customMessages = [
+            'name.required'   => 'Nama Profesi harus diisi.',
+            'status.required' => 'Status harus dipilih.'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
         $profession = Profession::find($id);
 
-        $profession->name = $request->name;
+        $profession->name   = $request->name;
+        $profession->status = $request->status;
 
         $profession->save();
 

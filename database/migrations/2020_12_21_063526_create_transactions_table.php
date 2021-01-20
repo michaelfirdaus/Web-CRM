@@ -15,18 +15,17 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('coach_program_id');
+            $table->bigInteger('program_id');
             $table->bigInteger('participant_id');
             $table->bigInteger('salesperson_id');
-            $table->boolean('result')->default(0);
+            $table->bigInteger('result_id')->nullable();
+            $table->boolean('result_flag')->default(0);
             $table->integer('price');
-            $table->integer('firsttrans');
-            $table->integer('secondtrans')->nullable();
-            $table->integer('cashback')->nullable();
             $table->string('note')->nullable();
             $table->integer('rating')->nullable();
             $table->string('rating_text')->nullable();
-            $table->integer('recoaching');
+            $table->boolean('recoaching')->default(0);
+            $table->integer('recoaching_count')->default(0);
             $table->timestamps();
         });
     }

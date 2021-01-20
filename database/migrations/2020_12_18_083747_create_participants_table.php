@@ -18,6 +18,8 @@ class CreateParticipantsTable extends Migration
             $table->bigInteger('branch_id');
             $table->bigInteger('knowcn_id');
             $table->bigInteger('profession_id')->nullable();
+            $table->bigInteger('memberreference_id')->nullable();
+            $table->string('memberreference_name')->nullable();
             $table->string('name');
             $table->string('pob');
             $table->string('dob');

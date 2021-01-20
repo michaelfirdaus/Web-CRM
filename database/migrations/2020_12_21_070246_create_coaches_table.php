@@ -20,6 +20,7 @@ class CreateCoachesTable extends Migration
             $table->string('phonenumber');
             $table->string('dob');
             $table->text('address');
+            $table->boolean('status')->default('1');
             $table->timestamps();
         });
     }

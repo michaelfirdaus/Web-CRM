@@ -29,7 +29,7 @@ class ProgramcategoryController extends Controller
      */
     public function create()
     {
-        return view('programcategory.create')->with('programcategories', $branches);
+        return view('programcategory.create');
     }
 
     /**
@@ -40,12 +40,22 @@ class ProgramcategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name'              => 'required|unique:programcategories',
-        ]);
+        $rules = [
+            'name'   => 'required|unique:programcategories',
+            'status' => 'required|boolean'
+        ];
+
+        $customMessages = [
+            'name.required'   => 'Nama Kategori Program harus diisi.',
+            'name.unique'     => 'Nama Kategori Program sudah terdaftar, silahkan coba lagi.',
+            'status.required' => 'Status Kategori Program harus dipilih.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         $programcategory = Programcategory::create([
-            'name'          => $request->name
+            'name'   => $request->name,
+            'status' => $request->status  
         ]);
 
         Session::flash('success', 'Berhasil Menambahkan Kategori Program');
@@ -86,14 +96,23 @@ class ProgramcategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $programcategory = Programcategory::find($id);
+        $rules = [
+            'name'   => 'required',
+            'status' => 'required|boolean'
+        ];
 
-        $this->validate($request, [
-            'name'              => 'required',
-        ]);
+        $customMessages = [
+            'name.required'   => 'Nama Kategori Program harus diisi.',
+            'status.required' => 'Status Kategori Program harus dipilih.'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
+        $programcategory = Programcategory::find($id);
 
         $programcategory->id        = $request->id;
         $programcategory->name      = $request->name;
+        $programcategory->status    = $request->status;
 
         $programcategory->save();
 

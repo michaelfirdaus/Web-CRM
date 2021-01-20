@@ -8,8 +8,8 @@
 
     <div class="card">
         <div class="card-header text-danger text-bold">Informasi Penting</div>
-        <div class="card-body text-bold">
-            PASTIKAN username tidak mengandung spasi.      
+        <div class="card-body">
+            PASTIKAN Username tidak mengandung spasi.      
         </div>
     </div>
 
@@ -42,6 +42,16 @@
                 <div class="form-group">
                     <label for="confirmpassword">Konfirmasi Ubah Password</label>
                     <input name="confirmpassword" type="password" placeholder="Konfirmasi Ubah Password" id="confirm_password" class="form-control">
+                </div>
+
+                <br>
+                <hr>
+                <div class="text-danger text-bold">
+                    Apabila tidak perlu pengubahan foto profil, silahkan lewati.
+                </div>
+                <div class="form-group">
+                    <label for="photo">Upload Foto Profil</label><br>
+                    <input type="file" name="photo" placeholder="">
                 </div>
 
                 <div class="form-group">

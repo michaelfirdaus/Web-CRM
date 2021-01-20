@@ -16,6 +16,7 @@ class CreateProgramcategoryTable extends Migration
         Schema::create('programcategories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

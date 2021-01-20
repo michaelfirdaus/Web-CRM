@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Auth;
 use Validator;
 use App\User;
 use Session;
@@ -48,7 +49,7 @@ class UserController extends Controller
  
         $rules = [
             'name'            => 'required',
-            'username'        => 'required|without_spaces|unique:username',
+            'username'        => 'required|without_spaces|unique:users',
             'password'        => 'required',
             'confirmpassword' => 'required',
         ];
@@ -62,13 +63,34 @@ class UserController extends Controller
             'username.unique'          => 'Username sudah terpakai, silahkan coba lagi.',
         ];
 
-        $this->validate($request, $rules, $customMessages);
+        if($request->has('photo')){
+            $this->validate($request, $rules, $customMessages);
+                
+            $image = $request->file('photo');
+    
+            $fullImage = time().'.'.$image->getClientOriginalExtension();
             
-        $user = User::create([
-            'name'      => $request->name,
-            'username'  => $request->username,
-            'password'  => bcrypt($request->password),
-        ]);
+            $path = public_path('/uploads/userphoto/');
+            
+            $image->move($path, $fullImage);
+    
+            $user = User::create([
+                'name'      => $request->name,
+                'username'  => $request->username,
+                'password'  => bcrypt($request->password),
+                'photo'     => $fullImage,
+            ]);
+        }
+
+        else{
+            $user = User::create([
+                'name'      => $request->name,
+                'username'  => $request->username,
+                'password'  => bcrypt($request->password),
+                'photo'     => 'logo-cn.png',
+            ]);
+        }
+
 
         Session::flash('success', 'Berhasil Menambahkan User');
 
@@ -108,6 +130,11 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        Validator::extend('without_spaces', function($attr, $value){
+            return preg_match('/^\S*$/u', $value);
+        });
+
         $rules = [
             'name'            => 'required',
             'username'        => 'required|without_spaces',
@@ -129,6 +156,18 @@ class UserController extends Controller
         if($request->has('password')){
             $user->password = bcrypt($request->password);
         }
+
+        if($request->has('photo')){
+            $image = $request->file('photo');
+
+            $fullImage = time().'.'.$image->getClientOriginalExtension();
+            
+            $path = public_path('/uploads/userphoto/');
+            
+            $image->move($path, $fullImage);
+
+            $user->photo = $fullImage;
+        }
         
         $user->save();
         Session::flash('success', 'Berhasil Memperbaharui User');
@@ -144,7 +183,13 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+
         $user = User::find($id);
+
+        if($user->id == Auth::user()->id){
+            Session::flash('warning', 'Tidak dapat menghapus data Anda sendiri.');
+            return redirect()->route('users');
+        }
 
         $user->delete();
 
@@ -157,10 +202,10 @@ class UserController extends Controller
 
         if($user->admin == 0){
             $user->admin = 1;
-            Session::flash('success', 'Berhasil Menjadikan Admin');
+            Session::flash('success', 'Berhasil Menjadikan ' .$user->name. ' sebagai Admin');
         }else{
             $user->admin = 0;
-            Session::flash('success', 'Berhasil Menjadikan User');
+            Session::flash('success', 'Berhasil Menjadikan ' .$user->name. ' sebagai User');
         }
 
         $user->save();

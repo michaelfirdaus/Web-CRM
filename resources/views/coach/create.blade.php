@@ -35,7 +35,7 @@
 
                 <div class="form-group">
                     <label for="dob">Tanggal Lahir <span class="text-danger">*</span></label>
-                    <input type="date" name="dob" value="{{ old('dob') }}">
+                    <input type="date" name="dob" value="{{ old('dob') }}" class="ml-2">
                     @if( $errors->has('dob') )
                         <div class="text-danger">{{ $errors->first('dob') }}</div>
                     @endif
@@ -43,9 +43,20 @@
         
                 <div class="form-group">
                     <label for="address">Alamat <span class="text-danger">*</span></label>
-                    <input type="text" name="address" class="form-control" value="{{ old('address') }}">
+                    <input type="text" name="address" class="form-control" value="{{ old('address') }}" placeholder="Contoh: Villa Permata Berlian, Jalan Sukses 1 Blok E1-9, Jakarta 12345">
                     @if( $errors->has('address') )
                         <div class="text-danger">{{ $errors->first('address') }}</div>
+                    @endif
+                </div>
+
+                <div class="form-group">
+                    <label for="status">Status Pengajar <span class="text-danger">*</span></label>
+                    <select name="status" id="status" class="form-control select2" style="width: auto;">
+                    <option value="1" selected> Aktif </option>
+                    <option value="0"> Tidak Aktif </option>
+                    </select>
+                    @if( $errors->has('status') )
+                        <div class="text-danger">{{ $errors->first('status') }}</div>
                     @endif
                 </div>
 

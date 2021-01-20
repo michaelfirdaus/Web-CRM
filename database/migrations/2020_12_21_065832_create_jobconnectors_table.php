@@ -15,8 +15,9 @@ class CreateJobconnectorsTable extends Migration
     {
         Schema::create('jobconnectors', function (Blueprint $table) {
             $table->id();
-            $table->string('company_name');
+            $table->string('name');
             $table->string('location');
+            $table->boolean('status')->default('1');
             $table->timestamps();
         });
     }

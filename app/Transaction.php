@@ -14,12 +14,12 @@ class Transaction extends Model
         return $this->belongsTo('App\Salesperson');
     }
 
-    public function coachprogram(){
-        return $this->hasOne('App\CoachProgram', 'id');
+    public function program(){
+        return $this->hasOne('App\Program', 'id', 'program_id');
     }
 
     public function result(){
-        return $this->hasOne('App\Result');
+        return $this->hasOne('App\Result', 'id', 'result_id', 'transaction_id');
     }
 
     public function participant(){

@@ -4,22 +4,22 @@
 
 @section('content')
 
+    <div class="card">
+        <div class="card-header text-danger text-bold">Informasi Penting</div>
+        <div class="card-body">
+            <ul>
+                <li>Apabila ikon pada kolom Nilai <span class="fas fa-plus"></span>, maka nilai peserta belum diinput.</li>
+                <li>Apabila ikon pada kolom Nilai <span class="fas fa-address-book"></span>, maka nilai peserta sudah diinput.</li>
+                <li class="text-bold">Transaksi dapat dibuat apabila jadwal kelas yang tersedia paling lambat 7 hari sebelum dari tanggal hari ini.</li> 
+            </ul>
+        </div>
+    </div>
+
     <div class="row">
         <div class="form-group ml-auto mr-2">
             <a href="{{ route('transaction.create') }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Buat Transaksi</a>
         </div>
     </div>
-
-        <div class="card">
-            <div class="card-header text-danger text-bold">Informasi Penting</div>
-            <div class="card-body">
-                <ul>
-                    <li>Apabila ikon nilai <span class="fas fa-plus"></span>, maka nilai belum diinput.</li>
-                    <li>Apabila ikon nilai <span class="fas fa-address-book"></span>, maka nilai sudah diinput.</li>
-                    <li class="text-bold">Transaksi dapat dibuat apabila jadwal kelas yang tersedia paling lambat 7 hari sebelum dari tanggal hari ini.</li> 
-                </ul>
-            </div>
-        </div>
 
     <div class="card">
         <div class="card-body">
@@ -27,6 +27,9 @@
                 <thead>
                     <th class="text-center">
                         Tgl Transaksi
+                    </th>
+                    <th class="text-center">
+                        Nomor Member
                     </th>
                     <th class="text-center">
                         Nama Peserta
@@ -41,16 +44,10 @@
                         Tanggal Batch
                     </th>
                     <th class="text-center">
+                        Lokasi Kelas
+                    </th>
+                    <th class="text-center">
                         Harga
-                    </th>
-                    <th class="text-center">
-                        DP Pertama
-                    </th>
-                    <th class="text-center">
-                        DP Kedua
-                    </th>
-                    <th class="text-center">
-                        Cashback
                     </th>
                     <th class="text-center">
                         Rating
@@ -59,10 +56,10 @@
                         Ulasan
                     </th>
                     <th class="text-center">
-                        Recoaching?
+                        Jumlah Recoaching
                     </th>
                     <th class="text-center">
-                        Status Pelunasan
+                        Recoaching?
                     </th>
                     <th class="text-center">
                         Catatan
@@ -85,6 +82,9 @@
                                 <td>
                                     {{ $transaction->created_at }}
                                 </td>
+                                <td class="text-center">
+                                    {{ $transaction->participant->id }}
+                                </td>
                                 <td>
                                     {{ $transaction->participant->name }}
                                 </td>
@@ -92,23 +92,16 @@
                                     {{ $transaction->salesperson->name }}
                                 </td>
                                 <td>
-                                    {{ $transaction->coachprogram->program->name }}
+                                    {{ $transaction->program->programname->name }}
                                 </td>
                                 <td class="text-center">
-                                    {{ $transaction->coachprogram->date }}
+                                    {{ $transaction->program->date }}
                                 </td>
-                        
+                                <td class="text-center">
+                                    {{ $transaction->program->branch->name }}
+                                </td>
                                 <td>
                                     @currency( $transaction->price )
-                                </td>
-                                <td>
-                                    @currency( $transaction->firsttrans )
-                                </td>
-                                <td>
-                                    @currency( $transaction->secondtrans )
-                                </td>
-                                <td>
-                                    @currency( $transaction->cashback )
                                 </td>
                                 <td>
                                     {{ $transaction->rating }}
@@ -117,24 +110,20 @@
                                     {{ $transaction->rating_text }}
                                 </td>
                                 <td class="text-center">
+                                    {{ $transaction->recoaching_count }}
+                                </td>
+                                <td class="text-center">
                                     @if($transaction->recoaching == 0)
                                         Tidak
                                     @else
                                         Ya
                                     @endif
                                 </td>
-                                <td class="text-center">
-                                    @if($transaction->price == $transaction->firsttrans + $transaction->secondtrans)
-                                        Lunas
-                                    @else
-                                        Belum Lunas
-                                    @endif
-                                </td>
                                 <td>
                                     {{ $transaction->note }}
                                 </td>
                                 <td class="text-center">
-                                    @if($transaction->result == 0)
+                                    @if($transaction->result_flag == 0)
                                     <a href="{{ route('resultbyid.create', ['id' => $transaction->id]) }}" class="btn btn-xs btn-success">
                                         <span class="fas fa-plus"></span>
                                     </a>
