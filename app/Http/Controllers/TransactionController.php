@@ -195,7 +195,7 @@ class TransactionController extends Controller
             $transaction->rating            = $request->rating;
             $transaction->rating_text       = $request->rating_text;
             $transaction->note              = $request->note;
-            $transaction->recoaching        = 0;;
+            $transaction->recoaching        = 0;
         }
 
         $transaction->save();
@@ -222,9 +222,10 @@ class TransactionController extends Controller
         return redirect()->route('transactions');
     }
 
-    function fetch(Request $request){
-        $fill = Programname::find($request->id);
-        return response()->json($fill);
+    public function fetch(Request $request){
+        $a = Program::find($request->id);
+        $fill = Programname::find($a->programname_id);
+        return response()->json($fill->program_price);
     }
 
 }
