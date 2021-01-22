@@ -72,4 +72,10 @@
         </div>
     </div>
 </div>
+
+<footer class="m-3 p-2" style="position:fixed; left:0; bottom:0px; !important">
+    <strong>Copyright &copy; 2020-2021. Created By Michael.</strong>
+    All rights reserved.
+  </footer>
+
 @endsection
