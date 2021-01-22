@@ -138,10 +138,10 @@ $('.currency').keyup(function(event) {
 
 $('.program').change(function() {
     var program_id =  $(this).val();
+    {{-- console.log(program_id); --}}
     var a = $(this).parent();
     var op ="";
 
-    console.log("Its Change !"),
     $.ajax({
         type: 'GET',
         headers: {
@@ -151,8 +151,9 @@ $('.program').change(function() {
         data: {'id': program_id},
         dataType: 'json',
         success: function(data){
-            {{-- console.log(data.program_price); --}}
-            $('.price').val(data.program_price);
+            {{-- console.log(data);
+            console.log("Its Change !"), --}}
+            $('.price').val(data);
         },
         error:function(){
 

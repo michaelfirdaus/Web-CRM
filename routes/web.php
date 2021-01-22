@@ -517,7 +517,7 @@ Route::group(['middleware' => 'auth'], function() {
         'as'    => 'transaction.create'
     ]);
 
-    Route::Get('/transaction/fetch',[
+    Route::get('/transaction/fetch',[
         'uses'  => 'TransactionController@fetch',
         'as'    => 'transaction.fetch'
     ]);
