@@ -4,8 +4,8 @@
 
 @section('content')
 
-        <div class="card mb-5">
-            <div class="card-header text-success text-bold">Informasi Kelas</div>
+    <div class="card mb-5">
+        <div class="card-header text-success text-bold">Informasi Kelas</div>
             <div class="card-body">
                 <ul>
                     <li>
@@ -36,86 +36,87 @@
                 </ul>
             </div>
         </div>
+    </div>
 
-        <div class="card">
-            <div class="card-body">
-                <table id="table" class="table table-hover table-bordered">
-                    <thead>
-                        <th class="text-center">
-                            Nomor Member
-                        </th>
-                        <th class="text-center">
-                            Nama Peserta
-                        </th>
-                        <th class="text-center">
-                            Nilai Ujian
-                        </th>
-                        <th class="text-center"> 
-                            Nomor Sertifikat Skill
-                        </th>
-                        <th class="text-center"> 
-                            Tanggal Pengambilan Sertifikat Skill
-                        </th>
-                        <th class="text-center"> 
-                            Nomor Sertifikat Kehadiran
-                        </th>
-                        <th class="text-center"> 
-                            Tanggal Pengambilan Sertifikat Kehadiran
-                        </th>
-                        <th class="text-center">
-                            Edit Data Peserta
-                        </th>
-                        <th class="text-center">
-                            Edit Nilai
-                        </th>
-                    </thead>
-            
-                    <tbody>
-                        @foreach($transactions as $t)
-                            <tr>
-                                <td>
-                                    {{ $t->participant_id }}
-                                </td>
-                                <td>
-                                    {{ $t->participant->name }}
-                                </td>
-                                @if($t->result_flag == 1)
-                                    <td class="text-center">
-                                        {{ $t->result->score }}
-                                    </td>
-                                    <td>
-                                        {{ $t->result->skillcertificate_number }}
-                                    </td>
-                                    <td>
-                                        {{ $t->result->skillcertificate_pickdate }}
-                                    </td>
-                                    <td>
-                                        {{ $t->result->attendancecertificate_number }}
-                                    </td>
-                                    <td>
-                                        {{ $t->result->attendancecertificate_pickdate }}
-                                    </td>
-                                @else
-                                    <td colspan="5" class="text-center">
-                                        Belum Ada Data Nilai yang Diinput
-                                    </td>
-                                @endif
+    <div class="card">
+        <div class="card-body">
+            <table id="table" class="table table-hover table-bordered">
+                <thead>
+                    <th class="text-center">
+                        Nomor Member
+                    </th>
+                    <th class="text-center">
+                        Nama Peserta
+                    </th>
+                    <th class="text-center">
+                        Nilai Ujian
+                    </th>
+                    <th class="text-center"> 
+                        Nomor Sertifikat Skill
+                    </th>
+                    <th class="text-center"> 
+                        Tanggal Pengambilan Sertifikat Skill
+                    </th>
+                    <th class="text-center"> 
+                        Nomor Sertifikat Kehadiran
+                    </th>
+                    <th class="text-center"> 
+                        Tanggal Pengambilan Sertifikat Kehadiran
+                    </th>
+                    <th class="text-center">
+                        Edit Data Peserta
+                    </th>
+                    <th class="text-center">
+                        Edit Nilai
+                    </th>
+                </thead>
+        
+                <tbody>
+                    @foreach($transactions as $t)
+                        <tr>
+                            <td>
+                                {{ $t->participant_id }}
+                            </td>
+                            <td>
+                                {{ $t->participant->name }}
+                            </td>
+                            @if($t->result_flag == 1)
                                 <td class="text-center">
-                                    <a href="{{ route('participant.edit', ['id'=> $t->participant_id]) }}" class="btn btn-xs btn-info">
-                                        <span class="fas fa-users-cog"></span>
-                                    </a>
+                                    {{ $t->result->score }}
                                 </td>
-                                <td class="text-center">
-                                    <a href="{{ route('resultbyid', ['id'=> $t->id]) }}" class="btn btn-xs btn-info">
-                                        <span class="fas fa-pencil-alt"></span>
-                                    </a>
+                                <td>
+                                    {{ $t->result->skillcertificate_number }}
                                 </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                                <td>
+                                    {{ $t->result->skillcertificate_pickdate }}
+                                </td>
+                                <td>
+                                    {{ $t->result->attendancecertificate_number }}
+                                </td>
+                                <td>
+                                    {{ $t->result->attendancecertificate_pickdate }}
+                                </td>
+                            @else
+                                <td colspan="5" class="text-center">
+                                    Belum Ada Data Nilai yang Diinput
+                                </td>
+                            @endif
+                            <td class="text-center">
+                                <a href="{{ route('participant.edit', ['id'=> $t->participant_id]) }}" class="btn btn-xs btn-info">
+                                    <span class="fas fa-users-cog"></span>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a href="{{ route('resultbyid', ['id'=> $t->id]) }}" class="btn btn-xs btn-info">
+                                    <span class="fas fa-pencil-alt"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
- 
+    </div>
+
 
 @endsection
