@@ -61,11 +61,28 @@
 
                 <div class="form-group">
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success">Tambahkan User</button>
+                        <button type="submit" class="btn btn-success">Perbaharui User</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
     
+@endsection
+
+@section('scripts')
+
+    var password = document.getElementById("password"),
+    confirm_password = document.getElementById("confirm_password");
+
+    function validatePassword(){
+        if(password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Password Tidak Sesuai");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
 @endsection
