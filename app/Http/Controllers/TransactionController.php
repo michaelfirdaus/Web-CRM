@@ -129,8 +129,7 @@ class TransactionController extends Controller
     public function edit($id)
     {
         $transaction = Transaction::find($id);
-        $date = Carbon::today()->subDays(7);
-        $programs = Program::with('programname','branch')->where('date', '>=', $date)->get();
+        $programs = Program::all();
         $participants = Participant::all();
         $salespersons = Salesperson::all();
 
