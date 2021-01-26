@@ -117,7 +117,7 @@ class ParticipantController extends Controller
         $checkParticipant = Participant::all();
 
         if($checkParticipant->count() > 0 && $request->has('memberreference_id')){
-            $p = Participant::where('id',$request->memberreference_id)->get();
+            $p = Participant::where('id',$request->memberreference_id)->first();
             
             $branch_code = Branch::find($request->branch_id);
             $membernum = Membernumber::where('branch_id', $request->branch_id)->first();
