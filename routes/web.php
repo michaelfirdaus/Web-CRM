@@ -103,9 +103,24 @@ Route::get('user/profile', [
     'as' => 'user.profile'
 ]);
 
+Route::get('user/profile/edit', [
+    'uses' => 'UserProfileController@edit',
+    'as' => 'user.profile.edit'
+]);
+
 Route::post('user/profile/update/{id}', [
-    'uses' => 'UserProfileController@update',
+    'uses' => 'UserProfilecontroller@update',
     'as' => 'user.profile.update'
+]);
+
+Route::get('user/profile/changepassword', [
+    'uses' => 'UserProfileController@changepassword',
+    'as' => 'user.profile.changepassword'
+]);
+
+Route::post('user/profile/updatepassword/{id}', [
+    'uses' => 'UserProfileController@updatepassword',
+    'as' => 'user.profile.updatepassword'
 ]);
 //
 

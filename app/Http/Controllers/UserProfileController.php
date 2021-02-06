@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\User;
 use Session;
+use Validator;
 
 class UserProfileController extends Controller
 {
@@ -17,7 +18,7 @@ class UserProfileController extends Controller
      */
     public function index()
     {
-        return view('user.profile')->with('user', User::find(Auth::user()->id));
+        return view('user.index')->with('user', User::find(Auth::user()->id));
     }
 
     /**
@@ -58,9 +59,9 @@ class UserProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        return view('user.edit')->with('user', User::find(Auth::user()->id));
     }
 
     /**
@@ -72,19 +73,23 @@ class UserProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'username' => 'required',
+
+        $rules = [
             'name' => 'required',
-        ]);
+            'photo' => 'image|max:10240'
+        ];
+
+        $customMessages = [
+            'name.required' => 'Nama harus diisi.',
+            'photo.image'   => 'Format foto tidak diizinkan.',
+            'photo.max'   => 'Ukuran file lebih dari 10MB.'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
 
         $user = User::find($id);
 
         $user->name     = $request->name;
-        $user->username = $request->username;
-        
-        if($request->password != ''){
-            $user->password = bcrypt($request->password);
-        }
 
         if($request->has('photo')){
             $image = $request->file('photo');
@@ -113,5 +118,34 @@ class UserProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function changepassword(){
+        return view('user.changepassword')->with('user', User::find(Auth::user()->id));
+    }
+
+    public function updatepassword(Request $request, $id){
+
+        $rules = [
+            'password' => 'required',
+            'confirmpassword' => 'required|same:password',
+        ];
+
+        $customMessages = [
+            'password.required'         => 'Password Baru harus diisi.',
+            'confirmpassword.required'  => 'Konfirmasi Password Baru harus diisi.',
+            'confirmpassword.same'      => 'Konfirmasi Password Baru tidak sesuai.',
+        ];
+
+        $this->validate($request, $rules, $customMessages);        
+
+        $user = User::find($id);
+
+        $user->password = bcrypt($request->password);
+
+        $user->update();
+        Session::flash('success', 'Password Berhasil Diubah');
+
+        return redirect()->route('participants');
     }
 }

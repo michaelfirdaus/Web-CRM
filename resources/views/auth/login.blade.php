@@ -90,7 +90,7 @@
             All rights reserved.
         </a>
         <div class="form-inline">
-            <b class="mr-1">Version</b>1.1.4
+            <b class="mr-1">Version</b>1.1.5
         </div>          
     </div>
 
