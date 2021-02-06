@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Tambah Jadwal Kelas Baru @endsection
+@section('title')Tambah Jadwal Kelas @endsection
+
+@section('header') Tambah Jadwal Kelas @endsection
+
+@section('breadcrumb')
+<a href="/coachprograms" class="mr-1">Jadwal Kelas</a>/ 
+Tambah Jadwal Kelas 
+@endsection
 
 @section('content')
 

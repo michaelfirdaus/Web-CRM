@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
+@section('title')Job Connector @endsection
+
 @section('header') List Semua Job Connector @endsection
+
+@section('breadcrumb')
+Job Connector
+@endsection
 
 @section('content')
 
@@ -12,7 +18,7 @@
 
     <div class="card">
         <div class="card card-body">
-            <table id="table" class="table table-hover table-bordered table-responsive">
+            <table id="table" class="display table-bordered" style="width:100%">
                 <thead>
                     <th class="text-center">
                         Nomor Member
@@ -33,6 +39,12 @@
                         Status
                     </th>
                     <th class="text-center">
+                        Diinput Oleh
+                    </th>
+                    <th class="text-center">
+                        Terakhir di Edit Oleh
+                    </th>
+                    <th class="text-center">
                         Edit
                     </th>
                     <th class="text-center">
@@ -41,85 +53,93 @@
                 </thead>
         
                 <tbody>
-                    @if($jobconnectorparticipants->count() > 0)
-                        @foreach ($jobconnectorparticipants as $jobconnectorparticipant)
-                            <tr>
-                                <td>
-                                    {{ $jobconnectorparticipant->participant->id }}
-                                </td>
-                                <td>
-                                    {{ $jobconnectorparticipant->participant->name }}
-                                </td>
-                                <td>
-                                    <a href="{{ $jobconnectorparticipant->participant->cv_link }}" target="_blank">{{ $jobconnectorparticipant->participant->cv_link }}</a>
-                                </td>
-                                <td>
-                                    {{ $jobconnectorparticipant->jobconnector->name }}
-                                </td>
-                                <td>
-                                    {{ $jobconnectorparticipant->date }}
-                                </td>
-                                <td>
-                                    @if( $jobconnectorparticipant->application_status == 1 )
-                                        Sedang Dalam Proses
-                                    @elseif( $jobconnectorparticipant->application_status == 2 )
-                                        Ditolak
-                                    @elseif( $jobconnectorparticipant->application_status == 3 )
-                                        Diterima
-                                    @elseif( $jobconnectorparticipant->application_status == 4 )
-                                        Dibatalkan
-                                    @else
-                                        Lainnya
-                                    @endif
-                                </td>
-                                <td class="text-center">
-                                    <a href="{{ route('jobconnectorparticipant.edit', ['id' => $jobconnectorparticipant->id]) }}" class="btn btn-xs btn-info">
-                                        <span class="fas fa-pencil-alt"></span>
-                                    </a>
-                                </td>
-                                <td class="text-center">
-                                    <a href="" class="btn btn-xs btn-danger"  data-toggle="modal" data-target="#modal-default">
-                                        <span class="fas fa-trash-alt"></span>
-                                    </a>
-                                </td>
-
-                                <div class="modal fade" id="modal-default">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Konfirmasi</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Yakin Untuk Menghapus Item Ini?</p>
-                                            <p class="text-bold">PERINGATAN! Data yang Sudah Dihapus Tidak Dapat Dikembalikan</p>
-                                        </div>
-                                        <div class="modal-footer justify-content-between">
-                                            <button type="button" class="btn btn-success" data-dismiss="modal">
-                                                <span class="fas fa-times mr-1"></span>
-                                            Batalkan
-                                            </button>
-                                            <a href="{{ route('jobconnectorparticipant.delete', ['id' => $jobconnectorparticipant->id]) }}" class="btn btn btn-danger">
-                                            <span class="fas fa-check mr-1"></span>
-                                            Hapus
-                                            </a>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </tr>
-                        @endforeach
-                    @else
-                        <tr>
-                            <th colspan="8" class="text-center">Tidak ada job connector yang terdaftar.</th>
-                        </tr>
-                    @endif
-
                 </tbody>
             </table>
         </div>
     </div>
     
+@endsection
+
+@section('scripts')
+$(document).ready(function() {
+    let preloader = '{{ asset('assets/data-preloader.gif') }}';
+    $('#table').DataTable({
+        dom: 'lBfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        lengthMenu: [[10, 25, 50, 75, 100, -1], [10, 25, 50, 75, 100, "Semua"]],
+        scrollY: 200,
+        scrollX: true,
+        ordering: true,
+        order: [[ 4, 'desc' ]],
+        processing: true,
+        serverSide: true,
+        language:{
+            info: "<span class='font-weight-bold'>Menampilkan _START_ - _END_ dari _TOTAL_ data</span>",
+            infoEmpty: "<span class='font-weight-bold'>Tidak ada data</span>",
+            infoFiltered: "<span class='font-weight-bold'>(Filter dari _MAX_ data)</span>",
+            paginate: 
+            {
+                previous: "<i class='fas fa-chevron-left'></i>",
+                next: "<i class='fas fa-chevron-right'></i>"
+            },
+            processing: `<span class="bg-dark p-3"><img src="${preloader}" width="50" height="50"/>Memuat data...</span>`,
+            search: "<span class='font-weight-bold'>Cari: </span>",
+            searchPlaceholder: "",
+            zeroRecords: "<span class='font-weight-bold'>Data tidak ditemukan</span>",
+
+        },
+        oLanguage: {
+            sLengthMenu: "<span class='font-weight-bold mr-3'>Tampilkan _MENU_data</span>",
+        },          
+        ajax: 
+        {
+            url: "{{ route('jobconnectorparticipants') }}",
+        },
+        columns: 
+        [
+            {
+                data: 'participant_id',
+                name: 'participant_id'
+            },
+            {
+                data: 'participantname',
+                name: 'participantname'
+            },
+            {
+                data: 'participantcv_link',
+                name: 'participantcv_link'
+            },
+            {
+                data: 'companyname',
+                name: 'companyname'
+            },
+            {
+                data: 'date',
+                name: 'date'
+            },
+            {
+                data: 'application_status',
+                name: 'application_status'
+            },
+            {
+                data: 'created_by',
+                name: 'created_by'
+            },
+            {
+                data: 'lastedited_by',
+                name: 'lastedited_by'
+            },
+            {
+                data: 'Edit',
+                name: 'Edit'
+            },
+            {
+                data: 'Hapus',
+                name: 'Hapus'
+            }
+        ]
+    });
+});
 @endsection

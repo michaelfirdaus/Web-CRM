@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
-@section('header') Perbaharui Data Nilai Peserta {{ $result->transaction->participant->name }} @endsection
+@section('title')Edit Data Nilai {{ $result->transaction->participant_id}} - {{ $result->transaction->participant->name }} @endsection
+
+@section('header') Perbaharui Data Nilai Peserta <br>{{ $result->transaction->participant_id}} - {{ $result->transaction->participant->name }} @endsection
+
+@section('breadcrumb')
+<a href="/transactions" class="mr-1">Transaksi</a>/ 
+<a href="/resultbyid/{{$result->transaction->id}}" class="ml-1 mr-1">
+Data Nilai {{ $result->transaction->participant_id}} - {{ $result->transaction->participant->name }}</a>/ 
+Edit
+@endsection
 
 @section('content')
 

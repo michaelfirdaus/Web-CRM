@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Perbaharui Batch Program {{ $program->programname->name }}<br> Tanggal {{ $program->date }} @endsection
+@section('title')Edit Batch Program {{ $program->programname->name }} ({{ $program->date }})@endsection
+
+@section('header') Perbaharui Batch Program <br>{{ $program->programname->name }}<br> Tanggal: {{ $program->date }} @endsection
+
+@section('breadcrumb')
+    <a href="/programs" class="mr-1">Batch Program</a>/ 
+    Edit Batch Program {{ $program->programname->name }} ({{ $program->date }})
+@endsection
 
 @section('content')
 

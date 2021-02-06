@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Tambah Nama Program Baru Course-Net @endsection
+@section('title')Tambah Program @endsection
+
+@section('header') Tambah Program Course-Net @endsection
+
+@section('breadcrumb')
+<a href="/programnames" class="mr-1">Program</a>/ 
+Tambah Program
+@endsection
 
 @section('content')
 

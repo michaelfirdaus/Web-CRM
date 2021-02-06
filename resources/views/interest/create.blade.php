@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
-@section('header') Tambah Minat Program Baru Untuk Peserta  @endsection
+@section('title')Tambah Minat Program Peserta {{$participant->id}} - {{$participant->name}} @endsection
+
+@section('header') Tambah Minat Program Peserta <br>{{$participant->id}} - {{$participant->name}} @endsection
+
+@section('breadcrumb')
+<a href="/participants" class="mr-1">Dashboard Peserta</a>/ 
+<a href="/interests/{{$participant->id}}" class="mr-1 ml-1">Minat Program {{$participant->id}} - {{$participant->name}}</a>/ 
+Tambah Minat Program
+@endsection
+
 
 @section('content')
 

@@ -65,18 +65,6 @@ Route::group(['middleware' => 'auth'], function() {
     ]);
 //
 
-//User (user profile) routes
-    Route::get('user/profile', [
-        'uses' => 'UserProfileController@index',
-        'as' => 'user.profile'
-    ]);
-
-    Route::post('user/profile/update', [
-        'uses' => 'UserProfileController@update',
-        'as' => 'user.profile.update'
-    ]);
-//
-
 //Profession routes
     Route::get('/professions',[
         'uses'  => 'ProfessionController@index',
@@ -107,6 +95,18 @@ Route::group(['middleware' => 'auth'], function() {
     //     'uses' => 'ProfessionController@destroy',
     //     'as'   => 'profession.delete'
     // ]);
+//
+
+//User (user profile) routes
+Route::get('user/profile', [
+    'uses' => 'UserProfileController@index',
+    'as' => 'user.profile'
+]);
+
+Route::post('user/profile/update/{id}', [
+    'uses' => 'UserProfileController@update',
+    'as' => 'user.profile.update'
+]);
 //
 
 
@@ -438,11 +438,11 @@ Route::group(['middleware' => 'auth'], function() {
         'as'    => 'participant.store'
     ]);
 
-    Route::get('/participant/delete/{id}',[
-        'uses' => 'ParticipantController@destroy',
-        'as'   => 'participant.delete'
-    ]);
-//
+//     Route::get('/participant/delete/{id}',[
+//         'uses' => 'ParticipantController@destroy',
+//         'as'   => 'participant.delete'
+//     ]);
+// //
 
 
 //Reference routes
@@ -606,5 +606,15 @@ Route::group(['middleware' => 'auth'], function() {
         'as'   => 'jobconnectorparticipant.delete'
     ]);
 //
+
+//Report Routes
+    Route::get('/reports', [
+        'uses' => 'ReportController@index',
+        'as'   => 'reports'
+    ]);
+    Route::get('/report/{id}', [
+        'uses' => 'ReportController@detail',
+        'as'   => 'report.detail'
+    ]);
 
 });

@@ -1,10 +1,15 @@
 @extends('layouts.app')
 
-@section('header') Data Nilai Peserta {{ $result->transaction->participant->name }} @endsection
+@section('title')Data Nilai {{ $result->transaction->participant_id}} - {{ $result->transaction->participant->name }} @endsection
+
+@section('header') Data Nilai Peserta <br>{{ $result->transaction->participant_id}} - {{ $result->transaction->participant->name }} @endsection
+
+@section('breadcrumb')
+<a href="/transactions" class="mr-1">Transaksi</a>/ 
+Data Nilai {{ $result->transaction->participant_id}} - {{ $result->transaction->participant->name }}
+@endsection
 
 @section('content')
-
-    {{-- @foreach($transaction as $t) --}}
         @if($result == null)
             <div class="row">
                 <strong>Belum Ada Data Nilai.</strong>
@@ -38,6 +43,4 @@
                 </div>
             </div>
         @endif
-    {{-- @endforeach --}}
-
 @endsection

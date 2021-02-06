@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
+use App\User;
 use Session;
-use Auth;
 
 class UserProfileController extends Controller
 {
@@ -16,7 +17,7 @@ class UserProfileController extends Controller
      */
     public function index()
     {
-        return view('user.profile')->with('user', Auth::user());
+        return view('user.profile')->with('user', User::find(Auth::user()->id));
     }
 
     /**
@@ -69,19 +70,19 @@ class UserProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $this->validate($request, [
             'username' => 'required',
             'name' => 'required',
         ]);
 
-        $user = Auth::user();
+        $user = User::find($id);
 
         $user->name     = $request->name;
         $user->username = $request->username;
         
-        if($request->has('password')){
+        if($request->password != ''){
             $user->password = bcrypt($request->password);
         }
 
@@ -97,7 +98,7 @@ class UserProfileController extends Controller
             $user->photo = $fullImage;
         }
         
-        $user->save();
+        $user->update();
         Session::flash('success', 'Profil Anda Telah Diperbaharui');
 
         return redirect()->route('participants');

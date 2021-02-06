@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Tambah Data Nilai Baru @endsection
+@section('title')Input Data Nilai {{$transaction->participant_id}} - {{ $transaction->participant->name }}  @endsection
+
+@section('header') Input Data Nilai Peserta<br>{{$transaction->participant_id}} - {{ $transaction->participant->name }} @endsection
+
+@section('breadcrumb')
+<a href="/transactions" class="mr-1">Transaksi</a>/ 
+Input Nilai {{$transaction->participant_id}} - {{ $transaction->participant->name }}
+@endsection
 
 @section('content')
 

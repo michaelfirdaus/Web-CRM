@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
+@section('title')Edit Perusahaan Rekanan {{$jobconnector->name}} @endsection
+
 @section('header') Perbaharui Perusahaan {{ $jobconnector->name }} @endsection
+
+@section('breadcrumb')
+<a href="/knowcns" class="mr-1">Perusahaan Rekanan</a>/ 
+Edit Perusahaan {{$jobconnector->name}}
+@endsection
 
 @section('content')
 

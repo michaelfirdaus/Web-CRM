@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <title>Course-Net CRM</title>
+    <title>@yield('title') | Course-Net CRM</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -31,14 +31,21 @@
     <!-- DataTables -->
     {{-- <link rel="stylesheet" href="{{ asset('adminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}"> --}}
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
     
     {{-- Dropdown List W/Search --}}
     <link rel="stylesheet" href="{{ asset('adminLTE/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminLTE/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+    <style>
+      .dataTables_processing
+      {
+        z-index: 105 !important;
+      }
+    </style>
+    
     @yield('css')
-
+    
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
   @if(Auth::check())
@@ -57,11 +64,10 @@
           <!-- Notifications Dropdown Menu -->
           <li class="nav-item dropdown">
             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-              {{ Auth::user()->name }}
+              Halo, {{ Auth::user()->name }}!
             </a>
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <div class="dropdown-item disabled">Halo, {{ Auth::user()->name }}!</div>
               <a href="{{ route('user.profile') }}" class="dropdown-item">Profil Saya<a>
               <a class="dropdown-item" href="{{ route('logout') }}"
                   onclick="event.preventDefault();
@@ -81,8 +87,8 @@
       <!-- Main Sidebar Container -->
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="index3.html" class="brand-link">
-          <img src={{ asset('assets/logo-cn.png') }} alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+        <a href="{{ route('participants') }}" class="brand-link">
+          <img src={{ asset('assets/logo-cn.png') }} alt="Course-Net" class="brand-image img-circle elevation-3"
               style="opacity: .8">
           <span class="brand-text font-weight-light">Course-Net CRM</span>
         </a>
@@ -92,10 +98,10 @@
           <!-- Sidebar user panel (optional) -->
           <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-              <img src="{{ asset('uploads/userphoto/'.Auth::user()->photo) }}" class="img-circle elevation-2" alt="User Image">
+              <img src="{{ asset('uploads/userphoto/'.Auth::user()->photo) }}" class="" alt="User Image">
             </div>
-            <div class="info">
-              <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+            <div class="info my-auto">
+              <a href="#" class="d-block text-bold">{{ Auth::user()->name }}</a>
             </div>
           </div>
 
@@ -182,7 +188,7 @@
 
               <li class="nav-item">
                 <a href="{{route('programnames')}}" class="nav-link">
-                  <i class="nav-icon fas fa-book"></i>
+                  <i class="nav-icon fas fa-book-open"></i>
                   <p>
                     Program
                   </p>
@@ -240,6 +246,17 @@
 
               @if(Auth::user()->admin)
 
+              <li class="nav-header">Administrasi Kantor</li>
+              
+              <li class="nav-item">
+                <a href="{{route('reports')}}" class="nav-link">
+                  <i class="nav-icon far fa-clipboard"></i>
+                  <p>
+                    Laporan Kelas
+                  </p>
+                </a>
+              </li>
+
               <li class="nav-header">Fitur Admin</li>
 
               <li class="nav-item">
@@ -288,15 +305,15 @@
         <!-- Content Header (Page header) -->
         <div class="content-header">
           <div class="container-fluid">
-            <div class="row mb-2">
-              <div class="col-sm-6">
-                <h1 class="m-0 text-black text-bold">@yield('header')</h1>
-              </div><!-- /.col -->
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
+            <div class="row mb-2 ml-2 justify-content-between">
+              {{-- <div class="col-sm-12"> --}}
+                <h4 class="m-0 text-black text-bold">@yield('header')</h4>
+              {{-- </div><!-- /.col --> --}}
+              {{-- <div class="col-sm-6 ml-auto"> --}}
+                <ol class="breadcrumb mt-0 mr-2 form-inline text-sm">
                     @yield('breadcrumb')
                 </ol>
-              </div><!-- /.col -->
+              {{-- </div><!-- /.col --> --}}
             </div><!-- /.row -->
           </div><!-- /.container-fluid -->
         </div>
@@ -314,10 +331,12 @@
       </div>
       <!-- /.content-wrapper -->
       <footer class="main-footer bg-dark">
-        <strong>Copyright &copy; 2020-2021. Created By Michael.</strong>
-        All rights reserved.
+        <a href="https://www.linkedin.com/in/michaelfirdaus/" target="_blank" class="text-white" style="text-decoration: none !important;">  
+          <strong>Copyright &copy; 2020-2021. Created By Michael.</strong>
+          All rights reserved.
+        </a>
         <div class="float-right d-none d-sm-inline-block">
-          <b>Version</b> 1.0.4
+          <b>Version</b> 1.1.4
         </div>
       </footer>
 
@@ -470,12 +489,14 @@
         toastr.warning("{{ Session::get('warning') }}")
     @endif
 
-    $('#table').DataTable( {
-      dom: 'lBfrtip',
-      buttons: [
-          'copy', 'csv', 'excel', 'pdf', 'print'
-      ],
-    });
+    // $('#table').DataTable( {
+    //   dom: 'lBfrtip',
+    //   buttons: [
+    //       'copy', 'csv', 'excel', 'pdf', 'print'
+    //   ],
+    //   scrollY: "300",
+    //   scrollX: true
+    // });
    
     //Initialize Select2 Elements
     $('.select2').select2({

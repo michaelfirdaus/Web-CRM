@@ -1,17 +1,23 @@
 @extends('layouts.app')
 
+@section('title')Dashboard Peserta @endsection
+
 @section('header') List Semua Peserta Course-Net @endsection
+
+@section('breadcrumb')
+    Dashboard Peserta
+@endsection
 
 @section('content')
 
     <div class="row">
-        <div class="form-group ml-auto mr-2">
+        <div class="form-group ml-auto mr-2 mt-0 pt-0">
             <a href="{{ route('participant.create') }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Tambah Peserta</a>
         </div>
     </div>
     <div class="card">
         <div class="card-body">
-            <table id="table" class="table table-hover table-bordered table-responsive">
+            <table id="table" class="display table-bordered" style="width:100%">
                 <thead>
                     <th class="text-center">
                         Nomor Member
@@ -62,6 +68,15 @@
                         Profesi
                     </th>
                     <th class="text-center">
+                        Detail Nama Perusahaan/Universitas
+                    </th>
+                    <th class="text-center">
+                        Diinput Oleh
+                    </th>
+                    <th class="text-center">
+                        Terakhir di Edit Oleh
+                    </th>
+                    <th class="text-center">
                         Minat Program
                     </th>
                     <th class="text-center">
@@ -70,131 +85,147 @@
                     <th class="text-center">
                         Edit
                     </th>
-                    <th class="text-center">
+                    {{-- <th class="text-center">
                         Hapus
-                    </th>
+                    </th> --}}
                 </thead>
         
                 <tbody>
-                    @if($participants->count() > 0)
-                        @foreach ($participants as $participant)
-                            <tr>
-                                <td class="text-center">
-                                    {{ $participant->id }}
-                                </td>
-                                <td>
-                                    {{ $participant->name }}
-                                </td>
-                                <td>
-                                    {{ $participant->pob }}
-                                </td>
-                                <td>
-                                    {{ $participant->dob }}
-                                </td>
-                                <td class="text-center">
-                                    {{ $participant->phonenumber }}
-                                </td>
-                                <td>
-                                    {{ $participant->address }}
-                                </td>
-                                <td>
-                                    {{ $participant->email }}
-                                </td>
-                                <td>
-                                    {{ $participant->student_idcard }}
-                                </td>
-                                <td>
-                                    <a href="{{ $participant->cv_link }}" target="_blank">{{ $participant->cv_link }}</a>
-                                </td>
-                                <td>
-                                    <a href="{{ $participant->sp_link }}" target="_blank">{{ $participant->sp_link }}</a>
-                                </td>
-                                <td>
-                                    {{ $participant->emergencycontact_name }}
-                                </td>
-                                <td>
-                                    {{ $participant->emergencycontact_phone }}
-                                </td>
-                                <td class="text-center">
-                                    {{ $participant->member_validthru }}
-                                </td>
-                                <td class="text-center">
-                                    {{ $participant->branch->name }}
-                                </td>
-                                <td class="text-center">
-                                    @if($participant->knowcn_id == 1)
-                                        {{ $participant->memberreference_id }} - {{ $participant->memberreference_name }}
-                                    @else
-                                        {{ $participant->knowcn->name }}
-                                    @endif
-                                </td>
-                                <td class="text-center">
-                                    @if($participant->profession)
-                                        {{ $participant->profession->name }}
-                                    @else
-                                        <div class="text-bold text-danger">Tidak Ada Data</div>
-                                    @endif
-                                </td>
-                                <td class="text-center">
-                                    <a href="{{ route('interests', ['id' => $participant ->id]) }}" class="btn btn-xs btn-success">
-                                        <span class="fas fa-tasks"></span>
-                                    </a>
-                                </td>
-                                <td class="text-center">
-                                    <a href="{{ route('references', ['id' => $participant ->id]) }}" class="btn btn-xs btn-success">
-                                        <span class="fas fa-address-book"></span>
-                                    </a>
-                                </td>
-                                <td class="text-center">
-                                    <a href="{{ route('participant.edit', ['id' => $participant ->id]) }}" class="btn btn-xs btn-info">
-                                        <span class="fas fa-pencil-alt"></span>
-                                    </a>
-                                </td>
-
-                                <td class="text-center">
-                                    <a href="" class="btn btn-xs btn-danger"  data-toggle="modal" data-target="#modal-default">
-                                        <span class="fas fa-trash-alt"></span>
-                                    </a>
-                                </td>
-
-                                <div class="modal fade" id="modal-default">
-                                    <div class="modal-dialog">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h4 class="modal-title">Konfirmasi</h4>
-                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                          </button>
-                                        </div>
-                                        <div class="modal-body">
-                                          <p>Yakin Untuk Menghapus Item Ini?</p>
-                                          <p class="text-bold">PERINGATAN! Data yang Sudah Dihapus Tidak Dapat Dikembalikan</p>
-                                        </div>
-                                        <div class="modal-footer justify-content-between">
-                                          <button type="button" class="btn btn-success" data-dismiss="modal">
-                                              <span class="fas fa-times mr-1"></span>
-                                            Batalkan
-                                          </button>
-                                          <a href="{{ route('participant.delete', ['id' => $participant ->id]) }}" class="btn btn btn-danger">
-                                            <span class="fas fa-check mr-1"></span>
-                                            Hapus
-                                          </a>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-
-                            </tr>
-                        @endforeach
-                    @else
-                        <tr>
-                            <th colspan="19" class="text-center">Belum ada peserta yang terdaftar.</th>
-                        </tr>
-                    @endif
-
                 </tbody>
             </table>
         </div>
     </div>
     
+@endsection
+
+@section('scripts')
+    $(document).ready(function() {
+        let preloader = '{{ asset('assets/data-preloader.gif') }}';
+        $('#table').DataTable({
+            dom: 'lBfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+            lengthMenu: [[10, 25, 50, 75, 100, -1], [10, 25, 50, 75, 100, "Semua"]],
+            scrollY: 200,
+            scrollX: true,
+            ordering: true,
+            order: [[ 0, 'desc' ]],
+            processing: true,
+            serverSide: true,
+            language:{
+                info: "<span class='font-weight-bold'>Menampilkan _START_ - _END_ dari _TOTAL_ data</span>",
+                infoEmpty: "<span class='font-weight-bold'>Tidak ada data</span>",
+                infoFiltered: "<span class='font-weight-bold'>(Filter dari _MAX_ data)</span>",
+                paginate: 
+                {
+                    previous: "<i class='fas fa-chevron-left'></i>",
+                    next: "<i class='fas fa-chevron-right'></i>"
+                },
+                processing: `<span class="bg-dark p-3"><img src="${preloader}" width="50" height="50"/>Memuat data...</span>`,
+                search: "<span class='font-weight-bold'>Cari: </span>",
+                searchPlaceholder: "",
+                zeroRecords: "<span class='font-weight-bold'>Data tidak ditemukan</span>",
+    
+            },
+            oLanguage: {
+                sLengthMenu: "<span class='font-weight-bold mr-3'>Tampilkan _MENU_ data</span>",
+            },          
+            ajax: 
+            {
+                url: "{{ route('participants') }}",
+            },
+            columns: 
+            [
+                {
+                    data: 'id',
+                    name: 'id'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'pob',
+                    name: 'pob'
+                },
+                {
+                    data: 'dob',
+                    name: 'dob'
+                },
+                {
+                    data: 'phonenumber',
+                    name: 'phonenumber'                   
+                },
+                {
+                    data: 'address',
+                    name: 'address'
+                },
+                {
+                    data: 'email',
+                    name: 'email'
+                },
+                {
+                    data: 'student_idcard',
+                    name: 'student_idcard'
+                },
+                {
+                    data: 'cv_link',
+                    name: 'cv_link'
+                },
+                {
+                    data: 'sp_link',
+                    name: 'sp_link'
+                },
+                {
+                    data: 'emergencycontact_name',
+                    name: 'emergencycontact_name'
+                },
+                {
+                    data: 'emergencycontact_phone',
+                    name: 'emergencycontact_phone'
+                },
+                {
+                    data: 'member_validthru',
+                    name: 'member_validthru'
+                },
+                {
+                    data: 'branch',
+                    name: 'branch'
+                },
+                {
+                    data: 'knowcn',
+                    name: 'knowcn'
+                },
+                {
+                    data: 'profession',
+                    name: 'profession'
+                },
+                {
+                    data: 'professiondetail',
+                    name: 'professiondetail'
+                },
+                {
+                    data: 'created_by',
+                    name: 'created_by'
+                },
+                {
+                    data: 'lastedited_by',
+                    name: 'lastedited_by'
+                },
+                {
+                    data: 'Minat Program',
+                    name: 'Minat Program'
+                },
+                {
+                    data: 'Referensi',
+                    name: 'Referensi'
+                },
+                {
+                    data: 'Edit',
+                    name: 'Edit'
+                }
+            ]
+        });
+    });
 @endsection

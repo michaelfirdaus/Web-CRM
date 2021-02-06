@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
-@section('header') Perbaharui Referensi {{$reference->name}} @endsection
+@section('title')Edit Referensi {{$reference->name}} @endsection
+
+@section('header') Perbaharui Referensi <br>{{$reference->name}} @endsection
+
+@section('breadcrumb')
+<a href="/participants" class="mr-1">Dashboard Peserta</a>/
+<a href="/references/{{$participant->id}}" class="mr-1 ml-1">Referensi {{$participant->id}} - {{ $participant->name }}</a>/ 
+Edit Referensi {{$reference->name}}
+@endsection
 
 @section('content')
 

@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Tambah Transaksi Baru @endsection
+@section('title')Tambah Transaksi @endsection
+
+@section('header') Tambah Transaksi @endsection
+
+@section('breadcrumb')
+<a href="/transactions" class="mr-1">Transaksi</a>/
+Tambah Transaksi
+@endsection
 
 @section('content')
 

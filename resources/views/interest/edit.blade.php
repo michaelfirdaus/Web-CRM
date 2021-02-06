@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
-@section('header') Perbaharui Referensi {{$interest->participant->name}} @endsection
+@section('title')Edit Minat Program {{$interest->participant_id}} - {{$interest->participant->name}} @endsection
+
+@section('header') Perbaharui Minat Program <br>{{$interest->participant_id}} - {{$interest->participant->name}} @endsection
+
+@section('breadcrumb')
+<a href="/participants" class="mr-1">Dashboard Peserta</a>/ 
+<a href="/interests/{{$interest->participant_id}}" class="mr-1 ml-1">Minat Program {{$interest->participant_id}} - {{$interest->participant->name}}</a>/ 
+Edit Minat Program
+@endsection
 
 @section('content')
 
@@ -27,7 +35,7 @@
 
                 <div class="form-group">
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success">Perbaharui Minat Program {{ $interest->participant->name }}</button>
+                        <button type="submit" class="btn btn-success">Perbaharui Minat Program</button>
                     </div>
                 </div>
             </form>

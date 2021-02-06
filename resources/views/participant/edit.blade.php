@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Perbaharui Peserta {{ $participant->name }} @endsection
+@section('title')Edit Peserta {{$participant->id}} - {{$participant->name}} @endsection
+
+@section('header') Perbaharui Peserta <br>{{$participant->id}} - {{ $participant->name }} @endsection
+
+@section('breadcrumb')
+<a href="/participants" class="mr-1">Dashboard Peserta</a>/
+Edit {{$participant->id}} - {{ $participant->name }}
+@endsection
 
 @section('content')
 
@@ -149,7 +156,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="profession_id">Profesi</label>
+                    <label for="profession_id">Profesi <span class="text-danger">*</span></label>
+                    
                     <select name="profession_id" id="profession_id" class="form-control select2" style="width: auto;">
                     @foreach($professions as $profession)
                             @if($profession->id == $participant->profession_id)
@@ -159,6 +167,17 @@
                             @endif 
                     @endforeach
                     </select>
+                    @if( $errors->has('profession_id') )
+                        <div class="text-danger">{{ $errors->first('profession_id') }}</div>
+                    @endif
+                </div>
+
+                <div class="form-group">
+                    <label for="profession_detail">Detail Nama Perusahaan/Universitas (Jika ada)</label>
+                    <input type="text" name="profession_detail" class="form-control" placeholder="Contoh: BINUS University" value="{{ $participant->profession_detail }}">
+                    @if( $errors->has('profession_detail') )
+                        <div class="text-danger">{{ $errors->first('profession_detail') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">

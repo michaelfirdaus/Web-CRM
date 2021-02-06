@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Tambah Job Connector untuk Peserta @endsection
+@section('title')Tambah Job Connector @endsection
+
+@section('header') Tambah Job Connector @endsection
+
+@section('breadcrumb')
+<a href="/jobconnectorparticipants" class="mr-1">Job Connector</a>/ 
+Tambah Job Connector
+@endsection
 
 @section('content')
 

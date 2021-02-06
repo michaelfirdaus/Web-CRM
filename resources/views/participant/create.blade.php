@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Tambah Peserta Baru @endsection
+@section('title')Tambah Peserta @endsection
+
+@section('header') Tambah Peserta @endsection
+
+@section('breadcrumb')
+<a href="/participants" class="mr-1">Dashboard Peserta</a>/
+Tambah Peserta
+@endsection
 
 @section('content')
 
@@ -145,7 +152,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="profession_id">Profesi</label>
+                    <label for="profession_id">Profesi <span class="text-danger">*</span></label>
                     <select name="profession_id" id="profession_id" class="form-control select2" style="width: auto;">
                     <option value="" selected disabled hidden> - Pilih Profesi - </option>
                     @foreach($professions as $profession)
@@ -156,6 +163,17 @@
                         @endif
                     @endforeach
                     </select>
+                    @if( $errors->has('profession_id') )
+                        <div class="text-danger">{{ $errors->first('profession_id') }}</div>
+                    @endif
+                </div>
+
+                <div class="form-group">
+                    <label for="profession_detail">Detail Nama Perusahaan/Universitas (Jika ada)</label>
+                    <input type="text" name="profession_detail" class="form-control" placeholder="Contoh: BINUS University" value="{{ old('profession_detail') }}">
+                    @if( $errors->has('profession_detail') )
+                        <div class="text-danger">{{ $errors->first('profession_detail') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">

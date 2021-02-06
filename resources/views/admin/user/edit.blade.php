@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
+@section('title')Edit User {{$user->name}} @endsection
+
 @section('header') Perbaharui User {{ $user->name }} @endsection
+
+@section('breadcrumb')
+<a href="/users" class="mr-1">User</a>/
+Edit User {{$user->name}}
+@endsection
 
 @section('content')
 

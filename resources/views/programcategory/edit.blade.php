@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Perbaharui Kategori Program {{ $programcategory->name }} @endsection
+@section('title')Edit Kategori Program {{$programcategory->name}} @endsection
+
+@section('header') Perbaharui Kategori Program <br>{{ $programcategory->name }} @endsection
+
+@section('breadcrumb')
+<a href="/programcategories" class="mr-1">Kategori Program</a>/ 
+Edit Kategori Program {{$programcategory->name}}
+@endsection
 
 @section('content')
 

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 use App\Salesperson;
+use DataTables;
 use Session;
 
 class SalespersonController extends Controller
@@ -14,9 +16,32 @@ class SalespersonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('salesperson.index')->with('salespersons', Salesperson::all());
+        $salespersons = Salesperson::all();
+
+        if($request->ajax()){
+            return DataTables::of($salespersons) 
+                ->editColumn('status', function($salespersons){
+                    if($salespersons->status == 1){
+                        return "<div class='text-center'>Aktif</div>";
+                    }
+                    else{
+                        return "<div class='text-center'>Tidak Aktif</div>";
+                    }
+                })
+                ->addColumn('Edit', function($salespersons){
+                    return 
+                    "<div class='text-center'>
+                        <a href='".route('salesperson.edit', ['id' => $salespersons ->id])."' class='btn btn-xs btn-info'>
+                            <span class='fas fa-pencil-alt'></span>
+                        </a>
+                    </div>";
+                }) 
+                ->rawColumns(['status', 'Edit'])
+                ->make();  
+        }
+        return view('salesperson.index')->with('salespersons', $salespersons);
     }
 
     /**
@@ -54,7 +79,7 @@ class SalespersonController extends Controller
 
         $salesperson = new Salesperson;
 
-        $salesperson->name   = $request->name;
+        $salesperson->name   = ucwords($request->name);
         $salesperson->status = $request->status;
         //Saving current category to the database
         $salesperson->save();
@@ -117,7 +142,7 @@ class SalespersonController extends Controller
         //Find category based on category ID
         $salesperson = Salesperson::find($id);
         
-        $salesperson->name   = $request->name;
+        $salesperson->name   = ucwords($request->name);
         $salesperson->status = $request->status;
         
         //Save the category to the database

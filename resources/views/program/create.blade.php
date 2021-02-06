@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Tambah Batch Program Baru @endsection
+@section('title')Tambah Batch Program @endsection
+
+@section('header') Tambah Batch Program @endsection
+
+@section('breadcrumb')
+    <a href="/programs" class="mr-1">Batch Program</a>/ 
+    Tambah Batch Program
+@endsection
 
 @section('content')
 

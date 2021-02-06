@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Perbaharui Jadwal Kelas {{ $program->programname->name }}<br>Batch {{ $program->date }}<br> {{$program->branch->name}} @endsection
+@section('title')Edit Jadwal Kelas {{ $program->programname->name }} - {{$program->branch->name}} ({{ $program->date }}) @endsection
+
+@section('header') Perbaharui Jadwal Kelas <br>{{ $program->programname->name }}<br>Batch: {{ $program->date }}<br> {{$program->branch->name}} @endsection
+
+@section('breadcrumb')
+<a href="/coachprograms" class="mr-1">Jadwal Kelas</a>/ 
+Edit Jadwal Kelas {{ $program->programname->name }} - {{$program->branch->name}} ({{ $program->date }}) 
+@endsection
 
 @section('content')
 

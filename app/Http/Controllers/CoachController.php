@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Coach;
 use Session;
+use DataTables;
 
 class CoachController extends Controller
 {
@@ -14,8 +15,38 @@ class CoachController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $coaches = Coach::all();
+
+        if($request->ajax()){
+            return DataTables::of($coaches)
+                ->editColumn('phonenumber', function($coaches){
+                    return "<div class='text-center'>".$coaches->phonenumber."</div>";
+                })
+                ->editColumn('dob', function($coaches){
+                    return "<div class='text-center'>".$coaches->dob."</div>";
+                })
+                ->editColumn('status', function($coaches){
+                    if($coaches->status == 1){
+                        return "<div class='text-center'>Aktif</div>";
+                    }
+                    else{
+                        return "<div class='text-center'>Tidak Aktif</div>";
+                    }
+                })
+                ->addColumn('Edit', function($coaches){
+                    return 
+                    "<div class='text-center'>
+                        <a href='".route('coach.edit', ['id' => $coaches ->id])."' class='btn btn-xs btn-info'>
+                            <span class='fas fa-pencil-alt'></span>
+                        </a>
+                    </div>";
+                })
+                ->rawColumns(['phonenumber', 'dob', 'status', 'Edit'])
+                ->make();
+        }
+
         return view('coach.index')->with('coaches', Coach::all());
     }
 
@@ -62,11 +93,11 @@ class CoachController extends Controller
 
         $coach = new Coach;
 
-        $coach->name        = $request->name;
+        $coach->name        = ucwords($request->name);
         $coach->email       = $request->email;
         $coach->phonenumber = $request->phonenumber;
         $coach->dob         = $request->dob;
-        $coach->address     = $request->address;
+        $coach->address     = ucwords($request->address);
         $coach->status      = $request->status;
         //Saving current category to the database
         $coach->save();
@@ -138,11 +169,11 @@ class CoachController extends Controller
         //Find category based on category ID
         $coach = Coach::find($id);
         
-        $coach->name        = $request->name;
+        $coach->name        = ucwords($request->name);
         $coach->email       = $request->email;
         $coach->phonenumber = $request->phonenumber;
         $coach->dob         = $request->dob;
-        $coach->address     = $request->address;
+        $coach->address     = ucwords($request->address);
         $coach->status      = $request->status;
         
         //Save the category to the database

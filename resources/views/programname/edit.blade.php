@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Perbaharui Nama Program {{$programname->name}} Course-Net @endsection
+@section('title')Edit Program {{$programname->name}} @endsection
+
+@section('header') Perbaharui Nama Program <br>{{$programname->name}} @endsection
+
+@section('breadcrumb')
+<a href="/programnames" class="mr-1">Program</a>/ 
+Edit Program {{$programname->name}}
+@endsection
 
 @section('content')
 

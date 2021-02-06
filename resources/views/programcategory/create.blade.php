@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Tambah Kategori Program Baru @endsection
+@section('title')Tambah Kategori Program @endsection
+
+@section('header') Tambah Kategori Program @endsection
+
+@section('breadcrumb')
+<a href="/programcategories" class="mr-1">Kategori Program</a>/ 
+Tambah Kategori Program
+@endsection
 
 @section('content')
 

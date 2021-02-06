@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Perbaharui Coach {{ $coach->name }} @endsection
+@section('title')Edit Coach {{$coach->name}} @endsection
+
+@section('header') Perbaharui Coach <br>{{ $coach->name }} @endsection
+
+@section('breadcrumb')
+<a href="/branches" class="mr-1">Coach</a>/ 
+Edit Coach {{$coach->name}}
+@endsection
 
 @section('content')
 

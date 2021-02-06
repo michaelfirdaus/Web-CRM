@@ -1,12 +1,22 @@
 @extends('layouts.app')
 
-
-@section('header') Perbaharui Cabang  @endsection
-
+@section('css')
+<style>
+        .footer{
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: left;
+            background-color:black;
+            color: white;
+        }
+</style>
+@endsection
 
 @section('content')
 <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header bg-dark text-bold">Login ke Course-Net CRM</div>
 
@@ -70,14 +80,18 @@
                     </div>
                 </form>
             </div>
-            <div class="card-footer text-right">Version 1.0.4</div>
         </div>
     </div>
 </div>
 
-<footer class="m-3 p-2" style="position:fixed; left:0; bottom:0px; !important">
-    <strong>Copyright &copy; 2020-2021. Created By Michael.</strong>
-    All rights reserved.
-  </footer>
+    <div class="navbar footer mt-5 pl-3 pr-3 pt-2 pb-2 justify-content-between">
+        <a href="https://www.linkedin.com/in/michaelfirdaus/" target="_blank" class="text-white" style="text-decoration: none !important;">  
+            <strong class="mr-1">Copyright &copy; 2020-2021. Created By Michael.</strong>
+            All rights reserved.
+        </a>
+        <div class="form-inline">
+            <b class="mr-1">Version</b>1.1.4
+        </div>          
+    </div>
 
 @endsection

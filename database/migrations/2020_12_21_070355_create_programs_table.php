@@ -19,6 +19,8 @@ class CreateProgramsTable extends Migration
             $table->bigInteger('programcategory_id');
             $table->bigInteger('programname_id');
             $table->date('date');
+            $table->string('created_by');
+            $table->string('lastedited_by');
             $table->timestamps();
         });
     }

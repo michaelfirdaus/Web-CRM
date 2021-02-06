@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Profession;
 use Session;
+use DataTables;
 
 class ProfessionController extends Controller
 {
@@ -14,9 +15,32 @@ class ProfessionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('profession.index')->with('professions', Profession::all());
+        $professions = Profession::all();
+
+        if($request->ajax()){
+            return DataTables::of($professions)
+            ->editColumn('status', function($professions){
+                if($professions->status == 1){
+                    return "<div class='text-center'>Aktif</div>";
+                }else{
+                    return "<div class='text-center'>Tidak Aktif</div>";
+                }
+            })
+            ->addColumn('Edit', function($professions){
+                return
+                "<div class='text-center'>
+                    <a href='".route('profession.edit', ['id' => $professions ->id])."' class='btn btn-xs btn-info'>
+                        <span class='fas fa-pencil-alt'></span>
+                    </a>
+                </div>";
+            })
+            ->rawColumns(['status', 'Edit'])
+            ->make();
+        }
+
+        return view('profession.index')->with('professions', $professions);
     }
 
     /**
@@ -53,7 +77,7 @@ class ProfessionController extends Controller
 
         $profession = new Profession;
 
-        $profession->name   = $request->name;
+        $profession->name   = ucwords($request->name);
         $profession->status = $request->status;
 
         $profession->save();
@@ -111,7 +135,7 @@ class ProfessionController extends Controller
 
         $profession = Profession::find($id);
 
-        $profession->name   = $request->name;
+        $profession->name   = ucwords($request->name);
         $profession->status = $request->status;
 
         $profession->save();

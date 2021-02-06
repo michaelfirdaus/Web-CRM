@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
-@section('header') Tambah Referensi Baru @endsection
+@section('title')Tambah Referensi {{$participant->id}} - {{$participant->name}} @endsection
+
+@section('header') Tambah Referensi Peserta<br>{{$participant->id}} - {{$participant->name}}@endsection
+
+@section('breadcrumb')
+<a href="/participants" class="mr-1">Dashboard Peserta</a>/
+<a href="/references/{{$participant->id}}" class="mr-1 ml-1">Referensi {{$participant->id}} - {{ $participant->name }}</a>/ 
+Tambah Referensi
+@endsection
 
 @section('content')
 

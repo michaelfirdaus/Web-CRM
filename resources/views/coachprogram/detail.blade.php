@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') List Semua Jadwal Kelas @endsection
+@section('title') Detail Kelas @endsection
+
+@section('header') Detail Kelas @endsection
+
+@section('breadcrumb')
+<a href="/coachprograms" class="mr-1">Jadwal Kelas</a>/ 
+Detail Kelas {{$program->programname->name}} ({{$program->date}})
+@endsection
 
 @section('content')
 
@@ -30,6 +37,8 @@
                             <span class="text-bold text-danger">Coach Belum Dipilih</span>
                         @endif
                     </li>
+                    <li>Program: {{$program->programname->name}}</li>
+                    <li>Kategori Program: {{$program->programcategory->name}}</li>
                     <li>Tanggal Batch: {{ $program->date }}</li>
                     <li>Jumlah Peserta: {{ $countparticipant }}</li>
                     <li>Lokasi Kelas: {{ $program->branch->name }}</li>
@@ -107,9 +116,15 @@
                                 </a>
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('resultbyid', ['id'=> $t->id]) }}" class="btn btn-xs btn-info">
-                                    <span class="fas fa-pencil-alt"></span>
-                                </a>
+                                @if($t->result_flag == 1)
+                                    <a href="{{ route('resultbyid', ['id'=> $t->id]) }}" class="btn btn-xs btn-info">
+                                        <span class="fas fa-pencil-alt"></span>
+                                    </a>
+                                @else
+                                    <a href="{{ route('resultbyid.create', ['id' => $t->id]) }}" class="btn btn-xs btn-success">
+                                        <span class="fas fa-plus"></span>
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -119,4 +134,15 @@
     </div>
 
 
+@endsection
+
+@section('scripts')
+$('#table').DataTable( {
+    dom: 'lBfrtip',
+    buttons: [
+       'copy', 'csv', 'excel', 'pdf', 'print'
+    ],
+    scrollY: "300",
+    scrollX: true
+});
 @endsection

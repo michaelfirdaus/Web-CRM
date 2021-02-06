@@ -9,6 +9,8 @@ use App\Branch;
 use App\Programcategory;
 use App\Programname;
 use Session;
+use DataTables;
+use Auth;
 
 class ProgramController extends Controller
 {
@@ -17,15 +19,40 @@ class ProgramController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $programs = Program::with('programcategory','programname')->get();
-        $programcategories = Programcategory::all();
-        $branches = Branch::all();
+        $programs = Program::with('programcategory','programname', 'branch');
+
+        if($request->ajax()){
+            return DataTables::of($programs)
+                ->addColumn('Edit', function($programs){
+                    return 
+                    "<div class='text-center'>
+                        <a href='".route('program.edit', ['id' => $programs ->id])."' class='btn btn-xs btn-info'>
+                            <span class='fas fa-pencil-alt'></span>
+                        </a>
+                    </div>";
+                })
+                ->editColumn('date', function($programs){
+                    return
+                    "<div class='text-center'>".$programs->date."</div>";
+                })
+                ->editColumn('branch.name', function($programs){
+                    return
+                    "<div class='text-center'>".$programs->branch->name."</div>";
+                })
+                ->editColumn('created_by', function($programs){
+                    return "<div class='text-center'>".$programs->created_by."</div>";
+                })
+                ->editColumn('lastedited_by', function($programs){
+                    return "<div class='text-center'>".$programs->lastedited_by."</div>";
+                })
+                ->rawColumns(['Edit', 'date', 'branch.name', 'created_by', 'lastedited_by'])
+                ->make();
+        }
 
         return view('program.index')
-            ->with('programs', $programs)
-            ->with('branches', $branches);
+            ->with('programs', $programs);
     }
 
     /**
@@ -81,6 +108,7 @@ class ProgramController extends Controller
             'branch_id'          => $request->branch_location,
             'programcategory_id' => $request->programcategory,
             'date'               => $request->date,
+            'created_by'         => Auth::user()->name,
         ]);
 
         Session::flash('success', 'Berhasil Menambahkan Program');
@@ -154,6 +182,7 @@ class ProgramController extends Controller
         $program->branch_id          = $request->branch_location;
         $program->programcategory_id = $request->programcategory;
         $program->date               = $request->date;
+        $program->lastedited_by      = Auth::user()->name;
 
         $program->save();
 

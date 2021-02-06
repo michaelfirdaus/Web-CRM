@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
+@section('title')Tambah Kanal Course-Net @endsection
+
 @section('header') Tambah Kanal Baru Course-Net @endsection
+
+@section('breadcrumb')
+<a href="/knowcns" class="mr-1">Kanal Course-Net</a>/ 
+Tambah Kanal
+@endsection
 
 @section('content')
 

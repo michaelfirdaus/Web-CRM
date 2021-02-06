@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Knowcn;
 use Session;
+use DataTables;
 
 class KnowcnController extends Controller
 {
@@ -14,9 +15,31 @@ class KnowcnController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('knowcn.index')->with('knowcns', Knowcn::all());
+        $knowcns = Knowcn::all();
+
+        if($request->ajax()){
+            return DataTables::of($knowcns)
+                ->editColumn('status', function($knowcns){
+                    if($knowcns->status == 1){
+                        return "<div class='text-center'>Aktif</div>";
+                    }else{
+                        return "<div class='text-center'>Tidak Aktif</div>";
+                    }
+                })
+                ->addColumn('Edit', function($knowcns){
+                    return
+                    "<div class='text-center'>
+                        <a href='".route('knowcn.edit', ['id' => $knowcns ->id])."' class='btn btn-xs btn-info'>
+                            <span class='fas fa-pencil-alt'></span>
+                        </a>
+                    </div>";
+                })
+                ->rawColumns(['status', 'Edit'])
+                ->make();
+        }
+        return view('knowcn.index')->with('knowcns', $knowcns);
     }
 
     /**
@@ -54,7 +77,7 @@ class KnowcnController extends Controller
 
         $knowcn = new Knowcn;
 
-        $knowcn->name   = $request->name;
+        $knowcn->name   = ucwords($request->name);
         $knowcn->status = $request->status;
         //Saving current category to the database
         $knowcn->save();
@@ -116,7 +139,7 @@ class KnowcnController extends Controller
         //Find category based on category ID
         $knowcn = Knowcn::find($id);
         
-        $knowcn->name   = $request->name;
+        $knowcn->name   = ucwords($request->name);
         $knowcn->status = $request->status; 
         //Save the category to the database
         $knowcn->save();

@@ -16,7 +16,7 @@
     <div class="card">
         <div class="card-body">
             <p class="text-danger text-bold">* : Data diperlukan.</p>
-            <form action="{{ route('user.profile.update') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('user.profile.update', Auth::user()->id) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="username">Username (Untuk Login Akun) <span class="text-danger">*</span></label>
@@ -31,7 +31,7 @@
                 <br>
                 <hr>
                 <div class="text-danger text-bold">
-                    Apabila tidak perlu pengubahan password, silahkan kosongkan textbox dibawah ini.
+                    Apabila tidak perlu mengubah password, kosongkan textbox dibawah ini.
                 </div>
                 <br>
                 <div class="form-group">

@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Tambah Profesi Baru @endsection
+@section('title')Tambah Profesi @endsection
+
+@section('header') Tambah Profesi @endsection
+
+@section('breadcrumb')
+<a href="/professions" class="mr-1">Profesi</a>/ 
+Tambah Profesi
+@endsection
 
 @section('content')
 

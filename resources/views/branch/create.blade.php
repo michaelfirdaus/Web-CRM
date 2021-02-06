@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Tambah Cabang Course-Net Baru @endsection
+@section('title')Tambah Cabang/Lokasi Kelas @endsection
+
+@section('header') Tambah Cabang/Lokasi Kelas Course-Net @endsection
+
+@section('breadcrumb')
+<a href="/branches" class="mr-1">Cabang/Lokasi Kelas</a>/ 
+Tambah Cabang/Lokasi Kelas
+@endsection
 
 @section('content')
 
@@ -38,7 +45,7 @@
 
                 <div class="form-group">
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success">Tambahkan Cabang</button>
+                        <button type="submit" class="btn btn-success">Tambahkan Cabang/Lokasi Kelas</button>
                     </div>
                 </div>
 

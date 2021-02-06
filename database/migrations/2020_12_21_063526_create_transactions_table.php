@@ -26,6 +26,8 @@ class CreateTransactionsTable extends Migration
             $table->string('rating_text')->nullable();
             $table->boolean('recoaching')->default(0);
             $table->integer('recoaching_count')->default(0);
+            $table->string('created_by')->nullable();
+            $table->string('lastedited_by')->nullable();
             $table->timestamps();
         });
     }

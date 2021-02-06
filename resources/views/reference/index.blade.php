@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') List Referensi Peserta {{$currentparticipant->name}} @endsection
+@section('title')List Referensi {{$currentparticipant->id}} - {{$currentparticipant->name}} @endsection
+
+@section('header') List Referensi Peserta <br>{{$currentparticipant->id}} - {{$currentparticipant->name}} @endsection
+
+@section('breadcrumb')
+<a href="/participants" class="mr-1">Dashboard Peserta</a>/
+Referensi {{$currentparticipant->id}} - {{ $currentparticipant->name }}
+@endsection
 
 @section('content')
 
@@ -11,7 +18,7 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <table id="table" class="table table-hover">
+            <table id="table" class="display table-bordered" style="width: 100%">
                 <thead>
                     <th class="text-center">
                         Nama Referensi
@@ -39,7 +46,7 @@
                                     {{ $reference->phone }}
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('reference.edit', ['id' => $reference->id]) }}" class="btn btn-xs btn-info">
+                                    <a href="{{ route('reference.edit', ['id' => $reference->id, 'participantid' => $currentparticipant->id]) }}" class="btn btn-xs btn-info">
                                         <span class="fas fa-pencil-alt"></span>
                                     </a>
                                 </td>
@@ -88,4 +95,37 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+$(document).ready(function() {
+    let preloader = '{{ asset('assets/data-preloader.gif') }}';
+    $('#table').DataTable( {
+    dom: 'lBfrtip',
+    buttons: [
+        'copy', 'csv', 'excel', 'pdf', 'print'
+    ],
+    lengthMenu: [[10, 25, 50, 75, 100, -1], [10, 25, 50, 75, 100, "Semua"]],
+    scrollY: "200",
+    scrollX: true,
+        language:{
+            info: "<span class='font-weight-bold'>Menampilkan _START_ - _END_ dari _TOTAL_ data</span>",
+            infoEmpty: "<span class='font-weight-bold'>Tidak ada data</span>",
+            infoFiltered: "<span class='font-weight-bold'>(Filter dari _MAX_ data)</span>",
+            paginate: 
+            {
+                previous: "<i class='fas fa-chevron-left'></i>",
+                next: "<i class='fas fa-chevron-right'></i>"
+            },
+            processing: `<span class="bg-dark p-3"><img src="${preloader}" width="50" height="50"/>Memuat data...</span>`,
+            search: "<span class='font-weight-bold'>Cari: </span>",
+            searchPlaceholder: "",
+            zeroRecords: "<span class='font-weight-bold'>Data tidak ditemukan</span>",
+
+        },
+        oLanguage: {
+            sLengthMenu: "<span class='font-weight-bold mr-3'>Tampilkan _MENU_ data</span>",
+        },         
+    });
+});
 @endsection

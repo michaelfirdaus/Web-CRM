@@ -36,12 +36,13 @@ class InterestController extends Controller
     public function create($id)
     {
         $currentparticipant = $id;
-
+        $participant = Participant::find($id);
         $programnames = Programname::all();
 
         return view('interest.create')
                ->with('programnames', $programnames)
-               ->with('currentparticipant', $currentparticipant);
+               ->with('currentparticipant', $currentparticipant)
+               ->with('participant', $participant);
     }
 
     /**

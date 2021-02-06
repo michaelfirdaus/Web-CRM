@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Perbaharui Job Connector Peserta {{ $currentparticipant->name }} @endsection
+@section('title')Edit Job Connector {{$currentparticipant->id}} - {{ $currentparticipant->name }} @endsection
+
+@section('header') Perbaharui Job Connector Peserta <br>{{$currentparticipant->id}} - {{ $currentparticipant->name }} @endsection
+
+@section('breadcrumb')
+<a href="/jobconnectorparticipants" class="mr-1">Job Connector</a>/ 
+Edit Job Connector {{$currentparticipant->id}} - {{ $currentparticipant->name }}
+@endsection
 
 @section('content')
 

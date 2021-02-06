@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Tambah Sales Baru Course-Net @endsection
+@section('title')Tambah Sales @endsection
+
+@section('header') Tambah Sales Course-Net @endsection
+
+@section('breadcrumb')
+<a href="/salesperons" class="mr-1">Sales</a>/ 
+Tambah Sales
+@endsection
 
 @section('content')
 

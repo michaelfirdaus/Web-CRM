@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Branch;
 use Session;
+use DataTables;
 
 class BranchController extends Controller
 {
@@ -14,8 +15,34 @@ class BranchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $branches = Branch::all();
+
+        if($request->ajax()){
+            return DataTables::of($branches)
+                ->editColumn('code', function($branches){
+                    return "<div class='text-center'>".$branches->code."</div>";
+                })
+                ->editColumn('status', function($branches){
+                    if($branches->status == 1){
+                        return "<div class='text-center'>Aktif</div>";
+                    }else{
+                        return "<div class='text-center'>Tidak Aktif</div>";
+                    }
+                })
+                ->addColumn('Edit', function($branches){
+                    return 
+                    "<div class='text-center'>
+                        <a href='".route('branch.edit', ['id' => $branches ->id])."' class='btn btn-xs btn-info'>
+                            <span class='fas fa-pencil-alt'></span>
+                        </a>
+                    </div>";
+                })
+                ->rawColumns(['code', 'status', 'Edit'])
+                ->make();
+        }
+
         return view('branch.index')->with('branches', Branch::all());
     }
 
@@ -56,7 +83,7 @@ class BranchController extends Controller
 
         $branch = new Branch;
 
-        $branch->name   = $request->name;
+        $branch->name   = ucwords($request->name);
         $branch->code   = $request->code;
         $branch->status = $request->status;
         //Saving current category to the database
@@ -123,7 +150,7 @@ class BranchController extends Controller
         //Find category based on category ID
         $branch = Branch::find($id);
         
-        $branch->name   = $request->name;
+        $branch->name   = ucwords($request->name);
         $branch->code   = $request->code;
         $branch->status = $request->status;
         

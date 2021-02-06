@@ -19,7 +19,6 @@ class ReferenceController extends Controller
     {
         $references = Reference::where('participant_id', $id)->get();
         $currentparticipant = Participant::where('id', $id)->first();
-
         return view('reference.index', ['references'             => $references, 
                                         'currentparticipant'     => $currentparticipant]);
     }
@@ -32,8 +31,10 @@ class ReferenceController extends Controller
     public function create($id)
     {
         $currentparticipant = $id;
-
-        return view('reference.create')->with('currentparticipant', $currentparticipant);
+        $participant = Participant::find($id);
+        return view('reference.create')
+            ->with('currentparticipant', $currentparticipant)
+            ->witH('participant', $participant);
         
     }
 
@@ -61,7 +62,7 @@ class ReferenceController extends Controller
 
         $reference = Reference::create([
             'participant_id'    => $request->id,
-            'name'              => $request->name,
+            'name'              => ucwords($request->name),
             'phone'             => $request->phone,
         ]);
 
@@ -87,12 +88,15 @@ class ReferenceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $participantid)
     {
         $reference = Reference::find($id);
+
+        $participant = Participant::find($participantid);
         
         return view('reference.edit')
-            ->with('reference', $reference);
+            ->with('reference', $reference)
+            ->with('participant', $participant);
     }
 
     /**
@@ -120,7 +124,7 @@ class ReferenceController extends Controller
         $this->validate($request, $rules, $customMessages);
 
         $reference->id      = $request->id;
-        $reference->name    = $request->name; 
+        $reference->name    = ucwords($request->name); 
         $reference->phone   = $request->phone;
 
         $reference->save();

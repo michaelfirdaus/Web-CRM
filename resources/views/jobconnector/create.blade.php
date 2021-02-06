@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Tambah Perusahaan Penerima Loker @endsection
+@section('title')Tambah Perusahaan Rekanan @endsection
+
+@section('header') Tambah Perusahaan Rekanan @endsection
+
+@section('breadcrumb')
+<a href="/knowcns" class="mr-1">Perusahaan Rekanan</a>/ 
+Tambah Perusahaan Rekanan
+@endsection
 
 @section('content')
 

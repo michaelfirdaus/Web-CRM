@@ -8,8 +8,10 @@ use App\Participant;
 use App\Branch;
 use App\Knowcn;
 use App\Profession;
+use Auth;
 use App\Membernumber;
 use Session;
+use DataTables;
 
 class ParticipantController extends Controller
 {
@@ -18,9 +20,87 @@ class ParticipantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $participants = Participant::with('branch', 'knowcn', 'profession')->get();
+
+        if($request->ajax()){
+            return DataTables::of($participants)
+                ->editColumn('pob', function($participants){
+                    return "<div class='text-center'>".$participants->pob."</div>";
+                })
+                ->editColumn('dob', function($participants){
+                    return "<div class='text-center'>".$participants->dob."</div>";
+                })
+                ->editColumn('cv_link', function($participants){
+                    return 
+                    "<a href='".$participants->cv_link."' target='_blank'>".$participants->cv_link."</a>";
+                })
+                ->editColumn('sp_link', function($participants){
+                    return 
+                    "<a href='".$participants->sp_link."' target='_blank'>".$participants->sp_link."</a>";
+                })
+                ->editColumn('member_validthru', function($participants){
+                    return "<div class='text-center'>".$participants->member_validthru."</div>";
+                })
+                ->editColumn('branch', function($participants){
+                    return "<div class='text-center'>".$participants->branch->name."</div>";
+                })
+                ->editColumn('knowcn', function($participants){
+                    if($participants->knowcn_id == 1){
+                        return 
+                        "<div class='text-center'>".$participants->memberreference_id." - ". $participants->memberreference_name."</div>";
+                    }else{
+                        return
+                        "<div class='text-center'>".$participants->knowcn->name."</div>";
+                    }
+                })
+                ->editColumn('profession', function($participants){
+                    if($participants->profession){
+                        return
+                        "<div class='text-center'>".$participants->profession->name."</div>";
+                    }else{
+                        return "<div class='text-bold text-danger'>Tidak Ada Data</div>";
+                    }
+                })
+                ->editColumn('professiondetail', function($participants){
+                    return "<div class='text-center'>".$participants->profession_detail."</div>";
+                })
+                ->editColumn('created_by', function($participants){
+                    return "<div class='text-center'>".$participants->created_by."</div>";
+                })
+                ->editColumn('lastedited_by', function($participants){
+                    return "<div class='text-center'>".$participants->lastedited_by."</div>";
+                })
+                ->addColumn('Minat Program', function($participants){
+                    return 
+                    "<div class='text-center'>
+                        <a href='".route('interests', ['id' => $participants ->id])."' class='btn btn-xs btn-success'>
+                            <span class='fas fa-tasks'></span>
+                        </a>
+                    </div>";
+                })
+                ->addColumn('Referensi', function($participants){
+                    return
+                    "<div class='text-center'>
+                        <a href='".route('references', ['id' => $participants ->id])."' class='btn btn-xs btn-success'>
+                            <span class='fas fa-address-book'></span>
+                        </a>
+                    </div>";
+                })
+                ->addColumn('Edit', function($participants){
+                    return
+                    "<div class='text-center'>
+                        <a href='".route('participant.edit', ['id' => $participants ->id])."' class='btn btn-xs btn-info'>
+                            <span class='fas fa-pencil-alt'></span>
+                        </a>
+                    </div>";
+                })
+                ->rawColumns(['pob', 'dob', 'cv_link', 'sp_link', 'member_validthru', 
+                             'branch', 'knowcn', 'profession', 'professiondetail',
+                             'Minat Program', 'Referensi', 'Edit', 'created_by', 'lastedited_by'])
+                ->make();
+        }
 
         return view('participant.index')
             ->with('participants', $participants);
@@ -73,6 +153,7 @@ class ParticipantController extends Controller
         $rules = [
             'branch_id'                 => 'required',
             'knowcn_id'                 => 'required',
+            'profession_id'             => 'required',
             'name'                      => 'required',
             'pob'                       => 'required',
             'dob'                       => 'required|date',
@@ -86,6 +167,7 @@ class ParticipantController extends Controller
         $customMessages = [
             'branch_id.required'                => 'Lokasi Pendaftaran harus dipilih.',
             'knowcn_id.required'                => 'Mengetahui Course-Net dari harus diisi.',
+            'profession_id.required'            => 'Profesi harus dipilih.',
             'name.required'                     => 'Nama Peserta harus diisi.',
             'pob.required'                      => 'Tempat Lahir harus diisi.',
             'dob.required'                      => 'Tanggal Lahir harus diisi.',
@@ -140,19 +222,21 @@ class ParticipantController extends Controller
                 'branch_id'                 => $request->branch_id,
                 'knowcn_id'                 => $request->knowcn_id,
                 'profession_id'             => $request->profession_id,
-                'name'                      => $request->name,
-                'pob'                       => $request->pob,
+                'profession_detail'         => ucfirst($request->profession_detail),
+                'name'                      => ucwords($request->name),
+                'pob'                       => ucwords($request->pob),
                 'dob'                       => $request->dob,
                 'phonenumber'               => $request->phonenumber,
-                'address'                   => $request->address,
+                'address'                   => ucwords($request->address),
                 'email'                     => $request->email,
                 'cv_link'                   => $request->cv_link,
                 'sp_link'                   => $request->sp_link,
                 'member_validthru'          => $request->member_validthru,
-                'emergencycontact_name'     => $request->emergencycontact_name,
+                'emergencycontact_name'     => ucwords($request->emergencycontact_name),
                 'emergencycontact_phone'    => $request->emergencycontact_phone,
                 'memberreference_id'        => $request->memberreference_id,
-                'memberreference_name'      => $p->name
+                'memberreference_name'      => ucwords($p->name),
+                'created_by'                => Auth::user()->name,
             ]);
         }else{
             $branch_code = Branch::find($request->branch_id);
@@ -176,17 +260,19 @@ class ParticipantController extends Controller
                 'branch_id'                 => $request->branch_id,
                 'knowcn_id'                 => $request->knowcn_id,
                 'profession_id'             => $request->profession_id,
-                'name'                      => $request->name,
-                'pob'                       => $request->pob,
+                'profession_detail'         => ucfirst($request->profession_detail),
+                'name'                      => ucwords($request->name),
+                'pob'                       => ucwords($request->pob),
                 'dob'                       => $request->dob,
                 'phonenumber'               => $request->phonenumber,
-                'address'                   => $request->address,
+                'address'                   => ucwords($request->address),
                 'email'                     => $request->email,
                 'cv_link'                   => $request->cv_link,
                 'sp_link'                   => $request->sp_link,
                 'member_validthru'          => $request->member_validthru,
-                'emergencycontact_name'     => $request->emergencycontact_name,
+                'emergencycontact_name'     => ucwords($request->emergencycontact_name),
                 'emergencycontact_phone'    => $request->emergencycontact_phone,
+                'created_by'                => Auth::user()->name,
             ]);
         }
 
@@ -242,6 +328,7 @@ class ParticipantController extends Controller
         $rules = [
             'branch_id'                 => 'required',
             'knowcn_id'                 => 'required',
+            'profession_id'             => 'required',
             'name'                      => 'required',
             'pob'                       => 'required',
             'dob'                       => 'required|date',
@@ -255,6 +342,7 @@ class ParticipantController extends Controller
         $customMessages = [
             'branch_id.required'                => 'Lokasi Pendaftaran harus dipilih.',
             'knowcn_id.required'                => 'Mengetahui Course-Net dari harus diisi.',
+            'profession_id.required'            => 'Profesi harus dipilih.',
             'name.required'                     => 'Nama Peserta harus diisi.',
             'pob.required'                      => 'Tempat Lahir harus diisi.',
             'dob.required'                      => 'Tanggal Lahir harus diisi.',
@@ -281,42 +369,44 @@ class ParticipantController extends Controller
             ];
 
             $this->validate($request, $rule, $customMessage);
-        }
-
-        if($participant->memberreference_id){
+    
             $p = Participant::find($request->memberreference_id);
             
             $participant->branch_id                 = $request->branch_id;
             $participant->knowcn_id                 = $request->knowcn_id;
             $participant->profession_id             = $request->profession_id;
-            $participant->name                      = $request->name;
-            $participant->pob                       = $request->pob;
+            $participant->profession_detail         = ucfirst($request->profession_detail);
+            $participant->name                      = ucwords($request->name);
+            $participant->pob                       = ucwords($request->pob);
             $participant->dob                       = $request->dob;
             $participant->phonenumber               = $request->phonenumber;
-            $participant->address                   = $request->address;
+            $participant->address                   = ucwords($request->address);
             $participant->email                     = $request->email;
             $participant->cv_link                   = $request->cv_link;
             $participant->sp_link                   = $request->sp_link;
             $participant->member_validthru          = $request->member_validthru;
-            $participant->emergencycontact_name     = $request->emergencycontact_name;
+            $participant->emergencycontact_name     = ucwords($request->emergencycontact_name);
             $participant->emergencycontact_phone    = $request->emergencycontact_phone;
             $participant->memberreference_id        = $request->memberreference_id;
-            $participant->memberreference_name      = $p->name;
+            $participant->memberreference_name      = ucwords($p->name);
+            $participant->lastedited_by             = Auth::user()->name;
         }else{
             $participant->branch_id                 = $request->branch_id;
             $participant->knowcn_id                 = $request->knowcn_id;
             $participant->profession_id             = $request->profession_id;
-            $participant->name                      = $request->name;
-            $participant->pob                       = $request->pob;
+            $participant->profession_detail         = ucfirst($request->profession_detail);
+            $participant->name                      = ucwords($request->name);
+            $participant->pob                       = ucwords($request->pob);
             $participant->dob                       = $request->dob;
             $participant->phonenumber               = $request->phonenumber;
-            $participant->address                   = $request->address;
+            $participant->address                   = ucwords($request->address);
             $participant->email                     = $request->email;
             $participant->cv_link                   = $request->cv_link;
             $participant->sp_link                   = $request->sp_link;
             $participant->member_validthru          = $request->member_validthru;
-            $participant->emergencycontact_name     = $request->emergencycontact_name;
+            $participant->emergencycontact_name     = ucwords($request->emergencycontact_name);
             $participant->emergencycontact_phone    = $request->emergencycontact_phone;
+            $participant->lastedited_by             = Auth::user()->name;
         }
 
 

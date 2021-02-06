@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Perbaharui Cabang {{ $branch->name }} @endsection
+@section('title')Edit Cabang/Lokasi Kelas {{$branch->name}} @endsection
+
+@section('header') Perbaharui Cabang/Lokasi Kelas {{ $branch->name }} @endsection
+
+@section('breadcrumb')
+<a href="/branches" class="mr-1">Cabang/Lokasi Kelas</a>/ 
+Edit Cabang/Lokasi Kelas {{$branch->name}}
+@endsection
 
 @section('content')
 
@@ -43,7 +50,7 @@
 
                 <div class="form-group">
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success">Perbaharui Cabang</button>
+                        <button type="submit" class="btn btn-success">Perbaharui Cabang/Lokasi Kelas</button>
                     </div>
                 </div>
             </form>

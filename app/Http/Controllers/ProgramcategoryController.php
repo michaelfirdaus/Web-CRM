@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Programcategory;
 use Session;
+use DataTables;
 
 class ProgramcategoryController extends Controller
 {
@@ -14,9 +15,30 @@ class ProgramcategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $programcategories = Programcategory::all();
+
+        if($request->ajax()){
+            return DataTables::of($programcategories)
+                ->editColumn('status', function($programcategories){
+                    if($programcategories->status == 1){
+                        return "<div class='text-center'>Aktif</div>";
+                    }else{
+                        return "<div class='text-center'>Tidak Aktif</div>";
+                    }
+                })
+                ->addColumn('Edit', function($programcategories){
+                    return 
+                    "<div class='text-center'>
+                        <a href='".route('programcategory.edit', ['id' => $programcategories ->id])."' class='btn btn-xs btn-info'>
+                            <span class='fas fa-pencil-alt'></span>
+                        </a>
+                    </div>";
+                })
+                ->rawColumns(['status', 'Edit'])
+                ->make();
+        }
 
         return view('programcategory.index')
                ->with('programcategories', $programcategories);
@@ -54,7 +76,7 @@ class ProgramcategoryController extends Controller
         $this->validate($request, $rules, $customMessages);
 
         $programcategory = Programcategory::create([
-            'name'   => $request->name,
+            'name'   => ucwords($request->name),
             'status' => $request->status  
         ]);
 
@@ -111,7 +133,7 @@ class ProgramcategoryController extends Controller
         $programcategory = Programcategory::find($id);
 
         $programcategory->id        = $request->id;
-        $programcategory->name      = $request->name;
+        $programcategory->name      = ucwords($request->name);
         $programcategory->status    = $request->status;
 
         $programcategory->save();

@@ -29,8 +29,10 @@ class ResultByIdController extends Controller
      */
     public function create($id)
     {
-
-        return view('resultbyid.create')->with('currenttransaction', $id);
+        $transaction = Transaction::find($id);
+        return view('resultbyid.create')
+            ->with('currenttransaction', $id)
+            ->with('transaction', $transaction);
     }
 
     /**
@@ -84,7 +86,7 @@ class ResultByIdController extends Controller
                 'transaction_id'                 => $request->id,
                 'score'                          => $s,
                 'grade'                          => $g,
-                'jacket_size'                    => $request->jacket_size,
+                'jacket_size'                    => strtoupper($request->jacket_size),
                 'skillcertificate_number'        => $request->skillcertificate_number,
                 'skillcertificate_pickdate'      => $request->skillcertificate_pickdate,
                 'attendancecertificate_number'   => $request->attendancecertificate_number,
@@ -125,7 +127,7 @@ class ResultByIdController extends Controller
                 'transaction_id'                 => $request->id,
                 'score'                          => $s,
                 'grade'                          => $g,
-                'jacket_size'                    => $request->jacket_size,
+                'jacket_size'                    => strtoupper($request->jacket_size),
                 'skillcertificate_number'        => $request->skillcertificate_number,
                 'skillcertificate_pickdate'      => $request->skillcertificate_pickdate,
                 'attendancecertificate_number'   => $request->attendancecertificate_number,
@@ -140,7 +142,7 @@ class ResultByIdController extends Controller
             $transaction->save();
 
             
-            Session::flash('success', 'Berhasil Memperbaharui Data Nilai');
+            Session::flash('success', 'Berhasil Input Data Nilai');
             return redirect()->route('resultbyid', ['id'  => $transaction->id]);
         }
     }
@@ -225,7 +227,7 @@ class ResultByIdController extends Controller
         $result->id                             = $request->id;
         $result->score                          = $s;
         $result->grade                          = $g;
-        $result->jacket_size                    = $request->jacket_size;
+        $result->jacket_size                    = strtoupper($request->jacket_size);
         $result->skillcertificate_number        = $request->skillcertificate_number;
         $result->skillcertificate_pickdate      = $request->skillcertificate_pickdate;
         $result->attendancecertificate_number   = $request->attendancecertificate_number;

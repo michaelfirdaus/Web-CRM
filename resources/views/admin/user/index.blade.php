@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
+@section('title')User @endsection
+
 @section('header') List Semua User @endsection
+
+@section('breadcrumb')
+User
+@endsection
 
 @section('content')
 
@@ -11,7 +17,7 @@
     </div>
     <div class="card">
         <div class="card card-body">
-            <table id="table" class="table table-hover  table-bordered">
+            <table id="table" class="display table-bordered" style="width:100%">
                 <thead>
                     <th class="text-center">
                         Nama User
@@ -113,4 +119,39 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+$(document).ready(function() {
+    let preloader = '{{ asset('assets/data-preloader.gif') }}';
+    $('#table').DataTable( {
+    dom: 'lBfrtip',
+    buttons: [
+        'copy', 'csv', 'excel', 'pdf', 'print'
+    ],
+    lengthMenu: [[10, 25, 50, 75, 100, -1], [10, 25, 50, 75, 100, "Semua"]],
+    scrollY: "200",
+    ordering: true,
+    order: [[ 2, 'asc' ]],
+    scrollX: true,
+        language:{
+            info: "<span class='font-weight-bold'>Menampilkan _START_ - _END_ dari _TOTAL_ data</span>",
+            infoEmpty: "<span class='font-weight-bold'>Tidak ada data</span>",
+            infoFiltered: "<span class='font-weight-bold'>(Filter dari _MAX_ data)</span>",
+            paginate: 
+            {
+                previous: "<i class='fas fa-chevron-left'></i>",
+                next: "<i class='fas fa-chevron-right'></i>"
+            },
+            processing: `<span class="bg-dark p-3"><img src="${preloader}" width="50" height="50"/>Memuat data...</span>`,
+            search: "<span class='font-weight-bold'>Cari: </span>",
+            searchPlaceholder: "",
+            zeroRecords: "<span class='font-weight-bold'>Data tidak ditemukan</span>",
+
+        },
+        oLanguage: {
+            sLengthMenu: "<span class='font-weight-bold mr-3'>Tampilkan _MENU_ data</span>",
+        },         
+    });
+});
 @endsection

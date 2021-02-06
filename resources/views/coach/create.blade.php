@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
+@section('title')Tambah Coach @endsection
+
 @section('header') Tambah Coach Course-Net @endsection
+
+@section('breadcrumb')
+<a href="/branches" class="mr-1">Coach</a>/ 
+Tambah Coach
+@endsection
 
 @section('content')
 

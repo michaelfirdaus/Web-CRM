@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Perbaharui Profesi {{ $profession->name }} @endsection
+@section('title')Edit Profesi {{$profession->name}} @endsection
+
+@section('header') Perbaharui Profesi <br>{{ $profession->name }} @endsection
+
+@section('breadcrumb')
+<a href="/professions" class="mr-1">Profesi</a>/ 
+Edit Profesi {{$profession->name}}
+@endsection
 
 @section('content')
 

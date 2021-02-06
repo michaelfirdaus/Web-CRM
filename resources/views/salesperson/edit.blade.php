@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Perbaharui Sales {{$salesperson->name}} @endsection
+@section('title')Edit Sales {{$salesperson->name}} @endsection
+
+@section('header') Perbaharui Sales <br>{{$salesperson->name}} @endsection
+
+@section('breadcrumb')
+<a href="/salespersons" class="mr-1">Sales</a>/ 
+Edit Sales {{$salesperson->name}}
+@endsection
 
 @section('content')
 

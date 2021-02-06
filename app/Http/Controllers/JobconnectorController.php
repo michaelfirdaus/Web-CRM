@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Jobconnector;
 use Session;
+use DataTables;
 
 class JobconnectorController extends Controller
 {
@@ -14,9 +15,32 @@ class JobconnectorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('jobconnector.index')->with('jobconnectors', Jobconnector::all());
+        $jobconnectors = Jobconnector::all();
+
+        if($request->ajax()){
+            return DataTables::of($jobconnectors)
+                ->editColumn('status', function($jobconnectors){
+                    if($jobconnectors->status == 1){
+                        return "<div class='text-center'>Aktif</div>";
+                    }else{
+                        return "<div class='text-center>Tidak Aktif</div>";
+                    }
+                })
+                ->addColumn('Edit', function($jobconnectors){
+                    return
+                    "<div class='text-center'>
+                        <a href='".route('jobconnector.edit', ['id' => $jobconnectors ->id])."' class='btn btn-xs btn-info'>
+                            <span class='fas fa-pencil-alt'></span>
+                        </a>
+                    </div>";
+                })
+                ->rawColumns(['status', 'Edit'])
+                ->make();
+        }
+
+        return view('jobconnector.index')->with('jobconnectors', $jobconnectors);
     }
 
     /**
@@ -54,8 +78,8 @@ class JobconnectorController extends Controller
 
         $jobconnector = new Jobconnector;
 
-        $jobconnector->name     = $request->name;
-        $jobconnector->location = $request->location;
+        $jobconnector->name     = ucwords($request->name);
+        $jobconnector->location = ucwords($request->location);
         //Saving current category to the database
         $jobconnector->save();
 
@@ -116,8 +140,8 @@ class JobconnectorController extends Controller
         //Find category based on category ID
         $jobconnector = Jobconnector::find($id);
         
-        $jobconnector->company_name = $request->name;
-        $jobconnector->location     = $request->location;
+        $jobconnector->company_name = ucwords($request->name);
+        $jobconnector->location     = ucwords($request->location);
         
         //Save the category to the database
         $jobconnector->save();

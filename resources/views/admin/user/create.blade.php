@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('header') Tambah User Baru @endsection
+@section('title')Tambah User @endsection
+
+@section('header') Tambah User @endsection
+
+@section('breadcrumb')
+<a href="/users" class="mr-1">User</a>/
+Tambah User
+@endsection
 
 @section('content')
 

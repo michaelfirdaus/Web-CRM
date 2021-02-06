@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
+@section('title')Jadwal Kelas @endsection
+
 @section('header') List Semua Jadwal Kelas @endsection
+
+@section('breadcrumb')
+Jadwal Kelas
+@endsection
 
 @section('content')
 
@@ -32,6 +38,12 @@
                     </th>
                     <th class="text-center"> 
                         Lokasi Kelas
+                    </th>
+                    <th class="text-center">
+                        Diinput Oleh
+                    </th>
+                    <th class="text-center">
+                        Terakhir di Edit Oleh
                     </th>
                     <th class="text-center"> 
                         Lihat Detail Kelas
@@ -79,6 +91,12 @@
                                         {{ $p->branch->name }}
                                     </td>
                                     <td class="text-center">
+                                        {{ $p->created_by }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $p->lastedited_by }}
+                                    </td>
+                                    <td class="text-center">
                                         <a href="{{ route('coachprogram.detail', ['id'=> $p->id]) }}" class="btn btn-xs btn-success">
                                             <span class="far fa-eye"></span>
                                         </a>
@@ -100,4 +118,39 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+$(document).ready(function() {
+    let preloader = '{{ asset('assets/data-preloader.gif') }}';
+    $('#table').DataTable( {
+    dom: 'lBfrtip',
+    buttons: [
+        'copy', 'csv', 'excel', 'pdf', 'print'
+    ],
+    lengthMenu: [[10, 25, 50, 75, 100, -1], [10, 25, 50, 75, 100, "Semua"]],
+    scrollY: "200",
+    ordering: true,
+    order: [[ 3, 'desc' ]],
+    scrollX: true,
+        language:{
+            info: "<span class='font-weight-bold'>Menampilkan _START_ - _END_ dari _TOTAL_ data</span>",
+            infoEmpty: "<span class='font-weight-bold'>Tidak ada data</span>",
+            infoFiltered: "<span class='font-weight-bold'>(Filter dari _MAX_ data)</span>",
+            paginate: 
+            {
+                previous: "<i class='fas fa-chevron-left'></i>",
+                next: "<i class='fas fa-chevron-right'></i>"
+            },
+            processing: `<span class="bg-dark p-3"><img src="${preloader}" width="50" height="50"/>Memuat data...</span>`,
+            search: "<span class='font-weight-bold'>Cari: </span>",
+            searchPlaceholder: "",
+            zeroRecords: "<span class='font-weight-bold'>Data tidak ditemukan</span>",
+
+        },
+        oLanguage: {
+            sLengthMenu: "<span class='font-weight-bold mr-3'>Tampilkan _MENU_ data</span>",
+        },         
+    });
+});
 @endsection

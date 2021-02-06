@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
+@section('title')Edit Transaksi {{ $transaction->participant->id }} - {{ $transaction->participant->name }}@endsection
+
 @section('header') Perbaharui Transaksi Peserta <br>{{ $transaction->participant->id }} - {{ $transaction->participant->name }} @endsection
+
+@section('breadcrumb')
+<a href="/transactions" class="mr-1">Transaksi</a>/ 
+Edit Transaksi {{ $transaction->participant->id }} - {{ $transaction->participant->name }}
+@endsection
 
 @section('content')
 

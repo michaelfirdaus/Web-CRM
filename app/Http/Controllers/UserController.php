@@ -75,7 +75,7 @@ class UserController extends Controller
             $image->move($path, $fullImage);
     
             $user = User::create([
-                'name'      => $request->name,
+                'name'      => ucwords($request->name),
                 'username'  => $request->username,
                 'password'  => bcrypt($request->password),
                 'photo'     => $fullImage,
@@ -84,7 +84,7 @@ class UserController extends Controller
 
         else{
             $user = User::create([
-                'name'      => $request->name,
+                'name'      => ucwords($request->name),
                 'username'  => $request->username,
                 'password'  => bcrypt($request->password),
                 'photo'     => 'logo-cn.png',
@@ -150,7 +150,7 @@ class UserController extends Controller
 
         $user = User::find($id);
 
-        $user->name     = $request->name;
+        $user->name     = ucwords($request->name);
         $user->username = $request->username;
         
         if($request->has('password')){

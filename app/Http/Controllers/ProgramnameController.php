@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Programname;
 use Session;
+use DataTables;
 
 class ProgramnameController extends Controller
 {
@@ -14,9 +15,34 @@ class ProgramnameController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $programnames = Programname::all();
+        
+        if($request->ajax()){
+            return DataTables::of($programnames)
+                ->editColumn('program_price', function($programnames){
+                    return "<div class='text-center'>Rp. ".number_format($programnames->program_price, 0, ',', '.')."</div>";
+                })
+                ->editColumn('status', function($programnames){
+                    if($programnames->status == 1){
+                        return "<div class='text-center'>Aktif</div>";
+                    }else{
+                        return "<div class='text-center'>Tidak Aktif</div>";
+                    }
+                })
+                ->addColumn('Edit', function($programnames){
+                    return
+                    "<div class='text-center'>
+                        <a href='".route('programname.edit', ['id' => $programnames ->id])."' class='btn btn-xs btn-info'>
+                            <span class='fas fa-pencil-alt'></span>
+                        </a>
+                    </div>";
+                })
+                ->rawColumns(['program_price', 'status', 'Edit'])
+                ->make();
+        }
+
         return view('programname.index')->with('programnames', $programnames);
     }
 
@@ -58,7 +84,7 @@ class ProgramnameController extends Controller
 
         $pn = new Programname;
 
-        $pn->name           = $request->name;
+        $pn->name           = ucwords($request->name);
         $pn->program_price  = $p;
         $pn->status         = $request->status;
         //Saving current category to the database
@@ -125,7 +151,7 @@ class ProgramnameController extends Controller
         //Find category based on category ID
         $pn = Programname::find($id);
         
-        $pn->name           = $request->name;
+        $pn->name           = ucwords($request->name);
         $pn->program_price  = $p;
         $pn->status         = $request->status; 
         //Save the category to the database
