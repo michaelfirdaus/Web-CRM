@@ -31,7 +31,7 @@ Profesi
                 </thead>
 
                 <tbody>
-                    @if($professions->count() > 0)
+                    {{-- @if($professions->count() > 0)
                         @foreach ($professions as $profession)
                             <tr>
                                 <td>
@@ -55,7 +55,7 @@ Profesi
                         <tr>
                             <th colspan="3" class="text-center">Tidak ada profesi yang tersedia, tambahkan profesi baru.</th>
                         </tr>
-                    @endif
+                    @endif --}}
                 </tbody>
             </table>
         </div>

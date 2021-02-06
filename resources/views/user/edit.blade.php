@@ -1,15 +1,22 @@
 @extends('layouts.app')
 
-@section('header') Sunting Profil Anda @endsection
+@section('title') Sunting Profil @endsection
+
+@section('header')Sunting Profil Saya @endsection
+
+@section('breadcrumb')
+<a href="/user/profile" class="mr-1">Profil Saya</a>/ 
+Edit Profil
+@endsection
 
 @section('content')
-
-@include('includes.errors')
 
     <div class="card">
         <div class="card-header text-danger text-bold">Informasi Penting</div>
         <div class="card-body">
-            PASTIKAN Username tidak mengandung spasi.      
+            <ul>
+                <li><b>Anda bisa mengganti username dengan meminta kepada Administrator Web CRM Course-Net.</b> </li>
+                <li>Format foto yang diizinkan adalah .jpeg  .jpg  .png</li>  
         </div>
     </div>
 
@@ -20,31 +27,19 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="username">Username (Untuk Login Akun) <span class="text-danger">*</span></label>
-                    <input type="text" name="username" class="form-control" placeholder="Contoh: michael" value={{ $user->username }}>
+                    <input type="text" name="username" class="form-control" placeholder="Contoh: michael" value={{ $user->username }} disabled>
+                    @if( $errors->has('username') )
+                        <div class="text-danger">{{ $errors->first('username') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="name">Nama <span class="text-danger">*</span></label>
                     <input type="text" name="name" class="form-control" placeholder="Contoh: Michael Firdaus" value={{ $user->name }}>
+                    @if( $errors->has('name') )
+                        <div class="text-danger">{{ $errors->first('name') }}</div>
+                    @endif
                 </div>
-
-                <br>
-                <hr>
-                <div class="text-danger text-bold">
-                    Apabila tidak perlu mengubah password, kosongkan textbox dibawah ini.
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="password">Ubah Password</label>
-                    <input name="password" type="password" placeholder="Password" id="password" class="form-control">
-                </div>
-                
-                <div class="form-group">
-                    <label for="confirmpassword">Konfirmasi Ubah Password</label>
-                    <input name="confirmpassword" type="password" placeholder="Konfirmasi Ubah Password" id="confirm_password" class="form-control">
-                </div>
-
-                <br>
                 <hr>
                 <div class="text-danger text-bold">
                     Apabila tidak perlu pengubahan foto profil, silahkan lewati.
@@ -52,6 +47,9 @@
                 <div class="form-group">
                     <label for="photo">Upload Foto Profil</label><br>
                     <input type="file" name="photo" placeholder="">
+                    @if( $errors->has('photo') )
+                        <div class="text-danger">{{ $errors->first('photo') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">

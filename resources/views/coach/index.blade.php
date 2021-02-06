@@ -43,7 +43,7 @@ Coach
                 </thead>
 
                 <tbody>
-                    @if($coaches->count() > 0)
+                    {{-- @if($coaches->count() > 0)
                         @foreach ($coaches as $coach)
                             <tr>
                                 <td>
@@ -79,7 +79,7 @@ Coach
                         <tr>
                             <th colspan="3" class="text-center">Tidak ada coach yang tersedia, tambahkan coach terlebih dahulu.</th>
                         </tr>
-                    @endif
+                    @endif --}}
                 </tbody>
             </table>
         </div>

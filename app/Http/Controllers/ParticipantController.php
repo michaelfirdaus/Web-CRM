@@ -83,7 +83,7 @@ class ParticipantController extends Controller
                 ->addColumn('Referensi', function($participants){
                     return
                     "<div class='text-center'>
-                        <a href='".route('references', ['id' => $participants ->id])."' class='btn btn-xs btn-success'>
+                        <a href='".route('references', ['id' => $participants ->id])."' class='btn btn-xs btn-primary'>
                             <span class='fas fa-address-book'></span>
                         </a>
                     </div>";

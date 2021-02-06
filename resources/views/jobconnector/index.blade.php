@@ -34,7 +34,7 @@ Perusahaan Rekanan
                 </thead>
         
                 <tbody>
-                    @if($jobconnectors->count() > 0)
+                    {{-- @if($jobconnectors->count() > 0)
                         @foreach ($jobconnectors as $jobconnector)
                             <tr>
                                 <td>
@@ -61,7 +61,7 @@ Perusahaan Rekanan
                         <tr>
                             <th colspan="4" class="text-center">Tidak ada perusahaan yang tersedia, tambahkan perusahaan penerima loker terlebih dahulu.</th>
                         </tr>
-                    @endif
+                    @endif --}}
                 </tbody>
             </table>
         </div>

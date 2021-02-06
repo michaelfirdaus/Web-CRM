@@ -97,9 +97,13 @@ Jadwal Kelas
                                         {{ $p->lastedited_by }}
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('coachprogram.detail', ['id'=> $p->id]) }}" class="btn btn-xs btn-success">
-                                            <span class="far fa-eye"></span>
-                                        </a>
+                                        @if($p->transaction)
+                                            <a href="{{ route('coachprogram.detail', ['id'=> $p->id]) }}" class="btn btn-xs btn-success">
+                                                <span class="far fa-eye"></span>
+                                            </a>
+                                        @else
+                                            <b>Belum Ada Peserta</b>
+                                        @endif
                                     </td>
                                     <td class="text-center">
                                         <a href="{{ route('coachprogram.edit', ['id'=> $p->id]) }}" class="btn btn-xs btn-info">

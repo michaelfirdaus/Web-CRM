@@ -24,7 +24,7 @@ class ReportController extends Controller
     public function index(Request $request)
     {
         $programs = Program::with('coachprograms', 'branch', 'programname', 'programcategory');
-
+        
         if($request->ajax()){
             return DataTables::of($programs)
                 ->editColumn('date', function($programs){
@@ -37,12 +37,18 @@ class ReportController extends Controller
                     return "<div class='text-center'>".$programs->branch->name."</div>";
                 })
                 ->addColumn('report', function($programs){
-                    return
-                    "<div class='text-center'>
-                        <a href='".route('report.detail', ['id'=> $programs->id])."' class='btn btn-xs btn-success'>
-                            <span class='far fa-eye'></span>
-                        </a>
-                    </div>";
+                    if($programs->transaction){
+                        return
+                        "<div class='text-center'>
+                            <a href='".route('report.detail', ['id'=> $programs->id])."' class='btn btn-xs btn-success'>
+                                <span class='far fa-eye'></span>
+                            </a>
+                        </div>";
+                    }
+                    else{
+                        return
+                        "<div class='text-center text-bold'>Belum Ada Peserta</div>";
+                    }
                 })
                 ->rawColumns(['date', 'programcategory.name', 'branch.name', 'report'])
                 ->make();
