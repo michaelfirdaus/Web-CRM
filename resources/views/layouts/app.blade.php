@@ -66,7 +66,8 @@
       }
 
       .dropdown-item:hover{
-        background-color: red !important;
+        background-color: #c2c7d0d5 !important;
+
       }
 
       .active{
@@ -367,7 +368,7 @@
           All rights reserved.
         </a>
         <div class="float-right d-none d-sm-inline-block">
-          <b>Version</b> 1.1.5
+          <b>Version</b> 1.1.6
         </div>
       </footer>
 
