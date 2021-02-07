@@ -136,7 +136,7 @@ $(document).ready(function() {
         scrollY: 200,
         scrollX: true,
         ordering: true,
-        order: [[ 0, 'asc' ]],
+        order: [[ 2, 'desc' ]],
         processing: true,
         serverSide: true,
         language:{
