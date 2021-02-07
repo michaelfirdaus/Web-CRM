@@ -37,11 +37,42 @@
     {{-- Dropdown List W/Search --}}
     <link rel="stylesheet" href="{{ asset('adminLTE/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminLTE/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <style>
       .dataTables_processing
       {
         z-index: 105 !important;
       }
+
+      body{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 13.5px;
+      }
+
+      b, strong, h1, h2, h3, h4, h5, .text-bold{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+      }
+
+      .navbar, aside, footer, .main-footer, .dropdown-menu{
+        background-color: #1b1918 !important;
+      }
+
+      .dropdown-item{
+        color: white !important;
+      }
+
+      .dropdown-item:hover{
+        background-color: red !important;
+      }
+
+      .active{
+        background-color: red !important;
+      }
+
     </style>
     
     @yield('css')

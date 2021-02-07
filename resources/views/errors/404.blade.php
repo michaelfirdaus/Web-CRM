@@ -25,6 +25,10 @@
         color: #FF0000;
       }
 
+      .navbar{
+        background-color: #1b1918;
+      }
+  
       h2{
         font-family: 'Poppins', sans-serif;
       }
@@ -39,7 +43,7 @@
         bottom: 0;
         width: 100%;
         text-align: left;
-        background-color:black;
+        background-color:#1b1918;
         color: white;
       }
     </style>
@@ -48,7 +52,7 @@
     
   </head>
   <body>
-    <nav class="navbar navbar-dark bg-dark justify-content-between">
+    <nav class="navbar navbar-dark justify-content-between">
         <a class="navbar-brand" href="https://course-net.com/" target="_blank">
           <img src="{{ asset('assets/logo-cn-panjang.png') }}" alt="" height=30px width=120px class="d-inline-block align-top">
         </a>
