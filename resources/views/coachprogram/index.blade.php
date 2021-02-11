@@ -31,13 +31,13 @@ Jadwal Kelas
                         Kategori Program
                     </th>
                     <th class="text-center"> 
-                        Nama Coach
-                    </th>
-                    <th class="text-center"> 
                         Tanggal Batch
                     </th>
                     <th class="text-center"> 
                         Lokasi Kelas
+                    </th>
+                    <th class="text-center"> 
+                        Status Coach
                     </th>
                     <th class="text-center">
                         Diinput Oleh
@@ -54,7 +54,7 @@ Jadwal Kelas
                 </thead>
         
                 <tbody>
-                    @if($programs->count() > 0)
+                    {{-- @if($programs->count() > 0)
                         @foreach ($programs as $p)
                                 <tr>
                                     <td>
@@ -116,7 +116,7 @@ Jadwal Kelas
                         <tr>
                             <th colspan="6" class="text-center">Tidak ada jadwal kelas yang tersedia, tambahkan jadwal kelas baru.</th>
                         </tr>
-                    @endif
+                    @endif --}}
                 </tbody>
             </table>
         </div>
@@ -127,16 +127,18 @@ Jadwal Kelas
 @section('scripts')
 $(document).ready(function() {
     let preloader = '{{ asset('assets/data-preloader.gif') }}';
-    $('#table').DataTable( {
-    dom: 'lBfrtip',
-    buttons: [
-        'copy', 'csv', 'excel', 'pdf', 'print'
-    ],
-    lengthMenu: [[10, 25, 50, 75, 100, -1], [10, 25, 50, 75, 100, "Semua"]],
-    scrollY: "200",
-    ordering: true,
-    order: [[ 3, 'desc' ]],
-    scrollX: true,
+    $('#table').DataTable({
+        dom: 'lBfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        lengthMenu: [[10, 25, 50, 75, 100, -1], [10, 25, 50, 75, 100, "Semua"]],
+        scrollY: 200,
+        scrollX: true,
+        ordering: true,
+        order: [[ 2, 'desc' ]],
+        processing: true,
+        serverSide: true,
         language:{
             info: "<span class='font-weight-bold'>Menampilkan _START_ - _END_ dari _TOTAL_ data</span>",
             infoEmpty: "<span class='font-weight-bold'>Tidak ada data</span>",
@@ -154,7 +156,50 @@ $(document).ready(function() {
         },
         oLanguage: {
             sLengthMenu: "<span class='font-weight-bold mr-3'>Tampilkan _MENU_ data</span>",
-        },         
+        },          
+        ajax: 
+        {
+            url: "{{ route('coachprograms') }}",
+        },
+        columns: 
+        [
+            {
+                data: 'programname.name',
+                name: 'programname.name'
+            },
+            {
+                data: 'programcategory.name',
+                name: 'programcategory.name'
+            },
+            {
+                data: 'date',
+                name: 'date'
+            },
+            {
+                data: 'branch.name',
+                name: 'branch.name'
+            },
+            {
+                data: 'Status Coach',
+                name: 'Status Coach'
+            },
+            {
+                data: 'created_by',
+                name: 'created_by'
+            },
+            {
+                data: 'edited_by',
+                name: 'edited_by'
+            },
+            {
+                data: 'Detail',
+                name: 'Detail'
+            },
+            {
+                data: 'Edit',
+                name: 'Edit'
+            },
+        ]
     });
 });
 @endsection

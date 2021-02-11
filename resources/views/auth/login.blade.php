@@ -2,15 +2,15 @@
 
 @section('css')
 <style>
-        .footer{
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            text-align: left;
-            background-color:black;
-            color: white;
-        }
+    .footer{
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: left;
+        background-color: #1b1918;
+        color: white;
+    }
 </style>
 @endsection
 
@@ -90,7 +90,7 @@
             All rights reserved.
         </a>
         <div class="form-inline">
-            <b class="mr-1">Version</b>1.1.5
+            <b class="mr-1">Version</b>1.1.7
         </div>          
     </div>
 

@@ -12,6 +12,7 @@ use App\Transaction;
 use App\Result;
 use Session;
 use DB;
+use DataTables;
 
 class CoachProgramController extends Controller
 {
@@ -20,9 +21,56 @@ class CoachProgramController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $programs = Program::with('coachprograms', 'branch')->get();
+        $programs = Program::with('coachprograms', 'branch', 'programname', 'programcategory', 'coaches')->get();
+
+        if($request->ajax()){
+            return DataTables::of($programs)
+                ->editColumn('date', function($programs){
+                    return "<div class='text-center'>".$programs->date."</div>";
+                })
+                ->editColumn('branch.name', function($programs){
+                    return "<div class='text-center'>".$programs->branch->name."</div>";
+                })
+                ->editColumn('created_by', function($programs){
+                    return "<div class='text-center>".$programs->created_by."</div>";
+                })
+                ->editColumn('edited_by', function($programs){
+                    return "<div class='text-center'>".$programs->edited_by."</div>";
+                })
+                ->addColumn('Status Coach', function($programs){
+                    if($programs->coaches->count() == 0){
+                        return 
+                        "<div class='text-center text-bold text-danger'>
+                            Belum Ada Coach!
+                        </div>";
+                    }else{
+                        return 
+                        "<div class='text-center text-success'>
+                            Coach Sudah Dipilih
+                        </div>";
+                    }
+                })
+                ->addColumn('Detail', function($programs){
+                    return
+                        "<div class='text-center'>
+                            <a href='".route('coachprogram.detail', ['id'=> $programs->id])."' class='btn btn-xs btn-success'>
+                                <span class='far fa-eye'></span>
+                            </a>
+                        </div>";
+                })
+                ->addColumn('Edit', function($programs){
+                    return
+                    "<div class='text-center'>
+                        <a href='".route('coachprogram.edit', ['id'=> $programs->id])."' class='btn btn-xs btn-info'>
+                            <span class='fas fa-pencil-alt'></span>
+                        </a>
+                    </div>";
+                })
+                ->rawColumns(['date', 'branch.name', 'created_by', 'edited_by', 'Status Coach', 'Detail', 'Edit'])
+                ->make();
+        }
 
         return view('coachprogram.index')
         ->with('programs', $programs);
