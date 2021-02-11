@@ -457,6 +457,22 @@ Route::post('user/profile/updatepassword/{id}', [
 //         'uses' => 'ParticipantController@destroy',
 //         'as'   => 'participant.delete'
 //     ]);
+
+    Route::get('/participant/fetchknowcn',[
+        'uses'  => 'ParticipantController@fetchknowcn',
+        'as'    => 'participant.fetchknowcn'
+    ]);
+
+    Route::get('/participant/fetchbranch',[
+        'uses'  => 'ParticipantController@fetchbranch',
+        'as'    => 'participant.fetchbranch'
+    ]);
+
+    Route::get('/participant/fetchprofession',[
+        'uses'  => 'ParticipantController@fetchprofession',
+        'as'    => 'participant.fetchprofession'
+    ]);
+
 // //
 
 
@@ -474,7 +490,7 @@ Route::post('user/profile/updatepassword/{id}', [
         'as'    => 'reference.update'
     ]);
 
-    Route::get('/reference/edit/{id}',[
+    Route::get('/reference/edit/{id}/{participantid}',[
         'uses' => 'ReferenceController@edit',
         'as'   => 'reference.edit'
     ]);

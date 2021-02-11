@@ -229,6 +229,7 @@ class ParticipantController extends Controller
                 'phonenumber'               => $request->phonenumber,
                 'address'                   => ucwords($request->address),
                 'email'                     => $request->email,
+                'student_idcard'            => $request->student_idcard,
                 'cv_link'                   => $request->cv_link,
                 'sp_link'                   => $request->sp_link,
                 'member_validthru'          => $request->member_validthru,
@@ -267,6 +268,7 @@ class ParticipantController extends Controller
                 'phonenumber'               => $request->phonenumber,
                 'address'                   => ucwords($request->address),
                 'email'                     => $request->email,
+                'student_idcard'            => $request->student_idcard,
                 'cv_link'                   => $request->cv_link,
                 'sp_link'                   => $request->sp_link,
                 'member_validthru'          => $request->member_validthru,
@@ -382,6 +384,7 @@ class ParticipantController extends Controller
             $participant->phonenumber               = $request->phonenumber;
             $participant->address                   = ucwords($request->address);
             $participant->email                     = $request->email;
+            $participant->student_idcard            = $request->student_idcard;
             $participant->cv_link                   = $request->cv_link;
             $participant->sp_link                   = $request->sp_link;
             $participant->member_validthru          = $request->member_validthru;
@@ -401,6 +404,7 @@ class ParticipantController extends Controller
             $participant->phonenumber               = $request->phonenumber;
             $participant->address                   = ucwords($request->address);
             $participant->email                     = $request->email;
+            $participant->student_idcard            = $request->student_idcard;
             $participant->cv_link                   = $request->cv_link;
             $participant->sp_link                   = $request->sp_link;
             $participant->member_validthru          = $request->member_validthru;
@@ -434,4 +438,20 @@ class ParticipantController extends Controller
 
         return redirect()->route('participants');
     }
+
+    public function fetchknowcn(Request $request){
+        $a = Knowcn::find($request->id);
+        return response()->json($a->name);
+    }
+
+    public function fetchbranch(Request $request){
+        $a = Branch::find($request->id);
+        return response()->json($a->name);
+    }
+
+    public function fetchprofession(Request $request){
+        $a = Profession::find($request->id);
+        return response()->json($a->name);
+    }
+
 }
