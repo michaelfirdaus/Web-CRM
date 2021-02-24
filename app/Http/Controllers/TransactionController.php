@@ -25,11 +25,16 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
+        //Get all transactions
         $transactions = Transaction::with('participant', 'salesperson', 'program', 'program.programname', 'program.branch');
+        //Get all participants
         $participants = Participant::all();
+        //Get all programs
         $programs = Program::all();
+        //Get all salespersons
         $salespersons = Salesperson::all();
 
+        //DataTables server-side rendering
         if($request->ajax()){
             return Datatables::of($transactions)
                 ->editColumn('created_at', function($transactions){
@@ -119,6 +124,7 @@ class TransactionController extends Controller
                 ->make();   
         }
 
+        //Redirecting user to transaction index view
         return view('transaction.index')
             ->with('transactions', $transactions)
             ->with('participants', $participants)
@@ -133,17 +139,20 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        
+        //Get all participants
         $participants = Participant::all();
+        //Get date from today's date - 7 days
         $date = Carbon::today()->subDays(7);
         $programs = Program::orderBy('date', 'DESC')->where('date', '>=', $date)->get();
+        //Get all salespersons where status is active
         $salespersons = Salesperson::where('status', 1)->get();
+        //Check if participants or programs or salespersons are available
         if($participants->count() == 0 || $programs->count() == 0 || $salespersons->count() == 0){
             Session::flash('info', 'Tidak Dapat Menambahkan Transaksi karena Peserta/Jadwal Kelas/Sales Tidak Terdaftar');
             return redirect()->back();
         }
         
-
+        //Redirecting user to transaction create view
         return view('transaction.create')
             ->with('participants', $participants)
             ->with('programs', $programs)
@@ -159,7 +168,7 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
 
-
+        //Input validation
         $rules = [
             'participant'       => 'required',
             'sales'             => 'required',
@@ -167,6 +176,7 @@ class TransactionController extends Controller
             'price'             => 'required|min:0',
         ];
 
+        //Custom validation message
         $customMessages = [
             'participant.required' => 'Nama Peserta harus dipilih.',
             'sales.required'       => 'Nama Sales harus dipilih.',
@@ -177,6 +187,7 @@ class TransactionController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
+        //Get all transactions by program_id
         $transactions = Transaction::where('program_id',$request->program)->get();
         foreach($transactions as $t)
             if($t->participant_id == $request->participant){
@@ -186,7 +197,7 @@ class TransactionController extends Controller
 
         $price = (int)str_replace(".", "", $request->price);
 
-        
+        //Create transactions
         $transactions = Transaction::create([
             'participant_id'    => $request->participant,
             'salesperson_id'    => $request->sales,
@@ -198,8 +209,10 @@ class TransactionController extends Controller
             'created_by'        => Auth::user()->name,
         ]);
         
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Menambahkan Transaksi');
-
+        
+        //Redirecting user to transactions route
         return redirect()->route('transactions');
 
     }
@@ -223,11 +236,16 @@ class TransactionController extends Controller
      */
     public function edit($id)
     {
+        //Get transaction by id
         $transaction = Transaction::find($id);
+        //Get all programs
         $programs = Program::all();
+        //Get all participants
         $participants = Participant::all();
+        //Get all salespersons
         $salespersons = Salesperson::all();
 
+        //Redirecting user to transaction edit view
         return view('transaction.edit')
             ->with('transaction', $transaction)
             ->with('participants', $participants)
@@ -245,8 +263,10 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //Get transaction by id
         $transaction = Transaction::find($id);
 
+        //Input validation
         $rules = [
             'participant'       => 'required',
             'sales'             => 'required',
@@ -254,6 +274,7 @@ class TransactionController extends Controller
             'price'             => 'required|min:0',
         ];
 
+        //Custom validation message
         $customMessages = [
             'participant.required'   => 'Nilai Peserta harus dipilih.',
             'sales.required'         => 'Nama Sales harus dipilih.',
@@ -294,10 +315,13 @@ class TransactionController extends Controller
             $transaction->lastedited_by     = Auth::user()->name;
         }
 
+        //Save current transaction
         $transaction->save();
         
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Memperbaharui Transaksi');
 
+        //Redirecting user to transactions route
         return redirect()->route('transactions');
     }
 
@@ -309,18 +333,22 @@ class TransactionController extends Controller
      */
     public function destroy($id)
     {
+        //Get transaction by id
         $transaction = Transaction::find($id);
-
+        //Delete transaction
         $transaction->delete();
-
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Menghapus Transaksi');
-
+        //Redirecting user to transactions route
         return redirect()->route('transactions');
     }
 
     public function fetch(Request $request){
+        //Get program by id
         $a = Program::find($request->id);
+        //Get programname by id
         $fill = Programname::find($a->programname_id);
+        //Return json response
         return response()->json($fill->program_price);
     }
 
