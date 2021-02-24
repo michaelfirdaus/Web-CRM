@@ -18,7 +18,7 @@
 <br><br>
 <b>This web CRM using:</b>
 <ul>
-    <li>Laravel 7</li>
+    <li><a href="https://laravel.com/docs/7.x/releases" target="_blank">Laravel 7</li>
     <li><a href="https://adminlte.io/themes/dev/AdminLTE/index.html" target="_blank">adminLTE3 Dashboard</a></li>
     <li><a href="https://github.com/yajra/laravel-datatables" target="_blank">Yajra Laravel DataTables</a></li>
     <li><a href="https://getbootstrap.com/docs/4.0/getting-started/introduction/" target="_blank">Bootstrap 4</a></li>
