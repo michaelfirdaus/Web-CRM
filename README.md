@@ -9,11 +9,11 @@
 <p>2. Create database named crm</p>
 <p>3. Modify .env.example file name to .env </p>
 <p>4. Open your CLI on where this repository located</p>
-<p>5. On your CLI, run command \'composer install\' </p>
-<p>6. On your CLI, run command \'composer dump-autoload\' </p>
-<p>7. On your CLI, run command \'php artisan cache:clear\' </p>
-<p>8. On your CLI, run command \'php artisan key:generate\' </p>
-<p>9. To run this application, run command '\php artisan serve\' on your CLI</p>
+<p>5. On your CLI, run command 'composer install' </p>
+<p>6. On your CLI, run command 'composer dump-autoload' </p>
+<p>7. On your CLI, run command 'php artisan cache:clear' </p>
+<p>8. On your CLI, run command 'php artisan key:generate' </p>
+<p>9. To run this application, run command 'php artisan serve' on your CLI</p>
 <p>10. If you need a sample data, import database_template.sql file to your phpMyAdmin</p>
 <br><br>
 <b>This web CRM using:</b>
