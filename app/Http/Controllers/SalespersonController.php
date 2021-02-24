@@ -18,8 +18,10 @@ class SalespersonController extends Controller
      */
     public function index(Request $request)
     {
+        //Get all salesperson
         $salespersons = Salesperson::all();
 
+        //DataTables server-side rendering
         if($request->ajax()){
             return DataTables::of($salespersons) 
                 ->editColumn('status', function($salespersons){
@@ -41,6 +43,7 @@ class SalespersonController extends Controller
                 ->rawColumns(['status', 'Edit'])
                 ->make();  
         }
+        //Redirecting user to salesperson index view
         return view('salesperson.index')->with('salespersons', $salespersons);
     }
 
@@ -51,6 +54,7 @@ class SalespersonController extends Controller
      */
     public function create()
     {
+        //Redirecting user to salesperson create view
         return view('salesperson.create');
     }
 
@@ -62,13 +66,12 @@ class SalespersonController extends Controller
      */
     public function store(Request $request)
     {
-        //Validation to make sure name field should be filled and the category must be unique
-
+        //Input validation
         $rules = [
             'name'   => 'required|unique:salespersons',
             'status' => 'required|boolean'
         ];
-
+        //Custom validation message
         $customMessages = [
             'name.required'   => 'Nilai Sales harus diisi.',
             'name.unique'     => 'Nama Sales sudah terdaftar, silahkan coba lagi.',
@@ -81,13 +84,13 @@ class SalespersonController extends Controller
 
         $salesperson->name   = ucwords($request->name);
         $salesperson->status = $request->status;
-        //Saving current category to the database
+        //Save current salesperson
         $salesperson->save();
 
         //Notify user with pop up message
         Session::flash('success', 'Berhasil Menambahkan Sales Baru');
 
-        //Redirecting user to categories route
+        //Redirecting user to salespersons route
         return redirect()->route('salespersons');
 
     }
@@ -111,10 +114,10 @@ class SalespersonController extends Controller
      */
     public function edit($id)
     {
-        //Find category based on category ID
+        //Salesperson by id
         $salesperson = Salesperson::find($id);
 
-        //Redirecting user to admin/categories/edit view with the specific category
+        //Redirecting user salesperson edit view
         return view('salesperson.edit')->with('salesperson', $salesperson); 
     }
 
@@ -127,11 +130,12 @@ class SalespersonController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //Input validation
         $rules = [
             'name'   => 'required',
             'status' => 'required|boolean'
         ];
-
+        //Custom validation message
         $customMessages = [
             'name.required'   => 'Nilai Sales harus diisi.',
             'status.required' => 'Status harus dipilih.',
@@ -139,19 +143,19 @@ class SalespersonController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
-        //Find category based on category ID
+        //Get salesperson  by id
         $salesperson = Salesperson::find($id);
         
         $salesperson->name   = ucwords($request->name);
         $salesperson->status = $request->status;
         
-        //Save the category to the database
+        //Save current salesperson
         $salesperson->save();
 
         //Notify user with pop up message
         Session::flash('success', 'Berhasil Memperbaharui Sales');
 
-        //Redirecting user to categories route
+        //Redirecting user to salespersons route
         return redirect()->route('salespersons');
     }
 
@@ -163,16 +167,16 @@ class SalespersonController extends Controller
      */
     public function destroy($id)
     {
-        //Find category based on category ID
+        //Get salesperson by id
         $salesperson = Salesperson::find($id);
 
-        //Delete category
+        //Delete salesperson
         $salesperson->delete();
 
         //Notify user with pop up message
         Session::flash('success', 'Berhasil Menghapus Sales');
 
-        //Redirecting user to categories route
+        //Redirecting user to salespersons
         return redirect()->route('salespersons');
     }
 }

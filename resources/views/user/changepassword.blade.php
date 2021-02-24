@@ -18,6 +18,14 @@ Ubah Password
                 {{ csrf_field() }}
 
                 <div class="form-group">
+                    <label for="old_password">Password Lama <span class="text-danger">*</span></label>
+                    <input name="old_password" type="password" placeholder="Password Lama Anda" id="old_password" class="form-control">
+                    @if( $errors->has('old_password') )
+                            <div class="text-danger">{{ $errors->first('old_password') }}</div>
+                    @endif
+                </div>
+
+                <div class="form-group">
                     <label for="password">Password Baru <span class="text-danger">*</span></label>
                     <input name="password" type="password" placeholder="Password Baru Anda" id="password" class="form-control">
                     @if( $errors->has('password') )

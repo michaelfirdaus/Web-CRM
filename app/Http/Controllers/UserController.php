@@ -11,6 +11,7 @@ use Session;
 
 class UserController extends Controller
 {
+    //This page only accessible by admin
     public function __construct(){
         $this->middleware('admin');
     }
@@ -21,6 +22,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        //Redirecting user to admin user index view
         return view('admin.user.index')->with('users', User::all());
     }
 
@@ -31,6 +33,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        //Redirecting user to admin user create view
         return view('admin.user.create');
     }
 
@@ -42,11 +45,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
+        //Custom validator to check no spaces
         Validator::extend('without_spaces', function($attr, $value){
             return preg_match('/^\S*$/u', $value);
         });
  
+        //Input validation
         $rules = [
             'name'            => 'required',
             'username'        => 'required|without_spaces|unique:users',
@@ -54,6 +58,7 @@ class UserController extends Controller
             'confirmpassword' => 'required',
         ];
 
+        //Custom validation message
         $customMessages = [
             'name.required'            => 'Nama harus diisi.',
             'username.required'        => 'Username harus diisi.',
@@ -63,6 +68,7 @@ class UserController extends Controller
             'username.unique'          => 'Username sudah terpakai, silahkan coba lagi.',
         ];
 
+        //Check if user uploaded photo
         if($request->has('photo')){
             $this->validate($request, $rules, $customMessages);
                 
@@ -91,9 +97,10 @@ class UserController extends Controller
             ]);
         }
 
-
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Menambahkan User');
 
+        //Redirecting user to users route
         return redirect()->route('users');
     }
 
@@ -116,8 +123,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        //Get user by id
         $user = User::find($id);
 
+        //Redirecting user to admin user edit view
         return view('admin.user.edit')->with('user', $user);
     }
 
@@ -130,16 +139,18 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        //Custom validator to check no spaces
         Validator::extend('without_spaces', function($attr, $value){
             return preg_match('/^\S*$/u', $value);
         });
 
+        //Input validation
         $rules = [
             'name'            => 'required',
             'username'        => 'required|without_spaces',
         ];
 
+        //Custom validation message
         $customMessages = [
             'name.required'            => 'Nama harus diisi.',
             'username.required'        => 'Username harus diisi.',
@@ -148,15 +159,18 @@ class UserController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
+        //Get user by id
         $user = User::find($id);
 
         $user->name     = ucwords($request->name);
         $user->username = $request->username;
         
+        //Check if user change password
         if($request->has('password')){
             $user->password = bcrypt($request->password);
         }
 
+        //Check if user uploaded photo
         if($request->has('photo')){
             $image = $request->file('photo');
 
@@ -169,9 +183,11 @@ class UserController extends Controller
             $user->photo = $fullImage;
         }
         
+        //Save current user
         $user->save();
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Memperbaharui User');
-
+        //Redirecting user to users route
         return redirect()->route('users');
     }
 
@@ -183,23 +199,28 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-
+        //Get user by id
         $user = User::find($id);
 
+        //Check if user not delete himself
         if($user->id == Auth::user()->id){
             Session::flash('warning', 'Tidak dapat menghapus data Anda sendiri.');
             return redirect()->route('users');
         }
 
+        //Delete user
         $user->delete();
-
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Menghapus User');
+        //Redirecting user to users route
         return redirect()->route('users');
     }
 
     public function changerole($id){
+        //Get user by id
         $user = User::find($id);
 
+        //Check if user admin, then set to not admin and vice versa
         if($user->admin == 0){
             $user->admin = 1;
             Session::flash('success', 'Berhasil Menjadikan ' .$user->name. ' sebagai Admin');
@@ -208,8 +229,10 @@ class UserController extends Controller
             Session::flash('success', 'Berhasil Menjadikan ' .$user->name. ' sebagai User');
         }
 
+        //Save current user
         $user->save();
 
+        //Redirecting user back
         return redirect()->back();
     }
 }

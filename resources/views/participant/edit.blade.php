@@ -58,7 +58,7 @@ Edit {{$participant->id}} - {{ $participant->name }}
 
                 <div class="form-group">
                     <label for="email">E-mail <span class="text-danger">*</span></label>
-                    <input type="email" name="email" value="{{ $participant->email }}" placeholder="Contoh: michael@course-net.com" class="form-control">
+                    <input type="email" name="email" value="{{ $participant->email }}" placeholder="Contoh: michael@sample.com" class="form-control">
                     @if( $errors->has('emaik') )
                         <div class="text-danger">{{ $errors->first('email') }}</div>
                     @endif
@@ -117,23 +117,23 @@ Edit {{$participant->id}} - {{ $participant->name }}
                 </div>
 
                 <div class="form-group">
-                    <label for="knowcn_id">Mengetahui Course-Net dari <span class="text-danger">*</span></label>
-                    <select name="knowcn_id" id="knowcn_id" class="form-control select2" style="width: auto;">
-                    @foreach($knowcns as $knowcn)
-                            @if($knowcn->id == $participant->knowcn_id)
-                                <option selected value="{{ $knowcn->id }}"> {{ $knowcn->name }} </option>
+                    <label for="know_id">Mengetahui CRM dari <span class="text-danger">*</span></label>
+                    <select name="know_id" id="know_id" class="form-control select2" style="width: auto;">
+                    @foreach($knows as $know)
+                            @if($know->id == $participant->know_id)
+                                <option selected value="{{ $know->id }}"> {{ $know->name }} </option>
                             @else
-                                <option value="{{ $knowcn->id }}"> {{ $knowcn->name }} </option>
+                                <option value="{{ $know->id }}"> {{ $know->name }} </option>
                             @endif 
                     @endforeach
                     </select>
-                    @if( $errors->has('knowcn_id') )
-                        <div class="text-danger">{{ $errors->first('knowcn_id') }}</div>
+                    @if( $errors->has('know_id') )
+                        <div class="text-danger">{{ $errors->first('know_id') }}</div>
                     @endif
                 </div>
 
                 <div class="form-group memberreference">
-                    <label for="memberreference_id">Jika mengetahui Course-Net dari teman alumni Course-Net, sebutkan :</label>
+                    <label for="memberreference_id">Jika mengetahui Michael's CRM dari alumni, sebutkan:</label>
                     <select name="memberreference_id" id="memberreference_id" class="form-control select2" style="width: auto;">
                         @if($participant->memberreference_id == null)
                             <option value="" selected disabled hidden> - Pilih Member/Peserta - </option>
@@ -194,7 +194,7 @@ Edit {{$participant->id}} - {{ $participant->name }}
 @section('scripts')
 $('.memberreference').hide();
 
-$('#knowcn_id').change(function() {
+$('#know_id').change(function() {
     if($(this).val() == 1 ) $('.memberreference').show();
     else $('.memberreference').hide();
 });

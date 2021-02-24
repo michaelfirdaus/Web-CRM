@@ -2,7 +2,7 @@
 
 @section('title')Tambah Coach @endsection
 
-@section('header') Tambah Coach Course-Net @endsection
+@section('header') Tambah Coach @endsection
 
 @section('breadcrumb')
 <a href="/branches" class="mr-1">Coach</a>/ 
@@ -26,7 +26,7 @@ Tambah Coach
 
                 <div class="form-group">
                     <label for="email">Email <span class="text-danger">*</span></label>
-                    <input type="email" name="email" class="form-control" placeholder="Contoh: michael@course-net.com" value="{{ old('email') }}">
+                    <input type="email" name="email" class="form-control" placeholder="Contoh: michael@sample.com" value="{{ old('email') }}">
                     @if( $errors->has('email') )
                         <div class="text-danger">{{ $errors->first('email') }}</div>
                     @endif
@@ -57,7 +57,7 @@ Tambah Coach
                 </div>
 
                 <div class="form-group">
-                    <label for="status">Status Pengajar <span class="text-danger">*</span></label>
+                    <label for="status">Status Coach <span class="text-danger">*</span></label>
                     <select name="status" id="status" class="form-control select2" style="width: auto;">
                     <option value="1" selected> Aktif </option>
                     <option value="0"> Tidak Aktif </option>

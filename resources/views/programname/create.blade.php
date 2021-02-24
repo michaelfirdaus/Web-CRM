@@ -2,7 +2,7 @@
 
 @section('title')Tambah Program @endsection
 
-@section('header') Tambah Program Course-Net @endsection
+@section('header') Tambah Program @endsection
 
 @section('breadcrumb')
 <a href="/programnames" class="mr-1">Program</a>/ 
@@ -18,7 +18,7 @@ Tambah Program
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="name">Nama Program <span class="text-danger">*</span></label>
-                    <input type="text" name="name" placeholder="Contoh: CCNA" class="form-control" value="{{ old('name') }}">
+                    <input type="text" name="name" placeholder="Contoh: Algorithm and Programming" class="form-control" value="{{ old('name') }}">
                     @if( $errors->has('name') )
                         <div class="text-danger">{{ $errors->first('name') }}</div>
                     @endif

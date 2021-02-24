@@ -2,7 +2,7 @@
 
 @section('title')Transaksi @endsection
 
-@section('header') List Semua Transaksi Course-Net @endsection
+@section('header') List Semua Transaksi CRM @endsection
 
 @section('breadcrumb')
 Transaksi

@@ -2,7 +2,7 @@
 
 @section('title')Sales @endsection
 
-@section('header') List Semua Sales Course-Net @endsection
+@section('header') List Semua Sales @endsection
 
 @section('breadcrumb')
 Sales

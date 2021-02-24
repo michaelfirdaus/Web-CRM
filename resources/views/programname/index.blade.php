@@ -2,7 +2,7 @@
 
 @section('title')Program @endsection
 
-@section('header') List Semua Program Course-Net @endsection
+@section('header') List Semua Program @endsection
 
 @section('breadcrumb')
 Program

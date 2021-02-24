@@ -17,8 +17,10 @@ class ProfessionController extends Controller
      */
     public function index(Request $request)
     {
+        //Get all professions
         $professions = Profession::all();
 
+        //DataTables server-side rendering
         if($request->ajax()){
             return DataTables::of($professions)
             ->editColumn('status', function($professions){
@@ -39,7 +41,7 @@ class ProfessionController extends Controller
             ->rawColumns(['status', 'Edit'])
             ->make();
         }
-
+        //Redirecting user to profession index view
         return view('profession.index')->with('professions', $professions);
     }
 
@@ -50,6 +52,7 @@ class ProfessionController extends Controller
      */
     public function create()
     {
+        //Redirecting user to profession create view
         return view('profession.create');
     }
 
@@ -61,12 +64,12 @@ class ProfessionController extends Controller
      */
     public function store(Request $request)
     {
-
+        //Input validation
         $rules = [
             'name'   => 'required|unique:professions',
             'status' => 'required'
         ];
-
+        //Custom validation message
         $customMessages = [
             'name.required'   => 'Nama Profesi harus diisi.',
             'name.unique'     => 'Nama Profesi sudah terdaftar, silahkan coba lagi.',
@@ -79,11 +82,11 @@ class ProfessionController extends Controller
 
         $profession->name   = ucwords($request->name);
         $profession->status = $request->status;
-
+        //Save current profession
         $profession->save();
-
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Menambahkan Profesi Baru');
-
+        //Redirecting user to professions route
         return redirect()->route('professions');
 
     }
@@ -107,8 +110,9 @@ class ProfessionController extends Controller
      */
     public function edit($id)
     {
+        //Get profession by id
         $profession = Profession::find($id);
-
+        //Redirecting user to profession edit view
         return view('profession.edit')->with('profession', $profession);
     }
 
@@ -121,27 +125,28 @@ class ProfessionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //Input validation
         $rules = [
             'name'   => 'required',
             'status' => 'required'
         ];
-
+        //Custom validation message
         $customMessages = [
             'name.required'   => 'Nama Profesi harus diisi.',
             'status.required' => 'Status harus dipilih.'
         ];
 
         $this->validate($request, $rules, $customMessages);
-
+        //Get profession by id
         $profession = Profession::find($id);
 
         $profession->name   = ucwords($request->name);
         $profession->status = $request->status;
-
+        //Save current profession
         $profession->save();
-
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Memperbaharui Profesi');
-
+        //Redirecting user to professions route
         return redirect()->route('professions');
     }
 
@@ -153,12 +158,13 @@ class ProfessionController extends Controller
      */
     public function destroy($id)
     {
+        //Get profession by id
         $profession = Profession::find($id);
-
+        //Delete profession
         $profession->delete();
-
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Menghapus Profesi');
-
+        //Redirecting user to professions route
         return redirect()->route('professions');
     }
 }

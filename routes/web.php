@@ -191,37 +191,31 @@ Route::post('user/profile/updatepassword/{id}', [
 //
 
 
-//KnowCN routes
-    Route::get('/knowcns',[
-        'uses'  => 'KnowcnController@index',
-        'as'    => 'knowcns'
+//Know routes
+    Route::get('/knows',[
+        'uses'  => 'KnowController@index',
+        'as'    => 'knows'
     ]);
 
-    Route::get('/knowcn/create',[
-        'uses'  => 'KnowcnController@create',
-        'as'    => 'knowcn.create'
+    Route::get('/know/create',[
+        'uses'  => 'KnowController@create',
+        'as'    => 'know.create'
     ]);
 
-    Route::post('/knowcn/update/{id}',[
-        'uses'  => 'KnowcnController@update',
-        'as'    => 'knowcn.update'
+    Route::post('/know/update/{id}',[
+        'uses'  => 'KnowController@update',
+        'as'    => 'know.update'
     ]);
 
-    Route::get('/knowcn/edit/{id}',[
-        'uses' => 'KnowcnController@edit',
-        'as'   => 'knowcn.edit'
+    Route::get('/know/edit/{id}',[
+        'uses' => 'KnowController@edit',
+        'as'   => 'know.edit'
     ]);
 
-    Route::post('/knowcn/store',[
-        'uses'  => 'KnowcnController@store',
-        'as'    => 'knowcn.store'
+    Route::post('/know/store',[
+        'uses'  => 'KnowController@store',
+        'as'    => 'know.store'
     ]);
-
-    // Route::get('/knowcn/delete/{id}',[
-    //     'uses' => 'KnowcnController@destroy',
-    //     'as'   => 'knowcn.delete'
-    // ]);
-//
 
 
 //Jobconnector routes
@@ -290,7 +284,7 @@ Route::post('user/profile/updatepassword/{id}', [
 //
 
 
-//KnowCN routes
+//Programnames routes
     Route::get('/programnames',[
         'uses'  => 'ProgramnameController@index',
         'as'    => 'programnames'
@@ -315,12 +309,6 @@ Route::post('user/profile/updatepassword/{id}', [
         'uses'  => 'ProgramnameController@store',
         'as'    => 'programname.store'
     ]);
-
-    // Route::get('/knowcn/delete/{id}',[
-    //     'uses' => 'KnowcnController@destroy',
-    //     'as'   => 'knowcn.delete'
-    // ]);
-//
 
 
 //Program routes
@@ -458,9 +446,9 @@ Route::post('user/profile/updatepassword/{id}', [
 //         'as'   => 'participant.delete'
 //     ]);
 
-    Route::get('/participant/fetchknowcn',[
-        'uses'  => 'ParticipantController@fetchknowcn',
-        'as'    => 'participant.fetchknowcn'
+    Route::get('/participant/fetchknow',[
+        'uses'  => 'ParticipantController@fetchknow',
+        'as'    => 'participant.fetchknow'
     ]);
 
     Route::get('/participant/fetchbranch',[

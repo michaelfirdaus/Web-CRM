@@ -20,7 +20,7 @@ class CreateJobconnectorParticipantTable extends Migration
             $table->date('date');
             $table->integer('application_status');
             $table->string('created_by');
-            $table->string('lastedited_by');
+            $table->string('lastedited_by')->nullable();
             $table->timestamps();
         });
     }

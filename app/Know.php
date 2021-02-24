@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Knowcn extends Model
+class Know extends Model
 {
-    protected $table = 'knowcns';
+    protected $table = 'knows';
 
     protected $guarded = [];
 

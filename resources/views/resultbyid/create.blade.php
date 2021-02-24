@@ -31,7 +31,7 @@ Input Nilai {{$transaction->participant_id}} - {{ $transaction->participant->nam
 
                 <div class="form-group">
                     <label for="skillcertificate_number">Nomor Sertifikat Skill</label>
-                    <input type="text" name="skillcertificate_number" placeholder="Contoh: 2021/CCNA/01-2222" class="form-control" value={{ old('skillcertificate_number') }}>
+                    <input type="text" name="skillcertificate_number" placeholder="Contoh: 2021/ALGO/01-2222" class="form-control" value={{ old('skillcertificate_number') }}>
                 </div>
 
                 <div class="form-group">
@@ -42,7 +42,7 @@ Input Nilai {{$transaction->participant_id}} - {{ $transaction->participant->nam
 
                 <div class="form-group">
                     <label for="attendancecertificate_number">Nomor Sertifikat Kehadiran</label>
-                    <input type="text" name="attendancecertificate_number" placeholder="Contoh: 2021/CCNA/01-2222" class="form-control" value={{ old('attendancecertificate_number') }}>
+                    <input type="text" name="attendancecertificate_number" placeholder="Contoh: 2021/ALGO/01-2222" class="form-control" value={{ old('attendancecertificate_number') }}>
                 </div>
 
                 <div class="form-group">

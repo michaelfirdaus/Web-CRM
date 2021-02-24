@@ -18,7 +18,7 @@ Edit Perusahaan {{$jobconnector->name}}
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="name">Nama Perusahaan <span class="text-danger">*</span></label>
-                    <input type="text" name="name" placeholder="Contoh: BCA" value="{{ $jobconnector->name }}" class="form-control">
+                    <input type="text" name="name" placeholder="Contoh: PT. ABC" value="{{ $jobconnector->name }}" class="form-control">
                     @if( $errors->has('name') )
                         <div class="text-danger">{{ $errors->first('name') }}</div>
                     @endif

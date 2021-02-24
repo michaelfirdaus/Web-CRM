@@ -17,9 +17,4 @@ class CoachProgram extends Pivot
     public function program(){
         return $this->belongsTo('App\Program', 'id');
     }
-
-    // public function transaction(){
-    //     return $this->belongsTo('App\Transaction', 'id', 'transaction_id');
-    // }
-
 }

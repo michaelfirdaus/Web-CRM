@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKnowcnsTable extends Migration
+class CreateKnowsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateKnowcnsTable extends Migration
      */
     public function up()
     {
-        Schema::create('knowcns', function (Blueprint $table) {
+        Schema::create('knows', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->boolean('status')->default('1');

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Result;
 use App\Transaction;
 use App\Participant;
+use Auth;
 use Session;
 
 class ResultByIdController extends Controller
@@ -18,7 +19,10 @@ class ResultByIdController extends Controller
      */
     public function index($id)
     {
+        //Get result by transaction_id
         $result = Result::where('transaction_id', $id)->with('transaction','transaction.participant')->first();
+        
+        //Redirecting user to resultbyid index view
         return view('resultbyid.index', ['result'=> $result]);
     }
 
@@ -29,7 +33,10 @@ class ResultByIdController extends Controller
      */
     public function create($id)
     {
+        //Get transaction by id
         $transaction = Transaction::find($id);
+
+        //Redirecting user to resultbyid create view
         return view('resultbyid.create')
             ->with('currenttransaction', $id)
             ->with('transaction', $transaction);
@@ -43,11 +50,11 @@ class ResultByIdController extends Controller
      */
     public function store(Request $request)
     {
-
+        //Input validation
         $rules = [
             'score'    => 'required|numeric|max:100|min:0',
         ];
-
+        //Custom validation message
         $customMessages = [
             'score.required' => 'Nilai Ujian harus diisi.',
             'score.numeric'  => 'Nilai Ujian harus berupa angka.',
@@ -57,6 +64,7 @@ class ResultByIdController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
+        //Check if user uploaded photo
         if($request->hasFile('photo')){
             $image = $request->file('photo');
 
@@ -98,7 +106,7 @@ class ResultByIdController extends Controller
 
             $transaction->result_id = $result->id;
             $transaction->result_flag = 1;
-    
+            $transaction->lastedited_by = Auth::user()->name;
             $transaction->save();
             
             Session::flash('success', 'Berhasil Memperbaharui Data Nilai');
@@ -138,11 +146,12 @@ class ResultByIdController extends Controller
 
             $transaction->result_id = $result->id;
             $transaction->result_flag = 1;
-
+            //Save current transaction
             $transaction->save();
 
-            
+            //Notify user with pop up message
             Session::flash('success', 'Berhasil Input Data Nilai');
+            //Redirecting user to resultbyid route
             return redirect()->route('resultbyid', ['id'  => $transaction->id]);
         }
     }
@@ -166,8 +175,10 @@ class ResultByIdController extends Controller
      */
     public function edit($id)
     {
+        //Get result by id
         $result = Result::where('id', $id)->with('transaction', 'transaction.participant')->first();
 
+        //Redirecting user to resultbyid edit view
         return view('resultbyid.edit')->with('result', $result);
     }
 
@@ -180,12 +191,16 @@ class ResultByIdController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //Get result by id
         $result = Result::find($id);
 
+        //Get transaction by result_id
+        $transaction = Transaction::where('result_id', $id)->first();
+        //Input validation
         $rules = [
             'score'    => 'required|numeric|max:100|min:0',
         ];
-
+        //Custom validation message
         $customMessages = [
             'score.required' => 'Nilai Ujian harus diisi.',
             'score.numeric'  => 'Nilai Ujian harus berupa angka.',
@@ -194,7 +209,7 @@ class ResultByIdController extends Controller
         ];
 
         $this->validate($request, $rules, $customMessages);
-
+        //Check if user uploaded photo
         if($request->hasFile('photo')){
             $image = $request->file('photo');
 
@@ -232,10 +247,17 @@ class ResultByIdController extends Controller
         $result->skillcertificate_pickdate      = $request->skillcertificate_pickdate;
         $result->attendancecertificate_number   = $request->attendancecertificate_number;
         $result->attendancecertificate_pickdate = $request->attendancecertificate_pickdate;
-
+        //Save current result
         $result->save();
-        
+
+        $transaction->lastedited_by = Auth::user()->name;
+        //Save current transaction
+        $transaction->save();
+
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Memperbaharui Data Nilai');
+        
+        //Redirecting user to resultbyid route
         return redirect()->route('resultbyid', ['id' => $result->transaction->id]);
     }
 
@@ -247,18 +269,20 @@ class ResultByIdController extends Controller
      */
     public function destroy($id)
     {
+        //Get result by id
         $result = Result::find($id);
-
+        //Get transaction by id
         $transaction = Transaction::find($result->transaction_id);
-
+        
         $transaction->result_flag = 0;
-
+        //Save current transaction
         $transaction->save();
 
+        //Delete result
         $result->delete();
-
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Menghapus Data Nilai');
-
+        //Redirecting user to transactions route
         return redirect()->route('transactions');
     }
 }

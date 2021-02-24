@@ -2,7 +2,7 @@
 
 @section('title')Dashboard Peserta @endsection
 
-@section('header') List Semua Peserta Course-Net @endsection
+@section('header') List Semua Peserta CRM @endsection
 
 @section('breadcrumb')
     Dashboard Peserta
@@ -62,7 +62,7 @@
                         Lokasi Pendaftaran
                     </th>
                     <th class="text-center"> 
-                        Mengetahui CN dari
+                        Mengetahui CRM dari
                     </th>
                     <th class="text-center"> 
                         Profesi
@@ -194,8 +194,8 @@
                     name: 'branch'
                 },
                 {
-                    data: 'knowcn',
-                    name: 'knowcn'
+                    data: 'know',
+                    name: 'know'
                 },
                 {
                     data: 'profession',

@@ -19,8 +19,10 @@ class JobConnectorParticipantController extends Controller
      */
     public function index(Request $request)
     {
+        //Get all jobconnectorparticipants
         $jobconnectorparticipants = JobconnectorParticipant::with('participant', 'jobconnector');
 
+        //DataTables server-side rendering
         if($request->ajax()){
             return DataTables::of($jobconnectorparticipants)
                 ->editColumn('participant_id', function($jobconnectorparticipants){
@@ -103,6 +105,7 @@ class JobConnectorParticipantController extends Controller
                 ->make();
             }
 
+        //Redirecting jobconnectorparticipant index view
         return view('jobconnectorparticipant.index')
         ->with('jobconnectorparticipants', $jobconnectorparticipants);
     }
@@ -114,14 +117,18 @@ class JobConnectorParticipantController extends Controller
      */
     public function create()
     {
+        //Get all participants
         $participants = Participant::all();
+        //Get all jobconnectors where the status is active
         $jobconnectors = Jobconnector::where('status', 1)->get();
 
+        //Check if participants or jobconnectors are available
         if($participants->count() == 0 || $jobconnectors->count() == 0 ){
             Session::flash('info', 'Tidak Dapat Menambahkan Job Connector karena Peserta/Perusahaan Tidak Tersedia');
             return redirect()->back();
         }
 
+        //Redirecting user to jobconnectorparticipant create view
         return view('jobconnectorparticipant.create')
               ->with('participants', $participants)
               ->with('jobconnectors', $jobconnectors);
@@ -135,7 +142,7 @@ class JobConnectorParticipantController extends Controller
      */
     public function store(Request $request)
     {
-
+        //Input validation
         $rules = [
             'participant'        => 'required',
             'jobconnector'       => 'required',
@@ -143,6 +150,7 @@ class JobConnectorParticipantController extends Controller
             'application_status' => 'required',
         ];
 
+        //Custom validation message
         $customMessages = [
             'participant.required'        => 'Nama Peserta harus dipilih.',
             'jobconnector.required'       => 'Perusahaan Rekanan harus diisi.',
@@ -153,6 +161,7 @@ class JobConnectorParticipantController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
+        //Create jobconnectorparticipant
         $jcp = JobconnectorParticipant::create([
             'participant_id'        => $request->participant,
             'jobconnector_id'       => $request->jobconnector,
@@ -161,8 +170,10 @@ class JobConnectorParticipantController extends Controller
             'created_by'            => Auth::user()->name,
         ]);
 
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Menambahkan Job Connector Baru');
 
+        //Redirecting user to jobconnectorparticipants route
         return redirect()->route('jobconnectorparticipants');
     }
 
@@ -185,11 +196,16 @@ class JobConnectorParticipantController extends Controller
      */
     public function edit($id)
     {
+        //Get jobconnectorparticipant by id
         $jobconnectorparticipant = JobconnectorParticipant::find($id);
+        //Get current participant
         $currentparticipant = Participant::find($jobconnectorparticipant->participant_id);
+        //Get all participants
         $participants = Participant::all();
+        //Get all jobconnectors
         $jobconnectors = Jobconnector::all();
 
+        //Redirecting user to jobconnectorparticipant edit view
         return view('jobconnectorparticipant.edit')
             ->with('jobconnectorparticipant', $jobconnectorparticipant)
             ->with('currentparticipant', $currentparticipant)
@@ -206,15 +222,16 @@ class JobConnectorParticipantController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //Get jobconnectorparticipant by id
         $jobconnectorparticipant = JobconnectorParticipant::find($id);
-
+        //Input validation
         $rules = [
             'participant'        => 'required',
             'jobconnector'       => 'required',
             'date'               => 'required|date',
             'application_status' => 'required',
         ];
-
+        //Custom validation message
         $customMessages = [
             'participant.required'        => 'Nama Peserta harus dipilih.',
             'jobconnector.required'       => 'Perusahaan Rekanan harus diisi.',
@@ -231,11 +248,11 @@ class JobConnectorParticipantController extends Controller
         $jobconnectorparticipant->date               = $request->date;
         $jobconnectorparticipant->application_status = $request->application_status;
         $jobconnectorparticipant->lastedited_by      = Auth::user()->name;
-
+        //Save current jobconnectorparticipant
         $jobconnectorparticipant->save();
-
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Memperbaharui Job Connector');
-
+        //Redirecting user to jobconnectorparticipants
         return redirect()->route('jobconnectorparticipants');
     }
 
@@ -247,12 +264,13 @@ class JobConnectorParticipantController extends Controller
      */
     public function destroy($id)
     {
+        //Get jobconneectorparticipant by id
         $jobconnectorparticipant = JobconnectorParticipant::find($id);
-
+        //Delete jobconnectorparticipant
         $jobconnectorparticipant->delete();
-
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Menghapus Job Connector');
-
+        //Redirecting user to jobconnectorparticipants route
         return redirect()->route('jobconnectorparticipants');
     }
 }

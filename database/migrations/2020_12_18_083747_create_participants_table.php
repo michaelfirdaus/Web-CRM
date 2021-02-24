@@ -16,7 +16,7 @@ class CreateParticipantsTable extends Migration
         Schema::create('participants', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('branch_id');
-            $table->bigInteger('knowcn_id');
+            $table->bigInteger('know_id');
             $table->bigInteger('profession_id');
             $table->bigInteger('memberreference_id')->nullable();
             $table->string('memberreference_name')->nullable();

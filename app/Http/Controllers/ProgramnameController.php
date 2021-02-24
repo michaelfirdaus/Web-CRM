@@ -17,8 +17,10 @@ class ProgramnameController extends Controller
      */
     public function index(Request $request)
     {
+        //Get all programnames
         $programnames = Programname::all();
         
+        //DataTables server-side rendering
         if($request->ajax()){
             return DataTables::of($programnames)
                 ->editColumn('program_price', function($programnames){
@@ -43,6 +45,7 @@ class ProgramnameController extends Controller
                 ->make();
         }
 
+        //Redirecting user to programname index view
         return view('programname.index')->with('programnames', $programnames);
     }
 
@@ -53,6 +56,7 @@ class ProgramnameController extends Controller
      */
     public function create()
     {
+        //Redirecting programname create view
         return view('programname.create');
     }
 
@@ -64,12 +68,13 @@ class ProgramnameController extends Controller
      */
     public function store(Request $request)
     {
+        //Input validation
         $rules = [
             'name'   => 'required|unique:programnames',
             'price'  => 'required|min:0',
             'status' => 'required'      
         ];
-
+        //Custom validation message
         $customMessages = [
             'name.required'   => 'Nama Program harus diisi.',
             'name.unique'     => 'Nama Program sudah terdaftar, silahkan coba lagi.',
@@ -116,8 +121,10 @@ class ProgramnameController extends Controller
      */
     public function edit($id)
     {
+        //Get programname by id
         $pn = Programname::find($id);
 
+        //Redirecting user to programname edit view
         return view('programname.edit')->with('programname', $pn);
     }
 
@@ -130,12 +137,13 @@ class ProgramnameController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //Input validation
         $rules = [
             'name'   => 'required',
             'price'  => 'required|min:0',
             'status' => 'required'      
         ];
-
+        //Custom validation message
         $customMessages = [
             'name.required'   => 'Nama Program harus diisi.',
             'name.unique'     => 'Nama Program sudah terdaftar, silahkan coba lagi.',
@@ -148,17 +156,17 @@ class ProgramnameController extends Controller
 
         $p = (int)str_replace(".", "", $request->price);
 
-        //Find category based on category ID
+        //Get programname by id
         $pn = Programname::find($id);
         
         $pn->name           = ucwords($request->name);
         $pn->program_price  = $p;
         $pn->status         = $request->status; 
-        //Save the category to the database
+        //Save current programname
         $pn->save();
 
         //Notify user with pop up message
-        Session::flash('success', 'Berhasil Memperbaharui Program Course-Net');
+        Session::flash('success', 'Berhasil Memperbaharui Program');
 
         //Redirecting user to categories route
         return redirect()->route('programnames');
@@ -172,11 +180,13 @@ class ProgramnameController extends Controller
      */
     public function destroy($id)
     {
+        //Get programname by id
         $pn = Programname::find($id);
-
+        //Delete programname
         $pn->delete();
-
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Menghapus Program');
+        //Redirecting user to programnames route
         return redirect()->route('programnames');
     }
 }

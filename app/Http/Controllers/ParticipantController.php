@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Participant;
 use App\Branch;
-use App\Knowcn;
+use App\Know;
 use App\Profession;
 use Auth;
 use App\Membernumber;
@@ -22,8 +22,10 @@ class ParticipantController extends Controller
      */
     public function index(Request $request)
     {
-        $participants = Participant::with('branch', 'knowcn', 'profession')->get();
+        //Get all participants
+        $participants = Participant::with('branch', 'know', 'profession')->get();
 
+        //DataTables server-side rendering
         if($request->ajax()){
             return DataTables::of($participants)
                 ->editColumn('pob', function($participants){
@@ -46,13 +48,13 @@ class ParticipantController extends Controller
                 ->editColumn('branch', function($participants){
                     return "<div class='text-center'>".$participants->branch->name."</div>";
                 })
-                ->editColumn('knowcn', function($participants){
-                    if($participants->knowcn_id == 1){
+                ->editColumn('know', function($participants){
+                    if($participants->know_id == 1){
                         return 
                         "<div class='text-center'>".$participants->memberreference_id." - ". $participants->memberreference_name."</div>";
                     }else{
                         return
-                        "<div class='text-center'>".$participants->knowcn->name."</div>";
+                        "<div class='text-center'>".$participants->know->name."</div>";
                     }
                 })
                 ->editColumn('profession', function($participants){
@@ -97,11 +99,12 @@ class ParticipantController extends Controller
                     </div>";
                 })
                 ->rawColumns(['pob', 'dob', 'cv_link', 'sp_link', 'member_validthru', 
-                             'branch', 'knowcn', 'profession', 'professiondetail',
+                             'branch', 'know', 'profession', 'professiondetail',
                              'Minat Program', 'Referensi', 'Edit', 'created_by', 'lastedited_by'])
                 ->make();
         }
 
+        //Redirecting user to participant index view
         return view('participant.index')
             ->with('participants', $participants);
         
@@ -114,29 +117,34 @@ class ParticipantController extends Controller
      */
     public function create()
     {
+        //Get all branches where the status is active
         $branches = Branch::where('status', 1)->get();
-        $knowcns = Knowcn::where('status', 1)->get();
+        //Get all knows where the status is active
+        $knows = Know::where('status', 1)->get();
+        //Get all professions where the status is active
         $professions = Profession::where('status', 1)->get();
+        //Get all participants
         $participants = Participant::all();
 
+        //Check if branch is exists
         if($branches->count() == 0){
             Session::flash('info', 'Tidak Dapat Menambahkan Peserta karena Lokasi Kelas Tidak Tersedia');
             return redirect()->back();
         }
-
-        if($knowcns->count() == 0){
-            Session::flash('info', 'Tidak Dapat Menambahkan Peserta karena Tidak Ada Kanal Course-Net yang Terdaftar');
+        //Check if knows is exists
+        if($knows->count() == 0){
+            Session::flash('info', 'Tidak Dapat Menambahkan Peserta karena Tidak Ada Kanal yang Terdaftar');
             return redirect()->back();
         }
-
+        //Check if professions is exists
         if($professions->count() ==0){
             Session::flash('info', 'Tidak Dapat Menambahkan Peserta karena Tidak Ada Profesi yang Terdaftar');
             return redirect()->back();
         }
-
+        //Redirecting user to participant create view
         return view('participant.create')
             ->with('branches', $branches)
-            ->with('knowcns', $knowcns)
+            ->with('knows', $knows)
             ->with('participants', $participants)
             ->with('professions', $professions);
     }
@@ -149,10 +157,10 @@ class ParticipantController extends Controller
      */
     public function store(Request $request)
     {
-
+        //Input valdiation
         $rules = [
             'branch_id'                 => 'required',
-            'knowcn_id'                 => 'required',
+            'know_id'                   => 'required',
             'profession_id'             => 'required',
             'name'                      => 'required',
             'pob'                       => 'required',
@@ -163,10 +171,10 @@ class ParticipantController extends Controller
             'emergencycontact_name'     => 'required',
             'emergencycontact_phone'    => 'required|numeric'
         ];
-
+        //Custom validation message
         $customMessages = [
             'branch_id.required'                => 'Lokasi Pendaftaran harus dipilih.',
-            'knowcn_id.required'                => 'Mengetahui Course-Net dari harus diisi.',
+            'know_id.required'                  => 'Mengetahui Michael\'s CRM dari harus diisi.',
             'profession_id.required'            => 'Profesi harus dipilih.',
             'name.required'                     => 'Nama Peserta harus diisi.',
             'pob.required'                      => 'Tempat Lahir harus diisi.',
@@ -183,8 +191,8 @@ class ParticipantController extends Controller
         ];
 
         $this->validate($request, $rules, $customMessages);
-
-        if($request->knowcn_id == 1){
+        //Check if know exists
+        if($request->know_id == 1){
             $rule = [
                 'memberreference_id' => 'required',
             ];
@@ -196,8 +204,10 @@ class ParticipantController extends Controller
             $this->validate($request, $rule, $customMessage);
         }
         
+        //Get all participants
         $checkParticipant = Participant::all();
 
+        //Check if participants exists and if user select know CRM from alumni
         if($checkParticipant->count() > 0 && $request->has('memberreference_id')){
             $p = Participant::where('id',$request->memberreference_id)->first();
             
@@ -217,10 +227,11 @@ class ParticipantController extends Controller
                 $membernum->save();
             }
 
+            //Create participant
             $participant = Participant::create([
                 'id'                        => $membernum->lastnumber,
                 'branch_id'                 => $request->branch_id,
-                'knowcn_id'                 => $request->knowcn_id,
+                'know_id'                   => $request->know_id,
                 'profession_id'             => $request->profession_id,
                 'profession_detail'         => ucfirst($request->profession_detail),
                 'name'                      => ucwords($request->name),
@@ -242,7 +253,7 @@ class ParticipantController extends Controller
         }else{
             $branch_code = Branch::find($request->branch_id);
             $membernum = Membernumber::where('branch_id', $request->branch_id)->first();
-    
+            //Check if member number exists
             if($membernum == null){
                 $membernum = Membernumber::create([
                     'branch_id'     => $request->branch_id,
@@ -259,7 +270,7 @@ class ParticipantController extends Controller
             $participant = Participant::create([
                 'id'                        => $membernum->lastnumber,
                 'branch_id'                 => $request->branch_id,
-                'knowcn_id'                 => $request->knowcn_id,
+                'know_id'                   => $request->know_id,
                 'profession_id'             => $request->profession_id,
                 'profession_detail'         => ucfirst($request->profession_detail),
                 'name'                      => ucwords($request->name),
@@ -278,8 +289,10 @@ class ParticipantController extends Controller
             ]);
         }
 
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Menambahkan Peserta');
 
+        //Redirecting user to participants route
         return redirect()->route('participants');
     }
 
@@ -302,15 +315,21 @@ class ParticipantController extends Controller
      */
     public function edit($id)
     {
+        //Get participant by id
         $participant = Participant::find($id);
+        //Get all participants
         $allparticipant = Participant::all();
+        //Get all branches
         $branches = Branch::all();
-        $knowcns = Knowcn::all();
+        //Get all knows
+        $knows = Know::all();
+        //Get all professions
         $professions = Profession::all();
 
+        //Redirecting user to participant edit controller
         return view('participant.edit')
             ->with('branches', $branches)
-            ->with('knowcns', $knowcns)
+            ->with('knows', $knows)
             ->with('participant', $participant)
             ->with('allparticipant', $allparticipant)
             ->with('professions', $professions);
@@ -325,11 +344,12 @@ class ParticipantController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //Get participant by id
         $participant = Participant::find($id);
-
+        //Input validation
         $rules = [
             'branch_id'                 => 'required',
-            'knowcn_id'                 => 'required',
+            'know_id'                   => 'required',
             'profession_id'             => 'required',
             'name'                      => 'required',
             'pob'                       => 'required',
@@ -340,10 +360,10 @@ class ParticipantController extends Controller
             'emergencycontact_name'     => 'required',
             'emergencycontact_phone'    => 'required|numeric'
         ];
-
-        $customMessages = [
+        //Custom validation message
+        $customMessages =  [
             'branch_id.required'                => 'Lokasi Pendaftaran harus dipilih.',
-            'knowcn_id.required'                => 'Mengetahui Course-Net dari harus diisi.',
+            'know_id.required'                  => 'Mengetahui Michael\'s CRM dari harus diisi.',
             'profession_id.required'            => 'Profesi harus dipilih.',
             'name.required'                     => 'Nama Peserta harus diisi.',
             'pob.required'                      => 'Tempat Lahir harus diisi.',
@@ -361,7 +381,8 @@ class ParticipantController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
-        if($request->knowcn_id == 1){
+        //Check if user select know CRM from alumni
+        if($request->know_id == 1){
             $rule = [
                 'memberreference_id' => 'required',
             ];
@@ -375,7 +396,7 @@ class ParticipantController extends Controller
             $p = Participant::find($request->memberreference_id);
             
             $participant->branch_id                 = $request->branch_id;
-            $participant->knowcn_id                 = $request->knowcn_id;
+            $participant->know_id                   = $request->know_id;
             $participant->profession_id             = $request->profession_id;
             $participant->profession_detail         = ucfirst($request->profession_detail);
             $participant->name                      = ucwords($request->name);
@@ -395,7 +416,7 @@ class ParticipantController extends Controller
             $participant->lastedited_by             = Auth::user()->name;
         }else{
             $participant->branch_id                 = $request->branch_id;
-            $participant->knowcn_id                 = $request->knowcn_id;
+            $participant->know_id                   = $request->know_id;
             $participant->profession_id             = $request->profession_id;
             $participant->profession_detail         = ucfirst($request->profession_detail);
             $participant->name                      = ucwords($request->name);
@@ -413,11 +434,11 @@ class ParticipantController extends Controller
             $participant->lastedited_by             = Auth::user()->name;
         }
 
-
+        //Save current participant
         $participant->save();
-
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Memperbaharui Peserta');
-
+        //Redirecting user to participants route
         return redirect()->route('participants');
 
     }
@@ -430,17 +451,18 @@ class ParticipantController extends Controller
      */
     public function destroy($id)
     {
+        //Get participant by id
         $participant = Participant::find($id);
-
+        //Delete participant
         $participant->delete();
-
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Menghapus Peserta');
-
+        //Redirecting user to participants route
         return redirect()->route('participants');
     }
 
-    public function fetchknowcn(Request $request){
-        $a = Knowcn::find($request->id);
+    public function fetchknow(Request $request){
+        $a = Know::find($request->id);
         return response()->json($a->name);
     }
 

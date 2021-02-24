@@ -2,7 +2,7 @@
 
 @section('title')Tambah Sales @endsection
 
-@section('header') Tambah Sales Course-Net @endsection
+@section('header') Tambah Sales @endsection
 
 @section('breadcrumb')
 <a href="/salesperons" class="mr-1">Sales</a>/ 

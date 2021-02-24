@@ -2,7 +2,7 @@
 
 @section('title')Tambah Cabang/Lokasi Kelas @endsection
 
-@section('header') Tambah Cabang/Lokasi Kelas Course-Net @endsection
+@section('header') Tambah Cabang/Lokasi Kelas @endsection
 
 @section('breadcrumb')
 <a href="/branches" class="mr-1">Cabang/Lokasi Kelas</a>/ 

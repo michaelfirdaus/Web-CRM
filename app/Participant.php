@@ -32,8 +32,8 @@ class Participant extends Model
         return $this->belongsTo('App\Branch');
     }
 
-    public function knowcn(){
-        return $this->belongsTo('App\Knowcn');
+    public function know(){
+        return $this->belongsTo('App\Know');
     }
 
     public function interests(){

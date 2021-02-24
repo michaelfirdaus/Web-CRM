@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Knowcn;
+use App\Know;
 use Session;
 use DataTables;
 
-class KnowcnController extends Controller
+class KnowController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,21 +17,23 @@ class KnowcnController extends Controller
      */
     public function index(Request $request)
     {
-        $knowcns = Knowcn::all();
+        //Get all knows
+        $knows = Know::all();
 
+        //DataTables server-side rendering
         if($request->ajax()){
-            return DataTables::of($knowcns)
-                ->editColumn('status', function($knowcns){
-                    if($knowcns->status == 1){
+            return DataTables::of($knows)
+                ->editColumn('status', function($knows){
+                    if($knows->status == 1){
                         return "<div class='text-center'>Aktif</div>";
                     }else{
                         return "<div class='text-center'>Tidak Aktif</div>";
                     }
                 })
-                ->addColumn('Edit', function($knowcns){
+                ->addColumn('Edit', function($knows){
                     return
                     "<div class='text-center'>
-                        <a href='".route('knowcn.edit', ['id' => $knowcns ->id])."' class='btn btn-xs btn-info'>
+                        <a href='".route('know.edit', ['id' => $knows ->id])."' class='btn btn-xs btn-info'>
                             <span class='fas fa-pencil-alt'></span>
                         </a>
                     </div>";
@@ -39,7 +41,8 @@ class KnowcnController extends Controller
                 ->rawColumns(['status', 'Edit'])
                 ->make();
         }
-        return view('knowcn.index')->with('knowcns', $knowcns);
+        //Redirecting user to know index view
+        return view('know.index')->with('knows', $knows);
     }
 
     /**
@@ -49,7 +52,8 @@ class KnowcnController extends Controller
      */
     public function create()
     {
-        return view('knowcn.create');
+        //Redirecting user to know create view
+        return view('know.create');
     }
 
     /**
@@ -60,13 +64,12 @@ class KnowcnController extends Controller
      */
     public function store(Request $request)
     {
-        //Validation to make sure name field should be filled and the category must be unique
-
+        //Input validation
         $rules = [
-            'name'   => 'required|unique:knowcns',
+            'name'   => 'required|unique:knows',
             'status' => 'required'      
         ];
-
+        //Custom validation message
         $customMessages = [
             'name.required'   => 'Nama Kanal harus diisi.',
             'name.unique'     => 'Nama Kanal sudah terdaftar, silahkan coba lagi.',
@@ -75,18 +78,18 @@ class KnowcnController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
-        $knowcn = new Knowcn;
+        $know = new Know;
 
-        $knowcn->name   = ucwords($request->name);
-        $knowcn->status = $request->status;
-        //Saving current category to the database
-        $knowcn->save();
+        $know->name   = ucwords($request->name);
+        $know->status = $request->status;
+        //Save current know
+        $know->save();
 
         //Notify user with pop up message
         Session::flash('success', 'Berhasil Menambahkan Kanal Baru');
 
-        //Redirecting user to categories route
-        return redirect()->route('knowcns');
+        //Redirecting user to knows route
+        return redirect()->route('knows');
     }
 
     /**
@@ -108,11 +111,11 @@ class KnowcnController extends Controller
      */
     public function edit($id)
     {
-        //Find category based on category ID
-        $knowcn = Knowcn::find($id);
+        //Find know by id
+        $know = Know::find($id);
 
-        //Redirecting user to admin/categories/edit view with the specific category
-        return view('knowcn.edit')->with('knowcn', $knowcn); 
+        //Redirecting user to know edit view
+        return view('know.edit')->with('know', $know); 
     }
 
     /**
@@ -124,11 +127,12 @@ class KnowcnController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //Input validation
         $rules = [
             'name'   => 'required',
             'status' => 'required'
         ];
-
+        //Custom validation message
         $customMessages = [
             'name.required' => 'Nama Kanal harus diisi.',
             'status.required' => 'Status Kanal harus dipilih.'
@@ -136,19 +140,19 @@ class KnowcnController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
-        //Find category based on category ID
-        $knowcn = Knowcn::find($id);
+        //Get know by id
+        $know = Know::find($id);
         
-        $knowcn->name   = ucwords($request->name);
-        $knowcn->status = $request->status; 
-        //Save the category to the database
-        $knowcn->save();
+        $know->name   = ucwords($request->name);
+        $know->status = $request->status; 
+        //Save current know
+        $know->save();
 
         //Notify user with pop up message
-        Session::flash('success', 'Berhasil Memperbaharui Kanal Course-Net');
+        Session::flash('success', 'Berhasil Memperbaharui Kanal');
 
-        //Redirecting user to categories route
-        return redirect()->route('knowcns');
+        //Redirecting user to knows route
+        return redirect()->route('knows');
     }
 
     /**
@@ -159,16 +163,16 @@ class KnowcnController extends Controller
      */
     public function destroy($id)
     {
-        //Find category based on category ID
-        $knowcn = Knowcn::find($id);
+        //Get know by id
+        $know = Know::find($id);
 
-        //Delete category
-        $knowcn->delete();
+        //Delete know
+        $know->delete();
 
         //Notify user with pop up message
-        Session::flash('success', 'Berhasil Menghapus Kanal Course-Net');
+        Session::flash('success', 'Berhasil Menghapus Kanal');
 
-        //Redirecting user to categories route
-        return redirect()->route('knowcns');
+        //Redirecting user to knows route
+        return redirect()->route('knows');
     }
 }

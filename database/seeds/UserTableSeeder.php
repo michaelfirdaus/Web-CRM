@@ -12,19 +12,19 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         $user = App\User::create([
-            'name' => 'Michael',
-            'username' => 'michael',
+            'name' => 'Admin CRM',
+            'username' => 'admin',
             'password' => bcrypt('password'),
             'admin' => 1,
-            'photo' => 'logo-cn.png'
+            'photo' => 'user-picture.png'
         ]);
 
         $user1 = App\User::create([
-            'name' => 'User',
+            'name' => 'User CRM',
             'username' => 'user',
             'password' => bcrypt('password'),
             'admin' => 0,
-            'photo' => 'logo-cn.png'
+            'photo' => 'user-picture.png'
         ]);
     }
 }

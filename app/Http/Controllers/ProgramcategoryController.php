@@ -17,8 +17,10 @@ class ProgramcategoryController extends Controller
      */
     public function index(Request $request)
     {
+        //Get all programcategories
         $programcategories = Programcategory::all();
 
+        //DataTables server-side rendering
         if($request->ajax()){
             return DataTables::of($programcategories)
                 ->editColumn('status', function($programcategories){
@@ -39,7 +41,7 @@ class ProgramcategoryController extends Controller
                 ->rawColumns(['status', 'Edit'])
                 ->make();
         }
-
+        //Redirecting user to programcategory index view
         return view('programcategory.index')
                ->with('programcategories', $programcategories);
     }
@@ -51,6 +53,7 @@ class ProgramcategoryController extends Controller
      */
     public function create()
     {
+        //Redirecting user to programcategory create view
         return view('programcategory.create');
     }
 
@@ -62,11 +65,12 @@ class ProgramcategoryController extends Controller
      */
     public function store(Request $request)
     {
+        //Input validation
         $rules = [
             'name'   => 'required|unique:programcategories',
             'status' => 'required|boolean'
         ];
-
+        //Custom validation message
         $customMessages = [
             'name.required'   => 'Nama Kategori Program harus diisi.',
             'name.unique'     => 'Nama Kategori Program sudah terdaftar, silahkan coba lagi.',
@@ -74,14 +78,14 @@ class ProgramcategoryController extends Controller
         ];
 
         $this->validate($request, $rules, $customMessages);
-
+        //Create programcategory
         $programcategory = Programcategory::create([
             'name'   => ucwords($request->name),
             'status' => $request->status  
         ]);
-
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Menambahkan Kategori Program');
-
+        //Redirecting user to programcategories
         return redirect()->route('programcategories');
     }
 
@@ -104,8 +108,9 @@ class ProgramcategoryController extends Controller
      */
     public function edit($id)
     {
+        //Get programcategory by id
         $programcategory = Programcategory::find($id);
-
+        //Redirecting user to programcategory edit view
         return view('programcategory.edit')->with('programcategory', $programcategory);
     }
 
@@ -118,28 +123,29 @@ class ProgramcategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //Input validation
         $rules = [
             'name'   => 'required',
             'status' => 'required|boolean'
         ];
-
+        //Custom validation message
         $customMessages = [
             'name.required'   => 'Nama Kategori Program harus diisi.',
             'status.required' => 'Status Kategori Program harus dipilih.'
         ];
 
         $this->validate($request, $rules, $customMessages);
-
+        //Get programcategory by id
         $programcategory = Programcategory::find($id);
 
         $programcategory->id        = $request->id;
         $programcategory->name      = ucwords($request->name);
         $programcategory->status    = $request->status;
-
+        //Save current programcategory
         $programcategory->save();
-
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Memperbaharui Kategori Program');
-
+        //Redirecting user to programcategories route
         return redirect()->route('programcategories');
     }
 
@@ -151,12 +157,14 @@ class ProgramcategoryController extends Controller
      */
     public function destroy($id)
     {
+        //Get programcategory by id
         $programcategory = Programcategory::find($id);
-
+        //Delete programcategory
         $programcategory->delete();
 
-
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Menghapus Kategori Program');
+        //Redirecting use to programcategories route
         return redirect()->route('programcategories');
     }
 }

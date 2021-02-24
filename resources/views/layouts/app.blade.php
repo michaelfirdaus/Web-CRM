@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <title>@yield('title') | Course-Net CRM</title>
+    <title>@yield('title') | Michael's CRM</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -120,9 +120,9 @@
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="{{ route('participants') }}" class="brand-link">
-          <img src={{ asset('assets/logo-cn.png') }} alt="Course-Net" class="brand-image img-circle elevation-3"
+          <img src={{ asset('assets/company-logo.png') }} alt="Michael" class="brand-image img-circle elevation-3"
               style="opacity: .8">
-          <span class="brand-text font-weight-light">Course-Net CRM</span>
+          <span class="brand-text font-weight-light">Michael's CRM</span>
         </a>
 
         <!-- Sidebar -->
@@ -258,10 +258,10 @@
 
 
               <li class="nav-item">
-                <a href="{{route('knowcns')}}" class="nav-link">
+                <a href="{{route('knows')}}" class="nav-link">
                   <i class="nav-icon fab fa-youtube"></i>
                   <p>
-                    Kanal Course-Net
+                    Kanal CRM
                   </p>
                 </a>
               </li>
@@ -386,7 +386,7 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-black shadow-sm">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ asset('assets/logo-cn-panjang.png') }}" height=30px width=120px>
+                <img src="{{ asset('assets/long-company-logo.png') }}" height=30px width=120px>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -406,7 +406,7 @@
                             <a class="nav-link text-bold" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li> --}}
                         <li class="nav-item">
-                          <div class="text-bold">Course-Net CRM</div>
+                          <div class="text-bold">Michael's CRM</div>
                         </li>
                         @if (Route::has('register'))
                             <li class="nav-item">
@@ -478,10 +478,6 @@
 {{-- Toastr Notification --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <!-- DataTables -->
-{{-- <script src="{{ asset('adminLTE/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('adminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('adminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('adminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script> --}}
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.flash.min.js"></script>
@@ -520,15 +516,6 @@
     @if(Session::has('warning'))
         toastr.warning("{{ Session::get('warning') }}")
     @endif
-
-    // $('#table').DataTable( {
-    //   dom: 'lBfrtip',
-    //   buttons: [
-    //       'copy', 'csv', 'excel', 'pdf', 'print'
-    //   ],
-    //   scrollY: "300",
-    //   scrollX: true
-    // });
    
     //Initialize Select2 Elements
     $('.select2').select2({

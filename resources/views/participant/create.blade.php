@@ -58,7 +58,7 @@ Tambah Peserta
 
                 <div class="form-group">
                     <label for="email">E-mail <span class="text-danger">*</span></label>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="Contoh: michael@course-net.com" value="{{ old('email') }}">
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Contoh: michael@sample.com" value="{{ old('email') }}">
                     @if( $errors->has('email') )
                         <div class="text-danger">{{ $errors->first('email') }}</div>
                     @endif
@@ -118,24 +118,24 @@ Tambah Peserta
                 </div>
 
                 <div class="form-group">
-                    <label for="knowcn_id">Mengetahui Course-Net dari <span class="text-danger">*</span></label>
-                    <select name="knowcn_id" id="knowcn_id" class="form-control select2" style="width: auto;">
-                    <option value="" selected disabled hidden> - Pilih Kanal CN - </option>
-                    @foreach($knowcns as $knowcn)
-                        @if( old('knowcn_id') )
-                            <option selected value="{{ $knowcn->id }}"> {{ $knowcn->name }} </option>
+                    <label for="know_id">Mengetahui Michael's CRM dari <span class="text-danger">*</span></label>
+                    <select name="know_id" id="know_id" class="form-control select2" style="width: auto;">
+                    <option value="" selected disabled hidden> - Pilih Kanal CRM - </option>
+                    @foreach($knows as $know)
+                        @if( old('know_id') )
+                            <option selected value="{{ $know->id }}"> {{ $know->name }} </option>
                         @else
-                            <option value="{{ $knowcn->id }}"> {{ $knowcn->name }} </option>
+                            <option value="{{ $know->id }}"> {{ $know->name }} </option>
                         @endif
                     @endforeach
                     </select>
-                    @if( $errors->has('knowcn_id') )
-                        <div class="text-danger">{{ $errors->first('knowcn_id') }}</div>
+                    @if( $errors->has('know_id') )
+                        <div class="text-danger">{{ $errors->first('know_id') }}</div>
                     @endif
                 </div>
 
                 <div class="form-group memberreference">
-                    <label for="memberreference_id">Jika mengetahui Course-Net dari alumni Course-Net, sebutkan : <span class="text-danger">*</span></label>
+                    <label for="memberreference_id">Jika mengetahui Michael's CRM dari alumni, sebutkan: <span class="text-danger">*</span></label>
                     <select name="memberreference_id" id="memberreference_id" class="form-control select2" style="width: auto;">
                     <option value="" selected disabled hidden> - Pilih Member/Peserta - </option>
                     @foreach($participants as $participant)
@@ -239,7 +239,6 @@ $('.memberreference').hide();
 
 $('#branch_id').change(function() {
     var branch_id =  $(this).val();
-    {{-- console.log(branch_id); --}}
     var a = $(this).parent();
     var op ="";
 
@@ -253,7 +252,6 @@ $('#branch_id').change(function() {
         dataType: 'json',
         success: function(data){
             console.log(data);
-            {{-- console.log("Its Change !"), --}}
            value13 = data;
         },
         error:function(){
@@ -262,12 +260,11 @@ $('#branch_id').change(function() {
     });
 });
 
-$('#knowcn_id').change(function() {
+$('#know_id').change(function() {
     if($(this).val() == 1 ) $('.memberreference').show();
     else $('.memberreference').hide();
 
-    var knowcn_id =  $(this).val();
-    {{-- console.log(knowcn_id); --}}
+    var know_id =  $(this).val();
     var a = $(this).parent();
     var op ="";
 
@@ -276,11 +273,10 @@ $('#knowcn_id').change(function() {
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "{{ route('participant.fetchknowcn') }}",
-        data: {'id': knowcn_id},
+        url: "{{ route('participant.fetchknow') }}",
+        data: {'id': know_id},
         dataType: 'json',
         success: function(data){
-            {{-- console.log(data); --}}
             console.log("Its Change !"),
             value14 = data;
         },
@@ -292,7 +288,7 @@ $('#knowcn_id').change(function() {
 });
 
 $('#memberreference_id').change(function() {
-    if($('#knowcn_id').val() == 1){
+    if($('#know_id').val() == 1){
         console.log($('#memberreference_id').val());
         value14 = $('#memberreference_id').val();
     }

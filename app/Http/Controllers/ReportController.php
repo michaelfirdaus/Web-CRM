@@ -23,8 +23,10 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
+        //Get all programs
         $programs = Program::with('coachprograms', 'branch', 'programname', 'programcategory');
         
+        //DataTables server-side rendering
         if($request->ajax()){
             return DataTables::of($programs)
                 ->editColumn('date', function($programs){
@@ -53,7 +55,7 @@ class ReportController extends Controller
                 ->rawColumns(['date', 'programcategory.name', 'branch.name', 'report'])
                 ->make();
         }
-
+        //Redirecting user to report index view
         return view('report.index')
         ->with('programs', $programs);
     }
@@ -120,10 +122,11 @@ class ReportController extends Controller
     }
 
     public function detail($id){
+        //Get program by id
         $program = Program::where('id',$id)->with('branch', 'coaches')->first();
-        // dd($program);
+        //Get all transactions prior to program_id
         $transactions = Transaction::where('program_id', $id)->with('participant','result')->get();
-        // dd($transactions);
+        
 
         $countparticipant = $transactions->count();
         if($countparticipant == 0){
@@ -131,6 +134,7 @@ class ReportController extends Controller
             return redirect()->back();
         }
 
+        //Redirecting user to report detail view
         return view('report.detail')
                ->with('program', $program)
                ->with('transactions', $transactions)

@@ -17,8 +17,10 @@ class CoachController extends Controller
      */
     public function index(Request $request)
     {
+        //Get all coaches
         $coaches = Coach::all();
 
+        //DataTables server-side rendering
         if($request->ajax()){
             return DataTables::of($coaches)
                 ->editColumn('phonenumber', function($coaches){
@@ -46,7 +48,7 @@ class CoachController extends Controller
                 ->rawColumns(['phonenumber', 'dob', 'status', 'Edit'])
                 ->make();
         }
-
+        //Return coach index view
         return view('coach.index')->with('coaches', Coach::all());
     }
 
@@ -57,6 +59,7 @@ class CoachController extends Controller
      */
     public function create()
     {
+        //Return coach create view
         return view('coach.create');
     }
 
@@ -68,7 +71,7 @@ class CoachController extends Controller
      */
     public function store(Request $request)
     {
-
+        //Input validation
         $rules = [
             'name'          => 'required',
             'email'         => 'required',
@@ -77,7 +80,7 @@ class CoachController extends Controller
             'address'       => 'required',
             'status'        => 'required'
         ];
-
+        //Custom validation message
         $customMessages = [
             'name.required'            => 'Nama Coach harus diisi.',
             'email.required'           => 'Email Coach harus diisi.',
@@ -99,13 +102,13 @@ class CoachController extends Controller
         $coach->dob         = $request->dob;
         $coach->address     = ucwords($request->address);
         $coach->status      = $request->status;
-        //Saving current category to the database
+        //Saving current coach
         $coach->save();
 
         //Notify user with pop up message
         Session::flash('success', 'Berhasil Menambahkan Coach Baru');
 
-        //Redirecting user to categories route
+        //Redirecting user to coaches route
         return redirect()->route('coaches');
     }
 
@@ -128,10 +131,10 @@ class CoachController extends Controller
      */
     public function edit($id)
     {
-        //Find category based on category ID
+        //Find coach
         $coach = Coach::find($id);
 
-        //Redirecting user to admin/categories/edit view with the specific category
+        //Redirecting user to coach edit view
         return view('coach.edit')->with('coach', $coach); 
     }
 
@@ -144,6 +147,7 @@ class CoachController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //Input validation
         $rules = [
             'name'          => 'required',
             'email'         => 'required',
@@ -152,7 +156,7 @@ class CoachController extends Controller
             'address'       => 'required',
             'status'        => 'required'
         ];
-
+        //Custom validation message
         $customMessages = [
             'name.required'            => 'Nama Coach harus diisi.',
             'email.required'           => 'Email Coach harus diisi.',
@@ -166,7 +170,7 @@ class CoachController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
-        //Find category based on category ID
+        //Find coach
         $coach = Coach::find($id);
         
         $coach->name        = ucwords($request->name);
@@ -176,7 +180,7 @@ class CoachController extends Controller
         $coach->address     = ucwords($request->address);
         $coach->status      = $request->status;
         
-        //Save the category to the database
+        //Save current coach
         $coach->save();
 
         //Notify user with pop up message

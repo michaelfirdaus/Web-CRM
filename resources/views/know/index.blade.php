@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
-@section('title')Kanal Course-Net @endsection
+@section('title')Kanal CRM @endsection
 
-@section('header') List Semua Kanal Course-Net @endsection
+@section('header') List Semua Kanal CRM @endsection
 
 @section('breadcrumb')
-Kanal Course-Net
+Kanal CRM
 @endsection
 
 @section('content')
 
     <div class="row">
         <div class="form-group ml-auto mr-2">
-            <a href="{{ route('knowcn.create') }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Tambah Kanal</a>
+            <a href="{{ route('know.create') }}" class="btn btn-success"><i class="nav-icon fas fa-plus mr-2"></i>Tambah Kanal</a>
         </div>
     </div>
     <div class="card">
@@ -73,7 +73,7 @@ $(document).ready(function() {
         },          
         ajax: 
         {
-            url: "{{ route('knowcns') }}",
+            url: "{{ route('knows') }}",
         },
         columns: 
         [

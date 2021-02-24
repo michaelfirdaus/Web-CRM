@@ -17,7 +17,6 @@ class CreateCoachProgramTable extends Migration
             $table->id();
             $table->bigInteger('coach_id');
             $table->bigInteger('program_id');
-            // $table->date('date');
             $table->timestamps();
         });
     }

@@ -17,8 +17,9 @@ class JobconnectorController extends Controller
      */
     public function index(Request $request)
     {
+        //Get all jobconnectors
         $jobconnectors = Jobconnector::all();
-
+        //DataTables server-side rendering
         if($request->ajax()){
             return DataTables::of($jobconnectors)
                 ->editColumn('status', function($jobconnectors){
@@ -39,7 +40,7 @@ class JobconnectorController extends Controller
                 ->rawColumns(['status', 'Edit'])
                 ->make();
         }
-
+        //Redirecting user to jobconnector index view
         return view('jobconnector.index')->with('jobconnectors', $jobconnectors);
     }
 
@@ -50,6 +51,7 @@ class JobconnectorController extends Controller
      */
     public function create()
     {
+        //Redirecting user to jobconnector create view
         return view('jobconnector.create');
     }
 
@@ -61,13 +63,13 @@ class JobconnectorController extends Controller
      */
     public function store(Request $request)
     {
-        //Validation to make sure name field should be filled and the category must be unique
-
+        //Input validation
         $rules = [
             'name'            => 'required|unique:jobconnectors',
             'location'        => 'required',
         ];
-
+        
+        //Custom validation message
         $customMessages = [
             'name.required'            => 'Nama Perusahaan harus diisi.',
             'location.required'        => 'Lokasi Perusahaan harus diisi.',
@@ -80,13 +82,13 @@ class JobconnectorController extends Controller
 
         $jobconnector->name     = ucwords($request->name);
         $jobconnector->location = ucwords($request->location);
-        //Saving current category to the database
+        //Save current jobconnector
         $jobconnector->save();
 
         //Notify user with pop up message
         Session::flash('success', 'Berhasil Menambahkan Perusahaan');
 
-        //Redirecting user to categories route
+        //Redirecting user to jobconnectors route
         return redirect()->route('jobconnectors');
     }
 
@@ -109,10 +111,10 @@ class JobconnectorController extends Controller
      */
     public function edit($id)
     {
-        //Find category based on category ID
+        //Get jobconnector by id
         $jobconnector = Jobconnector::find($id);
 
-        //Redirecting user to admin/categories/edit view with the specific category
+        //Redirecting user to jobconnector edit view
         return view('jobconnector.edit')->with('jobconnector', $jobconnector); 
     }
 
@@ -125,11 +127,13 @@ class JobconnectorController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //Input valdiation
         $rules = [
             'name'            => 'required',
             'location'        => 'required',
         ];
 
+        //Custom validation message
         $customMessages = [
             'name.required'            => 'Nama Perusahaan harus diisi.',
             'location.required'        => 'Lokasi Perusahaan harus diisi.',
@@ -137,19 +141,19 @@ class JobconnectorController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
-        //Find category based on category ID
+        //Find jobconnector by id
         $jobconnector = Jobconnector::find($id);
         
-        $jobconnector->company_name = ucwords($request->name);
+        $jobconnector->name = ucwords($request->name);
         $jobconnector->location     = ucwords($request->location);
         
-        //Save the category to the database
+        //Save current jobconnector
         $jobconnector->save();
 
         //Notify user with pop up message
         Session::flash('success', 'Berhasil Memperbaharui Perusahaan');
 
-        //Redirecting user to categories route
+        //Redirecting user to jobconnectors route
         return redirect()->route('jobconnectors');
     }
 
@@ -161,16 +165,16 @@ class JobconnectorController extends Controller
      */
     public function destroy($id)
     {
-        //Find category based on category ID
+        //Get jobconnector by id
         $jobconnector = Jobconnector::find($id);
 
-        //Delete category
+        //Delete jobconnector
         $jobconnector->delete();
 
         //Notify user with pop up message
         Session::flash('success', 'Berhasil Menghapus Perusahaan');
 
-        //Redirecting user to categories route
+        //Redirecting user to jobconnectors route
         return redirect()->route('jobconnectors');
     }
 }

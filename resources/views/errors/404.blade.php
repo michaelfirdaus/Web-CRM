@@ -48,17 +48,17 @@
       }
     </style>
 
-    <title>Error 404: Not Found | Course-Net CRM</title>
+    <title>Error 404: Not Found | Michael's CRM</title>
     
   </head>
   <body>
     <nav class="navbar navbar-dark justify-content-between">
-        <a class="navbar-brand" href="https://course-net.com/" target="_blank">
-          <img src="{{ asset('assets/logo-cn-panjang.png') }}" alt="" height=30px width=120px class="d-inline-block align-top">
+        <a class="navbar-brand" href="https://www.linkedin.com/in/michaelfirdaus/" target="_blank">
+          <img src="{{ asset('assets/long-company-logo.png') }}" alt="" height=30px width=120px class="d-inline-block align-top">
         </a>
       <div class="form-inline">
-        <a href="https://crm.course-net.com/" class="text-white" style="text-decoration: none !important;">
-          <strong class="text-white">Course-Net CRM</strong>
+        <a href="https://www.linkedin.com/in/michaelfirdaus/" class="text-white" style="text-decoration: none !important;">
+          <strong class="text-white">Michael's CRM</strong>
         </a>
       </div>
     </nav>
@@ -75,7 +75,7 @@
           All rights reserved.
         </a>
         <div class="ml-auto">
-          <a href="https://crm.course-net.com/" class="text-white" style="text-decoration: none !important;">crm.course-net.com</a>
+          <a href="http://127.0.0.1:8000/" class="text-white" style="text-decoration: none !important;">127.0.0.1:8000</a>
         </div>
       </div>
 

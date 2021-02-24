@@ -26,7 +26,7 @@ Edit Coach {{$coach->name}}
 
                 <div class="form-group">
                     <label for="email">Email <span class="text-danger">*</span></label>
-                    <input type="email" name="email" class="form-control" value="{{ $coach->email }}" placeholder="Contoh: michael@course-net.com">
+                    <input type="email" name="email" class="form-control" value="{{ $coach->email }}" placeholder="Contoh: michael@sample.com">
                     @if( $errors->has('email') )
                         <div class="text-danger">{{ $errors->first('email') }}</div>
                     @endif
@@ -57,7 +57,7 @@ Edit Coach {{$coach->name}}
                 </div>
 
                 <div class="form-group">
-                    <label for="status">Status Pengajar <span class="text-danger">*</span></label>
+                    <label for="status">Status Coach <span class="text-danger">*</span></label>
                     <select name="status" id="status" class="form-control select2" style="width: auto;">
                         @if($coach->status == 1)
                             <option value="1" selected> Aktif </option>

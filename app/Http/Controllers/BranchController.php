@@ -17,8 +17,10 @@ class BranchController extends Controller
      */
     public function index(Request $request)
     {
+        //Get all branches
         $branches = Branch::all();
 
+        //DataTables server-side rendering
         if($request->ajax()){
             return DataTables::of($branches)
                 ->editColumn('code', function($branches){
@@ -42,7 +44,7 @@ class BranchController extends Controller
                 ->rawColumns(['code', 'status', 'Edit'])
                 ->make();
         }
-
+        //Return branch index view
         return view('branch.index')->with('branches', Branch::all());
     }
 
@@ -53,6 +55,7 @@ class BranchController extends Controller
      */
     public function create()
     {
+        //Return branch create view
         return view('branch.create');
     }
 
@@ -64,13 +67,14 @@ class BranchController extends Controller
      */
     public function store(Request $request)
     {
-        //Validation to make sure name field should be filled and the category must be unique
+        //Input validation
         $rules = [
             'name'   => 'required',
             'code'   => 'required|numeric|unique:branches',
             'status' => 'required|boolean'
         ];
 
+        //Custom validation message
         $customMessages = [
             'name.required'   => 'Nama Cabang harus diisi.',
             'code.required'   => 'Kode Cabang harus diisi.',
@@ -86,13 +90,13 @@ class BranchController extends Controller
         $branch->name   = ucwords($request->name);
         $branch->code   = $request->code;
         $branch->status = $request->status;
-        //Saving current category to the database
+        //Save current branch
         $branch->save();
 
         //Notify user with pop up message
         Session::flash('success', 'Berhasil Menambahkan Cabang');
 
-        //Redirecting user to categories route
+        //Redirecting user to branches route
         return redirect()->route('branches');
     }
 
@@ -115,10 +119,10 @@ class BranchController extends Controller
      */
     public function edit($id)
     {
-        //Find category based on category ID
+        //Find branch based on branch ID
         $branch = Branch::find($id);
 
-        //Redirecting user to admin/categories/edit view with the specific category
+        //Redirecting user to branch edit view
         return view('branch.edit')->with('branch', $branch); 
     }
 
@@ -131,12 +135,15 @@ class BranchController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        //Input validation
         $rules = [
             'name'   => 'required',
             'code'   => 'required|numeric',
             'status' => 'required|boolean'
         ];
 
+        //Custom validation message
         $customMessages = [
             'name.required'   => 'Nama Cabang harus diisi.',
             'code.required'   => 'Kode Cabang harus diisi.',
@@ -147,20 +154,20 @@ class BranchController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
-        //Find category based on category ID
+        //Find branch
         $branch = Branch::find($id);
         
         $branch->name   = ucwords($request->name);
         $branch->code   = $request->code;
         $branch->status = $request->status;
         
-        //Save the category to the database
+        //Save current branch
         $branch->save();
 
         //Notify user with pop up message
         Session::flash('success', 'Berhasil Memperbaharui Cabang');
 
-        //Redirecting user to categories route
+        //Redirecting user to branches route
         return redirect()->route('branches');
     }
 
@@ -172,16 +179,16 @@ class BranchController extends Controller
      */
     public function destroy($id)
     {
-        //Find category based on category ID
+        //Find branch
         $branch = Branch::find($id);
 
-        //Delete category
+        //Delete branch
         $branch->delete();
 
         //Notify user with pop up message
         Session::flash('success', 'Berhasil Menghapus Cabang');
 
-        //Redirecting user to categories route
+        //Redirecting user to branches route
         return redirect()->route('branches');
     }
 }

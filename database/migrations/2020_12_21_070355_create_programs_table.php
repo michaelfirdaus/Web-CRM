@@ -20,7 +20,7 @@ class CreateProgramsTable extends Migration
             $table->bigInteger('programname_id');
             $table->date('date');
             $table->string('created_by');
-            $table->string('lastedited_by');
+            $table->string('lastedited_by')->nullable();
             $table->timestamps();
         });
     }

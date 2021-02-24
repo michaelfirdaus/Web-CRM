@@ -21,8 +21,10 @@ class ProgramController extends Controller
      */
     public function index(Request $request)
     {
+        //Get all programs
         $programs = Program::with('programcategory','programname', 'branch');
 
+        //DataTables server-side rendering
         if($request->ajax()){
             return DataTables::of($programs)
                 ->addColumn('Edit', function($programs){
@@ -51,6 +53,7 @@ class ProgramController extends Controller
                 ->make();
         }
 
+        //Redirecting user to program index view
         return view('program.index')
             ->with('programs', $programs);
     }
@@ -62,15 +65,20 @@ class ProgramController extends Controller
      */
     public function create()
     {
+        //Get all branches
         $branches = Branch::where('status',1)->get();
+        //Get all programnames
         $programnames = Programname::where('status',1)->get();
+        //Get all programcategories
         $programcategories = Programcategory::where('status',1)->get();
 
+        //Check if branch or programname or programcategory is exists
         if($branches->count() == 0 || $programnames->count() == 0 || $programcategories->count() == 0){
             Session::flash('info', 'Tidak Dapat Menambahkan Batch Program karena Tidak Ada Cabang/Kategori Program/Program yang Terdaftar');
             return redirect()->back();
         }
 
+        //Redirecting use to program create view
         return view('program.create')
                ->with('programcategories', $programcategories)
                ->with('programnames', $programnames)
@@ -85,14 +93,14 @@ class ProgramController extends Controller
      */
     public function store(Request $request)
     {
-
+        //Input validation
         $rules = [
             'programname'       => 'required',
             'branch_location'   => 'required',
             'programcategory'   => 'required',
             'date'              => 'required|date',
         ];
-
+        //Custom validation message
         $customMessages = [
             'programname.required'     => 'Nama Program harus dipilih.',
             'branch_location.required' => 'Lokasi Cabang harus dipilih.',
@@ -103,6 +111,7 @@ class ProgramController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
+        //Create program
         $programs = Program::create([
             'programname_id'     => $request->programname,
             'branch_id'          => $request->branch_location,
@@ -111,8 +120,10 @@ class ProgramController extends Controller
             'created_by'         => Auth::user()->name,
         ]);
 
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Menambahkan Program');
 
+        //Redirecting user to programs route
         return redirect()->route('programs');
     }
 
@@ -135,12 +146,17 @@ class ProgramController extends Controller
      */
     public function edit($id)
     {
+        //Get program by id
         $program = Program::find($id);
+        //Get all programnames
         $programnames = Programname::all();
+        //Get all branches
         $branches = Branch::all();
+        //Get all programcategories
         $programcategories = Programcategory::all();
         $current_branch = $program->branch->id;
 
+        //Redirecting user to program edit view
         return view('program.edit')
             ->with('program', $program)
             ->with('branches', $branches)
@@ -158,15 +174,16 @@ class ProgramController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //Get program by id
         $program = Program::find($id);
-
+        //Input validation
         $rules = [
             'programname'       => 'required',
             'branch_location'   => 'required',
             'programcategory'   => 'required',
             'date'              => 'required|date'
         ];
-
+        //Custom validation message
         $customMessages = [
             'programname.required'     => 'Nama Program harus diisi.',
             'branch_location.required' => 'Lokasi Cabang harus dipilih.',
@@ -183,11 +200,11 @@ class ProgramController extends Controller
         $program->programcategory_id = $request->programcategory;
         $program->date               = $request->date;
         $program->lastedited_by      = Auth::user()->name;
-
+        //Save current program
         $program->save();
-
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Memperbaharui Program');
-
+        //Redirecting user to programs route
         return redirect()->route('programs');
     }
 
@@ -199,12 +216,13 @@ class ProgramController extends Controller
      */
     public function destroy($id)
     {
+        //Get program by id
         $program = Program::find($id);
-
+        //Delete program
         $program->delete();
-
+        //Notify user with pop up message
         Session::flash('success', 'Berhasil Menghapus Program');
-
+        //Redirecting user to programs route
         return redirect()->route('programs');
     }
 }

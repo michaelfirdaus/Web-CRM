@@ -37,7 +37,4 @@ class Program extends Model
         return $this->hasOne('App\Programname', 'id', 'programname_id');
     }
 
-    // public function interest(){
-    //     return $this->belongsTo('App\Interest');
-    // }
 }

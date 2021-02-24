@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Session;
 use Validator;
+use Hash;
 
 class UserProfileController extends Controller
 {
@@ -18,6 +19,7 @@ class UserProfileController extends Controller
      */
     public function index()
     {
+        //Redirecting user to user index view
         return view('user.index')->with('user', User::find(Auth::user()->id));
     }
 
@@ -61,6 +63,7 @@ class UserProfileController extends Controller
      */
     public function edit()
     {
+        //Redirecting user to user edit view
         return view('user.edit')->with('user', User::find(Auth::user()->id));
     }
 
@@ -73,12 +76,13 @@ class UserProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        //Input validation
         $rules = [
             'name' => 'required',
             'photo' => 'image|max:10240'
         ];
 
+        //Custom validation message
         $customMessages = [
             'name.required' => 'Nama harus diisi.',
             'photo.image'   => 'Format foto tidak diizinkan.',
@@ -86,11 +90,12 @@ class UserProfileController extends Controller
         ];
 
         $this->validate($request, $rules, $customMessages);
-
+        //Get user by id
         $user = User::find($id);
 
         $user->name     = $request->name;
 
+        //Check if user uploaded photo
         if($request->has('photo')){
             $image = $request->file('photo');
 
@@ -102,10 +107,11 @@ class UserProfileController extends Controller
 
             $user->photo = $fullImage;
         }
-        
+        //Update user
         $user->update();
+        //Notify user with pop up message
         Session::flash('success', 'Profil Anda Telah Diperbaharui');
-
+        //Redirecting user to participants route
         return redirect()->route('participants');
     }
 
@@ -121,31 +127,44 @@ class UserProfileController extends Controller
     }
 
     public function changepassword(){
+        //Redirecting user to user changepassword view
         return view('user.changepassword')->with('user', User::find(Auth::user()->id));
     }
 
     public function updatepassword(Request $request, $id){
-
+        //Input validation
         $rules = [
-            'password' => 'required',
-            'confirmpassword' => 'required|same:password',
+            'password' => 'required|different:old_password',
+            'confirmpassword' => 'required|same:password|different:old_password',
         ];
 
+        //Custom validation message
         $customMessages = [
+            'password.different'        => 'Password Baru tidak boleh sama dengan Password Lama.',
             'password.required'         => 'Password Baru harus diisi.',
             'confirmpassword.required'  => 'Konfirmasi Password Baru harus diisi.',
+            'confirmpassword.different' => 'Konfirmasi Password Baru tidak boleh sama dengan Password Lama.',
             'confirmpassword.same'      => 'Konfirmasi Password Baru tidak sesuai.',
         ];
 
         $this->validate($request, $rules, $customMessages);        
-
+  
+        //Get user by id
         $user = User::find($id);
 
-        $user->password = bcrypt($request->password);
+        if(!Hash::check($request->old_password, $user->password)){
+            Session::flash('warning', 'Password Lama salah!');
+            return redirect()->back();
+        }
 
+        $user->password = bcrypt($request->password);
+        //Update user
         $user->update();
+
+        //Notify user with pop up message
         Session::flash('success', 'Password Berhasil Diubah');
 
+        //Redirecting user to participants route
         return redirect()->route('participants');
     }
 }

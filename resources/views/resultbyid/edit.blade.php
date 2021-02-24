@@ -19,7 +19,7 @@ Edit
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="score">Nilai Ujian</label>
-                    <input type="text" name="score" value="{{ $result->score }}" class="form-control">
+                    <input type="text" name="score" placeholder="Contoh: 95" value="{{ $result->score }}" class="form-control">
                     @if( $errors->has('score') )
                         <div class="text-danger">{{ $errors->first('score') }}</div>
                     @endif
@@ -27,12 +27,12 @@ Edit
 
                 <div class="form-group">
                     <label for="jacket_size">Ukuran Jaket</label>
-                    <input type="text" name="jacket_size" value="{{ $result->jacket_size }}" class="form-control">
+                    <input type="text" name="jacket_size" placeholder="Contoh : XL" value="{{ $result->jacket_size }}" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="skillcertificate_number">Nomor Sertifikat Skill</label>
-                    <input type="text" name="skillcertificate_number" value="{{ $result->skillcertificate_number }}" class="form-control">
+                    <input type="text" name="skillcertificate_number" placeholder="Contoh: 2021/ALGO/01-2222" value="{{ $result->skillcertificate_number }}" class="form-control">
                 </div>
 
                 <div class="form-group">
@@ -42,7 +42,7 @@ Edit
 
                 <div class="form-group">
                     <label for="attendancecertificate_number">Nomor Sertifikat Kehadiran</label>
-                    <input type="text" name="attendancecertificate_number" value="{{ $result->attendancecertificate_number }}" class="form-control">
+                    <input type="text" name="attendancecertificate_number" placeholder="Contoh: 2021/ALGO/01-2222" value="{{ $result->attendancecertificate_number }}" class="form-control">
                 </div>
 
                 <div class="form-group">

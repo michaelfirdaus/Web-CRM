@@ -2,7 +2,7 @@
 
 @section('title')Coach @endsection
 
-@section('header') List Semua Coach Course-Net @endsection
+@section('header') List Semua Coach @endsection
 
 @section('breadcrumb')
 Coach
