@@ -165,11 +165,11 @@ class ParticipantController extends Controller
             'name'                      => 'required',
             'pob'                       => 'required',
             'dob'                       => 'required|date',
-            'phonenumber'               => 'required|numeric',
+            'phonenumber'               => 'required|numeric|regex:/^[0-9]+$/u',
             'address'                   => 'required',
             'email'                     => 'required|email',
             'emergencycontact_name'     => 'required',
-            'emergencycontact_phone'    => 'required|numeric'
+            'emergencycontact_phone'    => 'required|numeric|regex:/^[0-9]+$/u'
         ];
         //Custom validation message
         $customMessages = [
@@ -182,12 +182,14 @@ class ParticipantController extends Controller
             'dob.date'                          => 'Tanggal Lahir harus berupa tanggal.',
             'phonenumber.required'              => 'Nomor Telepon harus diisi.',
             'phonenumber.numeric'               => 'Nomor Telepon harus berupa angka.',
+            'phonenumber.regex'                 => 'Nomor Telepon harus berupa angka.',
             'address.required'                  => 'Alamat harus diisi.',
             'email.required'                    => 'E-mail harus diisi.',
             'email.email'                       => 'Format e-mail tidak sesuai.',
             'emergencycontact_name.required'    => 'Nama Kontak Darurat harus diisi.',
             'emergencycontact_phone.required'   => 'Nomor Kontak Darurat harus diisi.',
-            'emergencycontact_phone.numeric'    => 'Nomor Kontak Darurat harus berupa angka.'
+            'emergencycontact_phone.numeric'    => 'Nomor Kontak Darurat harus berupa angka.',
+            'emergencycontact_phone.regex'    => 'Nomor Kontak Darurat harus berupa angka.'
         ];
 
         $this->validate($request, $rules, $customMessages);
@@ -354,11 +356,11 @@ class ParticipantController extends Controller
             'name'                      => 'required',
             'pob'                       => 'required',
             'dob'                       => 'required|date',
-            'phonenumber'               => 'required|numeric',
+            'phonenumber'               => 'required|numeric|regex:/^[0-9]+$/u',
             'address'                   => 'required',
             'email'                     => 'required|email',
             'emergencycontact_name'     => 'required',
-            'emergencycontact_phone'    => 'required|numeric'
+            'emergencycontact_phone'    => 'required|numeric|regex:/^[0-9]+$/u'
         ];
         //Custom validation message
         $customMessages =  [
@@ -371,12 +373,14 @@ class ParticipantController extends Controller
             'dob.date'                          => 'Tanggal Lahir harus berupa tanggal.',
             'phonenumber.required'              => 'Nomor Telepon harus diisi.',
             'phonenumber.numeric'               => 'Nomor Telepon harus berupa angka.',
+            'phonenumber.regex'                 => 'Nomor Telepon harus berupa angka.',
             'address.required'                  => 'Alamat harus diisi.',
             'email.required'                    => 'E-mail harus diisi.',
             'email.email'                       => 'Format e-mail tidak sesuai.',
             'emergencycontact_name.required'    => 'Nama Kontak Darurat harus diisi.',
             'emergencycontact_phone.required'   => 'Nomor Kontak Darurat harus diisi.',
-            'emergencycontact_phone.numeric'    => 'Nomor Kontak Darurat harus berupa angka.'
+            'emergencycontact_phone.numeric'    => 'Nomor Kontak Darurat harus berupa angka.',
+            'emergencycontact_phone.regex'      => 'Nomor Kontak Darurat harus berupa angka.'
         ];
 
         $this->validate($request, $rules, $customMessages);
