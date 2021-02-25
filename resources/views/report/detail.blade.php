@@ -195,6 +195,21 @@ Laporan Kelas {{$program->programname->name}} ({{$program->date}})
                                 <td>
                                     {{ $t->result->attendancecertificate_pickdate }}
                                 </td>
+                            @else
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
                             @endif
                             <td>
                                 {{$t->rating}}
