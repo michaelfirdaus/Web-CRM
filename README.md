@@ -25,6 +25,9 @@
     <li><a href="https://fonts.google.com/specimen/Poppins?preview.text_type=custom" target="_blank">Poppins Google Fonts</a></li>
     <li><a href="https://fontawesome.com/" target="_blank">Font Awesome</a></li>
 <br>
-<p>
+    
+<p>I originally created this crm web for the office where I worked before, but now I have published this crm web to the public!</p>
+
+<br><br>
 <b>Copyright &copy; 2020-2021. Created By Michael. </b>All rights reserved.
-</p>
+
