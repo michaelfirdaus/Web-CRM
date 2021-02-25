@@ -18,7 +18,7 @@
 <div class="row justify-content-center">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header bg-dark text-bold">Login ke Course-Net CRM</div>
+            <div class="card-header bg-dark text-bold">Login ke Michael's CRM</div>
 
             <div class="card-body">
                 <form method="POST" action="{{ route('login') }}">
