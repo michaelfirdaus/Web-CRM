@@ -104,16 +104,16 @@ $(document).ready(function() {
                 name: 'participant_id'
             },
             {
-                data: 'participantname',
-                name: 'participantname'
+                data: 'participant.name',
+                name: 'participant.name'
             },
             {
-                data: 'participantcv_link',
-                name: 'participantcv_link'
+                data: 'participant.cv_link',
+                name: 'participant.cv_link'
             },
             {
-                data: 'companyname',
-                name: 'companyname'
+                data: 'jobconnector.name',
+                name: 'jobconnector.name'
             },
             {
                 data: 'date',

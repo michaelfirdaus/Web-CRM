@@ -25,85 +25,85 @@ class JobConnectorParticipantController extends Controller
         //DataTables server-side rendering
         if($request->ajax()){
             return DataTables::of($jobconnectorparticipants)
-                ->editColumn('participant_id', function($jobconnectorparticipants){
-                    return "<div class='text-center'>".$jobconnectorparticipants->participant_id."</div>";
-                })
-                ->editColumn('participantname', function($jobconnectorparticipants){
-                    return "<div class='text-center'>".$jobconnectorparticipants->participant->name."</div>";
-                })
-                ->editColumn('participantcv_link', function($jobconnectorparticipants){
-                    return "<a href='".$jobconnectorparticipants->participant->cv_link."' target='_blank'>".$jobconnectorparticipants->participant->cv_link."</a>";
-                })
-                ->editColumn('companyname', function($jobconnectorparticipants){
-                    return "<div class='text-center'>".$jobconnectorparticipants->jobconnector->name."</div>";
-                })
-                ->editColumn('date', function($jobconnectorparticipants){
-                    return "<div class='text-center'>".$jobconnectorparticipants->date."</div>";
-                })
-                ->editColumn('application_status', function($jobconnectorparticipants){
-                    if($jobconnectorparticipants->application_status == 1){
-                        return "<div class='text-center'>Sedang Dalam Proses</div>";
-                    }elseif( $jobconnectorparticipants->application_status == 2 ){
-                        return "<div class='text-center'>Ditolak</div>";
-                    }elseif( $jobconnectorparticipants->application_status == 3 ){
-                        return "<div class='text-center'>Diterima</div>";
-                    }elseif( $jobconnectorparticipants->application_status == 4 ){
-                        return "<div class='text-center'>Dibatalkan</div>";
-                    }else{
-                        return "<div class='text-center'>Lainnya</div>";
-                    }
-                })
-                ->editColumn('created_by', function($jobconnectorparticipants){
-                    return "<div class='text-center'>".$jobconnectorparticipants->created_by."</div>";
-                })
-                ->editColumn('lastedited_by', function($jobconnectorparticipants){
-                    return "<div class='text-center'>".$jobconnectorparticipants->lastedited_by."</div>";
-                })
-                ->addColumn('Edit', function($jobconnectorparticipants){
-                    return
-                    "<div class='text-center'>
-                        <a href='".route('jobconnectorparticipant.edit', ['id' => $jobconnectorparticipants->id])."' class='btn btn-xs btn-info'>
-                            <span class='fas fa-pencil-alt'></span>
-                        </a>
-                    </div>";
-                })
-                ->addColumn('Hapus', function($jobconnectorparticipants){
-                    return
-                    "<div class='text-center'>
-                        <a href='' class='btn btn-xs btn-danger' data-toggle='modal' data-target='#modal-default'>
-                            <span class='fas fa-trash-alt'></span>
-                        </a>
-                    </div>
-                    <div class='modal fade' id='modal-default'>
-                        <div class='modal-dialog'>
-                            <div class='modal-content'>
-                            <div class='modal-header'>
-                                <h4 class='modal-title'>Konfirmasi</h4>
-                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-                                <span aria-hidden='true'>&times;</span>
-                                </button>
-                            </div>
-                            <div class='modal-body'>
-                                <p>Yakin Untuk Menghapus Item Ini?</p>
-                                <p class='text-bold'>PERINGATAN! Data yang Sudah Dihapus Tidak Dapat Dikembalikan</p>
-                            </div>
-                            <div class='modal-footer justify-content-between'>
-                                <button type='button' class='btn btn-success' data-dismiss='modal'>
-                                    <span class='fas fa-times mr-1'></span>
-                                Batalkan
-                                </button>
-                                <a href='".route('jobconnectorparticipant.delete', ['id' => $jobconnectorparticipants->id])."' class='btn btn btn-danger'>
-                                <span class='fas fa-check mr-1'></span>
-                                Hapus
-                                </a>
-                            </div>
-                            </div>
+            ->editColumn('participant_id', function($jobconnectorparticipants){
+                return "<div class='text-center'>".$jobconnectorparticipants->participant_id."</div>";
+            })
+            ->editColumn('participant.name', function($jobconnectorparticipants){
+                return "<div class='text-center'>".$jobconnectorparticipants->participant->name."</div>";
+            })
+            ->editColumn('participant.cv_link', function($jobconnectorparticipants){
+                return "<a href='".$jobconnectorparticipants->participant->cv_link."' target='_blank'>".$jobconnectorparticipants->participant->cv_link."</a>";
+            })
+            ->editColumn('jobconnector.name', function($jobconnectorparticipants){
+                return "<div class='text-center'>".$jobconnectorparticipants->jobconnector->name."</div>";
+            })
+            ->editColumn('date', function($jobconnectorparticipants){
+                return "<div class='text-center'>".$jobconnectorparticipants->date."</div>";
+            })
+            ->editColumn('application_status', function($jobconnectorparticipants){
+                if($jobconnectorparticipants->application_status == 1){
+                    return "<div class='text-center'>Sedang Dalam Proses</div>";
+                }elseif( $jobconnectorparticipants->application_status == 2 ){
+                    return "<div class='text-center'>Ditolak</div>";
+                }elseif( $jobconnectorparticipants->application_status == 3 ){
+                    return "<div class='text-center'>Diterima</div>";
+                }elseif( $jobconnectorparticipants->application_status == 4 ){
+                    return "<div class='text-center'>Dibatalkan</div>";
+                }else{
+                    return "<div class='text-center'>Lainnya</div>";
+                }
+            })
+            ->editColumn('created_by', function($jobconnectorparticipants){
+                return "<div class='text-center'>".$jobconnectorparticipants->created_by."</div>";
+            })
+            ->editColumn('lastedited_by', function($jobconnectorparticipants){
+                return "<div class='text-center'>".$jobconnectorparticipants->lastedited_by."</div>";
+            })
+            ->addColumn('Edit', function($jobconnectorparticipants){
+                return
+                "<div class='text-center'>
+                    <a href='".route('jobconnectorparticipant.edit', ['id' => $jobconnectorparticipants->id])."' class='btn btn-xs btn-info'>
+                        <span class='fas fa-pencil-alt'></span>
+                    </a>
+                </div>";
+            })
+            ->addColumn('Hapus', function($jobconnectorparticipants){
+                return
+                "<div class='text-center'>
+                    <a href='' class='btn btn-xs btn-danger' data-toggle='modal' data-target='#modal-default'>
+                        <span class='fas fa-trash-alt'></span>
+                    </a>
+                </div>
+                <div class='modal fade' id='modal-default'>
+                    <div class='modal-dialog'>
+                        <div class='modal-content'>
+                        <div class='modal-header'>
+                            <h4 class='modal-title'>Konfirmasi</h4>
+                            <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                            </button>
                         </div>
-                    </div>";
-                })
-                ->rawColumns(['participant_id', 'participantname', 'participantcv_link', 'companyname', 'date', 'application_status', 'created_by', 'lastedited_by', 'Edit', 'Hapus'])
-                ->make();
-            }
+                        <div class='modal-body'>
+                            <p>Yakin Untuk Menghapus Item Ini?</p>
+                            <p class='text-bold'>PERINGATAN! Data yang Sudah Dihapus Tidak Dapat Dikembalikan</p>
+                        </div>
+                        <div class='modal-footer justify-content-between'>
+                            <button type='button' class='btn btn-success' data-dismiss='modal'>
+                                <span class='fas fa-times mr-1'></span>
+                            Batalkan
+                            </button>
+                            <a href='".route('jobconnectorparticipant.delete', ['id' => $jobconnectorparticipants->id])."' class='btn btn btn-danger'>
+                            <span class='fas fa-check mr-1'></span>
+                            Hapus
+                            </a>
+                        </div>
+                        </div>
+                    </div>
+                </div>";
+            })
+            ->rawColumns(['participant_id', 'participant.name', 'participant.cv_link', 'jobconnector.name', 'date', 'application_status', 'created_by', 'lastedited_by', 'Edit', 'Hapus'])
+            ->make();
+        }
 
         //Redirecting jobconnectorparticipant index view
         return view('jobconnectorparticipant.index')
