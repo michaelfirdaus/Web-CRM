@@ -24,6 +24,7 @@
     <li><a href="https://getbootstrap.com/docs/4.0/getting-started/introduction/" target="_blank">Bootstrap 4</a></li>
     <li><a href="https://fonts.google.com/specimen/Poppins?preview.text_type=custom" target="_blank">Poppins Google Fonts</a></li>
     <li><a href="https://fontawesome.com/" target="_blank">Font Awesome</a></li>
+</ul>
 <br>
     
 <p>I originally created this crm web for the office where I worked before, but now I have published this crm web to the public!</p>
